@@ -75,7 +75,7 @@
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                                  <Component id="tombolTambah1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tombolTambahPembeli" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Component id="tombolBatal" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
@@ -117,7 +117,7 @@
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="tombolBatal" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
-                                      <Component id="tombolTambah1" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                                      <Component id="tombolTambahPembeli" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="32767" attributes="0"/>
                               </Group>
@@ -133,6 +133,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="isianNoIdentitas">
+                  <Events>
+                    <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="isianNoIdentitasKeyReleased"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel56">
                   <Properties>
@@ -146,12 +149,12 @@
                     <Property name="text" type="java.lang.String" value="Alamat"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="tombolTambah1">
+                <Component class="javax.swing.JButton" name="tombolTambahPembeli">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="TAMBAH"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tombolTambah1ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tombolTambahPembeliActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="tombolBatal">

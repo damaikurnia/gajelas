@@ -48,11 +48,6 @@ public class Per_TransaksiPenjualan extends javax.swing.JFrame {
             this.getRootPane().setDefaultButton(tombolTambah);//biar bisa enter
             this.setLocationRelativeTo(null);
 
-            dialogBarang.setVisible(false);
-            dialogBarang.setSize(500, 300);
-            dialogBarang.setLocationRelativeTo(null);
-            dialogBarang.setTitle("Pencarian Barang");
-
             GregorianCalendar gc = new GregorianCalendar();
             isian_tanggal.setDate(gc.getTime());
             isianNamaBarang.requestFocus();
@@ -79,7 +74,7 @@ public class Per_TransaksiPenjualan extends javax.swing.JFrame {
         jLabel56 = new javax.swing.JLabel();
         isiannamaAnggota = new javax.swing.JTextField();
         jLabel57 = new javax.swing.JLabel();
-        tombolTambah1 = new javax.swing.JButton();
+        tombolTambahPembeli = new javax.swing.JButton();
         tombolBatal = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         isianalamat = new javax.swing.JTextArea();
@@ -120,14 +115,20 @@ public class Per_TransaksiPenjualan extends javax.swing.JFrame {
 
         jLabel21.setText("No Identitas");
 
+        isianNoIdentitas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                isianNoIdentitasKeyReleased(evt);
+            }
+        });
+
         jLabel56.setText("Nama Anggota");
 
         jLabel57.setText("Alamat");
 
-        tombolTambah1.setText("TAMBAH");
-        tombolTambah1.addActionListener(new java.awt.event.ActionListener() {
+        tombolTambahPembeli.setText("TAMBAH");
+        tombolTambahPembeli.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tombolTambah1ActionPerformed(evt);
+                tombolTambahPembeliActionPerformed(evt);
             }
         });
 
@@ -166,7 +167,7 @@ public class Per_TransaksiPenjualan extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel14Layout.createSequentialGroup()
                         .addGap(35, 35, 35)
-                        .addComponent(tombolTambah1)
+                        .addComponent(tombolTambahPembeli)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(tombolBatal)
                         .addGap(72, 72, 72))))
@@ -199,7 +200,7 @@ public class Per_TransaksiPenjualan extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(tombolBatal, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tombolTambah1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tombolTambahPembeli, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
@@ -575,7 +576,7 @@ public class Per_TransaksiPenjualan extends javax.swing.JFrame {
     }//GEN-LAST:event_isianJumlahKeyReleased
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        dialogBarang.setVisible(true);
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void isianNamaBarangKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_isianNamaBarangKeyReleased
@@ -606,13 +607,35 @@ public class Per_TransaksiPenjualan extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_buttonProsesActionPerformed
 
-    private void tombolTambah1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombolTambah1ActionPerformed
+    private void tombolTambahPembeliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombolTambahPembeliActionPerformed
+        Anggota a = new Anggota();
+        a.noIdentitas = isianNoIdentitas.getText();
+        a.namaAnggota = isiannamaAnggota.getText();
+        a.alamat = isianalamat.getText();
+        a.noTelp = isianNoTelp.getText();
         
-    }//GEN-LAST:event_tombolTambah1ActionPerformed
+        //TAMBAH LANJUT
+        if(tombolTambahPembeli.getText().equals("TAMBAH")){
+            try {
+                Anggota_Kontrol.getKoneksi().insertAnggota(a);
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(Per_TransaksiPenjualan.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }   
+    }//GEN-LAST:event_tombolTambahPembeliActionPerformed
 
     private void tombolBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombolBatalActionPerformed
         bersihkan();
     }//GEN-LAST:event_tombolBatalActionPerformed
+
+    private void isianNoIdentitasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_isianNoIdentitasKeyReleased
+        try {
+            Anggota_Kontrol.getKoneksi().cariAnggota(isianNoIdentitas.getText());
+        } catch (SQLException ex) {
+            Logger.getLogger(Per_TransaksiPenjualan.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_isianNoIdentitasKeyReleased
 
     public void updateTabelTransaksi() throws Exception {
         List<Transaksi> a = Perdagangan.Kontrol.Transaksi_Kontrol.getKoneksi().tampilAllTransaksi(isian_kodeTransaksi.getText());
@@ -709,7 +732,7 @@ public class Per_TransaksiPenjualan extends javax.swing.JFrame {
     private javax.swing.JButton tombolBatal;
     private javax.swing.JButton tombolKembali;
     private javax.swing.JButton tombolTambah;
-    private javax.swing.JButton tombolTambah1;
+    private javax.swing.JButton tombolTambahPembeli;
     // End of variables declaration//GEN-END:variables
 
     private void updateTotalBayar() {
