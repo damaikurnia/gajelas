@@ -1477,12 +1477,6 @@ public class Perdagangan_Home extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_tombolBarangActionPerformed
 
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        Per_Anggota asd = new Per_Anggota();
-        asd.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_jButton10ActionPerformed
-
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         Per_Modal asd = new Per_Modal();
         asd.setVisible(true);
@@ -1570,6 +1564,12 @@ public class Perdagangan_Home extends javax.swing.JFrame {
     private void jButton32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton32ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton32ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        Per_Anggota asd = new Per_Anggota();
+        asd.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton10ActionPerformed
     public static String bulan(int b) {
         String bb = "";
         if (b == 1) {
