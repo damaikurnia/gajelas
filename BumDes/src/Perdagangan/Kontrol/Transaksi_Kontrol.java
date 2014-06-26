@@ -73,6 +73,21 @@ public class Transaksi_Kontrol {
         stmt.executeUpdate();
         conn.commit();
     }
+    
+    public void updateTransaksi2(Transaksi trans) throws SQLException {
+        PreparedStatement stmt = null;
+        conn.setAutoCommit(false);
+        String query = "update per_Transaksi set jenisPembayaran=?,status = ?,"
+                + "idPembeli = ? "
+                + "where kodeTransaksi=?";
+        stmt = conn.prepareStatement(query);
+        stmt.setString(1, trans.jenisPembayaran);
+        stmt.setString(2, trans.status);
+        stmt.setString(3, trans.idPembeli);
+        stmt.setString(4, trans.kodeTransaksi);
+        stmt.executeUpdate();
+        conn.commit();
+    }
 
     public List<Transaksi> tampilAllTransaksi(String kodeTransaksi) throws SQLException {
         PreparedStatement stmt = null;

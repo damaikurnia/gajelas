@@ -92,9 +92,9 @@ public class Anggota_Kontrol {
         ResultSet result = null;
         conn.setAutoCommit(false);
         String sql = "select * from per_anggota "
-                + "where namaAnggota LIKE '" + key + "'"
-                + "order by kodeBarang";
+                + "where noIdentitas = ?";
         stmt = conn.prepareStatement(sql);
+        stmt.setString(1, key);
         result = stmt.executeQuery();
         Anggota agt = new Anggota();
         while (result.next()) {
