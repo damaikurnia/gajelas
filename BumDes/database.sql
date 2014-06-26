@@ -119,6 +119,8 @@ CREATE TABLE `per_anggota` (
 
 /*Data for the table `per_anggota` */
 
+insert  into `per_anggota`(`noIdentitas`,`namaAnggota`,`alamat`,`noTelp`) values ('105314024','Adhi','Paingan','081911098981'),('105314044','Adit','Paingan','081944558847');
+
 /*Table structure for table `per_barang` */
 
 DROP TABLE IF EXISTS `per_barang`;
@@ -154,18 +156,6 @@ CREATE TABLE `per_modal` (
 
 insert  into `per_modal`(`id`,`tanggal`,`penerimaanKas`,`pengeluaranKas`,`Keterangan`) values (2,'2014-06-19','5000000','0','MODAL PERDAGANGAN');
 
-/*Table structure for table `per_piu` */
-
-DROP TABLE IF EXISTS `per_piu`;
-
-CREATE TABLE `per_piu` (
-  `kodeTransaksi` int(30) DEFAULT NULL,
-  `tanggal` date DEFAULT NULL,
-  `total` decimal(50,0) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-/*Data for the table `per_piu` */
-
 /*Table structure for table `per_transaksi` */
 
 DROP TABLE IF EXISTS `per_transaksi`;
@@ -181,22 +171,11 @@ CREATE TABLE `per_transaksi` (
   `status` varchar(10) DEFAULT NULL,
   `tanggal` date DEFAULT NULL,
   PRIMARY KEY (`no`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=latin1;
 
 /*Data for the table `per_transaksi` */
 
-/*Table structure for table `per_utg` */
-
-DROP TABLE IF EXISTS `per_utg`;
-
-CREATE TABLE `per_utg` (
-  `kodeTransaksi` int(30) NOT NULL,
-  `tanggal` date DEFAULT NULL,
-  `total` decimal(50,0) DEFAULT NULL,
-  PRIMARY KEY (`kodeTransaksi`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-/*Data for the table `per_utg` */
+insert  into `per_transaksi`(`no`,`kodeTransaksi`,`idBarang`,`jumlah`,`totalPenjualan`,`idPembeli`,`jenisPembayaran`,`status`,`tanggal`) values (36,'T-1','Pensil',2,'1900','-','-','BLM','2014-06-26'),(37,'T-1','Buku',1,'10000','-','-','BLM','2014-06-26'),(38,'T-2','Pensil',2,'1900','-','-','BLM','2014-06-26'),(39,'T-2','Buku',1,'10000','-','-','BLM','2014-06-26'),(40,'T-3','Sayur',1,'2000','-','-','BLM','2014-06-26'),(41,'T-4','Sayur',1,'2000','-','-','BLM','2014-06-26'),(42,'T-5','Sayur',1,'2000','105314024','HUTANG','LUNAS','2014-06-26'),(43,'T-6','Sayur',1,'2000','105314044','HUTANG','LUNAS','2014-06-26'),(44,'T-6','Buku',17,'170000','105314044','HUTANG','LUNAS','2014-06-26'),(45,'T-7','Buku',14,'140000','-','TUNAI','BELI_LUNAS','2014-06-26'),(46,'T-7','Pensil',6,'12000','-','TUNAI','BELI_LUNAS','2014-06-26'),(47,'T-8','Pensil',100,'50000','105314001','HUTANG','BLM','2014-06-26');
 
 /*Table structure for table `pinjaman` */
 
