@@ -13,6 +13,7 @@ import java.util.Date;
  * @author Adhi
  */
 public class Transaksi {
+    public int no;
     public String kodeTransaksi;
     public String idBarang;
     public int jumlah;
@@ -147,6 +148,20 @@ public class Transaksi {
      */
     public void setHargaSatuan(long hargaSatuan) {
         this.hargaSatuan = hargaSatuan;
+    }
+
+    /**
+     * @return the no
+     */
+    public int getNo() {
+        return no;
+    }
+
+    /**
+     * @param no the no to set
+     */
+    public void setNo(int no) {
+        this.no = no;
     }
     
 }

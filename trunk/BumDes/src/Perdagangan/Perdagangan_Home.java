@@ -1484,11 +1484,15 @@ public class Perdagangan_Home extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
-        pemakaian_listrik.setVisible(true);
+        Per_Hutang asd = new Per_Hutang();
+        asd.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton18ActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-        bahan_kimia.setVisible(true);
+        Per_Piutang asd = new Per_Piutang();
+        asd.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton13ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -1566,9 +1570,9 @@ public class Perdagangan_Home extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton32ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        Per_Anggota asd = new Per_Anggota();
-        asd.setVisible(true);
-        this.setVisible(false);
+//        Per_Anggota asd = new Per_Anggota();
+//        asd.setVisible(true);
+//        this.setVisible(false);
     }//GEN-LAST:event_jButton10ActionPerformed
     public static String bulan(int b) {
         String bb = "";
