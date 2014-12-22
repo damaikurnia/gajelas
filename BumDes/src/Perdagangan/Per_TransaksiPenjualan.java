@@ -493,33 +493,39 @@ public class Per_TransaksiPenjualan extends javax.swing.JFrame {
     }//GEN-LAST:event_tabelTransaksiMouseClicked
 
     private void tombolTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombolTambahActionPerformed
-        Barang brg = new Barang();
-        brg.namaBarang = isianNamaBarang.getText();
-
-        Transaksi trans = new Transaksi();
-        trans.kodeTransaksi = isian_kodeTransaksi.getText();
-        trans.idBarang = brg.namaBarang;
-        trans.jumlah = Integer.parseInt(isianJumlah.getText());
-        trans.totalPenjualan = Long.parseLong(isianTotalPenjualan.getText());
-        trans.idPembeli = "-";
-        trans.jenisPembayaran = "-";
-        trans.status = "BLM";
-
-        Date tanggal = isian_tanggal.getDate();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String tgl = sdf.format(tanggal);
-        trans.tanggal = tgl;
         try {
-            Transaksi_Kontrol.getKoneksi().insertTransaksi(trans);
-            updateTabelTransaksi();
-            bersihkan();
-            updateTotalBayar();
+            Barang temp = Barang_Kontrol.getKoneksi().tampilBarang(isianNamaBarang.getText());
+            if (temp.jumlahStok > Integer.parseInt(isianJumlah.getText())) {
+                Barang brg = new Barang();
+                brg.namaBarang = isianNamaBarang.getText();
+
+                Transaksi trans = new Transaksi();
+                trans.kodeTransaksi = isian_kodeTransaksi.getText();
+                trans.idBarang = brg.namaBarang;
+                trans.jumlah = Integer.parseInt(isianJumlah.getText());
+                trans.totalPenjualan = Long.parseLong(isianTotalPenjualan.getText());
+                trans.idPembeli = "-";
+                trans.jenisPembayaran = "-";
+                trans.status = "BLM";
+
+                Date tanggal = isian_tanggal.getDate();
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                String tgl = sdf.format(tanggal);
+                trans.tanggal = tgl;
+                Transaksi_Kontrol.getKoneksi().insertTransaksi(trans);
+                updateTabelTransaksi();
+                bersihkan();
+                updateTotalBayar();
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Stok Barang tidak mencukupi untuk Transaksi. "
+                        + "Silahkan membatalkan pembelian barang " + temp.namaBarang + " atau "
+                        + "mengurangi jumlah penjualan..");
+            }
         } catch (SQLException ex) {
             Logger.getLogger(Per_TransaksiPenjualan.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
             Logger.getLogger(Per_TransaksiPenjualan.class.getName()).log(Level.SEVERE, null, ex);
         }
-        isianNamaBarang.requestFocus();
     }//GEN-LAST:event_tombolTambahActionPerformed
 
     private void isianJumlahKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_isianJumlahKeyReleased
@@ -545,6 +551,9 @@ public class Per_TransaksiPenjualan extends javax.swing.JFrame {
     }//GEN-LAST:event_isianNamaBarangKeyReleased
 
     private void buttonProsesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonProsesActionPerformed
+        Transaksi temp = new Transaksi();
+        temp.kodeTransaksi = isian_kodeTransaksi.getText();
+        
         if (comboPembayaran.getSelectedItem().toString().equals("TUNAI")) {
             try {
                 Transaksi trans = new Transaksi();
@@ -571,7 +580,7 @@ public class Per_TransaksiPenjualan extends javax.swing.JFrame {
                         agt.alamat = isian_alamatAgt.getText();
                         agt.noTelp = isian_noTelpAgt.getText();
                         Anggota_Kontrol.getKoneksi().updateAnggota(agt);
-                        
+
                         Transaksi trans = new Transaksi();
                         trans.kodeTransaksi = isian_kodeTransaksi.getText();
                         trans.jenisPembayaran = "PIUTANG";
@@ -592,7 +601,7 @@ public class Per_TransaksiPenjualan extends javax.swing.JFrame {
                         agt.alamat = isian_alamatAgt.getText();
                         agt.noTelp = isian_noTelpAgt.getText();
                         Anggota_Kontrol.getKoneksi().insertAnggota(agt);
-                        
+
                         Transaksi trans = new Transaksi();
                         trans.kodeTransaksi = isian_kodeTransaksi.getText();
                         trans.jenisPembayaran = "PIUTANG";
@@ -608,6 +617,9 @@ public class Per_TransaksiPenjualan extends javax.swing.JFrame {
                 }
             }
         }
+        
+        //pengurangan barang di gudang
+        
     }//GEN-LAST:event_buttonProsesActionPerformed
 
     private void comboPembayaranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboPembayaranActionPerformed
