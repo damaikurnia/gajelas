@@ -35,7 +35,7 @@ public class LoginKontrol {
         PreparedStatement stmt = null;
         ResultSet result = null;
         conn.setAutoCommit(false);
-        String query = "SELECT USERname,password FROM Login where no = 1";
+        String query = "SELECT username,password FROM login where no = 1";
         stmt = conn.prepareStatement(query);
         result = stmt.executeQuery();
         String username = null;
