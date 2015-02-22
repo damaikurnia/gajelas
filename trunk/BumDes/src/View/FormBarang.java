@@ -5,11 +5,16 @@
  */
 package View;
 
+import Kelas.Barang;
 import Kelas.Profil;
+import Kontrol.BarangKontrol;
 import Kontrol.PengaturanKontrol;
+import TabelModel.BarangTM;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,12 +26,19 @@ public class FormBarang extends javax.swing.JFrame {
      * Creates new form FormAir
      */
     public FormBarang() {
+        initComponents();
+        this.setLocationRelativeTo(null);
+        resetDefault();
+        
+        dialog_barang.setVisible(false);
+        dialog_barang.setSize(627, 350);
+        dialog_barang.setLocationRelativeTo(null);
+        dialog_barang.setTitle("DATA BARANG");
+        
         try {
-            initComponents();
-            this.setLocationRelativeTo(null);
             Profil prof = PengaturanKontrol.getKoneksi().tampilProfil();
-            label_namaDesa.setText("BADAN USAHA MILIK DESA "+prof.getNamadesa());
-            label_alamatNotelp.setText(prof.getAlamatdesa()+" - "+prof.getNotelp());
+            label_namaDesa.setText("BADAN USAHA MILIK DESA " + prof.getNamadesa());
+            label_alamatNotelp.setText(prof.getAlamatdesa() + " - " + prof.getNotelp());
         } catch (SQLException ex) {
             Logger.getLogger(FormBarang.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -47,7 +59,7 @@ public class FormBarang extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabel_barang = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -78,6 +90,8 @@ public class FormBarang extends javax.swing.JFrame {
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
+        jMenu6 = new javax.swing.JMenu();
+        jMenuItem8 = new javax.swing.JMenuItem();
 
         dialog_barang.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -111,7 +125,7 @@ public class FormBarang extends javax.swing.JFrame {
         jPanel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabel_barang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -122,7 +136,12 @@ public class FormBarang extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tabel_barang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabel_barangMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tabel_barang);
 
         jPanel6.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 590, 210));
 
@@ -189,12 +208,27 @@ public class FormBarang extends javax.swing.JFrame {
         jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
 
         button_simpan.setText("SIMPAN");
+        button_simpan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_simpanActionPerformed(evt);
+            }
+        });
         jPanel3.add(button_simpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, -1, -1));
 
         button_ubah.setText("UBAH");
+        button_ubah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_ubahActionPerformed(evt);
+            }
+        });
         jPanel3.add(button_ubah, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 240, -1, -1));
 
         button_hapus.setText("HAPUS");
+        button_hapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_hapusActionPerformed(evt);
+            }
+        });
         jPanel3.add(button_hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, -1, -1));
 
         button_tabel.setText("DAFTAR SELURUH BARANG");
@@ -280,6 +314,18 @@ public class FormBarang extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu5);
 
+        jMenu6.setText("PENGATURAN");
+
+        jMenuItem8.setText("Profil Desa");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuItem8);
+
+        jMenuBar1.add(jMenu6);
+
         setJMenuBar(jMenuBar1);
 
         pack();
@@ -304,8 +350,8 @@ public class FormBarang extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu2MouseClicked
 
     private void button_tabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_tabelActionPerformed
-        Tabel a = new Tabel();
-        a.setVisible(true);
+        dialog_barang.setVisible(true);
+        update();
     }//GEN-LAST:event_button_tabelActionPerformed
 
     private void jMenu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MouseClicked
@@ -325,6 +371,91 @@ public class FormBarang extends javax.swing.JFrame {
         this.setVisible(false);
         a.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        FormPengaturan a = new FormPengaturan();
+        this.setVisible(false);
+        a.setVisible(true);
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void button_simpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_simpanActionPerformed
+        try {
+            Barang brg = new Barang();
+            brg.setIdBarang(text_kode.getText());
+            brg.setNamaBarang(text_nama.getText());
+            brg.setStok(Integer.parseInt(text_stok.getText()));
+
+            BarangKontrol.getKoneksi().insertBarang(brg);
+            JOptionPane.showMessageDialog(null, "Barang berhasil ditambahkan!");
+            resetDefault();
+        } catch (SQLException ex) {
+            Logger.getLogger(FormBarang.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_button_simpanActionPerformed
+
+    private void tabel_barangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabel_barangMouseClicked
+        int row1 = tabel_barang.getSelectedRow();
+        text_kode.setText(tabel_barang.getValueAt(row1, 0).toString());
+        text_nama.setText(tabel_barang.getValueAt(row1, 1).toString());
+        text_stok.setText(tabel_barang.getValueAt(row1, 2).toString());
+
+        text_kode.setEditable(false);
+        button_simpan.setEnabled(false);
+        button_ubah.setEnabled(true);
+        button_hapus.setEnabled(true);
+        dialog_barang.setVisible(false);
+    }//GEN-LAST:event_tabel_barangMouseClicked
+
+    private void button_ubahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_ubahActionPerformed
+        try {
+            Barang brg = new Barang();
+            brg.setIdBarang(text_kode.getText());
+            brg.setNamaBarang(text_nama.getText());
+            brg.setStok(Integer.parseInt(text_stok.getText()));
+            
+            BarangKontrol.getKoneksi().updateBarang(brg);
+            JOptionPane.showMessageDialog(null, "Barang Berhasil diupdate!");
+            resetDefault();
+        } catch (SQLException ex) {
+            Logger.getLogger(FormBarang.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_button_ubahActionPerformed
+
+    private void button_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_hapusActionPerformed
+        try {
+            Barang brg = new Barang(text_kode.getText(), null, WIDTH);
+            BarangKontrol.getKoneksi().deleteBarang(brg);
+            JOptionPane.showMessageDialog(null, "Barang Berhasil didelete!");
+            resetDefault();
+        } catch (SQLException ex) {
+            Logger.getLogger(FormBarang.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_button_hapusActionPerformed
+
+    public void update() {
+        try {
+            List<Barang> brg = BarangKontrol.getKoneksi().selectBarang();
+            BarangTM model = new BarangTM(brg);
+            tabel_barang.setModel(model);
+
+//        tabelDosen.getColumnModel().getColumn(0).setMinWidth(70);
+//        tabelDosen.getColumnModel().getColumn(0).setMaxWidth(70);
+//        tabelDosen.getColumnModel().getColumn(1).setMinWidth(220);
+//        tabelDosen.getColumnModel().getColumn(1).setMaxWidth(220);
+//            tabelDosen.setDefaultRenderer(Object.class, new renderWarnaWarni(Color.lightGray, Color.white));
+        } catch (SQLException ex) {
+            Logger.getLogger(FormBarang.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void resetDefault(){
+        button_ubah.setEnabled(false);
+        button_hapus.setEnabled(false);
+        text_kode.setEditable(true);
+        text_kode.setText("");
+        text_nama.setText("");
+        text_stok.setText("");
+    }
 
     /**
      * @param args the command line arguments
@@ -379,6 +510,7 @@ public class FormBarang extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
@@ -387,6 +519,7 @@ public class FormBarang extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -394,9 +527,9 @@ public class FormBarang extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel label_alamatNotelp;
     private javax.swing.JLabel label_namaDesa;
+    private javax.swing.JTable tabel_barang;
     private javax.swing.JTextField text_kode;
     private javax.swing.JTextField text_nama;
     private javax.swing.JTextField text_stok;
