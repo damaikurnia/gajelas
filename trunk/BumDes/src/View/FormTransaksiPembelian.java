@@ -5,6 +5,12 @@
  */
 package View;
 
+import Kelas.Profil;
+import Kontrol.PengaturanKontrol;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author damaikurnia
@@ -15,8 +21,15 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
      * Creates new form FormAir
      */
     public FormTransaksiPembelian() {
-        initComponents();
-        this.setLocationRelativeTo(null);
+        try {
+            initComponents();
+            this.setLocationRelativeTo(null);
+            Profil prof = PengaturanKontrol.getKoneksi().tampilProfil();
+            label_namaDesa.setText("BADAN USAHA MILIK DESA "+prof.getNamadesa());
+            label_alamatNotelp.setText(prof.getAlamatdesa()+" - "+prof.getNotelp());
+        } catch (SQLException ex) {
+            Logger.getLogger(FormTransaksiPembelian.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -31,8 +44,8 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        label_namaDesa = new javax.swing.JLabel();
+        label_alamatNotelp = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -77,11 +90,11 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("SISTEM INFORMASI PENGELOLAAN AIR BERSIH");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel2.setText("BADAN USAHA MILIK DESA <<NAMA DESA>>");
+        label_namaDesa.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        label_namaDesa.setText("BADAN USAHA MILIK DESA <<NAMA DESA>>");
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel3.setText("<<ALAMAT, NO TELP>>");
+        label_alamatNotelp.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        label_alamatNotelp.setText("<<ALAMAT, NO TELP>>");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -91,8 +104,8 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 728, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 728, Short.MAX_VALUE))
+                    .addComponent(label_namaDesa, javax.swing.GroupLayout.DEFAULT_SIZE, 728, Short.MAX_VALUE)
+                    .addComponent(label_alamatNotelp, javax.swing.GroupLayout.DEFAULT_SIZE, 728, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -101,9 +114,9 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(label_namaDesa, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
+                .addComponent(label_alamatNotelp)
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
@@ -356,8 +369,6 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JMenu jMenu1;
@@ -383,5 +394,7 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
+    private javax.swing.JLabel label_alamatNotelp;
+    private javax.swing.JLabel label_namaDesa;
     // End of variables declaration//GEN-END:variables
 }

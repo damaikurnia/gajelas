@@ -146,8 +146,8 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jLabel2" alignment="0" pref="728" max="32767" attributes="0"/>
-                          <Component id="jLabel3" alignment="0" pref="728" max="32767" attributes="0"/>
+                          <Component id="label_namaDesa" alignment="0" pref="728" max="32767" attributes="0"/>
+                          <Component id="label_alamatNotelp" alignment="0" pref="728" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -159,9 +159,9 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" pref="31" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel2" min="-2" pref="19" max="-2" attributes="0"/>
+                      <Component id="label_namaDesa" min="-2" pref="19" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                      <Component id="label_alamatNotelp" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="18" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -176,7 +176,7 @@
                 <Property name="text" type="java.lang.String" value="SISTEM INFORMASI PENGELOLAAN AIR BERSIH"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel2">
+            <Component class="javax.swing.JLabel" name="label_namaDesa">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="1"/>
@@ -184,7 +184,7 @@
                 <Property name="text" type="java.lang.String" value="BADAN USAHA MILIK DESA &lt;&lt;NAMA DESA&gt;&gt;"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel3">
+            <Component class="javax.swing.JLabel" name="label_alamatNotelp">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="1"/>

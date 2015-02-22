@@ -25,8 +25,9 @@ public class FormPengaturan extends javax.swing.JFrame {
         try {
             initComponents();
             this.setLocationRelativeTo(null);
-            
             Profil prof = PengaturanKontrol.getKoneksi().tampilProfil();
+            label_namaDesa.setText("BADAN USAHA MILIK DESA " + prof.getNamadesa());
+            label_alamatNotelp.setText(prof.getAlamatdesa() + " - " + prof.getNotelp());
             text_namadesa.setText(prof.getNamadesa());
             text_alamatdesa.setText(prof.getAlamatdesa());
             text_noTelp.setText(prof.getNotelp());
@@ -47,8 +48,8 @@ public class FormPengaturan extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        label_namaDesa = new javax.swing.JLabel();
+        label_alamatNotelp = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -85,11 +86,11 @@ public class FormPengaturan extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("SISTEM INFORMASI PENGELOLAAN AIR BERSIH");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel2.setText("BADAN USAHA MILIK DESA <<NAMA DESA>>");
+        label_namaDesa.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        label_namaDesa.setText("BADAN USAHA MILIK DESA <<NAMA DESA>>");
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel3.setText("<<ALAMAT, NO TELP>>");
+        label_alamatNotelp.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        label_alamatNotelp.setText("<<ALAMAT, NO TELP>>");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -99,8 +100,8 @@ public class FormPengaturan extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 728, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 728, Short.MAX_VALUE))
+                    .addComponent(label_namaDesa, javax.swing.GroupLayout.DEFAULT_SIZE, 728, Short.MAX_VALUE)
+                    .addComponent(label_alamatNotelp, javax.swing.GroupLayout.DEFAULT_SIZE, 728, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -109,9 +110,9 @@ public class FormPengaturan extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(label_namaDesa, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
+                .addComponent(label_alamatNotelp)
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
@@ -283,10 +284,21 @@ public class FormPengaturan extends javax.swing.JFrame {
             Profil prof = new Profil(text_namadesa.getText(), text_alamatdesa.getText(), text_noTelp.getText());
             PengaturanKontrol.getKoneksi().updateProfil(prof);
             JOptionPane.showMessageDialog(null, "Profil desa berhasil dirubah!");
+            update();
         } catch (SQLException ex) {
             Logger.getLogger(FormPengaturan.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_button_simpanActionPerformed
+
+    public void update() {
+        try {
+            Profil prof = PengaturanKontrol.getKoneksi().tampilProfil();
+            label_namaDesa.setText("BADAN USAHA MILIK DESA " + prof.getNamadesa());
+            label_alamatNotelp.setText(prof.getAlamatdesa() + " - " + prof.getNotelp());
+        } catch (SQLException ex) {
+            Logger.getLogger(FormPengaturan.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -327,8 +339,6 @@ public class FormPengaturan extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton button_simpan;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -352,6 +362,8 @@ public class FormPengaturan extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel label_alamatNotelp;
+    private javax.swing.JLabel label_namaDesa;
     private javax.swing.JTextArea text_alamatdesa;
     private javax.swing.JTextField text_namadesa;
     private javax.swing.JTextField text_noTelp;
