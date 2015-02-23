@@ -6,6 +6,7 @@
 package View;
 
 import Kelas.Profil;
+import Kelas.Tanggal;
 import Kontrol.PengaturanKontrol;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -27,6 +28,7 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
             Profil prof = PengaturanKontrol.getKoneksi().tampilProfil();
             label_namaDesa.setText("BADAN USAHA MILIK DESA "+prof.getNamadesa());
             label_alamatNotelp.setText(prof.getAlamatdesa()+" - "+prof.getNotelp());
+            label_tanggal.setText(Tanggal.getTanggal());
         } catch (SQLException ex) {
             Logger.getLogger(FormTransaksiPembelian.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -56,7 +58,7 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
         jTextField6 = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
+        label_tanggal = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jTextField7 = new javax.swing.JTextField();
@@ -159,11 +161,11 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
         jLabel10.setText("NO TRANSAKSI");
         jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 140, -1));
 
-        jLabel11.setText("Selasa, 17 Februari 2015");
-        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 50, 130, -1));
+        label_tanggal.setText("Selasa, 17 Februari 2015");
+        jPanel3.add(label_tanggal, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 50, 140, -1));
 
         jLabel12.setText("Hari, Tanggal");
-        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 50, 70, -1));
+        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 50, 80, -1));
 
         jLabel13.setText("JUMLAH BELI");
         jPanel3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 80, 110, -1));
@@ -369,7 +371,6 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -402,5 +403,6 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField9;
     private javax.swing.JLabel label_alamatNotelp;
     private javax.swing.JLabel label_namaDesa;
+    private javax.swing.JLabel label_tanggal;
     // End of variables declaration//GEN-END:variables
 }
