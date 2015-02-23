@@ -73,7 +73,6 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
@@ -219,7 +218,7 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
         });
         jMenuBar1.add(jMenu2);
 
-        jMenu3.setText("PEGAWAI");
+        jMenu3.setText("ANGGOTA");
         jMenu3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jMenu3MouseClicked(evt);
@@ -244,14 +243,6 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
             }
         });
         jMenu4.add(jMenuItem2);
-
-        jMenuItem3.setText("Penggajian Karyawan");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
-            }
-        });
-        jMenu4.add(jMenuItem3);
 
         jMenuBar1.add(jMenu4);
 
@@ -288,12 +279,6 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        FormPenggajianKaryawan a = new FormPenggajianKaryawan();
-        this.setVisible(false);
-        a.setVisible(true);
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
-
     private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
         FormAir a = new FormAir();
         this.setVisible(false);
@@ -312,7 +297,7 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jMenu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MouseClicked
-        FormPegawai a = new FormPegawai();
+        FormAnggota a = new FormAnggota();
         this.setVisible(false);
         a.setVisible(true);
     }//GEN-LAST:event_jMenu3MouseClicked
@@ -400,7 +385,6 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
