@@ -20,10 +20,17 @@ public class Tanggal {
         Date date = new Date(); 
         return dateFormat.format(date); 
     } 
+    
+    public static String getTanggal2() { 
+//        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date(); 
+        return dateFormat.format(date); 
+    } 
      
-//    public static void main(String Args[]){ 
-//        Tanggal tgl = new Tanggal(); 
-//        System.out.println("Tanggal dan waktu sekarang : "+tgl.getTanggal()); 
-//    } 
+    public static void main(String Args[]){ 
+        Tanggal tgl = new Tanggal(); 
+        System.out.println("Tanggal dan waktu sekarang : "+tgl.getTanggal2()); 
+    } 
 } 
 

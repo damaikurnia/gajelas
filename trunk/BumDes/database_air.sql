@@ -31,6 +31,8 @@ CREATE TABLE `anggota` (
 
 /*Data for the table `anggota` */
 
+insert  into `anggota`(`idanggota`,`namaanggota`,`pekerjaan`,`alamat`,`telp`,`noKTP`) values ('105314024','DAMAI KURNIA ADHI','PENGACARA','CONDONG CATUR DEPOK SLEMAN YOGYA','081222333856','3603120109920002');
+
 /*Table structure for table `barang` */
 
 DROP TABLE IF EXISTS `barang`;
@@ -83,16 +85,18 @@ DROP TABLE IF EXISTS `transaksi`;
 CREATE TABLE `transaksi` (
   `notransaksi` varchar(10) NOT NULL,
   `idbarang` varchar(10) NOT NULL,
-  `idpegawai` varchar(10) NOT NULL,
+  `idanggota` varchar(10) NOT NULL,
   `tanggaltransaksi` date DEFAULT NULL,
   `jenistransaksi` varchar(10) DEFAULT NULL,
   `jumlah` int(20) DEFAULT NULL,
   `hargasatuan` int(20) DEFAULT NULL,
   `total` int(40) DEFAULT NULL,
-  PRIMARY KEY (`notransaksi`,`idbarang`,`idpegawai`)
+  PRIMARY KEY (`notransaksi`,`idbarang`,`idanggota`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `transaksi` */
+
+insert  into `transaksi`(`notransaksi`,`idbarang`,`idanggota`,`tanggaltransaksi`,`jenistransaksi`,`jumlah`,`hargasatuan`,`total`) values ('123456','BRG1','-','2015-02-24','PEMBELIAN',1,10000,10000);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
