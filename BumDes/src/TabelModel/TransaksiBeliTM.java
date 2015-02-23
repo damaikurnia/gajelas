@@ -5,8 +5,7 @@
  */
 package TabelModel;
 
-import Kelas.Anggota;
-import Kelas.Barang;
+import Kelas.Transaksi;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -15,17 +14,17 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author damaikurnia
  */
-public class TransaksiTM extends AbstractTableModel {
+public class TransaksiBeliTM extends AbstractTableModel {
 
-    private List<Anggota> agt = new ArrayList<Anggota>();
+    private List<Transaksi> trans = new ArrayList<Transaksi>();
 
-    public TransaksiTM(List<Anggota> agt) {
-        this.agt = agt;
+    public TransaksiBeliTM(List<Transaksi> trs) {
+        this.trans = trs;
     }
 
     @Override
     public int getRowCount() {
-        return agt.size();
+        return trans.size();
     }
 
     @Override
@@ -35,20 +34,20 @@ public class TransaksiTM extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Anggota d = agt.get(rowIndex);
+        Transaksi d = trans.get(rowIndex);
         switch (columnIndex) {
             case 0:
-                return d.getIdAnggota();
+                return d.getNoTrans();
             case 1:
-                return d.getNamaAnggota();
+                return d.getIdBarang().getIdBarang();
             case 2:
-                return d.getPekerjaan();
+                return d.getTanggalTransaksi();
             case 3:
-                return d.getAlamat();
+                return d.getJumlah();
             case 4:
-                return d.getNoTelp();
+                return d.getHargaSatuan();
             case 5:
-                return d.getNoKTP();
+                return d.getTotal();
             default:
                 return "";
         }
@@ -58,17 +57,17 @@ public class TransaksiTM extends AbstractTableModel {
     public String getColumnName(int column) {
         switch (column) {
             case 0:
-                return "KODE";
+                return "NO TRANSAKSI";
             case 1:
-                return "NAMA";
+                return "BARANG";
             case 2:
-                return "PEKERJAAN";
+                return "TANGGAL TRANSAKSI";
             case 3:
-                return "ALAMAT";
+                return "JUMLAH";
             case 4:
-                return "NO TELP";
+                return "HARGA SATUAN";
             case 5:
-                return "NO KTP";
+                return "TOTAL";
             default:
                 return "";
         }
