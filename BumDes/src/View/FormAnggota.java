@@ -5,11 +5,16 @@
  */
 package View;
 
+import Kelas.Anggota;
 import Kelas.Profil;
+import Kontrol.AnggotaKontrol;
 import Kontrol.PengaturanKontrol;
+import TabelModel.AnggotaTM;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -25,8 +30,14 @@ public class FormAnggota extends javax.swing.JFrame {
             initComponents();
             this.setLocationRelativeTo(null);
             Profil prof = PengaturanKontrol.getKoneksi().tampilProfil();
-            label_namaDesa.setText("BADAN USAHA MILIK DESA "+prof.getNamadesa());
-            label_alamatNotelp.setText(prof.getAlamatdesa()+" - "+prof.getNotelp());
+            label_namaDesa.setText("BADAN USAHA MILIK DESA " + prof.getNamadesa());
+            label_alamatNotelp.setText(prof.getAlamatdesa() + " - " + prof.getNotelp());
+
+            resetdefault();
+            dialog_anggota.setVisible(false);
+            dialog_anggota.setSize(627, 350);
+            dialog_anggota.setLocationRelativeTo(null);
+            dialog_anggota.setTitle("DATA ANGGOTA");
         } catch (SQLException ex) {
             Logger.getLogger(FormAnggota.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -41,6 +52,12 @@ public class FormAnggota extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        dialog_anggota = new javax.swing.JDialog();
+        jPanel10 = new javax.swing.JPanel();
+        jPanel11 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tabel_anggota = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -51,17 +68,20 @@ public class FormAnggota extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        button_tambah = new javax.swing.JButton();
+        button_ubah = new javax.swing.JButton();
+        button_hapus = new javax.swing.JButton();
+        button_tabel = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
+        text_ktp = new javax.swing.JTextField();
+        text_idAnggota = new javax.swing.JTextField();
+        text_nama = new javax.swing.JTextField();
+        text_pekerjaan = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        text_alamat = new javax.swing.JTextArea();
+        jLabel10 = new javax.swing.JLabel();
+        text_telp = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -76,6 +96,58 @@ public class FormAnggota extends javax.swing.JFrame {
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenuItem8 = new javax.swing.JMenuItem();
+
+        dialog_anggota.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("TABEL ANGGOTA");
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jPanel10.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, 80));
+
+        tabel_anggota.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tabel_anggota.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabel_anggotaMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(tabel_anggota);
+
+        jPanel10.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 590, 200));
+
+        dialog_anggota.getContentPane().add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, 310));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -122,56 +194,77 @@ public class FormAnggota extends javax.swing.JFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel4.setText("TELP");
-        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, -1, -1));
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel4.setText("NO KTP");
+        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 90, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel5.setText("FORM PEGAWAI");
-        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("FORM PELANGGAN BARU");
+        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 730, -1));
 
-        jLabel6.setText("KODE");
-        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel6.setText("NOMOR PELANGGAN");
+        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, -1, -1));
 
-        jLabel7.setText("NAMA PEGAWAI");
-        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel7.setText("NAMA PELANGGAN");
+        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, -1, -1));
 
-        jButton1.setText("TAMBAH PEGAWAI");
-        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, -1, -1));
-
-        jButton2.setText("UBAH");
-        jPanel3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 240, -1, -1));
-
-        jButton3.setText("HAPUS");
-        jPanel3.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 240, -1, -1));
-
-        jButton4.setText("DAFTAR SELURUH PEGAWAI");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        button_tambah.setText("TAMBAH PELANGGAN");
+        button_tambah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                button_tambahActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 240, -1, -1));
+        jPanel3.add(button_tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 240, -1, -1));
 
-        jLabel8.setText("JABATAN");
-        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
+        button_ubah.setText("UBAH");
+        button_ubah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_ubahActionPerformed(evt);
+            }
+        });
+        jPanel3.add(button_ubah, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 240, -1, -1));
 
+        button_hapus.setText("HAPUS");
+        button_hapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_hapusActionPerformed(evt);
+            }
+        });
+        jPanel3.add(button_hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 240, -1, -1));
+
+        button_tabel.setText("DAFTAR SELURUH PELANGGAN");
+        button_tabel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_tabelActionPerformed(evt);
+            }
+        });
+        jPanel3.add(button_tabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 240, -1, -1));
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel8.setText("PEKERJAAN");
+        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, -1, -1));
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel9.setText("ALAMAT");
-        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, 20));
+        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, -1, 20));
+        jPanel3.add(text_ktp, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 90, 190, -1));
+        jPanel3.add(text_idAnggota, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, 190, -1));
+        jPanel3.add(text_nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, 190, -1));
+        jPanel3.add(text_pekerjaan, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 120, 190, -1));
 
-        jTextField1.setText("jTextField1");
-        jPanel3.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, 190, -1));
+        text_alamat.setColumns(20);
+        text_alamat.setRows(5);
+        jScrollPane1.setViewportView(text_alamat);
 
-        jTextField2.setText("jTextField1");
-        jPanel3.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 190, -1));
+        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 150, 190, 60));
 
-        jTextField3.setText("jTextField1");
-        jPanel3.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 190, -1));
-
-        jTextField4.setText("jTextField1");
-        jPanel3.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, 190, -1));
-
-        jTextField5.setText("jTextField1");
-        jPanel3.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 190, -1));
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel10.setText("TELP");
+        jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 60, -1, -1));
+        jPanel3.add(text_telp, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 60, 190, -1));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 750, 310));
 
@@ -266,10 +359,10 @@ public class FormAnggota extends javax.swing.JFrame {
         a.setVisible(true);
     }//GEN-LAST:event_jMenu2MouseClicked
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        Tabel ta = new Tabel();
-        ta.setVisible(true);
-    }//GEN-LAST:event_jButton4ActionPerformed
+    private void button_tabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_tabelActionPerformed
+        dialog_anggota.setVisible(true);
+        update();
+    }//GEN-LAST:event_button_tabelActionPerformed
 
     private void jMenu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MouseClicked
         FormAnggota a = new FormAnggota();
@@ -295,6 +388,104 @@ public class FormAnggota extends javax.swing.JFrame {
         a.setVisible(true);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
+    private void button_tambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_tambahActionPerformed
+        try {
+            Anggota agt = new Anggota();
+            agt.setIdAnggota(text_idAnggota.getText());
+            agt.setNamaAnggota(text_nama.getText());
+            agt.setPekerjaan(text_pekerjaan.getText());
+            agt.setAlamat(text_alamat.getText());
+            agt.setNoTelp(text_telp.getText());
+            agt.setNoKTP(text_ktp.getText());
+            
+            AnggotaKontrol.getKoneksi().insertAnggota(agt);
+            JOptionPane.showMessageDialog(null, "Anggota berhasil ditambahkan!");
+            resetdefault();
+        } catch (SQLException ex) {
+            Logger.getLogger(FormAnggota.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_button_tambahActionPerformed
+
+    private void button_ubahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_ubahActionPerformed
+        try {
+            Anggota agt = new Anggota();
+            agt.setIdAnggota(text_idAnggota.getText());
+            agt.setNamaAnggota(text_nama.getText());
+            agt.setPekerjaan(text_pekerjaan.getText());
+            agt.setAlamat(text_alamat.getText());
+            agt.setNoTelp(text_telp.getText());
+            agt.setNoKTP(text_ktp.getText());
+            
+            AnggotaKontrol.getKoneksi().updateAnggota(agt);
+            JOptionPane.showMessageDialog(null, "Anggota berhasil dirubah!");
+            resetdefault();
+        } catch (SQLException ex) {
+            Logger.getLogger(FormAnggota.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_button_ubahActionPerformed
+
+    private void button_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_hapusActionPerformed
+        try {
+            Anggota agt = new Anggota();
+            agt.setIdAnggota(text_idAnggota.getText());
+            
+            AnggotaKontrol.getKoneksi().deleteAnggota(agt);
+            JOptionPane.showMessageDialog(null, "Anggota berhasil dihapus!");
+            resetdefault();
+        } catch (SQLException ex) {
+            Logger.getLogger(FormAnggota.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_button_hapusActionPerformed
+
+    private void tabel_anggotaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabel_anggotaMouseClicked
+        custom();
+        int row1 = tabel_anggota.getSelectedRow();
+        text_idAnggota.setText(tabel_anggota.getValueAt(row1, 0).toString());
+        text_nama.setText(tabel_anggota.getValueAt(row1, 1).toString());
+        text_pekerjaan.setText(tabel_anggota.getValueAt(row1, 2).toString());
+        text_alamat.setText(tabel_anggota.getValueAt(row1, 3).toString());
+        text_telp.setText(tabel_anggota.getValueAt(row1, 4).toString());
+        text_ktp.setText(tabel_anggota.getValueAt(row1, 5).toString());
+
+        dialog_anggota.setVisible(false);
+    }//GEN-LAST:event_tabel_anggotaMouseClicked
+
+    public void resetdefault(){
+        text_idAnggota.setText("");
+        text_nama.setText("");
+        text_pekerjaan.setText("");
+        text_alamat.setText("");
+        text_telp.setText("");
+        text_ktp.setText("");
+        text_idAnggota.setEditable(true);
+        button_tambah.setEnabled(true);
+        button_ubah.setEnabled(false);
+        button_hapus.setEnabled(false);
+    }
+    
+    public void custom(){
+        text_idAnggota.setEditable(false);
+        button_tambah.setEnabled(false);
+        button_ubah.setEnabled(true);
+        button_hapus.setEnabled(true);
+    }
+    
+    public void update() {
+        try {
+            List<Anggota> agt = AnggotaKontrol.getKoneksi().selectAnggota();
+            AnggotaTM model = new AnggotaTM(agt);
+            tabel_anggota.setModel(model);
+
+//        tabelDosen.getColumnModel().getColumn(0).setMinWidth(70);
+//        tabelDosen.getColumnModel().getColumn(0).setMaxWidth(70);
+//        tabelDosen.getColumnModel().getColumn(1).setMinWidth(220);
+//        tabelDosen.getColumnModel().getColumn(1).setMaxWidth(220);
+//            tabelDosen.setDefaultRenderer(Object.class, new renderWarnaWarni(Color.lightGray, Color.white));
+        } catch (SQLException ex) {
+            Logger.getLogger(FormAnggota.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -338,11 +529,14 @@ public class FormAnggota extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton button_hapus;
+    private javax.swing.JButton button_tabel;
+    private javax.swing.JButton button_tambah;
+    private javax.swing.JButton button_ubah;
+    private javax.swing.JDialog dialog_anggota;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -364,14 +558,20 @@ public class FormAnggota extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel label_alamatNotelp;
     private javax.swing.JLabel label_namaDesa;
+    private javax.swing.JTable tabel_anggota;
+    private javax.swing.JTextArea text_alamat;
+    private javax.swing.JTextField text_idAnggota;
+    private javax.swing.JTextField text_ktp;
+    private javax.swing.JTextField text_nama;
+    private javax.swing.JTextField text_pekerjaan;
+    private javax.swing.JTextField text_telp;
     // End of variables declaration//GEN-END:variables
 }
