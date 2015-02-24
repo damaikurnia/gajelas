@@ -77,12 +77,13 @@ public class TransaksiKontrol {
         return trans;
     }
     
-    public List<Transaksi> beli_selectTransaksiAll() throws SQLException {
+    public List<Transaksi> beli_selectTransaksiAll(String t) throws SQLException {
         PreparedStatement stmt = null;
         ResultSet result = null;
         conn.setAutoCommit(false);
-        String query = "SELECT * from transaksi where jenistransaksi = 'PEMBELIAN'";
+        String query = "SELECT * from transaksi where jenistransaksi = 'PEMBELIAN' AND tanggaltransaksi LIKE (?)";
         stmt = conn.prepareStatement(query);
+        stmt.setString(1, t);
         result = stmt.executeQuery();
         List<Transaksi> trans = new ArrayList<Transaksi>();
         while (result.next()) {

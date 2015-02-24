@@ -30,7 +30,8 @@ public class Tanggal {
      
     public static void main(String Args[]){ 
         Tanggal tgl = new Tanggal(); 
-        System.out.println("Tanggal dan waktu sekarang : "+tgl.getTanggal2()); 
+//        System.out.println("Tanggal dan waktu sekarang : "+tgl.getTanggal2()); 
+        System.out.println("('-')"); 
     } 
 } 
 
