@@ -139,12 +139,27 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
         jPanel6.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
         cb_tahun.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "2014", "2015" }));
+        cb_tahun.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_tahunActionPerformed(evt);
+            }
+        });
         jPanel6.add(cb_tahun, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 40, -1, -1));
 
         cb_tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+        cb_tanggal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_tanggalActionPerformed(evt);
+            }
+        });
         jPanel6.add(cb_tanggal, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, -1, -1));
 
         cb_bulan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "JANUARI", "FEBRUARI", "MARET", "APRIL", "MEI", "JUNI", "JULI", "AGUSTUS", "SEPTEMBER", "OKTOBER", "NOVEMBER", "DESEMBER" }));
+        cb_bulan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_bulanActionPerformed(evt);
+            }
+        });
         jPanel6.add(cb_bulan, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, -1, -1));
 
         jPanel4.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 670, 70));
@@ -422,7 +437,7 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
 
     private void button_tabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_tabelActionPerformed
         dialog_pembelian.setVisible(true);
-        update2();
+        update2("%-%");
     }//GEN-LAST:event_button_tabelActionPerformed
 
     private void jMenu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MouseClicked
@@ -457,7 +472,7 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
             trans.setJumlah(Integer.parseInt(text_jmlBeli.getText()));
             trans.setHargaSatuan(Double.parseDouble(text_hargaSatuan.getText()));
             trans.setTotal(Double.parseDouble(text_total.getText()));
-            
+
             TransaksiKontrol.getKoneksi().beli_insertTransaksi(trans);
             update();
         } catch (SQLException ex) {
@@ -477,8 +492,8 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
         if (text_jmlBeli.getText().equals("")) {
 
         } else {
-            double total = Integer.parseInt(text_jmlBeli.getText())*
-                    Integer.parseInt(text_hargaSatuan.getText());
+            double total = Integer.parseInt(text_jmlBeli.getText())
+                    * Integer.parseInt(text_hargaSatuan.getText());
             text_total.setText(Double.toString(total));
         }
     }//GEN-LAST:event_text_jmlBeliKeyReleased
@@ -487,11 +502,83 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
         if (text_hargaSatuan.getText().equals("")) {
 
         } else {
-            double total = Integer.parseInt(text_jmlBeli.getText())*
-                    Integer.parseInt(text_hargaSatuan.getText());
+            double total = Integer.parseInt(text_jmlBeli.getText())
+                    * Integer.parseInt(text_hargaSatuan.getText());
             text_total.setText(Double.toString(total));
         }
     }//GEN-LAST:event_text_hargaSatuanKeyReleased
+
+    private void cb_tanggalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_tanggalActionPerformed
+        String tanggal = cb_tanggal.getSelectedItem().toString();
+        String bulan = konversiBulan(cb_bulan.getSelectedItem().toString());
+        String tahun = cb_tahun.getSelectedItem().toString();
+
+        if (!tanggal.equals("-") && bulan.equals("-") && tahun.equals("-")) {
+            update2("%" + tanggal); //tanggal on, bulan off, tahun off
+        } else if (!tanggal.equals("-") && !bulan.equals("-") && tahun.equals("-")) {
+            update2("%" + bulan + "-" + tanggal); //tanggal on, bulan on, tahun off
+        } else if (!tanggal.equals("-") && bulan.equals("-") && !tahun.equals("-")) {
+            update2(tahun + "%" + tanggal); //tanggal on, bulan off, tahun on
+        } else if (tanggal.equals("-") && !bulan.equals("-") && tahun.equals("-")) {
+            update2("%" + bulan + "%"); //tanggal off, bulan on, tahun off
+        } else if (tanggal.equals("-") && !bulan.equals("-") && !tahun.equals("-")) {
+            update2(tahun + "-" + bulan + "%"); //tanggal off, bulan on, tahun on
+        } else if (tanggal.equals("-") && bulan.equals("-") && !tahun.equals("-")) {
+            update2(tahun + "%");//tanggal off, bulan off, tahun on
+        } else if (tanggal.equals("-") && bulan.equals("-") && tahun.equals("-")) {
+            update2("%-%");
+        } else {
+            update2(tahun + "-" + bulan + "-" + tanggal);
+        }
+    }//GEN-LAST:event_cb_tanggalActionPerformed
+
+    private void cb_bulanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_bulanActionPerformed
+        String tanggal = cb_tanggal.getSelectedItem().toString();
+        String bulan = konversiBulan(cb_bulan.getSelectedItem().toString());
+        String tahun = cb_tahun.getSelectedItem().toString();
+
+        if (!tanggal.equals("-") && bulan.equals("-") && tahun.equals("-")) {
+            update2("%" + tanggal); //tanggal on, bulan off, tahun off
+        } else if (!tanggal.equals("-") && !bulan.equals("-") && tahun.equals("-")) {
+            update2("%" + bulan + "-" + tanggal); //tanggal on, bulan on, tahun off
+        } else if (!tanggal.equals("-") && bulan.equals("-") && !tahun.equals("-")) {
+            update2(tahun + "%" + tanggal); //tanggal on, bulan off, tahun on
+        } else if (tanggal.equals("-") && !bulan.equals("-") && tahun.equals("-")) {
+            update2("%" + bulan + "%"); //tanggal off, bulan on, tahun off
+        } else if (tanggal.equals("-") && !bulan.equals("-") && !tahun.equals("-")) {
+            update2(tahun + "-" + bulan + "%"); //tanggal off, bulan on, tahun on
+        } else if (tanggal.equals("-") && bulan.equals("-") && !tahun.equals("-")) {
+            update2(tahun + "%");//tanggal off, bulan off, tahun on
+        } else if (tanggal.equals("-") && bulan.equals("-") && tahun.equals("-")) {
+            update2("%-%");
+        } else {
+            update2(tahun + "-" + bulan + "-" + tanggal);
+        }
+    }//GEN-LAST:event_cb_bulanActionPerformed
+
+    private void cb_tahunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_tahunActionPerformed
+        String tanggal = cb_tanggal.getSelectedItem().toString();
+        String bulan = konversiBulan(cb_bulan.getSelectedItem().toString());
+        String tahun = cb_tahun.getSelectedItem().toString();
+
+        if (!tanggal.equals("-") && bulan.equals("-") && tahun.equals("-")) {
+            update2("%" + tanggal); //tanggal on, bulan off, tahun off
+        } else if (!tanggal.equals("-") && !bulan.equals("-") && tahun.equals("-")) {
+            update2("%" + bulan + "-" + tanggal); //tanggal on, bulan on, tahun off
+        } else if (!tanggal.equals("-") && bulan.equals("-") && !tahun.equals("-")) {
+            update2(tahun + "%" + tanggal); //tanggal on, bulan off, tahun on
+        } else if (tanggal.equals("-") && !bulan.equals("-") && tahun.equals("-")) {
+            update2("%" + bulan + "%"); //tanggal off, bulan on, tahun off
+        } else if (tanggal.equals("-") && !bulan.equals("-") && !tahun.equals("-")) {
+            update2(tahun + "-" + bulan + "%"); //tanggal off, bulan on, tahun on
+        } else if (tanggal.equals("-") && bulan.equals("-") && !tahun.equals("-")) {
+            update2(tahun + "%");//tanggal off, bulan off, tahun on
+        } else if (tanggal.equals("-") && bulan.equals("-") && tahun.equals("-")) {
+            update2("%-%");
+        } else {
+            update2(tahun + "-" + bulan + "-" + tanggal);
+        }
+    }//GEN-LAST:event_cb_tahunActionPerformed
 
     public void update() {
         try {
@@ -508,10 +595,10 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
             Logger.getLogger(FormAnggota.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void update2() {
+
+    public void update2(String tanggal) {
         try {
-            List<Transaksi> agt = TransaksiKontrol.getKoneksi().beli_selectTransaksiAll();
+            List<Transaksi> agt = TransaksiKontrol.getKoneksi().beli_selectTransaksiAll(tanggal);
             TransaksiBeliTM model = new TransaksiBeliTM(agt);
             tabel_pembelian2.setModel(model);
 
@@ -524,7 +611,37 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
             Logger.getLogger(FormAnggota.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
+    public String konversiBulan(String bulan) {
+        if (bulan.equals("JANUARI")) {
+            return "01";
+        } else if (bulan.equals("FEBRUARI")) {
+            return "02";
+        } else if (bulan.equals("MARET")) {
+            return "03";
+        } else if (bulan.equals("APRIL")) {
+            return "04";
+        } else if (bulan.equals("MEI")) {
+            return "05";
+        } else if (bulan.equals("JUNI")) {
+            return "06";
+        } else if (bulan.equals("JULI")) {
+            return "07";
+        } else if (bulan.equals("AGUSTUS")) {
+            return "08";
+        } else if (bulan.equals("SEPTEMBER")) {
+            return "09";
+        } else if (bulan.equals("OKTOBER")) {
+            return "10";
+        } else if (bulan.equals("NOVEMBER")) {
+            return "11";
+        } else if (bulan.equals("DESEMBER")) {
+            return "12";
+        } else {
+            return "-";
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
