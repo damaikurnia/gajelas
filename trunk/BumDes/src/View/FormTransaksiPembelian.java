@@ -11,6 +11,7 @@ import Kelas.Profil;
 import Kelas.Tanggal;
 import Kelas.Transaksi;
 import Kontrol.AnggotaKontrol;
+import Kontrol.BarangKontrol;
 import Kontrol.PengaturanKontrol;
 import Kontrol.TransaksiKontrol;
 import TabelModel.AnggotaTM;
@@ -44,6 +45,7 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
             dialog_pembelian.setLocationRelativeTo(null);
             dialog_pembelian.setTitle("DATA ANGGOTA");
             update();
+            isiList();
         } catch (SQLException ex) {
             Logger.getLogger(FormTransaksiPembelian.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -83,7 +85,6 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
         button_ubah = new javax.swing.JButton();
         button_hapus = new javax.swing.JButton();
         button_tabel = new javax.swing.JButton();
-        text_kodeBrg = new javax.swing.JTextField();
         text_noTrans = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         label_tanggal = new javax.swing.JLabel();
@@ -97,6 +98,7 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabel_pembelian = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
+        combo_barang = new javax.swing.JComboBox();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -272,7 +274,6 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
             }
         });
         jPanel3.add(button_tabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 270, -1, -1));
-        jPanel3.add(text_kodeBrg, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, 110, -1));
         jPanel3.add(text_noTrans, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 140, -1));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -341,6 +342,8 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("TRANSAKSI HARI INI");
         jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 690, 20));
+
+        jPanel3.add(combo_barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, 90, -1));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 750, 310));
 
@@ -468,7 +471,7 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
         try {
             Transaksi trans = new Transaksi();
             trans.setNoTrans(text_noTrans.getText());
-            trans.setIdBarang(new Barang(text_kodeBrg.getText(), "", 0));
+            trans.setIdBarang(new Barang(combo_barang.getSelectedItem().toString(), "", 0));
             trans.setJumlah(Integer.parseInt(text_jmlBeli.getText()));
             trans.setHargaSatuan(Double.parseDouble(text_hargaSatuan.getText()));
             trans.setTotal(Double.parseDouble(text_total.getText()));
@@ -641,6 +644,13 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
             return "-";
         }
     }
+    
+    public void isiList() throws SQLException{
+        List<Barang> brg = BarangKontrol.getKoneksi().selectBarang();
+        for (Barang b : brg) {
+            combo_barang.addItem(b.getNamaBarang());
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -692,6 +702,7 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
     private javax.swing.JComboBox cb_bulan;
     private javax.swing.JComboBox cb_tahun;
     private javax.swing.JComboBox cb_tanggal;
+    private javax.swing.JComboBox combo_barang;
     private javax.swing.JDialog dialog_pembelian;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -735,7 +746,6 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
     private javax.swing.JTable tabel_pembelian2;
     private javax.swing.JTextField text_hargaSatuan;
     private javax.swing.JTextField text_jmlBeli;
-    private javax.swing.JTextField text_kodeBrg;
     private javax.swing.JTextField text_noTrans;
     private javax.swing.JTextField text_total;
     // End of variables declaration//GEN-END:variables
