@@ -14,13 +14,14 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author damaikurnia
  */
-public class BarangTM extends AbstractTableModel{
+public class BarangTM extends AbstractTableModel {
+
     private List<Barang> brg = new ArrayList<Barang>();
 
     public BarangTM(List<Barang> brg) {
         this.brg = brg;
     }
-    
+
     @Override
     public int getRowCount() {
         return brg.size();
@@ -28,7 +29,7 @@ public class BarangTM extends AbstractTableModel{
 
     @Override
     public int getColumnCount() {
-        return 3;
+        return 4;
     }
 
     @Override
@@ -41,11 +42,13 @@ public class BarangTM extends AbstractTableModel{
                 return d.getNamaBarang();
             case 2:
                 return d.getStok();
+            case 3:
+                return d.getTotalAset();
             default:
                 return "";
         }
     }
-    
+
     @Override
     public String getColumnName(int column) {
         switch (column) {
@@ -55,6 +58,8 @@ public class BarangTM extends AbstractTableModel{
                 return "NAMA BARANG";
             case 2:
                 return "JUMLAH STOK";
+            case 3:
+                return "TOTAL ASET";
             default:
                 return "";
         }

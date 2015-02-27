@@ -78,7 +78,7 @@ public class FormBarang extends javax.swing.JFrame {
         text_kode = new javax.swing.JTextField();
         text_nama = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        text_hargaStok = new javax.swing.JTextField();
+        text_totalAset = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -195,7 +195,7 @@ public class FormBarang extends javax.swing.JFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel4.setText("HARGA STOK");
+        jLabel4.setText("TOTAL ASET");
         jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, -1, 20));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -245,9 +245,7 @@ public class FormBarang extends javax.swing.JFrame {
 
         jLabel9.setText("STOK SAAT INI");
         jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
-
-        text_hargaStok.setText("textfield");
-        jPanel3.add(text_hargaStok, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, 210, -1));
+        jPanel3.add(text_totalAset, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, 210, -1));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 750, 310));
 
@@ -377,6 +375,7 @@ public class FormBarang extends javax.swing.JFrame {
             brg.setIdBarang(text_kode.getText());
             brg.setNamaBarang(text_nama.getText());
             brg.setStok(Integer.parseInt(text_stok.getText()));
+            brg.setTotalAset(Double.parseDouble(text_totalAset.getText()));
 
             BarangKontrol.getKoneksi().insertBarang(brg);
             JOptionPane.showMessageDialog(null, "Barang berhasil ditambahkan!");
@@ -405,6 +404,7 @@ public class FormBarang extends javax.swing.JFrame {
             brg.setIdBarang(text_kode.getText());
             brg.setNamaBarang(text_nama.getText());
             brg.setStok(Integer.parseInt(text_stok.getText()));
+            brg.setTotalAset(Double.parseDouble(text_totalAset.getText()));
             
             BarangKontrol.getKoneksi().updateBarang(brg);
             JOptionPane.showMessageDialog(null, "Barang Berhasil diupdate!");
@@ -416,7 +416,7 @@ public class FormBarang extends javax.swing.JFrame {
 
     private void button_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_hapusActionPerformed
         try {
-            Barang brg = new Barang(text_kode.getText(), null, WIDTH);
+            Barang brg = new Barang(text_kode.getText(), null, WIDTH,WIDTH);
             BarangKontrol.getKoneksi().deleteBarang(brg);
             JOptionPane.showMessageDialog(null, "Barang Berhasil didelete!");
             resetDefault();
@@ -448,6 +448,7 @@ public class FormBarang extends javax.swing.JFrame {
         text_kode.setText("");
         text_nama.setText("");
         text_stok.setText("");
+        text_totalAset.setText("");
     }
 
     /**
@@ -523,9 +524,9 @@ public class FormBarang extends javax.swing.JFrame {
     private javax.swing.JLabel label_alamatNotelp;
     private javax.swing.JLabel label_namaDesa;
     private javax.swing.JTable tabel_barang;
-    private javax.swing.JTextField text_hargaStok;
     private javax.swing.JTextField text_kode;
     private javax.swing.JTextField text_nama;
     private javax.swing.JTextField text_stok;
+    private javax.swing.JTextField text_totalAset;
     // End of variables declaration//GEN-END:variables
 }
