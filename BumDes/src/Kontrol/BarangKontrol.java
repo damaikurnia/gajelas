@@ -6,7 +6,6 @@
 package Kontrol;
 
 import Kelas.Barang;
-import Kelas.Profil;
 import Koneksi.Koneksi;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -36,11 +35,12 @@ public class BarangKontrol {
     public void updateBarang(Barang brg) throws SQLException {
         PreparedStatement stmt = null;
         conn.setAutoCommit(false);
-        String query = "update barang set namabarang = ?, stokbarang = ? where idbarang = ?";
+        String query = "update barang set namabarang = ?, stokbarang = ?, totalaset? where idbarang = ?";
         stmt = conn.prepareStatement(query);
         stmt.setString(1, brg.getNamaBarang());
         stmt.setInt(2, brg.getStok());
-        stmt.setString(3, brg.getIdBarang());
+        stmt.setDouble(3, brg.getTotalAset());
+        stmt.setString(4, brg.getIdBarang());
 
         stmt.executeUpdate();
         conn.commit();
@@ -56,7 +56,7 @@ public class BarangKontrol {
         result = stmt.executeQuery();
         List<Barang> brg = new ArrayList<Barang>();
         while (result.next()) {
-            Barang bar = new Barang(result.getString(1), result.getString(2), result.getInt(3));
+            Barang bar = new Barang(result.getString(1), result.getString(2), result.getInt(3),result.getDouble(4));
             brg.add(bar);
         }
         conn.close();
@@ -78,11 +78,12 @@ public class BarangKontrol {
     public void insertBarang(Barang brg) throws SQLException {
         PreparedStatement stmt = null;
         conn.setAutoCommit(false);
-        String query = "INSERT INTO barang VALUES(?,?,?)";
+        String query = "INSERT INTO barang VALUES(?,?,?,?)";
         stmt = conn.prepareStatement(query);
         stmt.setString(1, brg.getIdBarang());
         stmt.setString(2, brg.getNamaBarang());
         stmt.setInt(3, brg.getStok());
+        stmt.setDouble(4,brg.getTotalAset());
 
         stmt.executeUpdate();
         conn.commit();

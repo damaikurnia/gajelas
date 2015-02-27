@@ -10,16 +10,18 @@ package Kelas;
  * @author damaikurnia
  */
 public class Barang {
-    private String idBarang;
-    private String namaBarang;
-    private int stok;
+    String idBarang;
+    String namaBarang;
+    int stok;
+    double totalAset;
 
     public Barang(){}
     
-    public Barang(String id, String nama, int stok){
+    public Barang(String id, String nama, int stok,double aset){
         this.idBarang = id;
         this.namaBarang = nama;
         this.stok = stok;
+        this.totalAset = aset;
     }
     
     /**
@@ -63,6 +65,18 @@ public class Barang {
     public void setStok(int stok) {
         this.stok = stok;
     }
-    
-    
+
+    /**
+     * @return the totalAset
+     */
+    public double getTotalAset() {
+        return totalAset;
+    }
+
+    /**
+     * @param totalAset the totalAset to set
+     */
+    public void setTotalAset(double totalAset) {
+        this.totalAset = totalAset;
+    }
 }
