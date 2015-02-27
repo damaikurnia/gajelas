@@ -77,6 +77,8 @@ public class FormBarang extends javax.swing.JFrame {
         text_stok = new javax.swing.JTextField();
         text_kode = new javax.swing.JTextField();
         text_nama = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        text_hargaStok = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -193,8 +195,8 @@ public class FormBarang extends javax.swing.JFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel4.setText("STOK SAAT INI");
-        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, -1));
+        jLabel4.setText("HARGA STOK");
+        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, -1, 20));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel5.setText("FORM BARANG");
@@ -204,7 +206,7 @@ public class FormBarang extends javax.swing.JFrame {
         jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
 
         jLabel7.setText("NAMA BARANG");
-        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
+        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
 
         button_simpan.setText("SIMPAN");
         button_simpan.addActionListener(new java.awt.event.ActionListener() {
@@ -237,9 +239,15 @@ public class FormBarang extends javax.swing.JFrame {
             }
         });
         jPanel3.add(button_tabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 240, -1, -1));
-        jPanel3.add(text_stok, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, 210, -1));
+        jPanel3.add(text_stok, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 210, -1));
         jPanel3.add(text_kode, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, 210, -1));
-        jPanel3.add(text_nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, 210, -1));
+        jPanel3.add(text_nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 210, -1));
+
+        jLabel9.setText("STOK SAAT INI");
+        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
+
+        text_hargaStok.setText("textfield");
+        jPanel3.add(text_hargaStok, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, 210, -1));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 750, 310));
 
@@ -490,6 +498,7 @@ public class FormBarang extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -514,6 +523,7 @@ public class FormBarang extends javax.swing.JFrame {
     private javax.swing.JLabel label_alamatNotelp;
     private javax.swing.JLabel label_namaDesa;
     private javax.swing.JTable tabel_barang;
+    private javax.swing.JTextField text_hargaStok;
     private javax.swing.JTextField text_kode;
     private javax.swing.JTextField text_nama;
     private javax.swing.JTextField text_stok;
