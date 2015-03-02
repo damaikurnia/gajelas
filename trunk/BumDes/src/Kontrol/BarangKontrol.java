@@ -35,7 +35,7 @@ public class BarangKontrol {
     public void updateBarang(Barang brg) throws SQLException {
         PreparedStatement stmt = null;
         conn.setAutoCommit(false);
-        String query = "update barang set namabarang = ?, stokbarang = ?, totalaset? where idbarang = ?";
+        String query = "update barang set namabarang = ?, stokbarang = ?, totalaset = ? where idbarang = ?";
         stmt = conn.prepareStatement(query);
         stmt.setString(1, brg.getNamaBarang());
         stmt.setInt(2, brg.getStok());
@@ -61,6 +61,22 @@ public class BarangKontrol {
         }
         conn.close();
         return brg;
+    }
+    
+    public Barang selectBarang2(String id) throws SQLException {
+        PreparedStatement stmt = null;
+        ResultSet result = null;
+        conn.setAutoCommit(false);
+        String query = "SELECT * from barang where idbarang = ?";
+        stmt = conn.prepareStatement(query);
+        stmt.setString(1, id);
+        result = stmt.executeQuery();
+        Barang bar = null;
+        while (result.next()) {
+            bar = new Barang(result.getString(1), result.getString(2), result.getInt(3),result.getDouble(4));
+        }
+        conn.close();
+        return bar;
     }
     
     public void deleteBarang(Barang brg) throws SQLException{
@@ -96,6 +112,22 @@ public class BarangKontrol {
         conn.setAutoCommit(false);
         String query = "SELECT SUM(totalaset) FROM barang";
         stmt = conn.prepareStatement(query);
+        result = stmt.executeQuery();
+        String data = "";
+        while (result.next()) {
+            data = result.getString(1);
+        }
+        conn.close();
+        return data;
+    }
+    
+    public String cariIdBarang(String nama) throws SQLException{
+        PreparedStatement stmt = null;
+        ResultSet result = null;
+        conn.setAutoCommit(false);
+        String query = "SELECT idbarang FROM barang where namabarang = ?";
+        stmt = conn.prepareStatement(query);
+        stmt.setString(1, nama);
         result = stmt.executeQuery();
         String data = "";
         while (result.next()) {

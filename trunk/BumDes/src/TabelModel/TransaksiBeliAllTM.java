@@ -14,11 +14,11 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author damaikurnia
  */
-public class TransaksiBeliTM extends AbstractTableModel {
+public class TransaksiBeliAllTM extends AbstractTableModel {
 
     private List<Transaksi> trans = new ArrayList<Transaksi>();
 
-    public TransaksiBeliTM(List<Transaksi> trs) {
+    public TransaksiBeliAllTM(List<Transaksi> trs) {
         this.trans = trs;
     }
 
@@ -29,7 +29,7 @@ public class TransaksiBeliTM extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 5;
+        return 6;
     }
 
     @Override
@@ -37,14 +37,16 @@ public class TransaksiBeliTM extends AbstractTableModel {
         Transaksi d = trans.get(rowIndex);
         switch (columnIndex) {
             case 0:
-                return d.getNoTrans();
+                return d.getTanggalTransaksi();
             case 1:
-                return d.getIdBarang().getNamaBarang();
+                return d.getNoTrans();
             case 2:
-                return d.getJumlah();
+                return d.getIdBarang().getNamaBarang();
             case 3:
-                return Double.toString(d.getHargaSatuan()).split("\\.")[0];
+                return d.getJumlah();
             case 4:
+                return Double.toString(d.getHargaSatuan()).split("\\.")[0];
+            case 5:
                 return Double.toString(d.getTotal()).split("\\.")[0];
             default:
                 return "";
@@ -55,14 +57,16 @@ public class TransaksiBeliTM extends AbstractTableModel {
     public String getColumnName(int column) {
         switch (column) {
             case 0:
-                return "NO TRANSAKSI";
+                return "TANGGAL";
             case 1:
-                return "BARANG";
+                return "NO TRANSAKSI";
             case 2:
-                return "JUMLAH";
+                return "BARANG";
             case 3:
-                return "HARGA SATUAN";
+                return "JUMLAH";
             case 4:
+                return "HARGA SATUAN";
+            case 5:
                 return "TOTAL";
             default:
                 return "";
