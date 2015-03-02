@@ -53,7 +53,7 @@ CREATE TABLE `barang` (
 
 /*Data for the table `barang` */
 
-insert  into `barang`(`idbarang`,`namabarang`,`stokbarang`,`totalaset`) values ('BRG1','Kaporit',10,100000);
+insert  into `barang`(`idbarang`,`namabarang`,`stokbarang`,`totalaset`) values ('BRG1','Kaporit',14,100000),('BRG2','Filter',102,50000);
 
 /*Table structure for table `login` */
 
@@ -118,7 +118,7 @@ CREATE TABLE `transaksi` (
 
 /*Data for the table `transaksi` */
 
-insert  into `transaksi`(`notransaksi`,`idbarang`,`idanggota`,`tanggaltransaksi`,`jenistransaksi`,`jumlah`,`hargasatuan`,`total`) values ('123123','Kaporit','-','2015-02-24','PEMBELIAN',2,2500,5000),('123456','Kaporit','-','2015-02-24','PEMBELIAN',1,10000,10000),('516245','Kapas','-','2015-02-24','PEMBELIAN',100,500,50000);
+insert  into `transaksi`(`notransaksi`,`idbarang`,`idanggota`,`tanggaltransaksi`,`jenistransaksi`,`jumlah`,`hargasatuan`,`total`) values ('4613584','BRG1','-','2015-03-02','PEMBELIAN',4,5000,20000),('55474511','BRG2','-','2015-03-02','PEMBELIAN',2,10000,20000);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
