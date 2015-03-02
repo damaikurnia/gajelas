@@ -6,7 +6,6 @@
 package TabelModel;
 
 import Kelas.Anggota;
-import Kelas.Barang;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -30,7 +29,7 @@ public class AnggotaTM extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 6;
+        return 12;
     }
 
     @Override
@@ -46,8 +45,20 @@ public class AnggotaTM extends AbstractTableModel {
             case 3:
                 return d.getAlamat();
             case 4:
-                return d.getNoTelp();
+                return d.getRt();
             case 5:
+                return d.getRw();
+            case 6:
+                return d.getDusun();
+            case 7:
+                return d.getDesa();
+            case 8:
+                return d.getKota();
+            case 9:
+                return d.getProvinsi();
+            case 10:
+                return d.getNoTelp();
+            case 11:
                 return d.getNoKTP();
             default:
                 return "";
@@ -66,8 +77,20 @@ public class AnggotaTM extends AbstractTableModel {
             case 3:
                 return "ALAMAT";
             case 4:
-                return "NO TELP";
+                return "RT";
             case 5:
+                return "RW";
+            case 6:
+                return "DUSUN";
+            case 7:
+                return "DESA";
+            case 8:
+                return "KOTA";
+            case 9:
+                return "PROVINSI";
+            case 10:
+                return "TELP";
+            case 11:
                 return "NO KTP";
             default:
                 return "";

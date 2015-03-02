@@ -36,14 +36,21 @@ public class AnggotaKontrol {
         PreparedStatement stmt = null;
         conn.setAutoCommit(false);
         String query = "update anggota set namaanggota = ?, pekerjaan = ?,"
-                + "alamat = ?, telp = ?, noKTP = ? where idanggota = ?";
+                + "alamat = ?,rt = ?, rw = ?, dusun = ?,desa = ?, kota = ?,"
+                + "provinsi = ?, telp = ?, noKTP = ? where idanggota = ?";
         stmt = conn.prepareStatement(query);
         stmt.setString(1, agt.getNamaAnggota());
         stmt.setString(2, agt.getPekerjaan());
         stmt.setString(3, agt.getAlamat());
-        stmt.setString(4, agt.getNoTelp());
-        stmt.setString(5, agt.getNoKTP());
-        stmt.setString(6, agt.getIdAnggota());
+        stmt.setInt(4, agt.getRt());
+        stmt.setInt(5, agt.getRw());
+        stmt.setString(6, agt.getDusun());
+        stmt.setString(7, agt.getDesa());
+        stmt.setString(8, agt.getKota());
+        stmt.setString(9, agt.getProvinsi());
+        stmt.setString(10, agt.getNoTelp());
+        stmt.setString(11, agt.getNoKTP());
+        stmt.setString(12, agt.getIdAnggota());
 
         stmt.executeUpdate();
         conn.commit();
@@ -61,10 +68,12 @@ public class AnggotaKontrol {
         while (result.next()) {
             Anggota bar = new Anggota(result.getString(1), result.getString(2),
                     result.getString(3), result.getString(4), result.getString(5),
-                    result.getString(6));
+                    result.getString(6), result.getInt(7), result.getInt(8),
+                    result.getString(9), result.getString(10), result.getString(11),
+                    result.getString(12));
             agt.add(bar);
         }
-        
+
         conn.close();
         return agt;
     }
@@ -84,7 +93,7 @@ public class AnggotaKontrol {
     public void insertAnggota(Anggota agt) throws SQLException {
         PreparedStatement stmt = null;
         conn.setAutoCommit(false);
-        String query = "INSERT INTO anggota VALUES(?,?,?,?,?,?)";
+        String query = "INSERT INTO anggota VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
         stmt = conn.prepareStatement(query);
         stmt.setString(1, agt.getIdAnggota());
         stmt.setString(2, agt.getNamaAnggota());
@@ -92,6 +101,12 @@ public class AnggotaKontrol {
         stmt.setString(4, agt.getAlamat());
         stmt.setString(5, agt.getNoTelp());
         stmt.setString(6, agt.getNoKTP());
+        stmt.setInt(7, agt.getRt());
+        stmt.setInt(8, agt.getRw());
+        stmt.setString(9, agt.getDusun());
+        stmt.setString(10, agt.getDesa());
+        stmt.setString(11, agt.getKota());
+        stmt.setString(12, agt.getProvinsi());
 
         stmt.executeUpdate();
         conn.commit();
