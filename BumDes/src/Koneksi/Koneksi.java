@@ -17,8 +17,8 @@ public class Koneksi {
     Connection connection = null;
     String url = "jdbc:mysql://localhost:3306/airbersih";
     String user = "root";
-    String password = "root";
-//    String password = "";
+//    String password = "root";
+    String password = "";
 
     public Connection getConnection() {
         if (connection == null) {
@@ -36,9 +36,9 @@ public class Koneksi {
         }
         return connection;
     }
-
-    public static void main(String args[]) {
-        Koneksi conn = new Koneksi();
-        conn.getConnection();//untuk uji koneksi.
-    }
+//
+//    public static void main(String args[]) {
+//        Koneksi conn = new Koneksi();
+//        conn.getConnection();//untuk uji koneksi.
+//    }
 }

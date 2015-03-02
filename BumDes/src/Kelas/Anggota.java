@@ -10,24 +10,38 @@ package Kelas;
  * @author damaikurnia
  */
 public class Anggota {
-    private String idAnggota;
-    private String namaAnggota;
-    private String pekerjaan;
-    private String alamat;
-    private String noTelp;
-    private String noKTP;
+    String idAnggota;
+    String namaAnggota;
+    String pekerjaan;
+    String alamat;
+    String noTelp;
+    String noKTP;
+    int rt;
+    int rw;
+    String dusun;
+    String desa;
+    String kota;
+    String provinsi;
 
-    public Anggota(String id,String nm,String pk,String almt,String telp,String ktp){
+    public Anggota(String id, String nm, String pk, String almt, String telp, String ktp,
+            int rt, int rw, String dusun, String dsa, String kota, String prov) {
         this.idAnggota = id;
         this.namaAnggota = nm;
         this.pekerjaan = pk;
         this.alamat = almt;
         this.noTelp = telp;
         this.noKTP = ktp;
+        this.rt = rt;
+        this.rw = rw;
+        this.dusun = dusun;
+        this.desa = dsa;
+        this.kota = kota;
+        this.provinsi = prov;
     }
-    
-    public Anggota(){}
-    
+
+    public Anggota() {
+    }
+
     /**
      * @return the idAnggota
      */
@@ -110,5 +124,89 @@ public class Anggota {
      */
     public void setNoKTP(String noKTP) {
         this.noKTP = noKTP;
+    }
+
+    /**
+     * @return the rt
+     */
+    public int getRt() {
+        return rt;
+    }
+
+    /**
+     * @param rt the rt to set
+     */
+    public void setRt(int rt) {
+        this.rt = rt;
+    }
+
+    /**
+     * @return the rw
+     */
+    public int getRw() {
+        return rw;
+    }
+
+    /**
+     * @param rw the rw to set
+     */
+    public void setRw(int rw) {
+        this.rw = rw;
+    }
+
+    /**
+     * @return the dusun
+     */
+    public String getDusun() {
+        return dusun;
+    }
+
+    /**
+     * @param dusun the dusun to set
+     */
+    public void setDusun(String dusun) {
+        this.dusun = dusun;
+    }
+
+    /**
+     * @return the desa
+     */
+    public String getDesa() {
+        return desa;
+    }
+
+    /**
+     * @param desa the desa to set
+     */
+    public void setDesa(String desa) {
+        this.desa = desa;
+    }
+
+    /**
+     * @return the kota
+     */
+    public String getKota() {
+        return kota;
+    }
+
+    /**
+     * @param kota the kota to set
+     */
+    public void setKota(String kota) {
+        this.kota = kota;
+    }
+
+    /**
+     * @return the provinsi
+     */
+    public String getProvinsi() {
+        return provinsi;
+    }
+
+    /**
+     * @param provinsi the provinsi to set
+     */
+    public void setProvinsi(String provinsi) {
+        this.provinsi = provinsi;
     }
 }
