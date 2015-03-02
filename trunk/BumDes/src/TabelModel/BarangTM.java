@@ -43,7 +43,7 @@ public class BarangTM extends AbstractTableModel {
             case 2:
                 return d.getStok();
             case 3:
-                return d.getTotalAset();
+                return Double.toString(d.getTotalAset()).split("\\.")[0];
             default:
                 return "";
         }

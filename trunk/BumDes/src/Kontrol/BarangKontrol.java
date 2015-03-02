@@ -89,4 +89,19 @@ public class BarangKontrol {
         conn.commit();
         conn.close();
     }
+    
+    public String tampilTotalAset() throws SQLException{
+        PreparedStatement stmt = null;
+        ResultSet result = null;
+        conn.setAutoCommit(false);
+        String query = "SELECT SUM(totalaset) FROM barang";
+        stmt = conn.prepareStatement(query);
+        result = stmt.executeQuery();
+        String data = "";
+        while (result.next()) {
+            data = result.getString(1);
+        }
+        conn.close();
+        return data;
+    }
 }

@@ -5,6 +5,7 @@
  */
 package View;
 
+import Custom.RataKanan;
 import Kelas.Barang;
 import Kelas.Profil;
 import Kontrol.BarangKontrol;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.TableCellRenderer;
 
 /**
  *
@@ -29,12 +31,12 @@ public class FormBarang extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         resetDefault();
-        
+
         dialog_barang.setVisible(false);
-        dialog_barang.setSize(627, 350);
+        dialog_barang.setSize(627, 400);
         dialog_barang.setLocationRelativeTo(null);
         dialog_barang.setTitle("DATA BARANG");
-        
+
         try {
             Profil prof = PengaturanKontrol.getKoneksi().tampilProfil();
             label_namaDesa.setText("BADAN USAHA MILIK DESA " + prof.getNamadesa());
@@ -60,6 +62,8 @@ public class FormBarang extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabel_barang = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        text_ttlaset = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -117,7 +121,7 @@ public class FormBarang extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -146,9 +150,17 @@ public class FormBarang extends javax.swing.JFrame {
 
         jPanel6.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 590, 210));
 
-        jPanel4.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 610, 230));
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("TOTAL ASET");
+        jPanel6.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 230, 130, 20));
 
-        dialog_barang.getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, 310));
+        text_ttlaset.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        jPanel6.add(text_ttlaset, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 230, 140, -1));
+
+        jPanel4.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 610, 270));
+
+        dialog_barang.getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, 360));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -390,6 +402,7 @@ public class FormBarang extends javax.swing.JFrame {
         text_kode.setText(tabel_barang.getValueAt(row1, 0).toString());
         text_nama.setText(tabel_barang.getValueAt(row1, 1).toString());
         text_stok.setText(tabel_barang.getValueAt(row1, 2).toString());
+        text_totalAset.setText(tabel_barang.getValueAt(row1, 3).toString());
 
         text_kode.setEditable(false);
         button_simpan.setEnabled(false);
@@ -405,7 +418,7 @@ public class FormBarang extends javax.swing.JFrame {
             brg.setNamaBarang(text_nama.getText());
             brg.setStok(Integer.parseInt(text_stok.getText()));
             brg.setTotalAset(Double.parseDouble(text_totalAset.getText()));
-            
+
             BarangKontrol.getKoneksi().updateBarang(brg);
             JOptionPane.showMessageDialog(null, "Barang Berhasil diupdate!");
             resetDefault();
@@ -416,7 +429,7 @@ public class FormBarang extends javax.swing.JFrame {
 
     private void button_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_hapusActionPerformed
         try {
-            Barang brg = new Barang(text_kode.getText(), null, WIDTH,WIDTH);
+            Barang brg = new Barang(text_kode.getText(), null, WIDTH, WIDTH);
             BarangKontrol.getKoneksi().deleteBarang(brg);
             JOptionPane.showMessageDialog(null, "Barang Berhasil didelete!");
             resetDefault();
@@ -431,7 +444,10 @@ public class FormBarang extends javax.swing.JFrame {
             BarangTM model = new BarangTM(brg);
             tabel_barang.setModel(model);
 
-//        tabelDosen.getColumnModel().getColumn(0).setMinWidth(70);
+            TableCellRenderer kanan = new RataKanan();
+            tabel_barang.getColumnModel().getColumn(3).setCellRenderer(kanan);
+            
+            text_ttlaset.setText(BarangKontrol.getKoneksi().tampilTotalAset());
 //        tabelDosen.getColumnModel().getColumn(0).setMaxWidth(70);
 //        tabelDosen.getColumnModel().getColumn(1).setMinWidth(220);
 //        tabelDosen.getColumnModel().getColumn(1).setMaxWidth(220);
@@ -440,8 +456,8 @@ public class FormBarang extends javax.swing.JFrame {
             Logger.getLogger(FormBarang.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void resetDefault(){
+
+    public void resetDefault() {
         button_ubah.setEnabled(false);
         button_hapus.setEnabled(false);
         text_kode.setEditable(true);
@@ -494,6 +510,7 @@ public class FormBarang extends javax.swing.JFrame {
     private javax.swing.JButton button_ubah;
     private javax.swing.JDialog dialog_barang;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -528,5 +545,6 @@ public class FormBarang extends javax.swing.JFrame {
     private javax.swing.JTextField text_nama;
     private javax.swing.JTextField text_stok;
     private javax.swing.JTextField text_totalAset;
+    private javax.swing.JTextField text_ttlaset;
     // End of variables declaration//GEN-END:variables
 }
