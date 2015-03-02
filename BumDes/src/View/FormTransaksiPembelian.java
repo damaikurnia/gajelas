@@ -5,22 +5,22 @@
  */
 package View;
 
-import Kelas.Anggota;
+import Custom.RataKanan;
 import Kelas.Barang;
 import Kelas.Profil;
 import Kelas.Tanggal;
 import Kelas.Transaksi;
-import Kontrol.AnggotaKontrol;
 import Kontrol.BarangKontrol;
 import Kontrol.PengaturanKontrol;
 import Kontrol.TransaksiKontrol;
-import TabelModel.AnggotaTM;
+import TabelModel.TransaksiBeliAllTM;
 import TabelModel.TransaksiBeliTM;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.TableCellRenderer;
 
 /**
  *
@@ -73,6 +73,8 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
         jPanel7 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabel_pembelian2 = new javax.swing.JTable();
+        jLabel9 = new javax.swing.JLabel();
+        text_ttlbeliall = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -99,6 +101,8 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
         tabel_pembelian = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         combo_barang = new javax.swing.JComboBox();
+        jLabel8 = new javax.swing.JLabel();
+        text_ttltransbeli = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -182,7 +186,14 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(tabel_pembelian2);
 
-        jPanel7.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 650, 270));
+        jPanel7.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 650, 220));
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel9.setText("TOTAL TRANSAKSI BELI");
+        jPanel7.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 260, 130, 20));
+
+        text_ttlbeliall.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        jPanel7.add(text_ttlbeliall, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 260, 170, -1));
 
         jPanel4.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 670, 300));
 
@@ -240,7 +251,7 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("KODE BARANG");
+        jLabel6.setText("BARANG");
         jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 110, -1));
 
         button_tambah.setText("TAMBAH");
@@ -249,7 +260,7 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
                 button_tambahActionPerformed(evt);
             }
         });
-        jPanel3.add(button_tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, -1, -1));
+        jPanel3.add(button_tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 320, -1, -1));
 
         button_ubah.setText("UBAH");
         button_ubah.addActionListener(new java.awt.event.ActionListener() {
@@ -257,7 +268,7 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
                 button_ubahActionPerformed(evt);
             }
         });
-        jPanel3.add(button_ubah, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 270, -1, -1));
+        jPanel3.add(button_ubah, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 320, -1, -1));
 
         button_hapus.setText("HAPUS");
         button_hapus.addActionListener(new java.awt.event.ActionListener() {
@@ -265,7 +276,7 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
                 button_hapusActionPerformed(evt);
             }
         });
-        jPanel3.add(button_hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 270, -1, -1));
+        jPanel3.add(button_hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 320, -1, -1));
 
         button_tabel.setText("TABEL TRANSAKSI PEMBELIAN");
         button_tabel.addActionListener(new java.awt.event.ActionListener() {
@@ -273,7 +284,7 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
                 button_tabelActionPerformed(evt);
             }
         });
-        jPanel3.add(button_tabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 270, -1, -1));
+        jPanel3.add(button_tabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 320, -1, -1));
         jPanel3.add(text_noTrans, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 140, -1));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -294,6 +305,7 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
         jLabel13.setText("JUMLAH BELI");
         jPanel3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 80, 110, -1));
 
+        text_jmlBeli.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         text_jmlBeli.setText("0");
         text_jmlBeli.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -307,6 +319,7 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
         jLabel14.setText("HARGA SATUAN");
         jPanel3.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 80, 120, -1));
 
+        text_hargaSatuan.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         text_hargaSatuan.setText("0");
         text_hargaSatuan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -320,6 +333,7 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
         jLabel15.setText("TOTAL");
         jPanel3.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 80, 120, -1));
 
+        text_total.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         text_total.setText("0");
         jPanel3.add(text_total, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 100, 120, -1));
 
@@ -336,18 +350,26 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tabel_pembelian);
 
-        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 690, 100));
+        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 690, 100));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("TRANSAKSI HARI INI");
-        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 690, 20));
+        jLabel2.setText("TOTAL TRANSAKSI PEMBELIAN HARI INI");
+        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 290, 330, 20));
 
         jPanel3.add(combo_barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, 90, -1));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 750, 310));
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("TRANSAKSI HARI INI");
+        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 690, 20));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 430));
+        text_ttltransbeli.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        jPanel3.add(text_ttltransbeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 290, 170, -1));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 750, 360));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 480));
 
         jMenu1.setText("HOME");
         jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -471,12 +493,19 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
         try {
             Transaksi trans = new Transaksi();
             trans.setNoTrans(text_noTrans.getText());
-            trans.setIdBarang(new Barang(combo_barang.getSelectedItem().toString(), "", 0));
+            String idBarang = BarangKontrol.getKoneksi().cariIdBarang(combo_barang.getSelectedItem().toString());
+            trans.setIdBarang(new Barang(idBarang,combo_barang.getSelectedItem().toString(), 0,0));
             trans.setJumlah(Integer.parseInt(text_jmlBeli.getText()));
             trans.setHargaSatuan(Double.parseDouble(text_hargaSatuan.getText()));
             trans.setTotal(Double.parseDouble(text_total.getText()));
 
             TransaksiKontrol.getKoneksi().beli_insertTransaksi(trans);
+            Barang bar = BarangKontrol.getKoneksi().selectBarang2(idBarang);
+            int stokSmntara = bar.getStok();
+            bar.setStok(stokSmntara+trans.getJumlah());
+            BarangKontrol.getKoneksi().updateBarang(bar);
+            JOptionPane.showMessageDialog(null,"Pembelian barang berhasil!");
+            JOptionPane.showMessageDialog(null,"Stok "+bar.getNamaBarang()+" saat ini adalah = "+bar.getStok());
             update();
         } catch (SQLException ex) {
             Logger.getLogger(FormTransaksiPembelian.class.getName()).log(Level.SEVERE, null, ex);
@@ -589,6 +618,12 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
             TransaksiBeliTM model = new TransaksiBeliTM(agt);
             tabel_pembelian.setModel(model);
 
+            TableCellRenderer kanan = new RataKanan();
+            tabel_pembelian.getColumnModel().getColumn(2).setCellRenderer(kanan);
+            tabel_pembelian.getColumnModel().getColumn(3).setCellRenderer(kanan);
+            tabel_pembelian.getColumnModel().getColumn(4).setCellRenderer(kanan);
+            
+            text_ttltransbeli.setText(TransaksiKontrol.getKoneksi().beli_tampilTotalBeliHariIni());
 //        tabelDosen.getColumnModel().getColumn(0).setMinWidth(70);
 //        tabelDosen.getColumnModel().getColumn(0).setMaxWidth(70);
 //        tabelDosen.getColumnModel().getColumn(1).setMinWidth(220);
@@ -602,9 +637,15 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
     public void update2(String tanggal) {
         try {
             List<Transaksi> agt = TransaksiKontrol.getKoneksi().beli_selectTransaksiAll(tanggal);
-            TransaksiBeliTM model = new TransaksiBeliTM(agt);
+            TransaksiBeliAllTM model = new TransaksiBeliAllTM(agt);
             tabel_pembelian2.setModel(model);
 
+            TableCellRenderer kanan = new RataKanan();
+            tabel_pembelian2.getColumnModel().getColumn(3).setCellRenderer(kanan);
+            tabel_pembelian2.getColumnModel().getColumn(4).setCellRenderer(kanan);
+            tabel_pembelian2.getColumnModel().getColumn(5).setCellRenderer(kanan);
+            
+            text_ttlbeliall.setText(TransaksiKontrol.getKoneksi().beli_tampilTotalBeliAll());
 //        tabelDosen.getColumnModel().getColumn(0).setMinWidth(70);
 //        tabelDosen.getColumnModel().getColumn(0).setMaxWidth(70);
 //        tabelDosen.getColumnModel().getColumn(1).setMinWidth(220);
@@ -716,6 +757,8 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -748,5 +791,7 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
     private javax.swing.JTextField text_jmlBeli;
     private javax.swing.JTextField text_noTrans;
     private javax.swing.JTextField text_total;
+    private javax.swing.JTextField text_ttlbeliall;
+    private javax.swing.JTextField text_ttltransbeli;
     // End of variables declaration//GEN-END:variables
 }

@@ -55,7 +55,9 @@ public class TransaksiKontrol {
         PreparedStatement stmt = null;
         ResultSet result = null;
         conn.setAutoCommit(false);
-        String query = "SELECT * from transaksi where tanggaltransaksi = ?";
+        String query = "SELECT a.notransaksi, b.namabarang,a.jumlah,a.hargasatuan,a.total \n"
+                + "FROM transaksi a, barang b "
+                + "WHERE a.idbarang = b.idbarang AND tanggaltransaksi = ?";
         stmt = conn.prepareStatement(query);
         stmt.setString(1, Tanggal.getTanggal2());
         result = stmt.executeQuery();
@@ -63,42 +65,42 @@ public class TransaksiKontrol {
         while (result.next()) {
             Transaksi trs = new Transaksi();
             trs.setNoTrans(result.getString(1));
-            trs.setIdBarang(new Barang(result.getString(2), "", 0));
-            String tgl = result.getString(4);
-            trs.setTanggalTransaksi(tgl.split("-")[2]+"-"+tgl.split("-")[1]+"-"+tgl.split("-")[0]);
-            trs.setJenisTransaksi(result.getString(5));
-            trs.setJumlah(result.getInt(6));
-            trs.setHargaSatuan(result.getDouble(7));
-            trs.setTotal(result.getDouble(8));
+            trs.setIdBarang(new Barang("", result.getString(2), 0, 0));
+            trs.setJumlah(result.getInt(3));
+            trs.setHargaSatuan(result.getDouble(4));
+            trs.setTotal(result.getDouble(5));
             trans.add(trs);
         }
-        
+
         conn.close();
         return trans;
     }
-    
+
     public List<Transaksi> beli_selectTransaksiAll(String t) throws SQLException {
         PreparedStatement stmt = null;
         ResultSet result = null;
         conn.setAutoCommit(false);
-        String query = "SELECT * from transaksi where jenistransaksi = 'PEMBELIAN' AND tanggaltransaksi LIKE (?)";
+        String query = "SELECT a.tanggaltransaksi,a.notransaksi, "
+                + "b.namabarang,a.jumlah,a.hargasatuan,a.total \n"
+                + "FROM transaksi a, barang b "
+                + "WHERE a.idbarang = b.idbarang AND a.jenistransaksi = 'PEMBELIAN' "
+                + "AND a.tanggaltransaksi LIKE (?) "
+                + "order by a.tanggaltransaksi";
         stmt = conn.prepareStatement(query);
         stmt.setString(1, t);
         result = stmt.executeQuery();
         List<Transaksi> trans = new ArrayList<Transaksi>();
         while (result.next()) {
             Transaksi trs = new Transaksi();
-            trs.setNoTrans(result.getString(1));
-            trs.setIdBarang(new Barang(result.getString(2), "", 0));
-            String tgl = result.getString(4);
-            trs.setTanggalTransaksi(tgl.split("-")[2]+"-"+tgl.split("-")[1]+"-"+tgl.split("-")[0]);
-            trs.setJenisTransaksi(result.getString(5));
-            trs.setJumlah(result.getInt(6));
-            trs.setHargaSatuan(result.getDouble(7));
-            trs.setTotal(result.getDouble(8));
+            String tgl = result.getString(1);
+            trs.setTanggalTransaksi(tgl.split("-")[2] + "-" + tgl.split("-")[1] + "-" + tgl.split("-")[0]);
+            trs.setNoTrans(result.getString(2));
+            trs.setIdBarang(new Barang("",result.getString(3), 0, 0));
+            trs.setJumlah(result.getInt(4));
+            trs.setHargaSatuan(result.getDouble(5));
+            trs.setTotal(result.getDouble(6));
             trans.add(trs);
         }
-        
         conn.close();
         return trans;
     }
@@ -131,5 +133,41 @@ public class TransaksiKontrol {
         stmt.executeUpdate();
         conn.commit();
         conn.close();
+    }
+
+    public String beli_tampilTotalBeliHariIni() throws SQLException {
+        PreparedStatement stmt = null;
+        ResultSet result = null;
+        conn.setAutoCommit(false);
+        String query = "SELECT SUM(total) FROM transaksi "
+                + "WHERE jenistransaksi = 'PEMBELIAN' "
+                + "AND tanggaltransaksi = ?";
+        stmt = conn.prepareStatement(query);
+        stmt.setString(1, Tanggal.getTanggal2());
+        result = stmt.executeQuery();
+        String total = "";
+        while (result.next()) {
+            total = result.getString(1);
+        }
+
+        conn.close();
+        return total;
+    }
+    
+    public String beli_tampilTotalBeliAll() throws SQLException {
+        PreparedStatement stmt = null;
+        ResultSet result = null;
+        conn.setAutoCommit(false);
+        String query = "SELECT SUM(total) FROM transaksi "
+                + "WHERE jenistransaksi = 'PEMBELIAN'";
+        stmt = conn.prepareStatement(query);
+        result = stmt.executeQuery();
+        String total = "";
+        while (result.next()) {
+            total = result.getString(1);
+        }
+
+        conn.close();
+        return total;
     }
 }
