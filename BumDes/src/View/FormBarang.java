@@ -445,6 +445,7 @@ public class FormBarang extends javax.swing.JFrame {
             tabel_barang.setModel(model);
 
             TableCellRenderer kanan = new RataKanan();
+            tabel_barang.getColumnModel().getColumn(2).setCellRenderer(kanan);
             tabel_barang.getColumnModel().getColumn(3).setCellRenderer(kanan);
             
             text_ttlaset.setText(BarangKontrol.getKoneksi().tampilTotalAset());
