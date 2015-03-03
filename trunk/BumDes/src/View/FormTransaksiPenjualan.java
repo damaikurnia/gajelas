@@ -6,15 +6,17 @@
 package View;
 
 import Custom.RataKanan;
-import Kelas.Barang;
+//import Kelas.Barang;
 import Kelas.Profil;
-import Kelas.Tanggal;
+import Custom.Tanggal;
+import Kelas.Anggota;
 import Kelas.Transaksi;
-import Kontrol.BarangKontrol;
+import Kontrol.AnggotaKontrol;
+//import Kontrol.BarangKontrol;
 import Kontrol.PengaturanKontrol;
 import Kontrol.TransaksiKontrol;
-import TabelModel.TransaksiBeliAllTM;
-import TabelModel.TransaksiBeliTM;
+import TabelModel.TransaksiJualAllTM;
+import TabelModel.TransaksiJualTM;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -73,7 +75,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         cb_bulan = new javax.swing.JComboBox();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tabel_pembelian2 = new javax.swing.JTable();
+        tabel_penjualan2 = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
         text_ttlbeliall = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
@@ -99,9 +101,9 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         text_total = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabel_pembelian = new javax.swing.JTable();
+        tabel_penjualan = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
-        combo_barang = new javax.swing.JComboBox();
+        combo_Anggota = new javax.swing.JComboBox();
         jLabel8 = new javax.swing.JLabel();
         text_ttltransbeli = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
@@ -175,7 +177,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         jPanel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        tabel_pembelian2.setModel(new javax.swing.table.DefaultTableModel(
+        tabel_penjualan2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -186,12 +188,12 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(tabel_pembelian2);
+        jScrollPane2.setViewportView(tabel_penjualan2);
 
         jPanel7.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 650, 220));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel9.setText("TOTAL TRANSAKSI BELI");
+        jLabel9.setText("TOTAL PENDAPATAN");
         jPanel7.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 260, 130, 20));
 
         text_ttlbeliall.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
@@ -253,7 +255,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("BARANG");
+        jLabel6.setText("PELANGGAN");
         jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 110, -1));
 
         button_tambah.setText("TAMBAH");
@@ -304,7 +306,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel13.setText("JUMLAH BELI");
+        jLabel13.setText("JUMLAH m3 AIR");
         jPanel3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 80, 110, -1));
 
         text_jmlBeli.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
@@ -322,7 +324,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         jPanel3.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 80, 120, -1));
 
         text_hargaSatuan.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        text_hargaSatuan.setText("0");
+        text_hargaSatuan.setText("500");
         text_hargaSatuan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 text_hargaSatuanKeyReleased(evt);
@@ -339,7 +341,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         text_total.setText("0");
         jPanel3.add(text_total, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 100, 120, -1));
 
-        tabel_pembelian.setModel(new javax.swing.table.DefaultTableModel(
+        tabel_penjualan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -350,21 +352,21 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tabel_pembelian.addMouseListener(new java.awt.event.MouseAdapter() {
+        tabel_penjualan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tabel_pembelianMouseClicked(evt);
+                tabel_penjualanMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tabel_pembelian);
+        jScrollPane1.setViewportView(tabel_penjualan);
 
         jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 690, 100));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("TOTAL TRANSAKSI PEMBELIAN HARI INI");
+        jLabel2.setText("TOTAL PENDAPATAN HARI INI");
         jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 290, 330, 20));
 
-        jPanel3.add(combo_barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, 90, -1));
+        jPanel3.add(combo_Anggota, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, 90, -1));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -504,19 +506,15 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         try {
             Transaksi trans = new Transaksi();
             trans.setNoTrans(text_noTrans.getText());
-            String idBarang = BarangKontrol.getKoneksi().cariIdBarang(combo_barang.getSelectedItem().toString());
-            trans.setIdBarang(new Barang(idBarang, combo_barang.getSelectedItem().toString(), 0, 0));
+            Anggota idAnggota = AnggotaKontrol.getKoneksi().cariIdAnggota(combo_Anggota.getSelectedItem().toString());
+            trans.setIdAnggota(new Anggota(idAnggota.getIdAnggota(), combo_Anggota.getSelectedItem().toString(),
+                    "", "", "", "", 0, 0, "", "", "", ""));
             trans.setJumlah(Integer.parseInt(text_jmlBeli.getText()));
             trans.setHargaSatuan(Double.parseDouble(text_hargaSatuan.getText()));
             trans.setTotal(Double.parseDouble(text_total.getText()));
 
-            TransaksiKontrol.getKoneksi().beli_insertTransaksi(trans);
-            Barang bar = BarangKontrol.getKoneksi().selectBarang2(idBarang);
-            int stokSmntara = bar.getStok();
-            bar.setStok(stokSmntara + trans.getJumlah());
-            BarangKontrol.getKoneksi().updateBarang(bar);
-            JOptionPane.showMessageDialog(null, "Pembelian barang berhasil!");
-            JOptionPane.showMessageDialog(null, "Stok " + bar.getNamaBarang() + " saat ini adalah = " + bar.getStok());
+            TransaksiKontrol.getKoneksi().jual_insertTransaksi(trans);
+            JOptionPane.showMessageDialog(null, "Transaksi berhasil!");
             update();
             defaultnya();
         } catch (SQLException ex) {
@@ -528,20 +526,21 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         try {
             Transaksi trans = new Transaksi();
             trans.setNoTrans(text_noTrans.getText());
-            String idBarang = BarangKontrol.getKoneksi().cariIdBarang(combo_barang.getSelectedItem().toString());
-            trans.setIdBarang(new Barang(idBarang, combo_barang.getSelectedItem().toString(), 0, 0));
+            Anggota idAnggota = AnggotaKontrol.getKoneksi().cariIdAnggota(combo_Anggota.getSelectedItem().toString());
+            trans.setIdAnggota(new Anggota(idAnggota.getIdAnggota(), combo_Anggota.getSelectedItem().toString(),
+                    "", "", "", "", 0, 0, "", "", "", ""));
             trans.setJumlah(Integer.parseInt(text_jmlBeli.getText()));
             trans.setHargaSatuan(Double.parseDouble(text_hargaSatuan.getText()));
             trans.setTotal(Double.parseDouble(text_total.getText()));
-            
-            TransaksiKontrol.getKoneksi().beli_updateTransaksi(trans);
-            Barang bar = BarangKontrol.getKoneksi().selectBarang2(idBarang);
-            int stokSmntara = bar.getStok();
-            stokSmntara = stokSmntara - Integer.parseInt(label_jmlBeli.getText());
-            bar.setStok(stokSmntara + trans.getJumlah());
-            BarangKontrol.getKoneksi().updateBarang(bar);
-            JOptionPane.showMessageDialog(null, "Update barang berhasil!");
-            JOptionPane.showMessageDialog(null, "Stok " + bar.getNamaBarang() + " saat ini adalah = " + bar.getStok());
+
+            TransaksiKontrol.getKoneksi().jual_updateTransaksi(trans);
+//            Barang bar = BarangKontrol.getKoneksi().selectBarang2(idAnggota);
+//            int stokSmntara = bar.getStok();
+//            stokSmntara = stokSmntara - Integer.parseInt(label_jmlBeli.getText());
+//            bar.setStok(stokSmntara + trans.getJumlah());
+//            BarangKontrol.getKoneksi().updateBarang(bar);
+//            JOptionPane.showMessageDialog(null, "Update barang berhasil!");
+//            JOptionPane.showMessageDialog(null, "Stok " + bar.getNamaBarang() + " saat ini adalah = " + bar.getStok());
             update();
             defaultnya();
         } catch (SQLException ex) {
@@ -553,17 +552,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         try {
             Transaksi trans = new Transaksi();
             trans.setNoTrans(text_noTrans.getText());
-            String idBarang = BarangKontrol.getKoneksi().cariIdBarang(combo_barang.getSelectedItem().toString());
-            trans.setIdBarang(new Barang(idBarang, combo_barang.getSelectedItem().toString(), 0, 0));
-
-            TransaksiKontrol.getKoneksi().beli_deleteTransaksi(trans);
-            Barang bar = BarangKontrol.getKoneksi().selectBarang2(idBarang);
-            int stokSmntara = bar.getStok();
-            stokSmntara = stokSmntara - Integer.parseInt(label_jmlBeli.getText());
-            bar.setStok(stokSmntara);
-            BarangKontrol.getKoneksi().updateBarang(bar);
-            JOptionPane.showMessageDialog(null, "Update barang berhasil!");
-            JOptionPane.showMessageDialog(null, "Stok " + bar.getNamaBarang() + " saat ini adalah = " + bar.getStok());
+            TransaksiKontrol.getKoneksi().deleteTransaksi(trans);
             update();
             defaultnya();
         } catch (SQLException ex) {
@@ -663,30 +652,30 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cb_tahunActionPerformed
 
-    private void tabel_pembelianMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabel_pembelianMouseClicked
-        int row1 = tabel_pembelian.getSelectedRow();
-        text_noTrans.setText(tabel_pembelian.getValueAt(row1, 0).toString());
-        combo_barang.setSelectedItem(tabel_pembelian.getValueAt(row1, 1).toString());
-        text_jmlBeli.setText(tabel_pembelian.getValueAt(row1, 2).toString());
-        label_jmlBeli.setText(tabel_pembelian.getValueAt(row1, 2).toString());
-        text_hargaSatuan.setText(tabel_pembelian.getValueAt(row1, 3).toString());
-        text_total.setText(tabel_pembelian.getValueAt(row1, 4).toString());
+    private void tabel_penjualanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabel_penjualanMouseClicked
+        int row1 = tabel_penjualan.getSelectedRow();
+        text_noTrans.setText(tabel_penjualan.getValueAt(row1, 0).toString());
+        combo_Anggota.setSelectedItem(tabel_penjualan.getValueAt(row1, 1).toString());
+        text_jmlBeli.setText(tabel_penjualan.getValueAt(row1, 2).toString());
+        label_jmlBeli.setText(tabel_penjualan.getValueAt(row1, 2).toString());
+        text_hargaSatuan.setText(tabel_penjualan.getValueAt(row1, 3).toString());
+        text_total.setText(tabel_penjualan.getValueAt(row1, 4).toString());
 
         customnya();
-    }//GEN-LAST:event_tabel_pembelianMouseClicked
+    }//GEN-LAST:event_tabel_penjualanMouseClicked
 
     public void update() {
         try {
-            List<Transaksi> agt = TransaksiKontrol.getKoneksi().beli_selectTransaksi();
-            TransaksiBeliTM model = new TransaksiBeliTM(agt);
-            tabel_pembelian.setModel(model);
+            List<Transaksi> agt = TransaksiKontrol.getKoneksi().jual_selectTransaksi();
+            TransaksiJualTM model = new TransaksiJualTM(agt);
+            tabel_penjualan.setModel(model);
 
             TableCellRenderer kanan = new RataKanan();
-            tabel_pembelian.getColumnModel().getColumn(2).setCellRenderer(kanan);
-            tabel_pembelian.getColumnModel().getColumn(3).setCellRenderer(kanan);
-            tabel_pembelian.getColumnModel().getColumn(4).setCellRenderer(kanan);
+            tabel_penjualan.getColumnModel().getColumn(2).setCellRenderer(kanan);
+            tabel_penjualan.getColumnModel().getColumn(3).setCellRenderer(kanan);
+            tabel_penjualan.getColumnModel().getColumn(4).setCellRenderer(kanan);
 
-            text_ttltransbeli.setText(TransaksiKontrol.getKoneksi().beli_tampilTotalBeliHariIni());
+            text_ttltransbeli.setText(TransaksiKontrol.getKoneksi().jual_tampilTotalBeliHariIni());
 //        tabelDosen.getColumnModel().getColumn(0).setMinWidth(70);
 //        tabelDosen.getColumnModel().getColumn(0).setMaxWidth(70);
 //        tabelDosen.getColumnModel().getColumn(1).setMinWidth(220);
@@ -699,16 +688,16 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
 
     public void update2(String tanggal) {
         try {
-            List<Transaksi> agt = TransaksiKontrol.getKoneksi().beli_selectTransaksiAll(tanggal);
-            TransaksiBeliAllTM model = new TransaksiBeliAllTM(agt);
-            tabel_pembelian2.setModel(model);
+            List<Transaksi> agt = TransaksiKontrol.getKoneksi().jual_selectTransaksiAll(tanggal);
+            TransaksiJualAllTM model = new TransaksiJualAllTM(agt);
+            tabel_penjualan2.setModel(model);
 
             TableCellRenderer kanan = new RataKanan();
-            tabel_pembelian2.getColumnModel().getColumn(3).setCellRenderer(kanan);
-            tabel_pembelian2.getColumnModel().getColumn(4).setCellRenderer(kanan);
-            tabel_pembelian2.getColumnModel().getColumn(5).setCellRenderer(kanan);
+            tabel_penjualan2.getColumnModel().getColumn(3).setCellRenderer(kanan);
+            tabel_penjualan2.getColumnModel().getColumn(4).setCellRenderer(kanan);
+            tabel_penjualan2.getColumnModel().getColumn(5).setCellRenderer(kanan);
 
-            text_ttlbeliall.setText(TransaksiKontrol.getKoneksi().beli_tampilTotalBeliAll());
+            text_ttlbeliall.setText(TransaksiKontrol.getKoneksi().jual_tampilTotalBeliAll());
 //        tabelDosen.getColumnModel().getColumn(0).setMinWidth(70);
 //        tabelDosen.getColumnModel().getColumn(0).setMaxWidth(70);
 //        tabelDosen.getColumnModel().getColumn(1).setMinWidth(220);
@@ -750,9 +739,9 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
     }
 
     public void isiList() throws SQLException {
-        List<Barang> brg = BarangKontrol.getKoneksi().selectBarang();
-        for (Barang b : brg) {
-            combo_barang.addItem(b.getNamaBarang());
+        List<Anggota> brg = AnggotaKontrol.getKoneksi().selectAnggota();
+        for (Anggota b : brg) {
+            combo_Anggota.addItem(b.getNamaAnggota());
         }
     }
 
@@ -760,7 +749,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         button_tambah.setEnabled(true);
         button_ubah.setEnabled(false);
         button_hapus.setEnabled(false);
-        combo_barang.setEnabled(true);
+        combo_Anggota.setEnabled(true);
         text_noTrans.setText("");
         text_jmlBeli.setText("0");
         text_hargaSatuan.setText("0");
@@ -771,7 +760,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         button_tambah.setEnabled(false);
         button_ubah.setEnabled(true);
         button_hapus.setEnabled(true);
-        combo_barang.setEnabled(false);
+        combo_Anggota.setEnabled(false);
         text_noTrans.setEditable(false);
     }
 
@@ -833,7 +822,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
     private javax.swing.JComboBox cb_bulan;
     private javax.swing.JComboBox cb_tahun;
     private javax.swing.JComboBox cb_tanggal;
-    private javax.swing.JComboBox combo_barang;
+    private javax.swing.JComboBox combo_Anggota;
     private javax.swing.JDialog dialog_pembelian;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -876,8 +865,8 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
     private javax.swing.JLabel label_jmlBeli;
     private javax.swing.JLabel label_namaDesa;
     private javax.swing.JLabel label_tanggal;
-    private javax.swing.JTable tabel_pembelian;
-    private javax.swing.JTable tabel_pembelian2;
+    private javax.swing.JTable tabel_penjualan;
+    private javax.swing.JTable tabel_penjualan2;
     private javax.swing.JTextField text_hargaSatuan;
     private javax.swing.JTextField text_jmlBeli;
     private javax.swing.JTextField text_noTrans;

@@ -112,4 +112,25 @@ public class AnggotaKontrol {
         conn.commit();
         conn.close();
     }
+    
+    public Anggota cariIdAnggota(String nama) throws SQLException{
+        PreparedStatement stmt = null;
+        ResultSet result = null;
+        conn.setAutoCommit(false);
+        String query = "SELECT * from anggota where namaanggota = ?";
+        stmt = conn.prepareStatement(query);
+        stmt.setString(1, nama);
+        result = stmt.executeQuery();
+        Anggota agt = null;
+        while (result.next()) {
+            agt = new Anggota(result.getString(1), result.getString(2),
+                    result.getString(3), result.getString(4), result.getString(5),
+                    result.getString(6), result.getInt(7), result.getInt(8),
+                    result.getString(9), result.getString(10), result.getString(11),
+                    result.getString(12));
+        }
+
+        conn.close();
+        return agt;
+    }
 }
