@@ -37,7 +37,7 @@ CREATE TABLE `anggota` (
 
 /*Data for the table `anggota` */
 
-insert  into `anggota`(`idanggota`,`namaanggota`,`pekerjaan`,`alamat`,`telp`,`noKTP`,`rt`,`rw`,`dusun`,`desa`,`kota`,`provinsi`) values ('105314022','Adit','Mahasiswa','JL Melati no 10 paingan timbulrejo','08122134212','01123124214214',1,2,'Timbulrejo','Maguwoharjo','Yogyakarta','DIY Yogyakarta'),('105314024','DAMAI KURNIA ADHI','PENGACARA','CONDONG CATUR DEPOK SLEMAN YOGYA','081222333856','3603120109920002',0,0,' ',' ',' ',' ');
+insert  into `anggota`(`idanggota`,`namaanggota`,`pekerjaan`,`alamat`,`telp`,`noKTP`,`rt`,`rw`,`dusun`,`desa`,`kota`,`provinsi`) values ('105314022','Adit','Mahasiswa','JL Melati no 10 paingan timbulrejo','08122134212','01123124214214',1,2,'Timbulrejo','Maguwoharjo','Yogyakarta','DIY Yogyakarta'),('105314024','DAMAI KURNIA ADHI','PENGACARA','CONDONG CATUR DEPOK SLEMAN YOGYA','081222333856','3603120109920002',10,8,' Maguwoharjo',' Depok',' Yogyakarta',' DIY Yogyakarta');
 
 /*Table structure for table `barang` */
 

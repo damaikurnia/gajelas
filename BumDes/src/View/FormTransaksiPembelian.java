@@ -8,7 +8,7 @@ package View;
 import Custom.RataKanan;
 import Kelas.Barang;
 import Kelas.Profil;
-import Kelas.Tanggal;
+import Custom.Tanggal;
 import Kelas.Transaksi;
 import Kontrol.BarangKontrol;
 import Kontrol.PengaturanKontrol;
@@ -557,7 +557,7 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
             String idBarang = BarangKontrol.getKoneksi().cariIdBarang(combo_barang.getSelectedItem().toString());
             trans.setIdBarang(new Barang(idBarang, combo_barang.getSelectedItem().toString(), 0, 0));
 
-            TransaksiKontrol.getKoneksi().beli_deleteTransaksi(trans);
+            TransaksiKontrol.getKoneksi().deleteTransaksi(trans);
             Barang bar = BarangKontrol.getKoneksi().selectBarang2(idBarang);
             int stokSmntara = bar.getStok();
             stokSmntara = stokSmntara - Integer.parseInt(label_jmlBeli.getText());
