@@ -15,7 +15,6 @@ import Kontrol.PengaturanKontrol;
 import Kontrol.TransaksiKontrol;
 import TabelModel.TransaksiBeliAllTM;
 import TabelModel.TransaksiBeliTM;
-import com.sun.jmx.snmp.BerDecoder;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -766,6 +765,7 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
         text_jmlBeli.setText("0");
         text_hargaSatuan.setText("0");
         text_total.setText("0");
+        text_noTrans.setEditable(true);
     }
 
     public void customnya() {
