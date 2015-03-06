@@ -22,9 +22,10 @@ public class Anggota {
     String desa;
     String kota;
     String provinsi;
+    String kecamatan;
 
     public Anggota(String id, String nm, String pk, String almt, String telp, String ktp,
-            int rt, int rw, String dusun, String dsa, String kota, String prov) {
+            int rt, int rw, String dusun, String dsa, String kota, String prov, String kec) {
         this.idAnggota = id;
         this.namaAnggota = nm;
         this.pekerjaan = pk;
@@ -37,6 +38,7 @@ public class Anggota {
         this.desa = dsa;
         this.kota = kota;
         this.provinsi = prov;
+        this.kecamatan = kec;
     }
 
     public Anggota() {
@@ -208,5 +210,19 @@ public class Anggota {
      */
     public void setProvinsi(String provinsi) {
         this.provinsi = provinsi;
+    }
+
+    /**
+     * @return the kecamatan
+     */
+    public String getKecamatan() {
+        return kecamatan;
+    }
+
+    /**
+     * @param kecamatan the kecamatan to set
+     */
+    public void setKecamatan(String kecamatan) {
+        this.kecamatan = kecamatan;
     }
 }

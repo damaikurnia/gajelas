@@ -94,10 +94,14 @@ public class FormAnggota extends javax.swing.JFrame {
         text_kota = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         text_rt = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
+        text_kecamatan = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
+        jMenu7 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -208,7 +212,7 @@ public class FormAnggota extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setText("NO KTP");
-        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 180, -1, 20));
+        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 210, -1, 20));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -216,7 +220,7 @@ public class FormAnggota extends javax.swing.JFrame {
         jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 730, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel6.setText("NOMOR PELANGGAN");
+        jLabel6.setText("NO PELANGGAN");
         jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, -1, 20));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -262,7 +266,7 @@ public class FormAnggota extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel9.setText("ALAMAT");
         jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, -1, 40));
-        jPanel3.add(text_ktp, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 180, 190, -1));
+        jPanel3.add(text_ktp, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 210, 190, -1));
         jPanel3.add(text_idAnggota, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, 190, -1));
         jPanel3.add(text_nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, 190, -1));
         jPanel3.add(text_pekerjaan, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 120, 190, -1));
@@ -275,12 +279,12 @@ public class FormAnggota extends javax.swing.JFrame {
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel10.setText("PROVINSI");
-        jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 120, -1, 20));
-        jPanel3.add(text_telp, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 150, 190, -1));
+        jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 150, -1, 20));
+        jPanel3.add(text_telp, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 180, 190, -1));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel11.setText("TELP");
-        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 150, -1, 20));
+        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 180, -1, 20));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel12.setText("DUSUN");
@@ -291,28 +295,34 @@ public class FormAnggota extends javax.swing.JFrame {
         jPanel3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 200, -1, 20));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel14.setText("KEL / DESA");
+        jLabel14.setText("KECAMATAN");
         jPanel3.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 60, -1, 20));
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel15.setText("KOTA");
-        jPanel3.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 90, -1, 20));
-        jPanel3.add(text_provinsi, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 120, 190, -1));
+        jLabel15.setText("KOTA / KAB");
+        jPanel3.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 120, -1, 20));
+        jPanel3.add(text_provinsi, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 150, 190, -1));
         jPanel3.add(text_rw, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 200, 60, -1));
         jPanel3.add(text_dusun, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 230, 190, -1));
-        jPanel3.add(text_desa, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 60, 190, -1));
-        jPanel3.add(text_kota, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 90, 190, -1));
+        jPanel3.add(text_desa, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 90, 190, -1));
+        jPanel3.add(text_kota, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 120, 190, -1));
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel16.setText("RT/RW");
         jPanel3.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, -1, 20));
         jPanel3.add(text_rt, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, 60, -1));
 
+        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel17.setText("KEL / DESA");
+        jPanel3.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 90, -1, 20));
+        jPanel3.add(text_kecamatan, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 60, 190, -1));
+
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 750, 310));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 430));
 
         jMenu1.setText("HOME");
+        jMenu1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jMenu1MouseClicked(evt);
@@ -321,6 +331,7 @@ public class FormAnggota extends javax.swing.JFrame {
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("BARANG");
+        jMenu2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jMenu2MouseClicked(evt);
@@ -329,6 +340,7 @@ public class FormAnggota extends javax.swing.JFrame {
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("ANGGOTA");
+        jMenu3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jMenu3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jMenu3MouseClicked(evt);
@@ -336,7 +348,21 @@ public class FormAnggota extends javax.swing.JFrame {
         });
         jMenuBar1.add(jMenu3);
 
+        jMenu7.setText("INFORMASI");
+        jMenu7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+
+        jMenuItem3.setText("Pemakaian Air Pelanggan");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMenuItem3);
+
+        jMenuBar1.add(jMenu7);
+
         jMenu4.setText("TRANSAKSI");
+        jMenu4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         jMenuItem1.setText("Pembelian");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -357,6 +383,7 @@ public class FormAnggota extends javax.swing.JFrame {
         jMenuBar1.add(jMenu4);
 
         jMenu5.setText("LAPORAN");
+        jMenu5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         jMenuItem4.setText("BUM");
         jMenu5.add(jMenuItem4);
@@ -373,6 +400,7 @@ public class FormAnggota extends javax.swing.JFrame {
         jMenuBar1.add(jMenu5);
 
         jMenu6.setText("PENGATURAN");
+        jMenu6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         jMenuItem8.setText("Profil Desa");
         jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
@@ -492,23 +520,35 @@ public class FormAnggota extends javax.swing.JFrame {
     }//GEN-LAST:event_button_hapusActionPerformed
 
     private void tabel_anggotaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabel_anggotaMouseClicked
-        custom();
-        int row1 = tabel_anggota.getSelectedRow();
-        text_idAnggota.setText(tabel_anggota.getValueAt(row1, 0).toString());
-        text_nama.setText(tabel_anggota.getValueAt(row1, 1).toString());
-        text_pekerjaan.setText(tabel_anggota.getValueAt(row1, 2).toString());
-        text_alamat.setText(tabel_anggota.getValueAt(row1, 3).toString());
-        text_rt.setText(tabel_anggota.getValueAt(row1, 4).toString());
-        text_rw.setText(tabel_anggota.getValueAt(row1, 5).toString());
-        text_dusun.setText(tabel_anggota.getValueAt(row1, 6).toString());
-        text_desa.setText(tabel_anggota.getValueAt(row1, 7).toString());
-        text_kota.setText(tabel_anggota.getValueAt(row1, 8).toString());
-        text_provinsi.setText(tabel_anggota.getValueAt(row1, 9).toString());
-        text_telp.setText(tabel_anggota.getValueAt(row1, 10).toString());
-        text_ktp.setText(tabel_anggota.getValueAt(row1, 11).toString());
-
-        dialog_anggota.setVisible(false);
+        try {
+            custom();
+            int row1 = tabel_anggota.getSelectedRow();
+            Anggota agt = AnggotaKontrol.getKoneksi().cariIdAnggota(tabel_anggota.getValueAt(row1, 1).toString());
+            text_idAnggota.setText(agt.getIdAnggota());
+            text_nama.setText(agt.getNamaAnggota());
+            text_pekerjaan.setText(agt.getPekerjaan());
+            text_alamat.setText(agt.getAlamat());
+            text_rt.setText(Integer.toString(agt.getRt()));
+            text_rw.setText(Integer.toString(agt.getRw()));
+            text_dusun.setText(agt.getDusun());
+            text_desa.setText(agt.getDesa());
+            text_kota.setText(agt.getKota());
+            text_provinsi.setText(agt.getProvinsi());
+            text_telp.setText(agt.getNoTelp());
+            text_ktp.setText(agt.getNoKTP());
+            text_kecamatan.setText(agt.getKecamatan());
+            
+            dialog_anggota.setVisible(false);
+        } catch (SQLException ex) {
+            Logger.getLogger(FormAnggota.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_tabel_anggotaMouseClicked
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        FormPemakaianAir a = new FormPemakaianAir();
+        this.setVisible(false);
+        a.setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     public void resetdefault() {
         text_idAnggota.setText("");
@@ -608,6 +648,7 @@ public class FormAnggota extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -621,9 +662,11 @@ public class FormAnggota extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
@@ -643,6 +686,7 @@ public class FormAnggota extends javax.swing.JFrame {
     private javax.swing.JTextField text_desa;
     private javax.swing.JTextField text_dusun;
     private javax.swing.JTextField text_idAnggota;
+    private javax.swing.JTextField text_kecamatan;
     private javax.swing.JTextField text_kota;
     private javax.swing.JTextField text_ktp;
     private javax.swing.JTextField text_nama;

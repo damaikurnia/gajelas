@@ -102,14 +102,23 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabel_penjualan = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
-        combo_Anggota = new javax.swing.JComboBox();
         jLabel8 = new javax.swing.JLabel();
         text_ttltransbeli = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        jTextField3 = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
+        jTextField4 = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
+        jMenu7 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -253,9 +262,9 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 730, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("PELANGGAN");
-        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 110, -1));
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel6.setText("PEMAKAIAN AIR AWAL");
+        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 140, 20));
 
         button_tambah.setText("TAMBAH");
         button_tambah.addActionListener(new java.awt.event.ActionListener() {
@@ -263,7 +272,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
                 button_tambahActionPerformed(evt);
             }
         });
-        jPanel3.add(button_tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 320, -1, -1));
+        jPanel3.add(button_tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 430, -1, -1));
 
         button_ubah.setText("UBAH");
         button_ubah.addActionListener(new java.awt.event.ActionListener() {
@@ -271,7 +280,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
                 button_ubahActionPerformed(evt);
             }
         });
-        jPanel3.add(button_ubah, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 320, -1, -1));
+        jPanel3.add(button_ubah, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 430, -1, -1));
 
         button_hapus.setText("HAPUS");
         button_hapus.addActionListener(new java.awt.event.ActionListener() {
@@ -279,7 +288,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
                 button_hapusActionPerformed(evt);
             }
         });
-        jPanel3.add(button_hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 320, -1, -1));
+        jPanel3.add(button_hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 430, -1, -1));
 
         button_tabel.setText("TABEL TRANSAKSI PEMBELIAN");
         button_tabel.addActionListener(new java.awt.event.ActionListener() {
@@ -287,13 +296,13 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
                 button_tabelActionPerformed(evt);
             }
         });
-        jPanel3.add(button_tabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 320, -1, -1));
-        jPanel3.add(text_noTrans, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 140, -1));
+        jPanel3.add(button_tabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 430, -1, -1));
+        jPanel3.add(text_noTrans, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, 120, 20));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel10.setText("NO TRANSAKSI");
-        jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 140, -1));
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel10.setText("NO PELANGGAN");
+        jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 84, 120, 30));
 
         label_tanggal.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         label_tanggal.setText("Selasa, 17 Februari 2015");
@@ -304,9 +313,9 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         jPanel3.add(label_jmlBeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 60, 80, -1));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel13.setText("JUMLAH m3 AIR");
-        jPanel3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 80, 110, -1));
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel13.setText("PEMAKAIAN AIR BULAN INI");
+        jPanel3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 180, -1));
 
         text_jmlBeli.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         text_jmlBeli.setText("0");
@@ -315,12 +324,12 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
                 text_jmlBeliKeyReleased(evt);
             }
         });
-        jPanel3.add(text_jmlBeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 100, 110, -1));
+        jPanel3.add(text_jmlBeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 220, 110, -1));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel14.setText("HARGA SATUAN");
-        jPanel3.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 80, 120, -1));
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel14.setText("DENDA ");
+        jPanel3.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 120, 120, -1));
 
         text_hargaSatuan.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         text_hargaSatuan.setText("500");
@@ -329,16 +338,17 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
                 text_hargaSatuanKeyReleased(evt);
             }
         });
-        jPanel3.add(text_hargaSatuan, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 100, 120, -1));
+        jPanel3.add(text_hargaSatuan, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 90, 120, -1));
 
-        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel15.setText("TOTAL");
-        jPanel3.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 80, 120, -1));
+        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel15.setText("TOTAL BIAYA");
+        jPanel3.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 210, 150, 40));
 
+        text_total.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         text_total.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         text_total.setText("0");
-        jPanel3.add(text_total, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 100, 120, -1));
+        jPanel3.add(text_total, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 210, 200, 40));
 
         tabel_penjualan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -358,32 +368,61 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tabel_penjualan);
 
-        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 690, 100));
+        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 690, 100));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("TOTAL PENDAPATAN HARI INI");
-        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 290, 330, 20));
-
-        jPanel3.add(combo_Anggota, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, 90, -1));
+        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 400, 330, 20));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("TRANSAKSI HARI INI");
-        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 690, 20));
+        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 690, 20));
 
         text_ttltransbeli.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jPanel3.add(text_ttltransbeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 290, 170, -1));
+        jPanel3.add(text_ttltransbeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 400, 170, -1));
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel16.setText("Hari, Tanggal");
         jPanel3.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 50, 80, -1));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 750, 360));
+        jTextField1.setText("jTextField1");
+        jPanel3.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 190, 120, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 480));
+        jButton1.setText("...");
+        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 90, 30, -1));
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel11.setText("NAMA PELANGGAN");
+        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 110, 20));
+
+        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel17.setText("PEMAKAIAN AIR BLM DIBAYAR");
+        jPanel3.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 180, -1));
+
+        jTextField2.setText("jTextField1");
+        jPanel3.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 120, 120, -1));
+
+        jTextField3.setText("jTextField1");
+        jPanel3.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 120, 120, -1));
+
+        jLabel18.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel18.setText("HARGA SATUAN AIR");
+        jPanel3.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 90, 120, -1));
+
+        jTextField4.setText("jTextField1");
+        jPanel3.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 160, 120, -1));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 750, 470));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 590));
 
         jMenu1.setText("HOME");
+        jMenu1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jMenu1MouseClicked(evt);
@@ -392,6 +431,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("BARANG");
+        jMenu2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jMenu2MouseClicked(evt);
@@ -400,6 +440,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("ANGGOTA");
+        jMenu3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jMenu3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jMenu3MouseClicked(evt);
@@ -407,7 +448,21 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         });
         jMenuBar1.add(jMenu3);
 
+        jMenu7.setText("INFORMASI");
+        jMenu7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+
+        jMenuItem3.setText("Pemakaian Air Pelanggan");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMenuItem3);
+
+        jMenuBar1.add(jMenu7);
+
         jMenu4.setText("TRANSAKSI");
+        jMenu4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         jMenuItem1.setText("Pembelian");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -428,6 +483,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         jMenuBar1.add(jMenu4);
 
         jMenu5.setText("LAPORAN");
+        jMenu5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         jMenuItem4.setText("BUM");
         jMenu5.add(jMenuItem4);
@@ -444,6 +500,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         jMenuBar1.add(jMenu5);
 
         jMenu6.setText("PENGATURAN");
+        jMenu6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         jMenuItem8.setText("Profil Desa");
         jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
@@ -663,6 +720,12 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         customnya();
     }//GEN-LAST:event_tabel_penjualanMouseClicked
 
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        FormPemakaianAir a = new FormPemakaianAir();
+        this.setVisible(false);
+        a.setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
     public void update() {
         try {
             List<Transaksi> agt = TransaksiKontrol.getKoneksi().jual_selectTransaksi();
@@ -822,14 +885,17 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
     private javax.swing.JComboBox cb_bulan;
     private javax.swing.JComboBox cb_tahun;
     private javax.swing.JComboBox cb_tanggal;
-    private javax.swing.JComboBox combo_Anggota;
     private javax.swing.JDialog dialog_pembelian;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -844,9 +910,11 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
@@ -861,6 +929,10 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
     private javax.swing.JLabel label_alamatNotelp;
     private javax.swing.JLabel label_jmlBeli;
     private javax.swing.JLabel label_namaDesa;
