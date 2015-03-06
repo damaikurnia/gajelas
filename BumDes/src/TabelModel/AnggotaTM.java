@@ -29,7 +29,7 @@ public class AnggotaTM extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 12;
+        return 5;
     }
 
     @Override
@@ -41,25 +41,11 @@ public class AnggotaTM extends AbstractTableModel {
             case 1:
                 return d.getNamaAnggota();
             case 2:
-                return d.getPekerjaan();
-            case 3:
                 return d.getAlamat();
-            case 4:
-                return d.getRt();
-            case 5:
-                return d.getRw();
-            case 6:
+            case 3:
                 return d.getDusun();
-            case 7:
-                return d.getDesa();
-            case 8:
-                return d.getKota();
-            case 9:
-                return d.getProvinsi();
-            case 10:
+            case 4:
                 return d.getNoTelp();
-            case 11:
-                return d.getNoKTP();
             default:
                 return "";
         }
@@ -69,29 +55,15 @@ public class AnggotaTM extends AbstractTableModel {
     public String getColumnName(int column) {
         switch (column) {
             case 0:
-                return "KODE";
+                return "NO PELANGGAN";
             case 1:
                 return "NAMA";
             case 2:
-                return "PEKERJAAN";
-            case 3:
                 return "ALAMAT";
-            case 4:
-                return "RT";
-            case 5:
-                return "RW";
-            case 6:
+            case 3:
                 return "DUSUN";
-            case 7:
-                return "DESA";
-            case 8:
-                return "KOTA";
-            case 9:
-                return "PROVINSI";
-            case 10:
+            case 4:
                 return "TELP";
-            case 11:
-                return "NO KTP";
             default:
                 return "";
         }
