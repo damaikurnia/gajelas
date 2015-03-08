@@ -46,9 +46,9 @@ public class FormPemakaianAir extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        text_key = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabel_pelanggan = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -111,10 +111,14 @@ public class FormPemakaianAir extends javax.swing.JFrame {
         jLabel13.setText("KEYWORD");
         jPanel4.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 60, 20));
 
-        jTextField6.setText("jTextField6");
-        jPanel4.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 520, -1));
+        text_key.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                text_keyKeyReleased(evt);
+            }
+        });
+        jPanel4.add(text_key, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 520, -1));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabel_pelanggan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -125,7 +129,12 @@ public class FormPemakaianAir extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        tabel_pelanggan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabel_pelangganMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tabel_pelanggan);
 
         jPanel4.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 620, 220));
 
@@ -182,13 +191,11 @@ public class FormPemakaianAir extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("NO PELANGGAN");
-        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
-
-        jTextField1.setText("jTextField1");
-        jPanel3.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 200, 20));
+        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 57, -1, 30));
+        jPanel3.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 200, 30));
 
         jButton1.setText("...");
-        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 70, -1, -1));
+        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 60, -1, 30));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setText("DEBIT AIR HARUS DIBAYAR");
@@ -206,22 +213,21 @@ public class FormPemakaianAir extends javax.swing.JFrame {
         jLabel7.setText("PENGGUNAAN AIR LUNAS");
         jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 110, -1, -1));
 
-        jTextField2.setText("jTextField2");
+        jTextField2.setEditable(false);
         jPanel3.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 170, 140, -1));
 
-        jTextField3.setText("jTextField2");
+        jTextField3.setEditable(false);
         jPanel3.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, 180, -1));
 
-        jTextField4.setText("jTextField2");
+        jTextField4.setEditable(false);
         jPanel3.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 110, 140, -1));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel8.setText("PENGGUNAAN AIR TERAKHIR");
         jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 140, -1, -1));
-
-        jTextField5.setText("jTextField2");
         jPanel3.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 140, 140, -1));
 
+        jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
@@ -400,6 +406,20 @@ public class FormPemakaianAir extends javax.swing.JFrame {
         a.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    private void tabel_pelangganMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabel_pelangganMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tabel_pelangganMouseClicked
+
+    private void text_keyKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_text_keyKeyReleased
+        if (text_jmlBeli.getText().equals("")) {
+
+        } else {
+            double total = Integer.parseInt(text_jmlBeli.getText())
+                    * Integer.parseInt(text_hargaSatuan.getText());
+            text_total.setText(Double.toString(total));
+        }
+    }//GEN-LAST:event_text_keyKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -478,15 +498,15 @@ public class FormPemakaianAir extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JLabel label_alamatNotelp;
     private javax.swing.JLabel label_namaDesa;
+    private javax.swing.JTable tabel_pelanggan;
+    private javax.swing.JTextField text_key;
     // End of variables declaration//GEN-END:variables
 }

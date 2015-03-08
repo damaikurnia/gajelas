@@ -32,12 +32,13 @@ CREATE TABLE `anggota` (
   `desa` varchar(50) DEFAULT NULL,
   `kota` varchar(50) DEFAULT NULL,
   `provinsi` varchar(50) DEFAULT NULL,
+  `kecamatan` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`idanggota`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `anggota` */
 
-insert  into `anggota`(`idanggota`,`namaanggota`,`pekerjaan`,`alamat`,`telp`,`noKTP`,`rt`,`rw`,`dusun`,`desa`,`kota`,`provinsi`) values ('105314022','Adit','Mahasiswa','JL Melati no 10 paingan timbulrejo','08122134212','01123124214214',1,2,'Timbulrejo','Maguwoharjo','Yogyakarta','DIY Yogyakarta'),('105314024','DAMAI KURNIA ADHI','PENGACARA','CONDONG CATUR DEPOK SLEMAN YOGYA','081222333856','3603120109920002',10,8,' Maguwoharjo',' Depok',' Yogyakarta',' DIY Yogyakarta');
+insert  into `anggota`(`idanggota`,`namaanggota`,`pekerjaan`,`alamat`,`telp`,`noKTP`,`rt`,`rw`,`dusun`,`desa`,`kota`,`provinsi`,`kecamatan`) values ('105314024','DAMAI KURNIA ADHI','PENGACARA','CONDONG CATUR DEPOK SLEMAN YOGYA','081222333856','3603120109920002',10,8,'Maguwoharjo','Depok','Yogyakarta','DIY Yogyakarta',' '),('105314044','Adit','Mahasiswa','JL Melati no 10 paingan timbulrejo','08122134212','01123124214214',1,2,'Timbulrejo','Maguwoharjo','Yogyakarta','DIY Yogyakarta',' ');
 
 /*Table structure for table `barang` */
 
@@ -69,20 +70,20 @@ CREATE TABLE `login` (
 
 insert  into `login`(`username`,`password`) values ('AIR','AIR');
 
-/*Table structure for table `pegawai` */
+/*Table structure for table `pemakaian` */
 
-DROP TABLE IF EXISTS `pegawai`;
+DROP TABLE IF EXISTS `pemakaian`;
 
-CREATE TABLE `pegawai` (
-  `idpegawai` varchar(10) NOT NULL,
-  `namapegawai` varchar(100) DEFAULT NULL,
-  `jabatan` varchar(100) DEFAULT NULL,
-  `alamat` varchar(200) DEFAULT NULL,
-  `telp` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`idpegawai`)
+CREATE TABLE `pemakaian` (
+  `notransaksi` varchar(50) DEFAULT NULL,
+  `idanggota` varchar(30) DEFAULT NULL,
+  `airlunas` double DEFAULT NULL,
+  `airterakhir` double DEFAULT NULL,
+  `airdibayar` double DEFAULT NULL,
+  `tanggal` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-/*Data for the table `pegawai` */
+/*Data for the table `pemakaian` */
 
 /*Table structure for table `profil` */
 
