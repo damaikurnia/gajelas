@@ -15,8 +15,21 @@ public class Pemakaian {
     double airlunas;
     double airterakhir;
     double airdibayar;
-    String tanggal;
+    String bulan;
+    String tahun;
     
+    public Pemakaian(){}
+    
+    public Pemakaian(String no, Anggota agt, double airlun, double airter, double airbay, String bln, String thn) {
+        this.notransaksi = no;
+        this.idanggota = agt;
+        this.airlunas = airlun;
+        this.airterakhir = airter;
+        this.airdibayar = airbay;
+        this.bulan = bln;
+        this.tahun = thn;
+    }
+
     /**
      * @return the notransaksi
      */
@@ -74,20 +87,6 @@ public class Pemakaian {
     }
 
     /**
-     * @return the tanggal
-     */
-    public String getTanggal() {
-        return tanggal;
-    }
-
-    /**
-     * @param tanggal the tanggal to set
-     */
-    public void setTanggal(String tanggal) {
-        this.tanggal = tanggal;
-    }
-
-    /**
      * @return the airdibayar
      */
     public double getAirdibayar() {
@@ -99,5 +98,33 @@ public class Pemakaian {
      */
     public void setAirdibayar(double airdibayar) {
         this.airdibayar = airdibayar;
+    }
+
+    /**
+     * @return the bulan
+     */
+    public String getBulan() {
+        return bulan;
+    }
+
+    /**
+     * @param bulan the bulan to set
+     */
+    public void setBulan(String bulan) {
+        this.bulan = bulan;
+    }
+
+    /**
+     * @return the tahun
+     */
+    public String getTahun() {
+        return tahun;
+    }
+
+    /**
+     * @param tahun the tahun to set
+     */
+    public void setTahun(String tahun) {
+        this.tahun = tahun;
     }
 }

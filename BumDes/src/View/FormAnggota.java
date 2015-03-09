@@ -5,9 +5,12 @@
  */
 package View;
 
+import Custom.Tanggal;
 import Kelas.Anggota;
+import Kelas.Pemakaian;
 import Kelas.Profil;
 import Kontrol.AnggotaKontrol;
+import Kontrol.PemakaianKontrol;
 import Kontrol.PengaturanKontrol;
 import TabelModel.AnggotaTM;
 import java.sql.SQLException;
@@ -475,6 +478,9 @@ public class FormAnggota extends javax.swing.JFrame {
             agt.setProvinsi(text_provinsi.getText());
 
             AnggotaKontrol.getKoneksi().insertAnggota(agt);
+            String tanggalBln = generateBulanTahun(Tanggal.getTanggal2());
+            Pemakaian pem = new Pemakaian(generateKode(agt), agt, 0, 0, 0, tanggalBln.split("-")[0], tanggalBln.split("-")[1]);
+            PemakaianKontrol.getKoneksi().insertPemakaian(pem);
             JOptionPane.showMessageDialog(null, "Anggota berhasil ditambahkan!");
             resetdefault();
         } catch (SQLException ex) {
@@ -537,7 +543,7 @@ public class FormAnggota extends javax.swing.JFrame {
             text_telp.setText(agt.getNoTelp());
             text_ktp.setText(agt.getNoKTP());
             text_kecamatan.setText(agt.getKecamatan());
-            
+
             dialog_anggota.setVisible(false);
         } catch (SQLException ex) {
             Logger.getLogger(FormAnggota.class.getName()).log(Level.SEVERE, null, ex);
@@ -563,6 +569,7 @@ public class FormAnggota extends javax.swing.JFrame {
         text_desa.setText("");
         text_kota.setText("");
         text_provinsi.setText("");
+        text_kecamatan.setText("");
         text_idAnggota.setEditable(true);
         button_tambah.setEnabled(true);
         button_ubah.setEnabled(false);
@@ -589,6 +596,38 @@ public class FormAnggota extends javax.swing.JFrame {
 //            tabelDosen.setDefaultRenderer(Object.class, new renderWarnaWarni(Color.lightGray, Color.white));
         } catch (SQLException ex) {
             Logger.getLogger(FormAnggota.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public String generateKode(Anggota agt) {
+        return agt.getIdAnggota() + "-1";
+    }
+
+    public String generateBulanTahun(String tanggal) {
+        if (tanggal.split("-")[1].equals("01")) {
+            return "JANUARI-" + tanggal.split("-")[0];
+        } else if (tanggal.split("-")[1].equals("02")) {
+            return "FEBRUARI-" + tanggal.split("-")[0];
+        } else if (tanggal.split("-")[1].equals("03")) {
+            return "MARET-" + tanggal.split("-")[0];
+        } else if (tanggal.split("-")[1].equals("04")) {
+            return "APRIL-" + tanggal.split("-")[0];
+        } else if (tanggal.split("-")[1].equals("05")) {
+            return "MEI-" + tanggal.split("-")[0];
+        } else if (tanggal.split("-")[1].equals("06")) {
+            return "JUNI-" + tanggal.split("-")[0];
+        } else if (tanggal.split("-")[1].equals("07")) {
+            return "JULI-" + tanggal.split("-")[0];
+        } else if (tanggal.split("-")[1].equals("08")) {
+            return "AGUSTUS-" + tanggal.split("-")[0];
+        } else if (tanggal.split("-")[1].equals("09")) {
+            return "SEPTEMBER-" + tanggal.split("-")[0];
+        } else if (tanggal.split("-")[1].equals("10")) {
+            return "OKTOBER-" + tanggal.split("-")[0];
+        } else if (tanggal.split("-")[1].equals("11")) {
+            return "NOVEMBER-" + tanggal.split("-")[0];
+        } else {
+            return "DESEMBER-" + tanggal.split("-")[0];
         }
     }
 
