@@ -5,11 +5,19 @@
  */
 package View;
 
+import Kelas.Anggota;
+import Kelas.Pemakaian;
 import Kelas.Profil;
+import Kontrol.AnggotaKontrol;
+import Kontrol.PemakaianKontrol;
 import Kontrol.PengaturanKontrol;
+import TabelModel.AnggotaTM;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -25,8 +33,15 @@ public class FormPemakaianAir extends javax.swing.JFrame {
             initComponents();
             this.setLocationRelativeTo(null);
             Profil prof = PengaturanKontrol.getKoneksi().tampilProfil();
-            label_namaDesa.setText("BADAN USAHA MILIK DESA "+prof.getNamadesa());
-            label_alamatNotelp.setText(prof.getAlamatdesa()+" - "+prof.getNotelp());
+            label_namaDesa.setText("BADAN USAHA MILIK DESA " + prof.getNamadesa());
+            label_alamatNotelp.setText(prof.getAlamatdesa() + " - " + prof.getNotelp());
+
+            dialog_cariP.setVisible(false);
+            dialog_cariP.setSize(673, 413);
+            dialog_cariP.setLocationRelativeTo(null);
+            dialog_cariP.setTitle("DATA ANGGOTA");
+
+            label_noTrans.setVisible(false);
         } catch (SQLException ex) {
             Logger.getLogger(FormPemakaianAir.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -55,27 +70,28 @@ public class FormPemakaianAir extends javax.swing.JFrame {
         label_namaDesa = new javax.swing.JLabel();
         label_alamatNotelp = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        label_noTrans = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        text_noPelanggan = new javax.swing.JTextField();
+        button_pelanggan = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        text_airdibayar = new javax.swing.JTextField();
+        text_nama = new javax.swing.JTextField();
+        text_airlunas = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        text_airterakhir = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jButton3 = new javax.swing.JButton();
+        text_alamat = new javax.swing.JTextArea();
+        button_simpan = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -109,14 +125,14 @@ public class FormPemakaianAir extends javax.swing.JFrame {
         jPanel4.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 70));
 
         jLabel13.setText("KEYWORD");
-        jPanel4.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 60, 20));
+        jPanel4.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 100, 20));
 
         text_key.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 text_keyKeyReleased(evt);
             }
         });
-        jPanel4.add(text_key, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 520, -1));
+        jPanel4.add(text_key, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, 470, -1));
 
         tabel_pelanggan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -185,21 +201,32 @@ public class FormPemakaianAir extends javax.swing.JFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel2.setText("FORM PEMAKAIAN AIR");
-        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+        label_noTrans.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        label_noTrans.setText("FORM PEMAKAIAN AIR");
+        jPanel3.add(label_noTrans, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 20, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("NO PELANGGAN");
         jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 57, -1, 30));
-        jPanel3.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 200, 30));
 
-        jButton1.setText("...");
-        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 60, -1, 30));
+        text_noPelanggan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                text_noPelangganKeyReleased(evt);
+            }
+        });
+        jPanel3.add(text_noPelanggan, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 200, 30));
+
+        button_pelanggan.setText("...");
+        button_pelanggan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_pelangganActionPerformed(evt);
+            }
+        });
+        jPanel3.add(button_pelanggan, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 60, -1, 30));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setText("DEBIT AIR HARUS DIBAYAR");
-        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, -1, -1));
+        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 170, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setText("NAMA");
@@ -209,33 +236,40 @@ public class FormPemakaianAir extends javax.swing.JFrame {
         jLabel6.setText("ALAMAT");
         jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel7.setText("PENGGUNAAN AIR LUNAS");
-        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 110, -1, -1));
+        text_airdibayar.setEditable(false);
+        jPanel3.add(text_airdibayar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 170, 140, -1));
 
-        jTextField2.setEditable(false);
-        jPanel3.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 170, 140, -1));
+        text_nama.setEditable(false);
+        jPanel3.add(text_nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, 180, -1));
 
-        jTextField3.setEditable(false);
-        jPanel3.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, 180, -1));
-
-        jTextField4.setEditable(false);
-        jPanel3.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 110, 140, -1));
+        text_airlunas.setEditable(false);
+        jPanel3.add(text_airlunas, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 110, 140, -1));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel8.setText("PENGGUNAAN AIR TERAKHIR");
-        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 140, -1, -1));
-        jPanel3.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 140, 140, -1));
+        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 140, -1, -1));
 
-        jTextArea1.setEditable(false);
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        text_airterakhir.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                text_airterakhirKeyReleased(evt);
+            }
+        });
+        jPanel3.add(text_airterakhir, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 140, 140, -1));
+
+        text_alamat.setEditable(false);
+        text_alamat.setColumns(20);
+        text_alamat.setRows(5);
+        jScrollPane1.setViewportView(text_alamat);
 
         jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, 180, 70));
 
-        jButton3.setText("SIMPAN");
-        jPanel3.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 240, 160, 40));
+        button_simpan.setText("SIMPAN");
+        button_simpan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_simpanActionPerformed(evt);
+            }
+        });
+        jPanel3.add(button_simpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 240, 160, 40));
 
         jButton4.setText("BATAL");
         jPanel3.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 240, 80, 40));
@@ -245,15 +279,23 @@ public class FormPemakaianAir extends javax.swing.JFrame {
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel9.setText("m³");
-        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 170, 20, 20));
+        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 170, 20, 20));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel10.setText("m³");
-        jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 110, 20, 20));
+        jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 110, 20, 20));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel11.setText("m³");
-        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 140, 20, 20));
+        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 140, 20, 20));
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel14.setText("PENGGUNAAN AIR LUNAS");
+        jPanel3.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 110, -1, -1));
+
+        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel15.setText("FORM PEMAKAIAN AIR");
+        jPanel3.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 750, 290));
 
@@ -407,18 +449,87 @@ public class FormPemakaianAir extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void tabel_pelangganMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabel_pelangganMouseClicked
-        // TODO add your handling code here:
+        try {
+            int row1 = tabel_pelanggan.getSelectedRow();
+            List<Anggota> agt = AnggotaKontrol.getKoneksi().selectAnggota2(tabel_pelanggan.getValueAt(row1, 1).toString());
+            Pemakaian pem = PemakaianKontrol.getKoneksi().selectPemakaian(tabel_pelanggan.getValueAt(row1, 0).toString());
+
+            text_noPelanggan.setText(pem.getIdanggota().getIdAnggota());
+            text_nama.setText(agt.get(0).getNamaAnggota());
+            text_alamat.setText(agt.get(0).getAlamat());
+            text_airlunas.setText(Double.toString(pem.getAirlunas()).split("\\.")[0]);
+            text_airdibayar.setText(Double.toString(pem.getAirdibayar()).split("\\.")[0]);
+            label_noTrans.setText(pem.getNotransaksi());
+            dialog_cariP.setVisible(false);
+            label_noTrans.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(FormPemakaianAir.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_tabel_pelangganMouseClicked
 
     private void text_keyKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_text_keyKeyReleased
-        if (text_jmlBeli.getText().equals("")) {
-
+        if (text_key.getText().equals("")) {
+            update("");
         } else {
-            double total = Integer.parseInt(text_jmlBeli.getText())
-                    * Integer.parseInt(text_hargaSatuan.getText());
-            text_total.setText(Double.toString(total));
+            update(text_key.getText());
         }
     }//GEN-LAST:event_text_keyKeyReleased
+
+    private void button_pelangganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_pelangganActionPerformed
+        update("");
+        dialog_cariP.setVisible(true);
+    }//GEN-LAST:event_button_pelangganActionPerformed
+
+    private void text_airterakhirKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_text_airterakhirKeyReleased
+        if (text_airterakhir.getText().equals("")) {
+            text_airterakhir.setText("0");
+        } else {
+            double selisih = Double.parseDouble(text_airterakhir.getText()) - Double.parseDouble(text_airlunas.getText());
+            text_airdibayar.setText(Double.toString(selisih).split("\\.")[0]);
+        }
+    }//GEN-LAST:event_text_airterakhirKeyReleased
+
+    private void button_simpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_simpanActionPerformed
+        try {
+            Pemakaian pem = new Pemakaian();
+            pem.setNotransaksi(label_noTrans.getText());
+            pem.setIdanggota(new Anggota(text_noPelanggan.getText(), text_nama.getText(), "", "", "", "", 0, 0, "", "", "", "", ""));
+            pem.setAirlunas(Double.parseDouble(text_airlunas.getText()));
+            pem.setAirterakhir(Double.parseDouble(text_airterakhir.getText()));
+            pem.setAirdibayar(Double.parseDouble(text_airdibayar.getText()));
+
+            PemakaianKontrol.getKoneksi().updatePemakaian(pem);
+            JOptionPane.showMessageDialog(null, "Pemakaian air pelanggan berhasil dirubah!");
+            resetDefault();
+        } catch (SQLException ex) {
+            Logger.getLogger(FormPemakaianAir.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_button_simpanActionPerformed
+
+    private void text_noPelangganKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_text_noPelangganKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_text_noPelangganKeyReleased
+
+    public void update(String key) {
+        try {
+            List<Anggota> agt = AnggotaKontrol.getKoneksi().selectAnggota2(key);
+            AnggotaTM model = new AnggotaTM(agt);
+            tabel_pelanggan.setModel(model);
+        } catch (SQLException ex) {
+            Logger.getLogger(FormPemakaianAir.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void resetDefault() {
+        text_noPelanggan.setText("");
+        text_nama.setText("");
+        text_alamat.setText("");
+        text_airlunas.setText("");
+        text_airdibayar.setText("");
+        label_noTrans.setText("");
+        text_airterakhir.setText("");
+        label_noTrans.setVisible(false);
+    }
 
     /**
      * @param args the command line arguments
@@ -457,9 +568,9 @@ public class FormPemakaianAir extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton button_pelanggan;
+    private javax.swing.JButton button_simpan;
     private javax.swing.JDialog dialog_cariP;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
@@ -467,12 +578,12 @@ public class FormPemakaianAir extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
@@ -498,15 +609,16 @@ public class FormPemakaianAir extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JLabel label_alamatNotelp;
     private javax.swing.JLabel label_namaDesa;
+    private javax.swing.JLabel label_noTrans;
     private javax.swing.JTable tabel_pelanggan;
+    private javax.swing.JTextField text_airdibayar;
+    private javax.swing.JTextField text_airlunas;
+    private javax.swing.JTextField text_airterakhir;
+    private javax.swing.JTextArea text_alamat;
     private javax.swing.JTextField text_key;
+    private javax.swing.JTextField text_nama;
+    private javax.swing.JTextField text_noPelanggan;
     // End of variables declaration//GEN-END:variables
 }

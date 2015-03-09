@@ -38,7 +38,7 @@ CREATE TABLE `anggota` (
 
 /*Data for the table `anggota` */
 
-insert  into `anggota`(`idanggota`,`namaanggota`,`pekerjaan`,`alamat`,`telp`,`noKTP`,`rt`,`rw`,`dusun`,`desa`,`kota`,`provinsi`,`kecamatan`) values ('105314024','DAMAI KURNIA ADHI','PENGACARA','CONDONG CATUR DEPOK SLEMAN YOGYA','081222333856','3603120109920002',10,8,'Maguwoharjo','Depok','Yogyakarta','DIY Yogyakarta',' '),('105314044','Adit','Mahasiswa','JL Melati no 10 paingan timbulrejo','08122134212','01123124214214',1,2,'Timbulrejo','Maguwoharjo','Yogyakarta','DIY Yogyakarta',' ');
+insert  into `anggota`(`idanggota`,`namaanggota`,`pekerjaan`,`alamat`,`telp`,`noKTP`,`rt`,`rw`,`dusun`,`desa`,`kota`,`provinsi`,`kecamatan`) values ('105314024','Damai Kurnia Adhi','Pengacara','JL Durian IV No 19','081222333856','3603120109920002',10,8,'Pondok Makmur','Kutabaru','Tangerang','Banten',NULL);
 
 /*Table structure for table `barang` */
 
@@ -80,10 +80,13 @@ CREATE TABLE `pemakaian` (
   `airlunas` double DEFAULT NULL,
   `airterakhir` double DEFAULT NULL,
   `airdibayar` double DEFAULT NULL,
-  `tanggal` date DEFAULT NULL
+  `bulan` varchar(10) DEFAULT NULL,
+  `tahun` varchar(4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `pemakaian` */
+
+insert  into `pemakaian`(`notransaksi`,`idanggota`,`airlunas`,`airterakhir`,`airdibayar`,`bulan`,`tahun`) values ('105314024-1','105314024',0,1500,1500,'MARET','2015');
 
 /*Table structure for table `profil` */
 
