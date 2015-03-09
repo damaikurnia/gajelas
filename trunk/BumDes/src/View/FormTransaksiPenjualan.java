@@ -49,7 +49,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
             dialog_pembelian.setLocationRelativeTo(null);
             dialog_pembelian.setTitle("DATA ANGGOTA");
             label_jmlBeli.setVisible(false);
-            
+
             dialog_cariP.setVisible(false);
             dialog_cariP.setSize(673, 413);
             dialog_cariP.setLocationRelativeTo(null);
@@ -454,7 +454,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel16.setText("Hari, Tanggal");
-        jPanel3.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 50, 80, -1));
+        jPanel3.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 50, 110, -1));
 
         text_airbln.setEditable(false);
         text_airbln.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
@@ -467,7 +467,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
                 button_pelangganActionPerformed(evt);
             }
         });
-        jPanel3.add(button_pelanggan, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 87, 40, -1));
+        jPanel3.add(button_pelanggan, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 82, 40, 30));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -507,7 +507,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         text_pembayaran.setText("0");
         jPanel3.add(text_pembayaran, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 210, 200, 30));
 
-        jLabel21.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel21.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel21.setText("TOTAL BIAYA");
         jPanel3.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 160, 120, 40));
@@ -654,23 +654,35 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void button_tambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_tambahActionPerformed
-//        try {
-//            Transaksi trans = new Transaksi();
-//            trans.setNoTrans(text_noTrans.getText());
-//            Anggota idAnggota = AnggotaKontrol.getKoneksi().cariIdAnggota(combo_Anggota.getSelectedItem().toString());
-//            trans.setIdAnggota(new Anggota(idAnggota.getIdAnggota(), combo_Anggota.getSelectedItem().toString(),
-//                    "", "", "", "", 0, 0, "", "", "", ""));
-//            trans.setJumlah(Integer.parseInt(text_jmlBeli.getText()));
-//            trans.setHargaSatuan(Double.parseDouble(text_hargaSatuan.getText()));
-//            trans.setTotal(Double.parseDouble(text_total.getText()));
-//
-//            TransaksiKontrol.getKoneksi().jual_insertTransaksi(trans);
-//            JOptionPane.showMessageDialog(null, "Transaksi berhasil!");
-//            update();
-//            defaultnya();
-//        } catch (SQLException ex) {
-//            Logger.getLogger(FormTransaksiPenjualan.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        if (Double.parseDouble(text_total.getText()) > Double.parseDouble(text_pembayaran.getText())) {
+            JOptionPane.showMessageDialog(null, "Pembayaran kurang");
+        } else {
+            double pembayaran = Double.parseDouble(text_pembayaran.getText());
+            pembayaran = pembayaran - Double.parseDouble(text_total.getText());
+            JOptionPane.showMessageDialog(null, "Kembalian Konsumen adalah : " + Double.toString(pembayaran).split("\\.")[0]);
+            try {
+                Transaksi trans = new Transaksi();
+                trans.setNoTrans(label_noTrans.getText());
+                Anggota idAnggota = new Anggota(text_noPelanggan.getText(), "", "", "", "", "", 0, 0, "", "", "", "", "");
+                trans.setIdAnggota(idAnggota);
+                trans.setJumlah(Integer.parseInt(text_airdibayar.getText()));
+                trans.setHargaSatuan(Double.parseDouble(text_hargaSatuan.getText()));
+                trans.setTotal(Double.parseDouble(text_total.getText()));
+
+                TransaksiKontrol.getKoneksi().jual_insertTransaksi(trans);
+                JOptionPane.showMessageDialog(null, "Transaksi berhasil!");
+                
+                String tanggalBln = generateBulanTahun(Tanggal.getTanggal2());
+                Pemakaian pem = new Pemakaian(generateKodeBaru(trans.getNoTrans()), idAnggota, 
+                        Double.parseDouble(text_airbln.getText()), 0, 0, tanggalBln.split("-")[0], tanggalBln.split("-")[1]);
+                PemakaianKontrol.getKoneksi().insertPemakaian(pem);
+                
+                update();
+                defaultnya();
+            } catch (SQLException ex) {
+                Logger.getLogger(FormTransaksiPenjualan.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_button_tambahActionPerformed
 
     private void button_ubahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_ubahActionPerformed
@@ -848,7 +860,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
             label_noTrans.setText(pem.getNotransaksi());
             dialog_cariP.setVisible(false);
             label_noTrans.setVisible(true);
-            
+
             double total = Integer.parseInt(text_airdibayar.getText())
                     * Integer.parseInt(text_hargaSatuan.getText());
             text_total.setText(Double.toString(total).split("\\.")[0]);
@@ -936,10 +948,15 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         button_ubah.setEnabled(false);
         button_hapus.setEnabled(false);
         text_noPelanggan.setText("");
+        text_nama.setText("");
+        text_airawal.setText("0");
         text_airdibayar.setText("0");
         text_hargaSatuan.setText("0");
+        text_airbln.setText("0");
         text_total.setText("0");
+        text_pembayaran.setText("0");
         text_noPelanggan.setEditable(true);
+        label_noTrans.setVisible(false);
     }
 
     public void customnya() {
@@ -948,15 +965,50 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         button_hapus.setEnabled(true);
         text_noPelanggan.setEditable(false);
     }
-    
-    public void update(String key){
-         try {
+
+    public void update(String key) {
+        try {
             List<Anggota> agt = AnggotaKontrol.getKoneksi().selectAnggota2(key);
             AnggotaTM model = new AnggotaTM(agt);
             tabel_pelanggan.setModel(model);
         } catch (SQLException ex) {
             Logger.getLogger(FormPemakaianAir.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public String generateBulanTahun(String tanggal) {
+        if (tanggal.split("-")[1].equals("01")) {
+            return "JANUARI-" + tanggal.split("-")[0];
+        } else if (tanggal.split("-")[1].equals("02")) {
+            return "FEBRUARI-" + tanggal.split("-")[0];
+        } else if (tanggal.split("-")[1].equals("03")) {
+            return "MARET-" + tanggal.split("-")[0];
+        } else if (tanggal.split("-")[1].equals("04")) {
+            return "APRIL-" + tanggal.split("-")[0];
+        } else if (tanggal.split("-")[1].equals("05")) {
+            return "MEI-" + tanggal.split("-")[0];
+        } else if (tanggal.split("-")[1].equals("06")) {
+            return "JUNI-" + tanggal.split("-")[0];
+        } else if (tanggal.split("-")[1].equals("07")) {
+            return "JULI-" + tanggal.split("-")[0];
+        } else if (tanggal.split("-")[1].equals("08")) {
+            return "AGUSTUS-" + tanggal.split("-")[0];
+        } else if (tanggal.split("-")[1].equals("09")) {
+            return "SEPTEMBER-" + tanggal.split("-")[0];
+        } else if (tanggal.split("-")[1].equals("10")) {
+            return "OKTOBER-" + tanggal.split("-")[0];
+        } else if (tanggal.split("-")[1].equals("11")) {
+            return "NOVEMBER-" + tanggal.split("-")[0];
+        } else {
+            return "DESEMBER-" + tanggal.split("-")[0];
+        }
+    }
+
+    public String generateKodeBaru(String kode) {
+        int noTa = Integer.parseInt(kode.split("-")[1]);
+        noTa = noTa+1;
+        System.out.println(kode.split("-")[0]+"-"+noTa);
+        return kode.split("-")[0]+"-"+noTa;
     }
 
     /**
