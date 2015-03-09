@@ -203,7 +203,7 @@ public class FormPemakaianAir extends javax.swing.JFrame {
 
         label_noTrans.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         label_noTrans.setText("FORM PEMAKAIAN AIR");
-        jPanel3.add(label_noTrans, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 20, -1, -1));
+        jPanel3.add(label_noTrans, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 20, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("NO PELANGGAN");

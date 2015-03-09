@@ -206,7 +206,7 @@ public class TransaksiKontrol {
         while (result.next()) {
             Transaksi trs = new Transaksi();
             trs.setNoTrans(result.getString(1));
-            trs.setIdAnggota(new Anggota("",result.getString(2), "", "", "", "", 0, 0, "", "", "", ""));
+            trs.setIdAnggota(new Anggota("",result.getString(2), "", "", "", "", 0, 0, "", "", "", "",""));
             trs.setJumlah(result.getInt(3));
             trs.setHargaSatuan(result.getDouble(4));
             trs.setTotal(result.getDouble(5));
@@ -236,7 +236,7 @@ public class TransaksiKontrol {
             String tgl = result.getString(1);
             trs.setTanggalTransaksi(tgl.split("-")[2] + "-" + tgl.split("-")[1] + "-" + tgl.split("-")[0]);
             trs.setNoTrans(result.getString(2));
-            trs.setIdAnggota(new Anggota("",result.getString(3), "", "", "", "", 0, 0, "", "", "", ""));
+            trs.setIdAnggota(new Anggota("",result.getString(3), "", "", "", "", 0, 0, "", "", "", "",""));
             trs.setJumlah(result.getInt(4));
             trs.setHargaSatuan(result.getDouble(5));
             trs.setTotal(result.getDouble(6));

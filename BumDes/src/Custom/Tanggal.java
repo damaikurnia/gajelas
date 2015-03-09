@@ -8,6 +8,7 @@ package Custom;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  *
@@ -16,7 +17,8 @@ import java.util.Date;
 public class Tanggal {
     public static String getTanggal() { 
 //        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        DateFormat dateFormat = new SimpleDateFormat("EEEEEE,d MMM yyyy");
+        Locale id = new Locale("in","ID");
+        DateFormat dateFormat = new SimpleDateFormat("EEEEEE,d MMM yyyy",id);
         Date date = new Date(); 
         return dateFormat.format(date); 
     } 

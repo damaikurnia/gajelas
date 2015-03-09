@@ -236,7 +236,7 @@ public class FormAnggota extends javax.swing.JFrame {
                 button_tambahActionPerformed(evt);
             }
         });
-        jPanel3.add(button_tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 270, -1, -1));
+        jPanel3.add(button_tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 270, -1, -1));
 
         button_ubah.setText("UBAH");
         button_ubah.addActionListener(new java.awt.event.ActionListener() {
