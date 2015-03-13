@@ -226,7 +226,7 @@ public class FormPemakaianAir extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setText("DEBIT AIR HARUS DIBAYAR");
-        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 170, -1, -1));
+        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 170, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setText("NAMA");
@@ -237,18 +237,21 @@ public class FormPemakaianAir extends javax.swing.JFrame {
         jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
 
         text_airdibayar.setEditable(false);
+        text_airdibayar.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jPanel3.add(text_airdibayar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 170, 140, -1));
 
         text_nama.setEditable(false);
         jPanel3.add(text_nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, 180, -1));
 
         text_airlunas.setEditable(false);
+        text_airlunas.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jPanel3.add(text_airlunas, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 110, 140, -1));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel8.setText("PENGGUNAAN AIR TERAKHIR");
-        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 140, -1, -1));
+        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 140, -1, -1));
 
+        text_airterakhir.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         text_airterakhir.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 text_airterakhirKeyReleased(evt);
@@ -291,7 +294,7 @@ public class FormPemakaianAir extends javax.swing.JFrame {
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel14.setText("PENGGUNAAN AIR LUNAS");
-        jPanel3.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 110, -1, -1));
+        jPanel3.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 110, -1, -1));
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel15.setText("FORM PEMAKAIAN AIR");
