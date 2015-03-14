@@ -294,6 +294,11 @@ public class FormPemakaianAir extends javax.swing.JFrame {
         jPanel3.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 240, 80, 40));
 
         button_list.setText("LIST PELANGGAN");
+        button_list.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_listActionPerformed(evt);
+            }
+        });
         jPanel3.add(button_list, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 240, 160, 40));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -535,6 +540,12 @@ public class FormPemakaianAir extends javax.swing.JFrame {
     private void text_noPelangganKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_text_noPelangganKeyReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_text_noPelangganKeyReleased
+
+    private void button_listActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_listActionPerformed
+        String tanggal = Tanggal.getTanggal2();
+        Pemakaian pem = new Pemakaian("", null,0,0,0, tanggal.split("-")[1], tanggal.split("-")[0]);
+        List<Pemakaian> p = PemakaianKontrol.getKoneksi().selectPemakaianBulanan(pem);
+    }//GEN-LAST:event_button_listActionPerformed
 
     public void update(String key) {
         try {

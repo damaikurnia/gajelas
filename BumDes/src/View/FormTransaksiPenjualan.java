@@ -671,12 +671,12 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
 
                 TransaksiKontrol.getKoneksi().jual_insertTransaksi(trans);
                 JOptionPane.showMessageDialog(null, "Transaksi berhasil!");
-                
+
                 String tanggalBln = generateBulanTahun(Tanggal.getTanggal2());
-                Pemakaian pem = new Pemakaian(generateKodeBaru(trans.getNoTrans()), idAnggota, 
+                Pemakaian pem = new Pemakaian(generateKodeBaru(trans.getNoTrans()), idAnggota,
                         Double.parseDouble(text_airbln.getText()), 0, 0, tanggalBln.split("-")[0], tanggalBln.split("-")[1]);
                 PemakaianKontrol.getKoneksi().insertPemakaian(pem);
-                
+
                 update();
                 defaultnya();
             } catch (SQLException ex) {
@@ -860,9 +860,19 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
             label_noTrans.setText(pem.getNotransaksi());
             dialog_cariP.setVisible(false);
             label_noTrans.setVisible(true);
+            String tanggal = Tanggal.getTanggal2();
 
             double total = Integer.parseInt(text_airdibayar.getText())
-                    * Integer.parseInt(text_hargaSatuan.getText());
+                    * Integer.parseInt(text_hargaSatuan.getText()) + Integer.parseInt(text_denda.getText());
+            
+            if (tanggal.split("-")[1].equals(generateBulanTahun2(pem.getBulan())) && Integer.parseInt(tanggal.split("-")[2]) > 10) {
+                System.out.println("denda nih");
+                double dend = total * (2 / 100);
+                total = total + dend;
+            } else {
+                double dend = 0;
+                total = total + dend;
+            }
             text_total.setText(Double.toString(total).split("\\.")[0]);
         } catch (SQLException ex) {
             Logger.getLogger(FormPemakaianAir.class.getName()).log(Level.SEVERE, null, ex);
@@ -1004,11 +1014,39 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         }
     }
 
+    public String generateBulanTahun2(String bulan) {
+        if (bulan.equals("JANUARI")) {
+            return "02";
+        } else if (bulan.equals("FEBRUARI")) {
+            return "03";
+        } else if (bulan.equals("MARET")) {
+            return "04";
+        } else if (bulan.equals("APRIL")) {
+            return "05";
+        } else if (bulan.equals("MEI")) {
+            return "06";
+        } else if (bulan.equals("JUNI")) {
+            return "07";
+        } else if (bulan.equals("JULI")) {
+            return "08";
+        } else if (bulan.equals("AGUSTUS")) {
+            return "09";
+        } else if (bulan.equals("SEPTEMBER")) {
+            return "10";
+        } else if (bulan.equals("OKTOBER")) {
+            return "11";
+        } else if (bulan.equals("NOVEMBER")) {
+            return "12";
+        } else {
+            return "01";
+        }
+    }
+
     public String generateKodeBaru(String kode) {
         int noTa = Integer.parseInt(kode.split("-")[1]);
-        noTa = noTa+1;
-        System.out.println(kode.split("-")[0]+"-"+noTa);
-        return kode.split("-")[0]+"-"+noTa;
+        noTa = noTa + 1;
+        System.out.println(kode.split("-")[0] + "-" + noTa);
+        return kode.split("-")[0] + "-" + noTa;
     }
 
     /**

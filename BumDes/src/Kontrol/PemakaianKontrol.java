@@ -168,21 +168,25 @@ public class PemakaianKontrol {
 //        return agt;
 //    }
     
-    public Pemakaian selectPemakaianBulanan(Pemakaian pem) throws SQLException {
+    public List<Pemakaian> selectPemakaianBulanan(Pemakaian pem) throws SQLException {
         PreparedStatement stmt = null;
         ResultSet result = null;
         conn.setAutoCommit(false);
-        String query = "SELECT * from pemakaian where idanggota = ? and airdibayar <> 0";
+        String query = "SELECT * from pemakaian where bulan = ? and tahun = ?";
         stmt = conn.prepareStatement(query);
-        stmt.setString(1, key);
+        stmt.setString(1, pem.getBulan());
+        stmt.setString(2, pem.getTahun());
         result = stmt.executeQuery();
-        Pemakaian agt = new Pemakaian();
+        List<Pemakaian> agt = new ArrayList<Pemakaian>();
         while (result.next()) {
-            agt.setNotransaksi(result.getString(1));
-            agt.setIdanggota(new Anggota(result.getString(2), "", "", "", "", "", 0, 0, "", "", "", "", ""));
-            agt.setAirlunas(result.getDouble(3));
-            agt.setAirterakhir(result.getDouble(4));
-            agt.setAirdibayar(result.getDouble(5));
+            Pemakaian pemm = new Pemakaian();
+            pemm.setNotransaksi(result.getString(1));
+            pemm.setIdanggota(new Anggota(result.getString(2), "", "", "", "", "", 0, 0, "", "", "", "", ""));
+            pemm.setAirlunas(result.getDouble(3));
+            pemm.setAirterakhir(result.getDouble(4));
+            pemm.setAirdibayar(result.getDouble(5));
+            pemm.setBulan(result.getString(6));
+            pemm.setTahun(result.getString(7));
         }
         conn.close();
         return agt;
