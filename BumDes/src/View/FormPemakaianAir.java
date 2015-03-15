@@ -483,7 +483,11 @@ public class FormPemakaianAir extends javax.swing.JFrame {
         try {
             int row1 = tabel_pelanggan.getSelectedRow();
             List<Anggota> agt = AnggotaKontrol.getKoneksi().selectAnggota2(tabel_pelanggan.getValueAt(row1, 1).toString());
-            Pemakaian pem = PemakaianKontrol.getKoneksi().selectPemakaian(tabel_pelanggan.getValueAt(row1, 0).toString());
+            String tanggal = Tanggal.getTanggal2();
+            Pemakaian pem = new Pemakaian(null, new Anggota(tabel_pelanggan.getValueAt(row1, 0).toString(),
+                    "", "", "", "", "", row1, row1, "", "", "", "", ""),
+                    row1, row1, row1, konversiBulan(tanggal), tanggal.split("-")[0]);
+            pem = PemakaianKontrol.getKoneksi().selectPemakaian(pem);
 
             text_noPelanggan.setText(pem.getIdanggota().getIdAnggota());
             text_nama.setText(agt.get(0).getNamaAnggota());
@@ -542,9 +546,9 @@ public class FormPemakaianAir extends javax.swing.JFrame {
     }//GEN-LAST:event_text_noPelangganKeyReleased
 
     private void button_listActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_listActionPerformed
-        String tanggal = Tanggal.getTanggal2();
-        Pemakaian pem = new Pemakaian("", null,0,0,0, tanggal.split("-")[1], tanggal.split("-")[0]);
-        List<Pemakaian> p = PemakaianKontrol.getKoneksi().selectPemakaianBulanan(pem);
+//        String tanggal = Tanggal.getTanggal2();
+//        Pemakaian pem = new Pemakaian("", null, 0, 0, 0, tanggal.split("-")[1], tanggal.split("-")[0]);
+//        List<Pemakaian> p = PemakaianKontrol.getKoneksi().selectPemakaianBulanan(pem);
     }//GEN-LAST:event_button_listActionPerformed
 
     public void update(String key) {
@@ -566,6 +570,61 @@ public class FormPemakaianAir extends javax.swing.JFrame {
         label_noTrans.setText("");
         text_airterakhir.setText("");
         label_noTrans.setVisible(false);
+    }
+
+    public String konversiBulan(String B) {
+        String bulan = B.split("-")[1];
+        if (bulan.equals("JANUARI")) {
+            return "01";
+        } else if (bulan.equals("FEBRUARI")) {
+            return "02";
+        } else if (bulan.equals("MARET")) {
+            return "03";
+        } else if (bulan.equals("APRIL")) {
+            return "04";
+        } else if (bulan.equals("MEI")) {
+            return "05";
+        } else if (bulan.equals("JUNI")) {
+            return "06";
+        } else if (bulan.equals("JULI")) {
+            return "07";
+        } else if (bulan.equals("AGUSTUS")) {
+            return "08";
+        } else if (bulan.equals("SEPTEMBER")) {
+            return "09";
+        } else if (bulan.equals("OKTOBER")) {
+            return "10";
+        } else if (bulan.equals("NOVEMBER")) {
+            return "11";
+        } else if (bulan.equals("DESEMBER")) {
+            return "12";
+        } else if (bulan.equals("01")) {
+            return "JANUARI";
+        } else if (bulan.equals("02")) {
+            return "FEBRUARI";
+        } else if (bulan.equals("03")) {
+            return "MARET";
+        } else if (bulan.equals("04")) {
+            return "APRIL";
+        } else if (bulan.equals("05")) {
+            return "MEI";
+        } else if (bulan.equals("06")) {
+            return "JUNI";
+        } else if (bulan.equals("07")) {
+            return "JULI";
+        } else if (bulan.equals("08")) {
+            return "AGUSTUS";
+        } else if (bulan.equals("09")) {
+            return "SEPTEMBER";
+        } else if (bulan.equals("10")) {
+            return "OKTOBER";
+        } else if (bulan.equals("11")) {
+            return "NOVEMBER";
+        } else if (bulan.equals("12")) {
+            return "DESEMBER";
+        } else {
+            return "-";
+        }
     }
 
     /**

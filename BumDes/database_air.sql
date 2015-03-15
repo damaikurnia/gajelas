@@ -48,7 +48,7 @@ CREATE TABLE `anggota` (
 
 LOCK TABLES `anggota` WRITE;
 /*!40000 ALTER TABLE `anggota` DISABLE KEYS */;
-INSERT INTO `anggota` VALUES ('105314024','Damai Kurnia Adhi','Pengacara','JL Durian IV No 19','081222333856','3603120109920002',10,8,'Pondok Makmur','Kutabaru','Tangerang','Banten',NULL),('105314044','Adit','Pengacara','JL Melati','08192231421','1231242131355',2,10,'Pondok Indah','Pasar Kemis','Tangerang','Banten',NULL),('105314064','Roy','Ngasah Akik','Jl Paingan','081922231124','4422118827312',1,2,'Timbulrejo','Depok','Sleman','Yogyakarta',NULL),('105314066','Aweng','Mahasiswa','Gang Gori','081222313242','7782736288192',4,1,'Timbulrejo','Depok','Sleman','Yogyakarta',NULL);
+INSERT INTO `anggota` VALUES ('105314024','Damai Kurnia Adhi','Pengacara','JL Durian IV No 19','081222333856','3603120109920002',10,8,'Pondok Makmur','Kutabaru','Tangerang','Banten','Pasarkemis'),('105314044','Adit','Pengacara','JL Melati','08192231421','1231242131355',2,10,'Pondok Indah','Kutabaru','Tangerang','Banten','Pasarkemis'),('105314064','Roy','Ngasah Akik','Jl Paingan','081922231124','4422118827312',1,2,'Timbulrejo','Depok','Sleman','Yogyakarta','Maguwoharjo'),('105314066','Aweng','Mahasiswa','Gang Gori','081222313242','7782736288192',4,1,'Timbulrejo','Depok','Sleman','Yogyakarta','Maguwoharjo');
 /*!40000 ALTER TABLE `anggota` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -127,7 +127,7 @@ CREATE TABLE `pemakaian` (
 
 LOCK TABLES `pemakaian` WRITE;
 /*!40000 ALTER TABLE `pemakaian` DISABLE KEYS */;
-INSERT INTO `pemakaian` VALUES ('105314024-1','105314024',0,150,150,'MARET','2015'),('105314024-2','105314024',150,0,0,'MARET','2015'),('105314044-1','105314044',0,0,0,'MARET','2015'),('105314064-1','105314064',0,0,0,'MARET','2015'),('105314066-1','105314066',0,0,0,'MARET','2015');
+INSERT INTO `pemakaian` VALUES ('105314024-1','105314024',0,150,150,'MARET','2015'),('105314024-2','105314024',150,0,0,'MARET','2015'),('105314044-1','105314044',0,500,500,'MARET','2015'),('105314044-2','105314044',500,0,0,'MARET','2015'),('105314064-1','105314064',0,0,0,'MARET','2015'),('105314066-1','105314066',0,0,0,'MARET','2015');
 /*!40000 ALTER TABLE `pemakaian` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -183,7 +183,7 @@ CREATE TABLE `transaksi` (
 
 LOCK TABLES `transaksi` WRITE;
 /*!40000 ALTER TABLE `transaksi` DISABLE KEYS */;
-INSERT INTO `transaksi` VALUES ('105314024-1','-','105314024','2015-03-09','PENJUALAN',150,500,75000),('4613584','BRG1','-','2015-03-02','PEMBELIAN',4,5000,20000),('55474511','BRG2','-','2015-03-02','PEMBELIAN',2,10000,20000);
+INSERT INTO `transaksi` VALUES ('105314024-1','-','105314024','2015-03-09','PENJUALAN',150,500,75000),('105314044-1','-','105314044','2015-03-10','PENJUALAN',500,500,250000),('4613584','BRG1','-','2015-03-02','PEMBELIAN',4,5000,20000),('55474511','BRG2','-','2015-03-02','PEMBELIAN',2,10000,20000);
 /*!40000 ALTER TABLE `transaksi` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -196,4 +196,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-03-09 20:20:10
+-- Dump completed on 2015-03-15 17:35:16

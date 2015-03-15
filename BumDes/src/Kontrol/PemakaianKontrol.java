@@ -49,13 +49,15 @@ public class PemakaianKontrol {
         conn.close();
     }
 
-    public Pemakaian selectPemakaian(String key) throws SQLException {
+    public Pemakaian selectPemakaian(Pemakaian key) throws SQLException {
         PreparedStatement stmt = null;
         ResultSet result = null;
         conn.setAutoCommit(false);
-        String query = "SELECT * from pemakaian where idanggota = ? and airterakhir = 0";
+        String query = "SELECT * from pemakaian where idanggota = ? and bulan = ? and tahun = ?";
         stmt = conn.prepareStatement(query);
-        stmt.setString(1, key);
+        stmt.setString(1, key.getIdanggota().getIdAnggota());
+        stmt.setString(2, key.getBulan());
+        stmt.setString(3, key.getTahun());
         result = stmt.executeQuery();
         Pemakaian agt = new Pemakaian();
         while (result.next()) {
