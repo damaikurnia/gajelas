@@ -494,6 +494,7 @@ public class FormPemakaianAir extends javax.swing.JFrame {
             text_alamat.setText(agt.get(0).getAlamat());
             text_airlunas.setText(Double.toString(pem.getAirlunas()).split("\\.")[0]);
             text_airdibayar.setText(Double.toString(pem.getAirdibayar()).split("\\.")[0]);
+            text_airterakhir.setText(Double.toString(pem.getAirterakhir()).split("\\.")[0]);
             label_noTrans.setText(pem.getNotransaksi());
             dialog_cariP.setVisible(false);
             label_noTrans.setVisible(true);
