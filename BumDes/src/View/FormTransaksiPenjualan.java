@@ -56,6 +56,10 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
             dialog_cariP.setTitle("DATA ANGGOTA");
             label_noTrans.setVisible(false);
             update();
+
+            String bulan = Tanggal.getTanggal2().split("-")[1];
+            bulan = "0" + Integer.toString(Integer.parseInt(bulan) - 1);
+            combo_bulan.setSelectedItem(generateBulanTahun3(bulan));
         } catch (SQLException ex) {
             Logger.getLogger(FormTransaksiPenjualan.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -85,6 +89,12 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         tabel_penjualan2 = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
         text_ttlbeliall = new javax.swing.JTextField();
+        jPanel10 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabel_penjualan = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        text_ttltransbeli = new javax.swing.JTextField();
         dialog_cariP = new javax.swing.JDialog();
         jPanel8 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
@@ -113,13 +123,8 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         text_airdibayar = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         text_hargaSatuan = new javax.swing.JTextField();
-        jLabel15 = new javax.swing.JLabel();
+        label_status = new javax.swing.JLabel();
         text_total = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tabel_penjualan = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        text_ttltransbeli = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         text_airbln = new javax.swing.JTextField();
         button_pelanggan = new javax.swing.JButton();
@@ -132,6 +137,9 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
         text_pembayaran = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        combo_bulan = new javax.swing.JComboBox();
+        jLabel23 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -217,18 +225,83 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(tabel_penjualan2);
 
-        jPanel7.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 650, 220));
+        jPanel7.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 650, 160));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel9.setText("TOTAL PENDAPATAN");
-        jPanel7.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 260, 130, 20));
+        jPanel7.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 190, 130, 20));
 
         text_ttlbeliall.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jPanel7.add(text_ttlbeliall, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 260, 170, -1));
+        jPanel7.add(text_ttlbeliall, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 190, 170, -1));
 
-        jPanel4.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 670, 300));
+        jPanel4.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 670, 230));
 
-        dialog_pembelian.getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 430));
+        jPanel10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("TRANSAKSI HARI INI");
+
+        tabel_penjualan.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tabel_penjualan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabel_penjualanMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tabel_penjualan);
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("TOTAL PENDAPATAN HARI INI");
+
+        text_ttltransbeli.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 644, Short.MAX_VALUE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(text_ttltransbeli, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(9, 9, 9))))
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel8)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(text_ttltransbeli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(76, 76, 76))
+        );
+
+        jPanel4.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 670, 260));
+
+        dialog_pembelian.getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 620));
 
         dialog_cariP.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -314,7 +387,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
                 .addComponent(label_namaDesa, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(label_alamatNotelp)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 110));
@@ -330,7 +403,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel6.setText("PEMAKAIAN AIR AWAL");
-        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 140, 20));
+        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 140, 20));
 
         button_tambah.setText("TAMBAH");
         button_tambah.addActionListener(new java.awt.event.ActionListener() {
@@ -338,7 +411,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
                 button_tambahActionPerformed(evt);
             }
         });
-        jPanel3.add(button_tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 430, -1, -1));
+        jPanel3.add(button_tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 300, -1, -1));
 
         button_ubah.setText("UBAH");
         button_ubah.addActionListener(new java.awt.event.ActionListener() {
@@ -346,7 +419,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
                 button_ubahActionPerformed(evt);
             }
         });
-        jPanel3.add(button_ubah, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 430, -1, -1));
+        jPanel3.add(button_ubah, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 300, -1, -1));
 
         button_hapus.setText("HAPUS");
         button_hapus.addActionListener(new java.awt.event.ActionListener() {
@@ -354,7 +427,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
                 button_hapusActionPerformed(evt);
             }
         });
-        jPanel3.add(button_hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 430, -1, -1));
+        jPanel3.add(button_hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 300, -1, -1));
 
         button_tabel.setText("TABEL TRANSAKSI PEMBELIAN");
         button_tabel.addActionListener(new java.awt.event.ActionListener() {
@@ -362,7 +435,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
                 button_tabelActionPerformed(evt);
             }
         });
-        jPanel3.add(button_tabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 430, -1, -1));
+        jPanel3.add(button_tabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 300, -1, -1));
         jPanel3.add(text_noPelanggan, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 170, 30));
 
         label_noTrans.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -381,7 +454,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel13.setText("PEMAKAIAN AIR BULAN INI");
-        jPanel3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 180, -1));
+        jPanel3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 180, -1));
 
         text_airdibayar.setEditable(false);
         text_airdibayar.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
@@ -391,7 +464,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
                 text_airdibayarKeyReleased(evt);
             }
         });
-        jPanel3.add(text_airdibayar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, 170, -1));
+        jPanel3.add(text_airdibayar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 250, 170, -1));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -408,49 +481,17 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         });
         jPanel3.add(text_hargaSatuan, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 90, 120, -1));
 
-        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel15.setText("PEMBAYARAN");
-        jPanel3.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 210, 120, 30));
+        label_status.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        label_status.setForeground(new java.awt.Color(255, 0, 51));
+        label_status.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        label_status.setText("STATUS : ");
+        jPanel3.add(label_status, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 240, 330, 30));
 
         text_total.setEditable(false);
         text_total.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         text_total.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         text_total.setText("0");
-        jPanel3.add(text_total, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 160, 200, 40));
-
-        tabel_penjualan.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        tabel_penjualan.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tabel_penjualanMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(tabel_penjualan);
-
-        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 690, 100));
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("TOTAL PENDAPATAN HARI INI");
-        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 400, 330, 20));
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setText("TRANSAKSI HARI INI");
-        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 690, 20));
-
-        text_ttltransbeli.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jPanel3.add(text_ttltransbeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 400, 170, -1));
+        jPanel3.add(text_total, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 150, 200, 40));
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel16.setText("Hari, Tanggal");
@@ -459,7 +500,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         text_airbln.setEditable(false);
         text_airbln.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         text_airbln.setText("0");
-        jPanel3.add(text_airbln, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 190, 170, -1));
+        jPanel3.add(text_airbln, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, 170, -1));
 
         button_pelanggan.setText("...");
         button_pelanggan.addActionListener(new java.awt.event.ActionListener() {
@@ -471,13 +512,13 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel11.setText("NAMA PELANGGAN");
-        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 110, 20));
+        jLabel11.setText("PEMAKAIAN BULAN");
+        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 140, 30));
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel17.setText("PEMAKAIAN AIR BLM DIBAYAR");
-        jPanel3.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 180, -1));
+        jPanel3.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 180, -1));
 
         text_nama.setEditable(false);
         jPanel3.add(text_nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 120, 170, -1));
@@ -495,7 +536,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         text_airawal.setEditable(false);
         text_airawal.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         text_airawal.setText("0");
-        jPanel3.add(text_airawal, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 160, 170, -1));
+        jPanel3.add(text_airawal, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 190, 170, -1));
 
         jLabel20.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -505,16 +546,34 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         text_pembayaran.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         text_pembayaran.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         text_pembayaran.setText("0");
-        jPanel3.add(text_pembayaran, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 210, 200, 30));
+        jPanel3.add(text_pembayaran, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 200, 200, 30));
 
         jLabel21.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel21.setText("TOTAL BIAYA");
-        jPanel3.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 160, 120, 40));
+        jPanel3.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 150, 120, 40));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 750, 470));
+        jLabel22.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel22.setText("NAMA PELANGGAN");
+        jPanel3.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 140, 20));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 590));
+        combo_bulan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "JANUARI", "FEBRUARI", "MARET", "APRIL", "MEI", "JUNI", "JULI", "AGUSTUS", "SEPTEMBER", "OKTOBER", "NOVEMBER", "DESEMBER" }));
+        combo_bulan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                combo_bulanActionPerformed(evt);
+            }
+        });
+        jPanel3.add(combo_bulan, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 150, 170, -1));
+
+        jLabel23.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel23.setText("PEMBAYARAN");
+        jPanel3.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 200, 120, 30));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 750, 350));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 470));
 
         jMenu1.setText("HOME");
         jMenu1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -850,34 +909,71 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         try {
             int row1 = tabel_pelanggan.getSelectedRow();
             List<Anggota> agt = AnggotaKontrol.getKoneksi().selectAnggota2(tabel_pelanggan.getValueAt(row1, 1).toString());
-            Pemakaian pem = PemakaianKontrol.getKoneksi().selectPemakaian2(tabel_pelanggan.getValueAt(row1, 0).toString());
-
-            text_noPelanggan.setText(pem.getIdanggota().getIdAnggota());
-            text_nama.setText(agt.get(0).getNamaAnggota());
-            text_airawal.setText(Double.toString(pem.getAirlunas()).split("\\.")[0]);
-            text_airbln.setText(Double.toString(pem.getAirterakhir()).split("\\.")[0]);
-            text_airdibayar.setText(Double.toString(pem.getAirdibayar()).split("\\.")[0]);
-            label_noTrans.setText(pem.getNotransaksi());
-            dialog_cariP.setVisible(false);
-            label_noTrans.setVisible(true);
-            String tanggal = Tanggal.getTanggal2();
-
-            double total = Integer.parseInt(text_airdibayar.getText())
-                    * Integer.parseInt(text_hargaSatuan.getText()) + Integer.parseInt(text_denda.getText());
             
-            if (tanggal.split("-")[1].equals(generateBulanTahun2(pem.getBulan())) && Integer.parseInt(tanggal.split("-")[2]) > 10) {
-                System.out.println("denda nih");
-                double dend = total * (2 / 100);
-                total = total + dend;
-            } else {
-                double dend = 0;
-                total = total + dend;
-            }
-            text_total.setText(Double.toString(total).split("\\.")[0]);
+
         } catch (SQLException ex) {
-            Logger.getLogger(FormPemakaianAir.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FormTransaksiPenjualan.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_tabel_pelangganMouseClicked
+
+    private void combo_bulanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_bulanActionPerformed
+        try {
+            if (text_noPelanggan.getText().equals("")) {
+            } else {
+                String noPelanggan = text_noPelanggan.getText();
+                String bulan = combo_bulan.getSelectedItem().toString();
+
+                List<Anggota> agt = AnggotaKontrol.getKoneksi().selectAnggota2(noPelanggan);
+                Pemakaian p = new Pemakaian("", new Anggota(noPelanggan,
+                        "", "", "", "", "", 0, 0, "", "", "", "", ""), 0, 0, 0,
+                        bulan, "");
+                Pemakaian pem = PemakaianKontrol.getKoneksi().selectPemakaian2(p);
+
+                text_noPelanggan.setText(pem.getIdanggota().getIdAnggota());
+                text_nama.setText(agt.get(0).getNamaAnggota());
+                text_airawal.setText(Double.toString(pem.getAirlunas()).split("\\.")[0]);
+                text_airbln.setText(Double.toString(pem.getAirterakhir()).split("\\.")[0]);
+                text_airdibayar.setText(Double.toString(pem.getAirdibayar()).split("\\.")[0]);
+                label_noTrans.setText(pem.getNotransaksi());
+                dialog_cariP.setVisible(false);
+                label_noTrans.setVisible(true);
+                String tanggal = Tanggal.getTanggal2();
+                double total = Integer.parseInt(text_airdibayar.getText())
+                        * Integer.parseInt(text_hargaSatuan.getText());
+
+                if (TransaksiKontrol.getKoneksi().jual_selectTransaksiCek(label_noTrans.getText()) == true) {
+                    label_status.setText("STATUS : LUNAS");
+                    double dend = 0;
+                    total = total + dend;
+                } else { //kalo belum bayar
+                    int index = combo_bulan.getSelectedIndex();//ambil bulan 
+                    if (index == 0) {
+                        index = 11;
+                    } else {
+                        index = index - 1;
+                    }
+
+                    String bulanSebelum = combo_bulan.getSelectedObjects()[index].toString();//bulan sblm bln skrg
+                    if (bulan.equals(bulanSebelum) && Integer.parseInt(Tanggal.getTanggal2().split("-")[2]) > 10) {//kalo denda 
+                        label_status.setText("STATUS : BLM LUNAS");
+                        JOptionPane.showMessageDialog(null, "Denda Nih");
+
+                        double dend = total * (2 / 100);
+                        text_denda.setText(Double.toString(dend).split("\\.")[0]);
+                        total = total + dend;
+                        text_total.setText(Double.toString(total).split("\\.")[0]);
+                    } else {//kalo gak denda
+                        double dend = 0;
+                        text_denda.setText(Double.toString(dend).split("\\.")[0]);
+                        total = total + dend;
+                        text_total.setText(Double.toString(total).split("\\.")[0]);
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FormTransaksiPenjualan.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_combo_bulanActionPerformed
 
     public void update() {
         try {
@@ -1014,7 +1110,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         }
     }
 
-    public String generateBulanTahun2(String bulan) {
+    public String generateBulanTahun2(String bulan) {//bulan sekarang
         if (bulan.equals("JANUARI")) {
             return "02";
         } else if (bulan.equals("FEBRUARI")) {
@@ -1039,6 +1135,58 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
             return "12";
         } else {
             return "01";
+        }
+    }
+
+    public String generateBulanTahun3(String bulan) {
+        if (bulan.equals("01")) {
+            return "JANUARI";
+        } else if (bulan.equals("02")) {
+            return "FEBRUARI";
+        } else if (bulan.equals("03")) {
+            return "MARET";
+        } else if (bulan.equals("04")) {
+            return "APRIL";
+        } else if (bulan.equals("05")) {
+            return "MEI";
+        } else if (bulan.equals("06")) {
+            return "JUNI";
+        } else if (bulan.equals("07")) {
+            return "JULI";
+        } else if (bulan.equals("08")) {
+            return "AGUSTUS";
+        } else if (bulan.equals("09")) {
+            return "SEPTEMBER";
+        } else if (bulan.equals("10")) {
+            return "OKTOBER";
+        } else if (bulan.equals("11")) {
+            return "NOVEMBER";
+        } else if (bulan.equals("12")) {
+            return "DESEMBER";
+        } else if (bulan.equals("JANUARI")) {
+            return "01";
+        } else if (bulan.equals("FEBRUARI")) {
+            return "02";
+        } else if (bulan.equals("MARET")) {
+            return "03";
+        } else if (bulan.equals("APRIL")) {
+            return "04";
+        } else if (bulan.equals("MEI")) {
+            return "05";
+        } else if (bulan.equals("JUNI")) {
+            return "06";
+        } else if (bulan.equals("JULI")) {
+            return "07";
+        } else if (bulan.equals("AGUSTUS")) {
+            return "08";
+        } else if (bulan.equals("SEPTEMBER")) {
+            return "09";
+        } else if (bulan.equals("OKTOBER")) {
+            return "10";
+        } else if (bulan.equals("NOVEMBER")) {
+            return "11";
+        } else {
+            return "12";
         }
     }
 
@@ -1108,6 +1256,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
     private javax.swing.JComboBox cb_bulan;
     private javax.swing.JComboBox cb_tahun;
     private javax.swing.JComboBox cb_tanggal;
+    private javax.swing.JComboBox combo_bulan;
     private javax.swing.JDialog dialog_cariP;
     private javax.swing.JDialog dialog_pembelian;
     private javax.swing.JLabel jLabel1;
@@ -1115,7 +1264,6 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
@@ -1123,6 +1271,8 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1147,6 +1297,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -1162,6 +1313,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
     private javax.swing.JLabel label_jmlBeli;
     private javax.swing.JLabel label_namaDesa;
     private javax.swing.JLabel label_noTrans;
+    private javax.swing.JLabel label_status;
     private javax.swing.JLabel label_tanggal;
     private javax.swing.JTable tabel_pelanggan;
     private javax.swing.JTable tabel_penjualan;

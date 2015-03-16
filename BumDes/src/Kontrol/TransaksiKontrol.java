@@ -96,7 +96,7 @@ public class TransaksiKontrol {
             String tgl = result.getString(1);
             trs.setTanggalTransaksi(tgl.split("-")[2] + "-" + tgl.split("-")[1] + "-" + tgl.split("-")[0]);
             trs.setNoTrans(result.getString(2));
-            trs.setIdBarang(new Barang("",result.getString(3), 0, 0));
+            trs.setIdBarang(new Barang("", result.getString(3), 0, 0));
             trs.setJumlah(result.getInt(4));
             trs.setHargaSatuan(result.getDouble(5));
             trs.setTotal(result.getDouble(6));
@@ -154,7 +154,7 @@ public class TransaksiKontrol {
         conn.close();
         return total;
     }
-    
+
     public String beli_tampilTotalBeliAll() throws SQLException {
         PreparedStatement stmt = null;
         ResultSet result = null;
@@ -171,9 +171,8 @@ public class TransaksiKontrol {
         conn.close();
         return total;
     }
-    
+
 //==============================================================================
-    
     public void jual_insertTransaksi(Transaksi trans) throws SQLException {
         PreparedStatement stmt = null;
         conn.setAutoCommit(false);
@@ -191,7 +190,7 @@ public class TransaksiKontrol {
         conn.commit();
         conn.close();
     }
-    
+
     public List<Transaksi> jual_selectTransaksi() throws SQLException {
         PreparedStatement stmt = null;
         ResultSet result = null;
@@ -206,7 +205,7 @@ public class TransaksiKontrol {
         while (result.next()) {
             Transaksi trs = new Transaksi();
             trs.setNoTrans(result.getString(1));
-            trs.setIdAnggota(new Anggota("",result.getString(2), "", "", "", "", 0, 0, "", "", "", "",""));
+            trs.setIdAnggota(new Anggota("", result.getString(2), "", "", "", "", 0, 0, "", "", "", "", ""));
             trs.setJumlah(result.getInt(3));
             trs.setHargaSatuan(result.getDouble(4));
             trs.setTotal(result.getDouble(5));
@@ -216,7 +215,7 @@ public class TransaksiKontrol {
         conn.close();
         return trans;
     }
-    
+
     public List<Transaksi> jual_selectTransaksiAll(String t) throws SQLException {
         PreparedStatement stmt = null;
         ResultSet result = null;
@@ -236,7 +235,7 @@ public class TransaksiKontrol {
             String tgl = result.getString(1);
             trs.setTanggalTransaksi(tgl.split("-")[2] + "-" + tgl.split("-")[1] + "-" + tgl.split("-")[0]);
             trs.setNoTrans(result.getString(2));
-            trs.setIdAnggota(new Anggota("",result.getString(3), "", "", "", "", 0, 0, "", "", "", "",""));
+            trs.setIdAnggota(new Anggota("", result.getString(3), "", "", "", "", 0, 0, "", "", "", "", ""));
             trs.setJumlah(result.getInt(4));
             trs.setHargaSatuan(result.getDouble(5));
             trs.setTotal(result.getDouble(6));
@@ -245,7 +244,7 @@ public class TransaksiKontrol {
         conn.close();
         return trans;
     }
-    
+
     public void jual_updateTransaksi(Transaksi trans) throws SQLException {
         PreparedStatement stmt = null;
         conn.setAutoCommit(false);
@@ -281,7 +280,7 @@ public class TransaksiKontrol {
         conn.close();
         return total;
     }
-    
+
     public String jual_tampilTotalBeliAll() throws SQLException {
         PreparedStatement stmt = null;
         ResultSet result = null;
@@ -297,5 +296,25 @@ public class TransaksiKontrol {
 
         conn.close();
         return total;
+    }
+
+    public boolean jual_selectTransaksiCek(String t) throws SQLException {
+        PreparedStatement stmt = null;
+        ResultSet result = null;
+        conn.setAutoCommit(false);
+        String query = "SELECT * FROM transaksi where notransaksi = ?";
+        stmt = conn.prepareStatement(query);
+        stmt.setString(1, t);
+        result = stmt.executeQuery();
+        boolean cek = false;
+        while (result.next()) {
+            if (result.getString(1).equals(null)) {
+                cek = true;
+            } else {
+                cek = false;
+            }
+        }
+        conn.close();
+        return cek;
     }
 }

@@ -71,13 +71,14 @@ public class PemakaianKontrol {
         return agt;
     }
     
-    public Pemakaian selectPemakaian2(String key) throws SQLException {
+    public Pemakaian selectPemakaian2(Pemakaian key) throws SQLException {
         PreparedStatement stmt = null;
         ResultSet result = null;
         conn.setAutoCommit(false);
-        String query = "SELECT * from pemakaian where idanggota = ? and airdibayar <> 0";
+        String query = "SELECT * from pemakaian where idanggota = ? and bulan = ?";
         stmt = conn.prepareStatement(query);
-        stmt.setString(1, key);
+        stmt.setString(1, key.getIdanggota().getIdAnggota());
+        stmt.setString(2, key.getBulan());
         result = stmt.executeQuery();
         Pemakaian agt = new Pemakaian();
         while (result.next()) {
