@@ -10,15 +10,17 @@ package Kelas;
  * @author damaikurnia
  */
 public class Transaksi {
-    String noTrans;
-    Barang idBarang;
-    Anggota idAnggota;
-    String tanggalTransaksi;
-    String jenisTransaksi;
-    int jumlah;
-    double hargaSatuan;
-    double total;
-    
+
+    private String noTrans;
+    private Barang idBarang;
+    private Anggota idAnggota;
+    private String tanggalTransaksi;
+    private String jenisTransaksi;
+    private int jumlah;
+    private double hargaSatuan;
+    private double denda;
+    private double total;
+
     /**
      * @return the noTrans
      */
@@ -129,5 +131,19 @@ public class Transaksi {
      */
     public void setTotal(double total) {
         this.total = total;
+    }
+
+    /**
+     * @return the denda
+     */
+    public double getDenda() {
+        return denda;
+    }
+
+    /**
+     * @param denda the denda to set
+     */
+    public void setDenda(double denda) {
+        this.denda = denda;
     }
 }

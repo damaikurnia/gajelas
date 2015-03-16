@@ -482,24 +482,57 @@ public class FormPemakaianAir extends javax.swing.JFrame {
     private void tabel_pelangganMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabel_pelangganMouseClicked
         try {
             int row1 = tabel_pelanggan.getSelectedRow();
-            List<Anggota> agt = AnggotaKontrol.getKoneksi().selectAnggota2(tabel_pelanggan.getValueAt(row1, 1).toString());
-            String tanggal = Tanggal.getTanggal2();
+            String tanggalBln = generateBulanTahun(Tanggal.getTanggal2());
             Pemakaian pem = new Pemakaian(null, new Anggota(tabel_pelanggan.getValueAt(row1, 0).toString(),
-                    "", "", "", "", "", row1, row1, "", "", "", "", ""),
-                    row1, row1, row1, konversiBulan(tanggal), tanggal.split("-")[0]);
+                    tanggalBln, tanggalBln, tanggalBln, tanggalBln, tanggalBln,
+                    row1, row1, tanggalBln, tanggalBln, tanggalBln, tanggalBln,
+                    tanggalBln), WIDTH, WIDTH, WIDTH, tanggalBln.split("-")[0],
+                    tanggalBln.split("-")[1]);
             pem = PemakaianKontrol.getKoneksi().selectPemakaian(pem);
+            if (pem.getAirlunas() == pem.getAirterakhir()) {//kalo lunas --> tampilkan, disable
+//                JOptionPane.showMessageDialog(null, "Lunas Cooooyyyy");
+                List<Anggota> agt = AnggotaKontrol.getKoneksi().selectAnggota2(tabel_pelanggan.getValueAt(row1, 1).toString());
 
-            text_noPelanggan.setText(pem.getIdanggota().getIdAnggota());
-            text_nama.setText(agt.get(0).getNamaAnggota());
-            text_alamat.setText(agt.get(0).getAlamat());
-            text_airlunas.setText(Double.toString(pem.getAirlunas()).split("\\.")[0]);
-            text_airdibayar.setText(Double.toString(pem.getAirdibayar()).split("\\.")[0]);
-            text_airterakhir.setText(Double.toString(pem.getAirterakhir()).split("\\.")[0]);
-            label_noTrans.setText(pem.getNotransaksi());
-            dialog_cariP.setVisible(false);
-            label_noTrans.setVisible(true);
-        } catch (SQLException ex) {
-            Logger.getLogger(FormPemakaianAir.class.getName()).log(Level.SEVERE, null, ex);
+                String tanggal = Tanggal.getTanggal2();
+                pem = new Pemakaian(null, new Anggota(tabel_pelanggan.getValueAt(row1, 0).toString(),
+                        "", "", "", "", "", row1, row1, "", "", "", "", ""),
+                        row1, row1, row1, konversiBulan(tanggal), tanggal.split("-")[0]);
+                pem = PemakaianKontrol.getKoneksi().selectPemakaian(pem);
+                text_noPelanggan.setText(pem.getIdanggota().getIdAnggota());
+                text_nama.setText(agt.get(0).getNamaAnggota());
+                text_alamat.setText(agt.get(0).getAlamat());
+                text_airlunas.setText(Double.toString(pem.getAirlunas()).split("\\.")[0]);
+                text_airdibayar.setText(Double.toString(pem.getAirdibayar()).split("\\.")[0]);
+                text_airterakhir.setText(Double.toString(pem.getAirterakhir()).split("\\.")[0]);
+                label_noTrans.setText(pem.getNotransaksi());
+                dialog_cariP.setVisible(false);
+                label_noTrans.setVisible(true);
+                text_airterakhir.setEditable(false);//tambah ini
+
+            } else { //kalo blm --> tampilkan aja
+//                JOptionPane.showMessageDialog(null, "Ada nih");
+                List<Anggota> agt = AnggotaKontrol.getKoneksi().selectAnggota2(tabel_pelanggan.getValueAt(row1, 1).toString());
+
+                String tanggal = Tanggal.getTanggal2();
+                pem = new Pemakaian(null, new Anggota(tabel_pelanggan.getValueAt(row1, 0).toString(),
+                        "", "", "", "", "", row1, row1, "", "", "", "", ""),
+                        row1, row1, row1, konversiBulan(tanggal), tanggal.split("-")[0]);
+                pem = PemakaianKontrol.getKoneksi().selectPemakaian(pem);
+
+                text_noPelanggan.setText(pem.getIdanggota().getIdAnggota());
+                text_nama.setText(agt.get(0).getNamaAnggota());
+                text_alamat.setText(agt.get(0).getAlamat());
+                text_airlunas.setText(Double.toString(pem.getAirlunas()).split("\\.")[0]);
+                text_airdibayar.setText(Double.toString(pem.getAirdibayar()).split("\\.")[0]);
+                text_airterakhir.setText(Double.toString(pem.getAirterakhir()).split("\\.")[0]);
+                label_noTrans.setText(pem.getNotransaksi());
+                dialog_cariP.setVisible(false);
+                label_noTrans.setVisible(true);
+                text_airterakhir.setEditable(true);
+                
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null,"Transaksi tidak ada");
         }
     }//GEN-LAST:event_tabel_pelangganMouseClicked
 
@@ -625,6 +658,34 @@ public class FormPemakaianAir extends javax.swing.JFrame {
             return "DESEMBER";
         } else {
             return "-";
+        }
+    }
+    
+    public String generateBulanTahun(String tanggal) {
+        if (tanggal.split("-")[1].equals("01")) {
+            return "JANUARI-" + tanggal.split("-")[0];
+        } else if (tanggal.split("-")[1].equals("02")) {
+            return "FEBRUARI-" + tanggal.split("-")[0];
+        } else if (tanggal.split("-")[1].equals("03")) {
+            return "MARET-" + tanggal.split("-")[0];
+        } else if (tanggal.split("-")[1].equals("04")) {
+            return "APRIL-" + tanggal.split("-")[0];
+        } else if (tanggal.split("-")[1].equals("05")) {
+            return "MEI-" + tanggal.split("-")[0];
+        } else if (tanggal.split("-")[1].equals("06")) {
+            return "JUNI-" + tanggal.split("-")[0];
+        } else if (tanggal.split("-")[1].equals("07")) {
+            return "JULI-" + tanggal.split("-")[0];
+        } else if (tanggal.split("-")[1].equals("08")) {
+            return "AGUSTUS-" + tanggal.split("-")[0];
+        } else if (tanggal.split("-")[1].equals("09")) {
+            return "SEPTEMBER-" + tanggal.split("-")[0];
+        } else if (tanggal.split("-")[1].equals("10")) {
+            return "OKTOBER-" + tanggal.split("-")[0];
+        } else if (tanggal.split("-")[1].equals("11")) {
+            return "NOVEMBER-" + tanggal.split("-")[0];
+        } else {
+            return "DESEMBER-" + tanggal.split("-")[0];
         }
     }
 

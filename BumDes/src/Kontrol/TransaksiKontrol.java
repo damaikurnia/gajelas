@@ -130,7 +130,8 @@ public class TransaksiKontrol {
         stmt.setString(5, "PEMBELIAN");
         stmt.setInt(6, trans.getJumlah());
         stmt.setDouble(7, trans.getHargaSatuan());
-        stmt.setDouble(8, trans.getTotal());
+        stmt.setDouble(8, 0);
+        stmt.setDouble(9, trans.getTotal());
         stmt.executeUpdate();
         conn.commit();
         conn.close();
@@ -176,7 +177,7 @@ public class TransaksiKontrol {
     public void jual_insertTransaksi(Transaksi trans) throws SQLException {
         PreparedStatement stmt = null;
         conn.setAutoCommit(false);
-        String query = "INSERT INTO transaksi VALUES(?,?,?,?,?,?,?,?)";
+        String query = "INSERT INTO transaksi VALUES(?,?,?,?,?,?,?,?,?)";
         stmt = conn.prepareStatement(query);
         stmt.setString(1, trans.getNoTrans());
         stmt.setString(2, "-");
@@ -185,7 +186,8 @@ public class TransaksiKontrol {
         stmt.setString(5, "PENJUALAN");
         stmt.setInt(6, trans.getJumlah());
         stmt.setDouble(7, trans.getHargaSatuan());
-        stmt.setDouble(8, trans.getTotal());
+        stmt.setDouble(8, trans.getDenda());
+        stmt.setDouble(9, trans.getTotal());
         stmt.executeUpdate();
         conn.commit();
         conn.close();

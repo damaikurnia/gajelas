@@ -405,7 +405,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         jLabel6.setText("PEMAKAIAN AIR AWAL");
         jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 140, 20));
 
-        button_tambah.setText("TAMBAH");
+        button_tambah.setText("BAYAR");
         button_tambah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 button_tambahActionPerformed(evt);
@@ -564,7 +564,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
                 combo_bulanActionPerformed(evt);
             }
         });
-        jPanel3.add(combo_bulan, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 150, 170, -1));
+        jPanel3.add(combo_bulan, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 150, 170, 30));
 
         jLabel23.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -726,16 +726,20 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
                 trans.setIdAnggota(idAnggota);
                 trans.setJumlah(Integer.parseInt(text_airdibayar.getText()));
                 trans.setHargaSatuan(Double.parseDouble(text_hargaSatuan.getText()));
+                trans.setDenda(Double.parseDouble(text_denda.getText()));
                 trans.setTotal(Double.parseDouble(text_total.getText()));
-
                 TransaksiKontrol.getKoneksi().jual_insertTransaksi(trans);
                 JOptionPane.showMessageDialog(null, "Transaksi berhasil!");
 
+                Pemakaian pem = new Pemakaian(trans.getNoTrans(), idAnggota,
+                        Double.parseDouble(text_airbln.getText()), Double.parseDouble(text_airbln.getText()),
+                        0, null, null);
+                PemakaianKontrol.getKoneksi().updatePemakaian(pem);//update pemakaian transaksi
+
                 String tanggalBln = generateBulanTahun(Tanggal.getTanggal2());
-                Pemakaian pem = new Pemakaian(generateKodeBaru(trans.getNoTrans()), idAnggota,
+                pem = new Pemakaian(generateKodeBaru(trans.getNoTrans()), idAnggota,
                         Double.parseDouble(text_airbln.getText()), 0, 0, tanggalBln.split("-")[0], tanggalBln.split("-")[1]);
                 PemakaianKontrol.getKoneksi().insertPemakaian(pem);
-
                 update();
                 defaultnya();
             } catch (SQLException ex) {
@@ -909,8 +913,9 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         try {
             int row1 = tabel_pelanggan.getSelectedRow();
             List<Anggota> agt = AnggotaKontrol.getKoneksi().selectAnggota2(tabel_pelanggan.getValueAt(row1, 1).toString());
-            
-
+            text_noPelanggan.setText(agt.get(0).getIdAnggota());
+            text_nama.setText(agt.get(0).getNamaAnggota());
+            dialog_cariP.setVisible(false);
         } catch (SQLException ex) {
             Logger.getLogger(FormTransaksiPenjualan.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -921,16 +926,15 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
             if (text_noPelanggan.getText().equals("")) {
             } else {
                 String noPelanggan = text_noPelanggan.getText();
+                String namaPelanggan = text_nama.getText();
                 String bulan = combo_bulan.getSelectedItem().toString();
+                String tahun = Tanggal.getTanggal2().split("-")[0];
 
-                List<Anggota> agt = AnggotaKontrol.getKoneksi().selectAnggota2(noPelanggan);
                 Pemakaian p = new Pemakaian("", new Anggota(noPelanggan,
-                        "", "", "", "", "", 0, 0, "", "", "", "", ""), 0, 0, 0,
-                        bulan, "");
-                Pemakaian pem = PemakaianKontrol.getKoneksi().selectPemakaian2(p);
-
+                        namaPelanggan, "", "", "", "", 0, 0, "", "", "", "", ""), 0, 0, 0,
+                        bulan, tahun);
+                Pemakaian pem = PemakaianKontrol.getKoneksi().selectPemakaian(p);
                 text_noPelanggan.setText(pem.getIdanggota().getIdAnggota());
-                text_nama.setText(agt.get(0).getNamaAnggota());
                 text_airawal.setText(Double.toString(pem.getAirlunas()).split("\\.")[0]);
                 text_airbln.setText(Double.toString(pem.getAirterakhir()).split("\\.")[0]);
                 text_airdibayar.setText(Double.toString(pem.getAirdibayar()).split("\\.")[0]);
@@ -940,38 +944,33 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
                 String tanggal = Tanggal.getTanggal2();
                 double total = Integer.parseInt(text_airdibayar.getText())
                         * Integer.parseInt(text_hargaSatuan.getText());
+                double dend = 0;
 
                 if (TransaksiKontrol.getKoneksi().jual_selectTransaksiCek(label_noTrans.getText()) == true) {
                     label_status.setText("STATUS : LUNAS");
-                    double dend = 0;
                     total = total + dend;
+                    text_denda.setText(Double.toString(dend).split("\\.")[0]);
+                    text_total.setText(Double.toString(total).split("\\.")[0]);
                 } else { //kalo belum bayar
-                    int index = combo_bulan.getSelectedIndex();//ambil bulan 
-                    if (index == 0) {
-                        index = 11;
-                    } else {
-                        index = index - 1;
-                    }
-
-                    String bulanSebelum = combo_bulan.getSelectedObjects()[index].toString();//bulan sblm bln skrg
-                    if (bulan.equals(bulanSebelum) && Integer.parseInt(Tanggal.getTanggal2().split("-")[2]) > 10) {//kalo denda 
-                        label_status.setText("STATUS : BLM LUNAS");
+                    int blnSkrg = Integer.parseInt(tanggal.split("-")[1]);
+                    int blnPemb = generateBulantoInt(bulan);
+                    label_status.setText("STATUS : BLM LUNAS");
+//                    System.out.println(blnSkrg + " " + blnPemb);
+                    if (blnPemb < blnSkrg && Integer.parseInt(tanggal.split("-")[2]) > 10) {//kalo denda
                         JOptionPane.showMessageDialog(null, "Denda Nih");
-
-                        double dend = total * (2 / 100);
-                        text_denda.setText(Double.toString(dend).split("\\.")[0]);
+                        dend = total * 0.02;
                         total = total + dend;
+                        text_denda.setText(Double.toString(dend).split("\\.")[0]);
                         text_total.setText(Double.toString(total).split("\\.")[0]);
-                    } else {//kalo gak denda
-                        double dend = 0;
-                        text_denda.setText(Double.toString(dend).split("\\.")[0]);
+                    } else {//kalo ga denda
                         total = total + dend;
+                        text_denda.setText(Double.toString(dend).split("\\.")[0]);
                         text_total.setText(Double.toString(total).split("\\.")[0]);
                     }
                 }
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(FormTransaksiPenjualan.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Data Pelanggan tidak tersedia");
         }
     }//GEN-LAST:event_combo_bulanActionPerformed
 
@@ -1060,6 +1059,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         text_hargaSatuan.setText("0");
         text_airbln.setText("0");
         text_total.setText("0");
+        text_denda.setText("0");
         text_pembayaran.setText("0");
         text_noPelanggan.setEditable(true);
         label_noTrans.setVisible(false);
@@ -1187,6 +1187,34 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
             return "11";
         } else {
             return "12";
+        }
+    }
+
+    public int generateBulantoInt(String bulan) {
+        if (bulan.equals("JANUARI")) {
+            return 1;
+        } else if (bulan.equals("FEBRUARI")) {
+            return 2;
+        } else if (bulan.equals("MARET")) {
+            return 3;
+        } else if (bulan.equals("APRIL")) {
+            return 4;
+        } else if (bulan.equals("MEI")) {
+            return 5;
+        } else if (bulan.equals("JUNI")) {
+            return 6;
+        } else if (bulan.equals("JULI")) {
+            return 7;
+        } else if (bulan.equals("AGUSTUS")) {
+            return 8;
+        } else if (bulan.equals("SEPTEMBER")) {
+            return 9;
+        } else if (bulan.equals("OKTOBER")) {
+            return 10;
+        } else if (bulan.equals("NOVEMBER")) {
+            return 11;
+        } else {
+            return 12;
         }
     }
 
