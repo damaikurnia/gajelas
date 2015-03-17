@@ -6,7 +6,6 @@
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["/home/damaikurnia/NetBeansProjects/trunk/BumDes/src/iReport/"]]></defaultValueExpression>
 	</parameter>
-	<parameter name="ParameterMain" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[select dusun from anggota group by dusun;]]>
 	</queryString>
@@ -35,11 +34,14 @@
 		</band>
 	</title>
 	<detail>
-		<band height="112" splitType="Stretch">
+		<band height="100" splitType="Stretch">
 			<subreport>
-				<reportElement x="0" y="0" width="555" height="100" uuid="ec5b1380-5948-401a-b9f0-8e48a19f9770"/>
+				<reportElement x="21" y="0" width="515" height="100" uuid="ec5b1380-5948-401a-b9f0-8e48a19f9770"/>
+				<subreportParameter name="parameterSub">
+					<subreportParameterExpression><![CDATA[$F{dusun}]]></subreportParameterExpression>
+				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "LapPelangganSub.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA["LapPelangganSub.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 	</detail>
