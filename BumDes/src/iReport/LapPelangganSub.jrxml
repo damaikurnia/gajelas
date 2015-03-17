@@ -3,6 +3,28 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<parameter name="parameterSub" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT idanggota, namaanggota, alamat, rt,rw,telp from anggota where dusun = $P{parameterSub};]]>
+	</queryString>
+	<field name="idanggota" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="namaanggota" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="alamat" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="rt" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="rw" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="telp" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -16,11 +38,11 @@
 				<text><![CDATA[DUSUN]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="128" y="0" width="185" height="20" uuid="abdd0dbb-3532-4620-af0b-caa240c151fd"/>
+				<reportElement x="128" y="0" width="159" height="20" uuid="860402cc-3343-4743-a45e-1e0e583bfcfd"/>
 				<textElement>
 					<font fontName="Times New Roman" size="14"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{field}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{parameterSub}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>
@@ -126,7 +148,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{field}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{idanggota}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="78" y="-1" width="141" height="20" uuid="32a0cc0b-69d6-4f49-96b7-c842cfb3a898"/>
@@ -140,7 +162,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{field}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{namaanggota}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="219" y="-1" width="176" height="20" uuid="28511519-c50d-46b9-a1ca-c4cccf806c64"/>
@@ -154,7 +176,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{field}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{alamat}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="395" y="-1" width="32" height="20" uuid="ed8ff7a9-0519-4da7-b41b-0dc6c4cea107"/>
@@ -168,7 +190,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{field}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{rt}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="427" y="-1" width="28" height="20" uuid="41363ac9-eae9-4246-adc3-1385e76f61b4"/>
@@ -182,7 +204,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{field}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{rw}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="455" y="-1" width="100" height="20" uuid="bb4d41fd-4c81-4af9-820d-8d63deb1e18e"/>
@@ -196,7 +218,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{field}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{telp}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

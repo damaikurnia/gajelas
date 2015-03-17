@@ -44,6 +44,7 @@ public class FormPemakaianAir extends javax.swing.JFrame {
 
             label_noTrans.setVisible(false);
             label_tanggal.setText(Tanggal.getTanggal());
+            text_airterakhir.setEditable(true);
         } catch (SQLException ex) {
             Logger.getLogger(FormPemakaianAir.class.getName()).log(Level.SEVERE, null, ex);
         }
