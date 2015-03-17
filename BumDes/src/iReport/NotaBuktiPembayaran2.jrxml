@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="520" pageHeight="595" orientation="Landscape" columnWidth="480" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="78019496-bac3-476a-ae55-703731405bba">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="480" height="20" uuid="004af75d-8b07-4d1b-a9be-5a0cd396e9c7"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[STRUK PEMBAYRAN REKENING AIR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="20" width="480" height="20" uuid="003aca56-227e-4389-976d-214c36448a9c"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PENGELOLAAN AIR BERSIH BADAN USAHA MILIK DESA (BUMDES)]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="87" height="20" uuid="75903b3d-88ec-41d2-9b41-953fa4414696"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[No Pelanggan	:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="20" width="87" height="20" uuid="b16fa174-a8fc-4d2b-9cea-c7ebb8fc29f8"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Nama		:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="40" width="87" height="20" uuid="5b180a5c-3e25-4a34-a174-2a441e44589e"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Alamat		:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="292" y="0" width="87" height="20" uuid="f8d0ad99-8fbd-4bd9-845d-acbe30f629b2"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Meter kini	:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="292" y="20" width="87" height="20" uuid="3df6f63d-3c39-44bc-adac-1a17865fd4a5"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Pemakaian	:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="87" y="0" width="183" height="20" uuid="27e54162-a820-45ba-a47a-744b5031f957"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{field}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="87" y="20" width="183" height="20" uuid="7269bc38-f0ec-4c33-a112-55e17aa28cac"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{field}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="87" y="40" width="183" height="20" uuid="b8f17c64-857e-47fd-80ed-29eb52e4d2d2"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{field}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="379" y="0" width="89" height="20" uuid="2bb2b637-735a-4ec3-83e1-4c980c961708"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{field}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="379" y="20" width="89" height="20" uuid="6926de67-f6a0-46f6-a3e2-1767eef242fe"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{field}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="87" height="20" uuid="96397e2e-e258-4827-9c5d-76e38c748a3d"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Periode		:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="20" width="87" height="20" uuid="d55baa5e-d5ad-4502-b246-525de2825cc9"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Tagihan Air	:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="40" width="87" height="20" uuid="548c5d90-b0d7-4a19-9822-1b735b401fce"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Denda		:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="87" y="0" width="183" height="20" uuid="5a3a4e2e-1453-4967-9359-0547a8b71d90"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{field}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="109" y="20" width="161" height="20" uuid="63b13993-d44d-42e4-a9cb-671294e9b9b7"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{field}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="109" y="40" width="161" height="20" uuid="0910986e-bc6d-47f9-87bc-9a301f40bf4b"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{field}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="87" y="20" width="22" height="20" uuid="5e78d323-d48a-48ea-9c5b-292aa0bdf6d6"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Rp.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="87" y="40" width="22" height="20" uuid="19068802-7fe1-404d-8647-bfe5b1157290"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Rp.]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<columnFooter>
+		<band height="31" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="10" width="87" height="20" uuid="27e9c175-b2aa-428e-b83c-96d8c1dddf0e"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Total Tagihan	:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="87" y="10" width="22" height="20" uuid="6fffe0ec-52a9-4be7-b0a4-82f4f089c54c"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Rp.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="109" y="10" width="161" height="20" uuid="01a70b42-961b-499b-b060-61b5037dcf6c"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{field}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="270" height="20" uuid="55d26499-9cf8-4545-a93b-7fbc0ccf80ef"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[TERIMAKASIH ATAS PEMBAYARAN ANDA]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
