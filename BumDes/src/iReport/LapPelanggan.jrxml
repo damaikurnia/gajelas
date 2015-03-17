@@ -34,9 +34,9 @@
 		</band>
 	</title>
 	<detail>
-		<band height="100" splitType="Stretch">
+		<band height="71" splitType="Stretch">
 			<subreport>
-				<reportElement x="21" y="0" width="515" height="100" uuid="ec5b1380-5948-401a-b9f0-8e48a19f9770"/>
+				<reportElement x="21" y="0" width="515" height="70" uuid="ec5b1380-5948-401a-b9f0-8e48a19f9770"/>
 				<subreportParameter name="parameterSub">
 					<subreportParameterExpression><![CDATA[$F{dusun}]]></subreportParameterExpression>
 				</subreportParameter>
