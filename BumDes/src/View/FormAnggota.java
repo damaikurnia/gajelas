@@ -593,7 +593,7 @@ public class FormAnggota extends javax.swing.JFrame {
         Koneksi con = new Koneksi();
         kon = con.getConnection();
 
-        String reportSource = "./src/iReport/LapPelanggan.jasper";
+        String reportSource = "./src/Lap/LapPelanggan.jasper";
 
         Map<String, Object> params = new HashMap<String, Object>();
         try {
