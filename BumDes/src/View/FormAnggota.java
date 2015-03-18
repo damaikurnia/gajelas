@@ -9,15 +9,27 @@ import Custom.Tanggal;
 import Kelas.Anggota;
 import Kelas.Pemakaian;
 import Kelas.Profil;
+import Koneksi.Koneksi;
 import Kontrol.AnggotaKontrol;
 import Kontrol.PemakaianKontrol;
 import Kontrol.PengaturanKontrol;
 import TabelModel.AnggotaTM;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -99,6 +111,7 @@ public class FormAnggota extends javax.swing.JFrame {
         text_rt = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         text_kecamatan = new javax.swing.JTextField();
+        button_cetak = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -236,7 +249,7 @@ public class FormAnggota extends javax.swing.JFrame {
                 button_tambahActionPerformed(evt);
             }
         });
-        jPanel3.add(button_tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 320, -1, -1));
+        jPanel3.add(button_tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, -1, -1));
 
         button_ubah.setText("UBAH");
         button_ubah.addActionListener(new java.awt.event.ActionListener() {
@@ -244,7 +257,7 @@ public class FormAnggota extends javax.swing.JFrame {
                 button_ubahActionPerformed(evt);
             }
         });
-        jPanel3.add(button_ubah, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 320, -1, -1));
+        jPanel3.add(button_ubah, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 320, -1, -1));
 
         button_hapus.setText("HAPUS");
         button_hapus.addActionListener(new java.awt.event.ActionListener() {
@@ -252,7 +265,7 @@ public class FormAnggota extends javax.swing.JFrame {
                 button_hapusActionPerformed(evt);
             }
         });
-        jPanel3.add(button_hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 320, -1, -1));
+        jPanel3.add(button_hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 320, -1, -1));
 
         button_tabel.setText("DAFTAR SELURUH PELANGGAN");
         button_tabel.addActionListener(new java.awt.event.ActionListener() {
@@ -260,7 +273,7 @@ public class FormAnggota extends javax.swing.JFrame {
                 button_tabelActionPerformed(evt);
             }
         });
-        jPanel3.add(button_tabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 320, -1, -1));
+        jPanel3.add(button_tabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 320, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel8.setText("PEKERJAAN");
@@ -319,6 +332,14 @@ public class FormAnggota extends javax.swing.JFrame {
         jLabel17.setText("KEL / DESA");
         jPanel3.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 90, -1, 20));
         jPanel3.add(text_kecamatan, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 60, 190, -1));
+
+        button_cetak.setText("CETAK");
+        button_cetak.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_cetakActionPerformed(evt);
+            }
+        });
+        jPanel3.add(button_cetak, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 320, -1, -1));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 750, 360));
 
@@ -556,6 +577,34 @@ public class FormAnggota extends javax.swing.JFrame {
         a.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    private void button_cetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_cetakActionPerformed
+//        JasperPrint jasperPrint = null;
+//        try {
+////            JasperCompileManager.compileReportToFile("./src/iReport/LapPelanggan.jrxml");
+//            jasperPrint = JasperFillManager.fillReport("/LapNya/LapPelanggan.jasper", new HashMap(),
+//                    new Koneksi().getConnection());
+//            JasperViewer jasperViewer = new JasperViewer(jasperPrint);
+//            jasperViewer.setVisible(true);
+//        } catch (JRException ex) {
+//            ex.printStackTrace();
+//        }
+        
+        Connection kon = null;
+        Koneksi con = new Koneksi();
+        kon = con.getConnection();
+
+        String reportSource = "./src/iReport/LapPelanggan.jasper";
+
+        Map<String, Object> params = new HashMap<String, Object>();
+        try {
+            JasperPrint jasperPrint = JasperFillManager.fillReport(reportSource, params, kon);
+            JasperViewer.viewReport(jasperPrint, false);
+
+        } catch (JRException ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_button_cetakActionPerformed
+
     public void resetdefault() {
         text_idAnggota.setText("");
         text_nama.setText("");
@@ -674,6 +723,7 @@ public class FormAnggota extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton button_cetak;
     private javax.swing.JButton button_hapus;
     private javax.swing.JButton button_tabel;
     private javax.swing.JButton button_tambah;
