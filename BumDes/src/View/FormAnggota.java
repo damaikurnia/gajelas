@@ -9,10 +9,12 @@ import Custom.Tanggal;
 import Kelas.Anggota;
 import Kelas.Pemakaian;
 import Kelas.Profil;
+import Kelas.Transaksi;
 import Koneksi.Koneksi;
 import Kontrol.AnggotaKontrol;
 import Kontrol.PemakaianKontrol;
 import Kontrol.PengaturanKontrol;
+import Kontrol.TransaksiKontrol;
 import TabelModel.AnggotaTM;
 import java.io.IOException;
 import java.io.InputStream;
@@ -112,6 +114,9 @@ public class FormAnggota extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         text_kecamatan = new javax.swing.JTextField();
         button_cetak = new javax.swing.JButton();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        text_biaya = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -227,8 +232,8 @@ public class FormAnggota extends javax.swing.JFrame {
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel4.setText("NO KTP");
-        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 210, -1, 20));
+        jLabel4.setText("Biaya Pendaftaran Rp 50000");
+        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 240, 270, 20));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -249,7 +254,7 @@ public class FormAnggota extends javax.swing.JFrame {
                 button_tambahActionPerformed(evt);
             }
         });
-        jPanel3.add(button_tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, -1, -1));
+        jPanel3.add(button_tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 320, -1, -1));
 
         button_ubah.setText("UBAH");
         button_ubah.addActionListener(new java.awt.event.ActionListener() {
@@ -339,7 +344,16 @@ public class FormAnggota extends javax.swing.JFrame {
                 button_cetakActionPerformed(evt);
             }
         });
-        jPanel3.add(button_cetak, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 320, -1, -1));
+        jPanel3.add(button_cetak, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 320, -1, -1));
+
+        jLabel18.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel18.setText("TOTAL BIAYA");
+        jPanel3.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 270, -1, 20));
+
+        jLabel19.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel19.setText("NO KTP");
+        jPanel3.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 210, -1, 20));
+        jPanel3.add(text_biaya, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 270, 190, -1));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 750, 360));
 
@@ -502,6 +516,7 @@ public class FormAnggota extends javax.swing.JFrame {
             String tanggalBln = generateBulanTahun(Tanggal.getTanggal2());
             Pemakaian pem = new Pemakaian(generateKode(agt), agt, 0, 0, 0, tanggalBln.split("-")[0], tanggalBln.split("-")[1]);
             PemakaianKontrol.getKoneksi().insertPemakaian(pem);
+            insertKeTransaksi(agt);
             JOptionPane.showMessageDialog(null, "Anggota berhasil ditambahkan!");
             resetdefault();
         } catch (SQLException ex) {
@@ -679,6 +694,39 @@ public class FormAnggota extends javax.swing.JFrame {
             return "DESEMBER-" + tanggal.split("-")[0];
         }
     }
+    
+    public void insertKeTransaksi(Anggota agt){
+        try {
+            Transaksi trans = new Transaksi();
+            trans.setNoTrans(agt.getIdAnggota()+"-0");
+            trans.setIdAnggota(agt);
+            trans.setHargaSatuan(50000);
+            trans.setTotal(50000);
+            
+            TransaksiKontrol.getKoneksi().daftar_insertTransaksi(trans);
+            cetakKuitansi(trans);
+        } catch (SQLException ex) {
+            Logger.getLogger(FormAnggota.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void cetakKuitansi(Transaksi agt){
+        Connection kon = null;
+        Koneksi con = new Koneksi();
+        kon = con.getConnection();
+
+        String reportSource = "./src/Lap/NotaBuktiPendaftaran.jasper";
+
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("noTrans", agt.getNoTrans());
+        try {
+            JasperPrint jasperPrint = JasperFillManager.fillReport(reportSource, params, kon);
+            JasperViewer.viewReport(jasperPrint, false);
+
+        } catch (JRException ex) {
+            ex.printStackTrace();
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -738,6 +786,8 @@ public class FormAnggota extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -772,6 +822,7 @@ public class FormAnggota extends javax.swing.JFrame {
     private javax.swing.JLabel label_namaDesa;
     private javax.swing.JTable tabel_anggota;
     private javax.swing.JTextArea text_alamat;
+    private javax.swing.JTextField text_biaya;
     private javax.swing.JTextField text_desa;
     private javax.swing.JTextField text_dusun;
     private javax.swing.JTextField text_idAnggota;

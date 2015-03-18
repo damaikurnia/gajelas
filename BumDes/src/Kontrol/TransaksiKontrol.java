@@ -319,4 +319,25 @@ public class TransaksiKontrol {
         conn.close();
         return cek;
     }
+    
+    //=========================================================================
+    
+    public void daftar_insertTransaksi(Transaksi trans) throws SQLException {
+        PreparedStatement stmt = null;
+        conn.setAutoCommit(false);
+        String query = "INSERT INTO transaksi VALUES(?,?,?,?,?,?,?,?,?)";
+        stmt = conn.prepareStatement(query);
+        stmt.setString(1, trans.getNoTrans());
+        stmt.setString(2, "-");
+        stmt.setString(3, trans.getIdAnggota().getIdAnggota());
+        stmt.setString(4, Tanggal.getTanggal2());
+        stmt.setString(5, "DAFTAR");
+        stmt.setInt(6, 1);
+        stmt.setDouble(7, trans.getHargaSatuan());
+        stmt.setDouble(8, 0);
+        stmt.setDouble(9, trans.getTotal());
+        stmt.executeUpdate();
+        conn.commit();
+        conn.close();
+    }
 }
