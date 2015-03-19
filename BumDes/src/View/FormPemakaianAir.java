@@ -13,6 +13,7 @@ import Kontrol.AnggotaKontrol;
 import Kontrol.PemakaianKontrol;
 import Kontrol.PengaturanKontrol;
 import TabelModel.AnggotaTM;
+import com.sun.jmx.snmp.BerDecoder;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -40,7 +41,7 @@ public class FormPemakaianAir extends javax.swing.JFrame {
             dialog_cariP.setSize(673, 413);
             dialog_cariP.setLocationRelativeTo(null);
             dialog_cariP.setTitle("DATA ANGGOTA");
-            
+
             dialog_cariP2.setVisible(false);
             dialog_cariP2.setSize(673, 413);
             dialog_cariP2.setLocationRelativeTo(null);
@@ -80,18 +81,18 @@ public class FormPemakaianAir extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        text_DNoPelanggan = new javax.swing.JTextField();
+        text_DNama = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        text_DDusun = new javax.swing.JTextField();
         jLabel22 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        text_DNoTelp = new javax.swing.JTextField();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        text_DAlamat = new javax.swing.JTextArea();
         jLabel23 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        text_DRT = new javax.swing.JTextField();
         jLabel24 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        text_DRW = new javax.swing.JTextField();
         button_cari = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -240,29 +241,17 @@ public class FormPemakaianAir extends javax.swing.JFrame {
 
         jLabel20.setText("ALAMAT");
 
-        jTextField1.setText("jTextField1");
-
-        jTextField2.setText("jTextField1");
-
         jLabel21.setText("DUSUN");
-
-        jTextField4.setText("jTextField1");
 
         jLabel22.setText("TELP");
 
-        jTextField5.setText("jTextField1");
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane4.setViewportView(jTextArea1);
+        text_DAlamat.setColumns(20);
+        text_DAlamat.setRows(5);
+        jScrollPane4.setViewportView(text_DAlamat);
 
         jLabel23.setText("RT / RW");
 
-        jTextField3.setText("jTextField1");
-
         jLabel24.setText("/");
-
-        jTextField6.setText("jTextField1");
 
         button_cari.setText("...");
         button_cari.addActionListener(new java.awt.event.ActionListener() {
@@ -283,10 +272,10 @@ public class FormPemakaianAir extends javax.swing.JFrame {
                     .addComponent(jLabel20))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+                    .addComponent(text_DNama, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
                     .addComponent(jScrollPane4)
                     .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(text_DNoPelanggan, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(button_cari, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(76, 76, 76)
@@ -294,7 +283,7 @@ public class FormPemakaianAir extends javax.swing.JFrame {
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addComponent(jLabel22)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(text_DNoTelp, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel21)
@@ -302,12 +291,12 @@ public class FormPemakaianAir extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel8Layout.createSequentialGroup()
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(text_DRT, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel24)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(text_DRW, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(text_DDusun, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(186, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
@@ -316,27 +305,27 @@ public class FormPemakaianAir extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(text_DNoPelanggan, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(text_DRT, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(text_DRW, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(button_cari))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(text_DDusun, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(text_DNoTelp, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(text_DNama, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel8Layout.createSequentialGroup()
@@ -787,7 +776,6 @@ public class FormPemakaianAir extends javax.swing.JFrame {
                 label_noTrans.setText(pem.getNotransaksi());
                 dialog_cariP.setVisible(false);
                 label_noTrans.setVisible(true);
-                
 
             } else { //kalo blm --> tampilkan aja
 //                JOptionPane.showMessageDialog(null, "Ada nih");
@@ -810,7 +798,7 @@ public class FormPemakaianAir extends javax.swing.JFrame {
                 label_noTrans.setVisible(true);
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null,"Transaksi tidak ada");
+            JOptionPane.showMessageDialog(null, "Transaksi tidak ada");
         }
     }//GEN-LAST:event_tabel_pelangganMouseClicked
 
@@ -868,10 +856,27 @@ public class FormPemakaianAir extends javax.swing.JFrame {
     }//GEN-LAST:event_text_keyP2KeyReleased
 
     private void tabel_pelangganP2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabel_pelangganP2MouseClicked
-        // TODO add your handling code here:
+        try {
+            int row1 = tabel_pelangganP2.getSelectedRow();
+            //set ke dalam text fieldnya
+            text_DNoPelanggan.setText(tabel_pelanggan.getValueAt(row1, 0).toString());
+            text_DNama.setText(tabel_pelanggan.getValueAt(row1, 1).toString());
+            text_DAlamat.setText(tabel_pelanggan.getValueAt(row1, 2).toString());
+            text_DDusun.setText(tabel_pelanggan.getValueAt(row1, 3).toString());
+            text_DNoTelp.setText(tabel_pelanggan.getValueAt(row1, 4).toString());
+            Anggota agt = AnggotaKontrol.getKoneksi().selectAnggota(text_DNoPelanggan.getText());
+            text_DRT.setText(Integer.toString(agt.getRt()));
+            text_DRW.setText(Integer.toString(agt.getRw()));
+            
+            // tampilkan riwayat pelanggan
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(FormPemakaianAir.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_tabel_pelangganP2MouseClicked
 
     private void button_cariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_cariActionPerformed
+        update("");
         dialog_cariP2.setVisible(true);
     }//GEN-LAST:event_button_cariActionPerformed
 
@@ -880,6 +885,7 @@ public class FormPemakaianAir extends javax.swing.JFrame {
             List<Anggota> agt = AnggotaKontrol.getKoneksi().selectAnggota2(key);
             AnggotaTM model = new AnggotaTM(agt);
             tabel_pelanggan.setModel(model);
+            tabel_pelangganP2.setModel(model);// tambah ini buat tabel sama di P2
         } catch (SQLException ex) {
             Logger.getLogger(FormPemakaianAir.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -950,7 +956,7 @@ public class FormPemakaianAir extends javax.swing.JFrame {
             return "-";
         }
     }
-    
+
     public String generateBulanTahun(String tanggal) {
         if (tanggal.split("-")[1].equals("01")) {
             return "JANUARI-" + tanggal.split("-")[0];
@@ -1085,19 +1091,19 @@ public class FormPemakaianAir extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JLabel label_alamatNotelp;
     private javax.swing.JLabel label_namaDesa;
     private javax.swing.JLabel label_noTrans;
     private javax.swing.JLabel label_tanggal;
     private javax.swing.JTable tabel_pelanggan;
     private javax.swing.JTable tabel_pelangganP2;
+    private javax.swing.JTextArea text_DAlamat;
+    private javax.swing.JTextField text_DDusun;
+    private javax.swing.JTextField text_DNama;
+    private javax.swing.JTextField text_DNoPelanggan;
+    private javax.swing.JTextField text_DNoTelp;
+    private javax.swing.JTextField text_DRT;
+    private javax.swing.JTextField text_DRW;
     private javax.swing.JTextField text_airdibayar;
     private javax.swing.JTextField text_airlunas;
     private javax.swing.JTextField text_airterakhir;

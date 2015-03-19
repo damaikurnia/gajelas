@@ -10,24 +10,24 @@ package Kelas;
  * @author damaikurnia
  */
 public class Pemakaian {
-    String notransaksi;
-    Anggota idanggota;
-    double airlunas;
-    double airterakhir;
-    double airdibayar;
-    String bulan;
-    String tahun;
+    private String notransaksi;
+    private Anggota idanggota;
+    private double airlunas;
+    private double airterakhir;
+    private double airdibayar;
+    private String bulan;
+    private String jatuhtempo;
     
     public Pemakaian(){}
     
-    public Pemakaian(String no, Anggota agt, double airlun, double airter, double airbay, String bln, String thn) {
+    public Pemakaian(String no, Anggota agt, double airlun, double airter, double airbay, String bln, String jt) {
         this.notransaksi = no;
         this.idanggota = agt;
         this.airlunas = airlun;
         this.airterakhir = airter;
         this.airdibayar = airbay;
         this.bulan = bln;
-        this.tahun = thn;
+        this.jatuhtempo = jt;
     }
 
     /**
@@ -115,16 +115,17 @@ public class Pemakaian {
     }
 
     /**
-     * @return the tahun
+     * @return the jatuhtempo
      */
-    public String getTahun() {
-        return tahun;
+    public String getJatuhtempo() {
+        return jatuhtempo;
     }
 
     /**
-     * @param tahun the tahun to set
+     * @param jatuhtempo the jatuhtempo to set
      */
-    public void setTahun(String tahun) {
-        this.tahun = tahun;
+    public void setJatuhtempo(String jatuhtempo) {
+        this.jatuhtempo = jatuhtempo;
     }
+
 }

@@ -243,10 +243,10 @@
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jTextField2" alignment="0" pref="260" max="32767" attributes="0"/>
+                              <Component id="text_DNama" alignment="0" pref="260" max="32767" attributes="0"/>
                               <Component id="jScrollPane4" max="32767" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jTextField1" min="-2" pref="216" max="-2" attributes="0"/>
+                                  <Component id="text_DNoPelanggan" min="-2" pref="216" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="button_cari" min="-2" pref="35" max="-2" attributes="0"/>
                               </Group>
@@ -256,7 +256,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel22" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="jTextField5" min="-2" pref="260" max="-2" attributes="0"/>
+                                  <Component id="text_DNoTelp" min="-2" pref="260" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -266,13 +266,13 @@
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
-                                          <Component id="jTextField3" min="-2" pref="44" max="-2" attributes="0"/>
+                                          <Component id="text_DRT" min="-2" pref="44" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="jLabel24" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="jTextField6" min="-2" pref="44" max="-2" attributes="0"/>
+                                          <Component id="text_DRW" min="-2" pref="44" max="-2" attributes="0"/>
                                       </Group>
-                                      <Component id="jTextField4" min="-2" pref="260" max="-2" attributes="0"/>
+                                      <Component id="text_DDusun" min="-2" pref="260" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -286,11 +286,11 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel18" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                              <Component id="jTextField1" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                              <Component id="text_DNoPelanggan" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                               <Component id="jLabel23" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                              <Component id="jTextField3" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                              <Component id="text_DRT" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                               <Component id="jLabel24" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                              <Component id="jTextField6" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                              <Component id="text_DRW" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                               <Component id="button_cari" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -298,19 +298,19 @@
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="jLabel21" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                                      <Component id="jTextField4" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                                      <Component id="text_DDusun" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="jLabel22" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                                      <Component id="jTextField5" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                                      <Component id="text_DNoTelp" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="jLabel19" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                                      <Component id="jTextField2" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                                      <Component id="text_DNama" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -343,35 +343,23 @@
                     <Property name="text" type="java.lang.String" value="ALAMAT"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="jTextField1">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="jTextField1"/>
-                  </Properties>
+                <Component class="javax.swing.JTextField" name="text_DNoPelanggan">
                 </Component>
-                <Component class="javax.swing.JTextField" name="jTextField2">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="jTextField1"/>
-                  </Properties>
+                <Component class="javax.swing.JTextField" name="text_DNama">
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel21">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="DUSUN"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="jTextField4">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="jTextField1"/>
-                  </Properties>
+                <Component class="javax.swing.JTextField" name="text_DDusun">
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel22">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="TELP"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="jTextField5">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="jTextField1"/>
-                  </Properties>
+                <Component class="javax.swing.JTextField" name="text_DNoTelp">
                 </Component>
                 <Container class="javax.swing.JScrollPane" name="jScrollPane4">
                   <AuxValues>
@@ -380,7 +368,7 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JTextArea" name="jTextArea1">
+                    <Component class="javax.swing.JTextArea" name="text_DAlamat">
                       <Properties>
                         <Property name="columns" type="int" value="20"/>
                         <Property name="rows" type="int" value="5"/>
@@ -393,20 +381,14 @@
                     <Property name="text" type="java.lang.String" value="RT / RW"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="jTextField3">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="jTextField1"/>
-                  </Properties>
+                <Component class="javax.swing.JTextField" name="text_DRT">
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel24">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="/"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="jTextField6">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="jTextField1"/>
-                  </Properties>
+                <Component class="javax.swing.JTextField" name="text_DRW">
                 </Component>
                 <Component class="javax.swing.JButton" name="button_cari">
                   <Properties>
