@@ -16,8 +16,6 @@ import Kontrol.PemakaianKontrol;
 import Kontrol.PengaturanKontrol;
 import Kontrol.TransaksiKontrol;
 import TabelModel.AnggotaTM;
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -25,10 +23,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.view.JasperViewer;
@@ -497,30 +493,35 @@ public class FormAnggota extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void button_tambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_tambahActionPerformed
-        try {
-            Anggota agt = new Anggota();
-            agt.setIdAnggota(text_idAnggota.getText());
-            agt.setNamaAnggota(text_nama.getText());
-            agt.setPekerjaan(text_pekerjaan.getText());
-            agt.setAlamat(text_alamat.getText());
-            agt.setNoTelp(text_telp.getText());
-            agt.setNoKTP(text_ktp.getText());
-            agt.setRt(Integer.parseInt(text_rt.getText()));
-            agt.setRw(Integer.parseInt(text_rw.getText()));
-            agt.setDusun(text_dusun.getText());
-            agt.setDesa(text_desa.getText());
-            agt.setKota(text_kota.getText());
-            agt.setProvinsi(text_provinsi.getText());
+        if (Double.parseDouble(text_biaya.getText()) < 50000) {
+            JOptionPane.showMessageDialog(null, "Pembayaran Kurang");
+        } else {
+            try {
+                Anggota agt = new Anggota();
+                agt.setIdAnggota(text_idAnggota.getText());
+                agt.setNamaAnggota(text_nama.getText());
+                agt.setPekerjaan(text_pekerjaan.getText());
+                agt.setAlamat(text_alamat.getText());
+                agt.setNoTelp(text_telp.getText());
+                agt.setNoKTP(text_ktp.getText());
+                agt.setRt(Integer.parseInt(text_rt.getText()));
+                agt.setRw(Integer.parseInt(text_rw.getText()));
+                agt.setDusun(text_dusun.getText());
+                agt.setDesa(text_desa.getText());
+                agt.setKota(text_kota.getText());
+                agt.setProvinsi(text_provinsi.getText());
+                agt.setKecamatan(text_kecamatan.getText());
 
-            AnggotaKontrol.getKoneksi().insertAnggota(agt);
-            String tanggalBln = generateBulanTahun(Tanggal.getTanggal2());
-            Pemakaian pem = new Pemakaian(generateKode(agt), agt, 0, 0, 0, tanggalBln.split("-")[0], tanggalBln.split("-")[1]);
-            PemakaianKontrol.getKoneksi().insertPemakaian(pem);
-            insertKeTransaksi(agt);
-            JOptionPane.showMessageDialog(null, "Anggota berhasil ditambahkan!");
-            resetdefault();
-        } catch (SQLException ex) {
-            Logger.getLogger(FormAnggota.class.getName()).log(Level.SEVERE, null, ex);
+                AnggotaKontrol.getKoneksi().insertAnggota(agt);
+                String tanggalBln = generateBulanTahun(Tanggal.getTanggal2());
+                Pemakaian pem = new Pemakaian(generateKode(agt), agt, 0, 0, 0, tanggalBln.split("-")[0], tanggalBln.split("-")[1]);
+                PemakaianKontrol.getKoneksi().insertPemakaian(pem);
+                insertKeTransaksi(agt);
+                JOptionPane.showMessageDialog(null, "Anggota berhasil ditambahkan!");
+                resetdefault();
+            } catch (SQLException ex) {
+                Logger.getLogger(FormAnggota.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_button_tambahActionPerformed
 
@@ -603,7 +604,7 @@ public class FormAnggota extends javax.swing.JFrame {
 //        } catch (JRException ex) {
 //            ex.printStackTrace();
 //        }
-        
+
         Connection kon = null;
         Koneksi con = new Koneksi();
         kon = con.getConnection();
@@ -694,23 +695,23 @@ public class FormAnggota extends javax.swing.JFrame {
             return "DESEMBER-" + tanggal.split("-")[0];
         }
     }
-    
-    public void insertKeTransaksi(Anggota agt){
+
+    public void insertKeTransaksi(Anggota agt) {
         try {
             Transaksi trans = new Transaksi();
-            trans.setNoTrans(agt.getIdAnggota()+"-0");
+            trans.setNoTrans(agt.getIdAnggota() + "-0");
             trans.setIdAnggota(agt);
             trans.setHargaSatuan(50000);
             trans.setTotal(50000);
-            
+
             TransaksiKontrol.getKoneksi().daftar_insertTransaksi(trans);
             cetakKuitansi(trans);
         } catch (SQLException ex) {
             Logger.getLogger(FormAnggota.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void cetakKuitansi(Transaksi agt){
+
+    public void cetakKuitansi(Transaksi agt) {
         Connection kon = null;
         Koneksi con = new Koneksi();
         kon = con.getConnection();
