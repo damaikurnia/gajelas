@@ -170,14 +170,24 @@ public class AnggotaKontrol {
         conn.setAutoCommit(false);
         String query = "SELECT * from anggota where idanggota = ?";
         stmt = conn.prepareStatement(query);
+        stmt.setString(1, key);
         result = stmt.executeQuery();
         Anggota bar = null;
         while (result.next()) {
-            bar = new Anggota(result.getString(1), result.getString(2),
-                    result.getString(3), result.getString(4), result.getString(5),
-                    result.getString(6), result.getInt(7), result.getInt(8),
-                    result.getString(9), result.getString(10), result.getString(11),
-                    result.getString(12),result.getString(13));
+            bar = new Anggota();
+            bar.setIdAnggota(result.getString(1));
+            bar.setNamaAnggota(result.getString(2));
+            bar.setPekerjaan(result.getString(3));
+            bar.setAlamat(result.getString(4));
+            bar.setNoTelp(result.getString(5));
+            bar.setNoKTP(result.getString(6));
+            bar.setRt(result.getInt(7));
+            bar.setRw(result.getInt(8));
+            bar.setDusun(result.getString(9));
+            bar.setDesa(result.getString(10));
+            bar.setKota(result.getString(11));
+            bar.setProvinsi(result.getString(12));
+            bar.setKecamatan(result.getString(13));
         }
         conn.close();
         return bar;

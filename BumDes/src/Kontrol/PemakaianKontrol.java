@@ -53,11 +53,10 @@ public class PemakaianKontrol {
         PreparedStatement stmt = null;
         ResultSet result = null;
         conn.setAutoCommit(false);
-        String query = "SELECT * from pemakaian where idanggota = ? and bulan = ? and tahun = ?";
+        String query = "SELECT * FROM pemakaian WHERE idanggota = ? AND jatuhtempo = ?";
         stmt = conn.prepareStatement(query);
         stmt.setString(1, key.getIdanggota().getIdAnggota());
-        stmt.setString(2, key.getBulan());
-        stmt.setString(3, key.getTahun());
+        stmt.setString(2, key.getJatuhtempo());
         result = stmt.executeQuery();
         Pemakaian agt = new Pemakaian();
         while (result.next()) {
@@ -67,12 +66,12 @@ public class PemakaianKontrol {
             agt.setAirterakhir(result.getDouble(4));
             agt.setAirdibayar(result.getDouble(5));
             agt.setBulan(result.getString(6));
-            agt.setTahun(result.getString(7));
+            agt.setJatuhtempo(result.getString(7));
         }
         conn.close();
         return agt;
     }
-     
+    
 //    public List<Anggota> selectAnggota2(String key) throws SQLException {
 //        PreparedStatement stmt = null;
 //        ResultSet result = null;
@@ -124,7 +123,7 @@ public class PemakaianKontrol {
         stmt.setDouble(4, pem.getAirterakhir());
         stmt.setDouble(5, pem.getAirdibayar());
         stmt.setString(6, pem.getBulan());
-        stmt.setString(7, pem.getTahun());
+        stmt.setString(7, pem.getJatuhtempo());
 
         stmt.executeUpdate();
         conn.commit();
@@ -152,14 +151,37 @@ public class PemakaianKontrol {
 //        return agt;
 //    }
     
-    public List<Pemakaian> selectPemakaianBulanan(Pemakaian pem) throws SQLException {
+//    public List<Pemakaian> selectPemakaianBulanan(Pemakaian pem) throws SQLException {
+//        PreparedStatement stmt = null;
+//        ResultSet result = null;
+//        conn.setAutoCommit(false);
+//        String query = "SELECT * from pemakaian where bulan = ? and tahun = ?";
+//        stmt = conn.prepareStatement(query);
+//        stmt.setString(1, pem.getBulan());
+//        stmt.setString(2, pem.getTahun());
+//        result = stmt.executeQuery();
+//        List<Pemakaian> agt = new ArrayList<Pemakaian>();
+//        while (result.next()) {
+//            Pemakaian pemm = new Pemakaian();
+//            pemm.setNotransaksi(result.getString(1));
+//            pemm.setIdanggota(new Anggota(result.getString(2), "", "", "", "", "", 0, 0, "", "", "", "", ""));
+//            pemm.setAirlunas(result.getDouble(3));
+//            pemm.setAirterakhir(result.getDouble(4));
+//            pemm.setAirdibayar(result.getDouble(5));
+//            pemm.setBulan(result.getString(6));
+//            pemm.setTahun(result.getString(7));
+//        }
+//        conn.close();
+//        return agt;
+//    }
+    
+    public List<Pemakaian> selectHistoriPemakaian(String idanggota) throws SQLException {
         PreparedStatement stmt = null;
         ResultSet result = null;
         conn.setAutoCommit(false);
-        String query = "SELECT * from pemakaian where bulan = ? and tahun = ?";
+        String query = "SELECT * FROM pemakaian WHERE idanggota = ? ORDER BY jatuhtempo";
         stmt = conn.prepareStatement(query);
-        stmt.setString(1, pem.getBulan());
-        stmt.setString(2, pem.getTahun());
+        stmt.setString(1, idanggota);
         result = stmt.executeQuery();
         List<Pemakaian> agt = new ArrayList<Pemakaian>();
         while (result.next()) {
@@ -170,7 +192,8 @@ public class PemakaianKontrol {
             pemm.setAirterakhir(result.getDouble(4));
             pemm.setAirdibayar(result.getDouble(5));
             pemm.setBulan(result.getString(6));
-            pemm.setTahun(result.getString(7));
+            pemm.setJatuhtempo(result.getString(7));
+            agt.add(pemm);
         }
         conn.close();
         return agt;

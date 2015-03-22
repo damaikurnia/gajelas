@@ -13,7 +13,7 @@ import Kontrol.AnggotaKontrol;
 import Kontrol.PemakaianKontrol;
 import Kontrol.PengaturanKontrol;
 import TabelModel.AnggotaTM;
-import com.sun.jmx.snmp.BerDecoder;
+import TabelModel.HistoriTM;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -42,13 +42,20 @@ public class FormPemakaianAir extends javax.swing.JFrame {
             dialog_cariP.setLocationRelativeTo(null);
             dialog_cariP.setTitle("DATA ANGGOTA");
 
-            dialog_cariP2.setVisible(false);
-            dialog_cariP2.setSize(673, 413);
-            dialog_cariP2.setLocationRelativeTo(null);
-            dialog_cariP2.setTitle("DATA ANGGOTA");
+            dialog_cariPHistori.setVisible(false);
+            dialog_cariPHistori.setSize(673, 413);
+            dialog_cariPHistori.setLocationRelativeTo(null);
+            dialog_cariPHistori.setTitle("DATA ANGGOTA");
+
+            dialog_histori.setVisible(false);
+            dialog_histori.setSize(1020, 600);
+            dialog_histori.setLocationRelativeTo(null);
+            dialog_histori.setTitle("FORM HISTORI PELANGGAN");
 
             label_noTrans.setVisible(false);
             label_tanggal.setText(Tanggal.getTanggal());
+            String bulan = generateBulanTahun(Tanggal.getTanggal2());
+            label_bulan.setText(bulan.split("-")[0]);
             text_airterakhir.setEditable(true);
         } catch (SQLException ex) {
             Logger.getLogger(FormPemakaianAir.class.getName()).log(Level.SEVERE, null, ex);
@@ -95,9 +102,9 @@ public class FormPemakaianAir extends javax.swing.JFrame {
         text_DRW = new javax.swing.JTextField();
         button_cari = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabel_histori = new javax.swing.JTable();
         jLabel17 = new javax.swing.JLabel();
-        dialog_cariP2 = new javax.swing.JDialog();
+        dialog_cariPHistori = new javax.swing.JDialog();
         jPanel9 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         jLabel25 = new javax.swing.JLabel();
@@ -127,7 +134,7 @@ public class FormPemakaianAir extends javax.swing.JFrame {
         text_alamat = new javax.swing.JTextArea();
         button_simpan = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        button_list = new javax.swing.JButton();
+        button_histori = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -135,7 +142,7 @@ public class FormPemakaianAir extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         button_rubah = new javax.swing.JButton();
         label_tanggal = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        label_bulan = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -297,7 +304,7 @@ public class FormPemakaianAir extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(text_DRW, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(text_DDusun, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(186, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -335,7 +342,7 @@ public class FormPemakaianAir extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabel_histori.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -346,7 +353,7 @@ public class FormPemakaianAir extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane3.setViewportView(jTable1);
+        jScrollPane3.setViewportView(tabel_histori);
 
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel17.setText("RIWAYAT PEMAKAIAN AIR PELANGGAN");
@@ -390,7 +397,7 @@ public class FormPemakaianAir extends javax.swing.JFrame {
                 .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        dialog_cariP2.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        dialog_cariPHistori.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -400,7 +407,7 @@ public class FormPemakaianAir extends javax.swing.JFrame {
 
         jLabel25.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel25.setText("DATA PELANGGAN");
+        jLabel25.setText("DATA PELANGGANN");
         jPanel10.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 640, 40));
 
         jPanel9.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 70));
@@ -435,7 +442,7 @@ public class FormPemakaianAir extends javax.swing.JFrame {
 
         jPanel9.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 620, 220));
 
-        dialog_cariP2.getContentPane().add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 380));
+        dialog_cariPHistori.getContentPane().add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 380));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -483,7 +490,7 @@ public class FormPemakaianAir extends javax.swing.JFrame {
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         label_noTrans.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        label_noTrans.setText("FORM PEMAKAIAN AIR");
+        label_noTrans.setText("<<label_noTrans>>");
         jPanel3.add(label_noTrans, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 20, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -558,13 +565,13 @@ public class FormPemakaianAir extends javax.swing.JFrame {
         jButton4.setText("BATAL");
         jPanel3.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 240, 80, 40));
 
-        button_list.setText("HISTORI PELANGGAN");
-        button_list.addActionListener(new java.awt.event.ActionListener() {
+        button_histori.setText("HISTORI PELANGGAN");
+        button_histori.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button_listActionPerformed(evt);
+                button_historiActionPerformed(evt);
             }
         });
-        jPanel3.add(button_list, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 240, 180, 40));
+        jPanel3.add(button_histori, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 240, 180, 40));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel9.setText("m³");
@@ -590,12 +597,12 @@ public class FormPemakaianAir extends javax.swing.JFrame {
         jPanel3.add(button_rubah, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 240, 140, 40));
 
         label_tanggal.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        label_tanggal.setText("jLabel2");
+        label_tanggal.setText("<<label_tanggal>>");
         jPanel3.add(label_tanggal, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 20, 200, 20));
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel2.setText("<<bulan>>");
-        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 60, 140, 30));
+        label_bulan.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        label_bulan.setText("<<bulan>>");
+        jPanel3.add(label_bulan, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 60, 140, 30));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 750, 290));
 
@@ -749,56 +756,58 @@ public class FormPemakaianAir extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void tabel_pelangganMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabel_pelangganMouseClicked
+        int row1 = tabel_pelanggan.getSelectedRow();
+        //set identitas ke dalam textfield
+        text_noPelanggan.setText(tabel_pelanggan.getValueAt(row1, 0).toString());
+        text_nama.setText(tabel_pelanggan.getValueAt(row1, 1).toString());
+        text_alamat.setText(tabel_pelanggan.getValueAt(row1, 2).toString());
+
+        //cari pemakaian air bulan ini
+        String jatuhTempo = cariTanggalJatuhTempo();
+        Pemakaian pem = new Pemakaian();
+        pem.setIdanggota(new Anggota(text_noPelanggan.getText(), jatuhTempo, jatuhTempo, jatuhTempo, jatuhTempo, jatuhTempo, row1, row1, jatuhTempo, jatuhTempo, jatuhTempo, jatuhTempo, jatuhTempo));
+        pem.setJatuhtempo(jatuhTempo);
         try {
-            int row1 = tabel_pelanggan.getSelectedRow();
-            String tanggalBln = generateBulanTahun(Tanggal.getTanggal2());
-            Pemakaian pem = new Pemakaian(null, new Anggota(tabel_pelanggan.getValueAt(row1, 0).toString(),
-                    tanggalBln, tanggalBln, tanggalBln, tanggalBln, tanggalBln,
-                    row1, row1, tanggalBln, tanggalBln, tanggalBln, tanggalBln,
-                    tanggalBln), WIDTH, WIDTH, WIDTH, tanggalBln.split("-")[0],
-                    tanggalBln.split("-")[1]);
             pem = PemakaianKontrol.getKoneksi().selectPemakaian(pem);
-            if (pem.getAirlunas() == pem.getAirterakhir()) {//kalo lunas --> tampilkan, disable
-//                JOptionPane.showMessageDialog(null, "Lunas Cooooyyyy");
-                List<Anggota> agt = AnggotaKontrol.getKoneksi().selectAnggota2(tabel_pelanggan.getValueAt(row1, 1).toString());
+            label_noTrans.setText(pem.getNotransaksi());
+            if (pem.getNotransaksi() == null) {//kalo kosong, buat baru
+                JOptionPane.showMessageDialog(null, "Buat Baru");
 
-                String tanggal = Tanggal.getTanggal2();
-                pem = new Pemakaian(null, new Anggota(tabel_pelanggan.getValueAt(row1, 0).toString(),
-                        "", "", "", "", "", row1, row1, "", "", "", "", ""),
-                        row1, row1, row1, konversiBulan(tanggal), tanggal.split("-")[0]);
-                pem = PemakaianKontrol.getKoneksi().selectPemakaian(pem);
-                text_noPelanggan.setText(pem.getIdanggota().getIdAnggota());
-                text_nama.setText(agt.get(0).getNamaAnggota());
-                text_alamat.setText(agt.get(0).getAlamat());
-                text_airlunas.setText(Double.toString(pem.getAirlunas()).split("\\.")[0]);
-                text_airdibayar.setText(Double.toString(pem.getAirdibayar()).split("\\.")[0]);
-                text_airterakhir.setText(Double.toString(pem.getAirterakhir()).split("\\.")[0]);
-                label_noTrans.setText(pem.getNotransaksi());
-                dialog_cariP.setVisible(false);
-                label_noTrans.setVisible(true);
-
-            } else { //kalo blm --> tampilkan aja
-//                JOptionPane.showMessageDialog(null, "Ada nih");
-                List<Anggota> agt = AnggotaKontrol.getKoneksi().selectAnggota2(tabel_pelanggan.getValueAt(row1, 1).toString());
-
-                String tanggal = Tanggal.getTanggal2();
-                pem = new Pemakaian(null, new Anggota(tabel_pelanggan.getValueAt(row1, 0).toString(),
-                        "", "", "", "", "", row1, row1, "", "", "", "", ""),
-                        row1, row1, row1, konversiBulan(tanggal), tanggal.split("-")[0]);
+                //cari data bln sblmnya
+                String tanggalSblm = cariTanggalJatuhTempoSblm();
+                pem.setIdanggota(new Anggota(text_noPelanggan.getText(), jatuhTempo, jatuhTempo, jatuhTempo, jatuhTempo, jatuhTempo, row1, row1, jatuhTempo, jatuhTempo, jatuhTempo, jatuhTempo, jatuhTempo));
+                pem.setJatuhtempo(tanggalSblm);
                 pem = PemakaianKontrol.getKoneksi().selectPemakaian(pem);
 
-                text_noPelanggan.setText(pem.getIdanggota().getIdAnggota());
-                text_nama.setText(agt.get(0).getNamaAnggota());
-                text_alamat.setText(agt.get(0).getAlamat());
-                text_airlunas.setText(Double.toString(pem.getAirlunas()).split("\\.")[0]);
-                text_airdibayar.setText(Double.toString(pem.getAirdibayar()).split("\\.")[0]);
-                text_airterakhir.setText(Double.toString(pem.getAirterakhir()).split("\\.")[0]);
+                //kemudian insert baru
+                String kodebaru = generateKodeBaru(pem.getNotransaksi());
+                Pemakaian dataBaru = new Pemakaian(kodebaru,
+                        pem.getIdanggota(), pem.getAirterakhir(), 0, 0, label_bulan.getText(), jatuhTempo);
+                PemakaianKontrol.getKoneksi().insertPemakaian(dataBaru);
+
+                //tampilkan
+                text_airlunas.setText(Double.toString(dataBaru.getAirlunas()).split("\\.")[0]);
+                text_airterakhir.setText(Double.toString(dataBaru.getAirterakhir()).split("\\.")[0]);
+                text_airdibayar.setText(Double.toString(dataBaru.getAirdibayar()).split("\\.")[0]);
                 label_noTrans.setText(pem.getNotransaksi());
-                dialog_cariP.setVisible(false);
+                text_airterakhir.setEditable(true);
                 label_noTrans.setVisible(true);
+            } else {
+                text_airlunas.setText(Double.toString(pem.getAirlunas()).split("\\.")[0]);
+                text_airterakhir.setText(Double.toString(pem.getAirterakhir()).split("\\.")[0]);
+                text_airdibayar.setText(Double.toString(pem.getAirdibayar()).split("\\.")[0]);
+                if (text_airlunas.getText().equals(text_airterakhir.getText()) && !text_airlunas.getText().equals("0")) {
+                    JOptionPane.showMessageDialog(null, "Lunas nih");
+                    text_airterakhir.setEditable(false);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Udah ada, tampilkan aja");
+                    label_noTrans.setVisible(true);
+                    text_airterakhir.setEditable(true);
+                }
             }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Transaksi tidak ada");
+            dialog_cariP.setVisible(false);
+        } catch (SQLException ex) {
+            Logger.getLogger(FormPemakaianAir.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_tabel_pelangganMouseClicked
 
@@ -845,11 +854,9 @@ public class FormPemakaianAir extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_text_noPelangganKeyReleased
 
-    private void button_listActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_listActionPerformed
-//        String tanggal = Tanggal.getTanggal2();
-//        Pemakaian pem = new Pemakaian("", null, 0, 0, 0, tanggal.split("-")[1], tanggal.split("-")[0]);
-//        List<Pemakaian> p = PemakaianKontrol.getKoneksi().selectPemakaianBulanan(pem);
-    }//GEN-LAST:event_button_listActionPerformed
+    private void button_historiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_historiActionPerformed
+        dialog_histori.setVisible(true);
+    }//GEN-LAST:event_button_historiActionPerformed
 
     private void text_keyP2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_text_keyP2KeyReleased
         // TODO add your handling code here:
@@ -859,17 +866,20 @@ public class FormPemakaianAir extends javax.swing.JFrame {
         try {
             int row1 = tabel_pelangganP2.getSelectedRow();
             //set ke dalam text fieldnya
-            text_DNoPelanggan.setText(tabel_pelanggan.getValueAt(row1, 0).toString());
-            text_DNama.setText(tabel_pelanggan.getValueAt(row1, 1).toString());
-            text_DAlamat.setText(tabel_pelanggan.getValueAt(row1, 2).toString());
-            text_DDusun.setText(tabel_pelanggan.getValueAt(row1, 3).toString());
-            text_DNoTelp.setText(tabel_pelanggan.getValueAt(row1, 4).toString());
+            text_DNoPelanggan.setText(tabel_pelangganP2.getValueAt(row1, 0).toString());
+            text_DNama.setText(tabel_pelangganP2.getValueAt(row1, 1).toString());
+            text_DAlamat.setText(tabel_pelangganP2.getValueAt(row1, 2).toString());
+            text_DDusun.setText(tabel_pelangganP2.getValueAt(row1, 3).toString());
+            text_DNoTelp.setText(tabel_pelangganP2.getValueAt(row1, 4).toString());
             Anggota agt = AnggotaKontrol.getKoneksi().selectAnggota(text_DNoPelanggan.getText());
             text_DRT.setText(Integer.toString(agt.getRt()));
             text_DRW.setText(Integer.toString(agt.getRw()));
-            
+
             // tampilkan riwayat pelanggan
-            
+            List<Pemakaian> pm = PemakaianKontrol.getKoneksi().selectHistoriPemakaian("105314064");
+            HistoriTM model = new HistoriTM(pm);
+            tabel_histori.setModel(model);
+            dialog_cariPHistori.setVisible(false);
         } catch (SQLException ex) {
             Logger.getLogger(FormPemakaianAir.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -877,7 +887,7 @@ public class FormPemakaianAir extends javax.swing.JFrame {
 
     private void button_cariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_cariActionPerformed
         update("");
-        dialog_cariP2.setVisible(true);
+        dialog_cariPHistori.setVisible(true);
     }//GEN-LAST:event_button_cariActionPerformed
 
     public void update(String key) {
@@ -985,6 +995,52 @@ public class FormPemakaianAir extends javax.swing.JFrame {
         }
     }
 
+    public String cariTanggalJatuhTempo() {
+        String tanggal = Tanggal.getTanggal2();//ambil tanggal sekarang
+        String jatuhTempo = "";
+        if (tanggal.split("-")[1].equals("12")) {//kalo bulan desember, jatuh tempo ke bln 1 thn selanjutnya
+            String tgl = "10";
+            String bulan = "01";
+            int tahun = Integer.parseInt(tanggal.split("-")[0]);
+            tahun = tahun + 1;
+            jatuhTempo = Integer.toString(tahun) + "-" + bulan + "-" + tgl;
+        } else {
+            String tgl = "10";
+            int bulan = Integer.parseInt(tanggal.split("-")[1]);
+            String bln = "";
+            if (bulan >= 9) {
+                bulan = bulan + 1;
+                bln = Integer.toString(bulan);
+            } else {
+                bulan = bulan + 1;
+                bln = "0" + Integer.toString(bulan);
+            }
+            String tahun = tanggal.split("-")[0];
+            jatuhTempo = tahun + "-" + bln + "-" + tgl;
+        }
+        return jatuhTempo;
+    }
+
+    public String cariTanggalJatuhTempoSblm() {
+        String tanggal = Tanggal.getTanggal2();
+        String jatuhTempo = "";
+        int bulan = Integer.parseInt(tanggal.split("-")[1]);
+
+        if (bulan <= 9) {
+            jatuhTempo = tanggal.split("-")[0] + "-0" + Integer.toString(bulan) + "-10";
+        } else {
+            jatuhTempo = tanggal.split("-")[0] + "-" + Integer.toString(bulan) + "-10";
+        }
+        return jatuhTempo;
+    }
+
+    public String generateKodeBaru(String kode) {
+        int noTa = Integer.parseInt(kode.split("-")[1]);
+        noTa = noTa + 1;
+//        System.out.println(kode.split("-")[0] + "-" + noTa);
+        return kode.split("-")[0] + "-" + noTa;
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -1025,12 +1081,12 @@ public class FormPemakaianAir extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton button_cari;
-    private javax.swing.JButton button_list;
+    private javax.swing.JButton button_histori;
     private javax.swing.JButton button_pelanggan;
     private javax.swing.JButton button_rubah;
     private javax.swing.JButton button_simpan;
     private javax.swing.JDialog dialog_cariP;
-    private javax.swing.JDialog dialog_cariP2;
+    private javax.swing.JDialog dialog_cariPHistori;
     private javax.swing.JDialog dialog_histori;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
@@ -1044,7 +1100,6 @@ public class FormPemakaianAir extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
@@ -1090,11 +1145,12 @@ public class FormPemakaianAir extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel label_alamatNotelp;
+    private javax.swing.JLabel label_bulan;
     private javax.swing.JLabel label_namaDesa;
     private javax.swing.JLabel label_noTrans;
     private javax.swing.JLabel label_tanggal;
+    private javax.swing.JTable tabel_histori;
     private javax.swing.JTable tabel_pelanggan;
     private javax.swing.JTable tabel_pelangganP2;
     private javax.swing.JTextArea text_DAlamat;

@@ -720,6 +720,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
             pembayaran = pembayaran - Double.parseDouble(text_total.getText());
             JOptionPane.showMessageDialog(null, "Kembalian Konsumen adalah : " + Double.toString(pembayaran).split("\\.")[0]);
             try {
+                //masukkan data pembayaran lunas ke dalam tabel transaksi
                 Transaksi trans = new Transaksi();
                 trans.setNoTrans(label_noTrans.getText());
                 Anggota idAnggota = new Anggota(text_noPelanggan.getText(), "", "", "", "", "", 0, 0, "", "", "", "", "");
@@ -730,16 +731,18 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
                 trans.setTotal(Double.parseDouble(text_total.getText()));
                 TransaksiKontrol.getKoneksi().jual_insertTransaksi(trans);
                 JOptionPane.showMessageDialog(null, "Transaksi berhasil!");
-
+                
+                //rubah pemakaian air bulan tsb. set air yg barus dibayar dengan 0
                 Pemakaian pem = new Pemakaian(trans.getNoTrans(), idAnggota,
                         Double.parseDouble(text_airbln.getText()), Double.parseDouble(text_airbln.getText()),
                         0, null, null);
                 PemakaianKontrol.getKoneksi().updatePemakaian(pem);//update pemakaian transaksi
-
-                String tanggalBln = generateBulanTahun(Tanggal.getTanggal2());
-                pem = new Pemakaian(generateKodeBaru(trans.getNoTrans()), idAnggota,
-                        Double.parseDouble(text_airbln.getText()), 0, 0, tanggalBln.split("-")[0], tanggalBln.split("-")[1]);
-                PemakaianKontrol.getKoneksi().insertPemakaian(pem);
+                
+//                //buat transaksi untuk bulan berikutnya
+//                String tanggalBln = generateBulanTahun(Tanggal.getTanggal2());
+//                pem = new Pemakaian(generateKodeBaru(trans.getNoTrans()), idAnggota,
+//                        Double.parseDouble(text_airbln.getText()), 0, 0, tanggalBln.split("-")[0], tanggalBln.split("-")[1]);
+//                PemakaianKontrol.getKoneksi().insertPemakaian(pem);
                 update();
                 defaultnya();
             } catch (SQLException ex) {
@@ -928,11 +931,10 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
                 String noPelanggan = text_noPelanggan.getText();
                 String namaPelanggan = text_nama.getText();
                 String bulan = combo_bulan.getSelectedItem().toString();
-                String tahun = Tanggal.getTanggal2().split("-")[0];
 
                 Pemakaian p = new Pemakaian("", new Anggota(noPelanggan,
                         namaPelanggan, "", "", "", "", 0, 0, "", "", "", "", ""), 0, 0, 0,
-                        bulan, tahun);
+                        bulan, "");
                 Pemakaian pem = PemakaianKontrol.getKoneksi().selectPemakaian(p);
                 text_noPelanggan.setText(pem.getIdanggota().getIdAnggota());
                 text_airawal.setText(Double.toString(pem.getAirlunas()).split("\\.")[0]);
