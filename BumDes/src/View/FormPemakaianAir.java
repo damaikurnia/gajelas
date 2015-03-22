@@ -876,7 +876,7 @@ public class FormPemakaianAir extends javax.swing.JFrame {
             text_DRW.setText(Integer.toString(agt.getRw()));
 
             // tampilkan riwayat pelanggan
-            List<Pemakaian> pm = PemakaianKontrol.getKoneksi().selectHistoriPemakaian("105314064");
+            List<Pemakaian> pm = PemakaianKontrol.getKoneksi().selectHistoriPemakaian(text_DNoPelanggan.getText());
             HistoriTM model = new HistoriTM(pm);
             tabel_histori.setModel(model);
             dialog_cariPHistori.setVisible(false);
