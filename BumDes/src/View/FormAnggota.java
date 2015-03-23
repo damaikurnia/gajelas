@@ -113,6 +113,7 @@ public class FormAnggota extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         text_biaya = new javax.swing.JTextField();
+        button_batal = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -250,7 +251,7 @@ public class FormAnggota extends javax.swing.JFrame {
                 button_tambahActionPerformed(evt);
             }
         });
-        jPanel3.add(button_tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 320, -1, -1));
+        jPanel3.add(button_tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, -1, -1));
 
         button_ubah.setText("UBAH");
         button_ubah.addActionListener(new java.awt.event.ActionListener() {
@@ -258,7 +259,7 @@ public class FormAnggota extends javax.swing.JFrame {
                 button_ubahActionPerformed(evt);
             }
         });
-        jPanel3.add(button_ubah, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 320, -1, -1));
+        jPanel3.add(button_ubah, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 320, -1, -1));
 
         button_hapus.setText("HAPUS");
         button_hapus.addActionListener(new java.awt.event.ActionListener() {
@@ -266,7 +267,7 @@ public class FormAnggota extends javax.swing.JFrame {
                 button_hapusActionPerformed(evt);
             }
         });
-        jPanel3.add(button_hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 320, -1, -1));
+        jPanel3.add(button_hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 320, -1, -1));
 
         button_tabel.setText("DAFTAR SELURUH PELANGGAN");
         button_tabel.addActionListener(new java.awt.event.ActionListener() {
@@ -274,7 +275,7 @@ public class FormAnggota extends javax.swing.JFrame {
                 button_tabelActionPerformed(evt);
             }
         });
-        jPanel3.add(button_tabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 320, -1, -1));
+        jPanel3.add(button_tabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 320, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel8.setText("PEKERJAAN");
@@ -340,7 +341,7 @@ public class FormAnggota extends javax.swing.JFrame {
                 button_cetakActionPerformed(evt);
             }
         });
-        jPanel3.add(button_cetak, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 320, -1, -1));
+        jPanel3.add(button_cetak, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 320, -1, -1));
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel18.setText("TOTAL BIAYA");
@@ -350,6 +351,14 @@ public class FormAnggota extends javax.swing.JFrame {
         jLabel19.setText("NO KTP");
         jPanel3.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 210, -1, 20));
         jPanel3.add(text_biaya, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 270, 190, -1));
+
+        button_batal.setText("BATAL");
+        button_batal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_batalActionPerformed(evt);
+            }
+        });
+        jPanel3.add(button_batal, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 320, -1, -1));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 750, 360));
 
@@ -540,6 +549,7 @@ public class FormAnggota extends javax.swing.JFrame {
             agt.setDesa(text_desa.getText());
             agt.setKota(text_kota.getText());
             agt.setProvinsi(text_provinsi.getText());
+            agt.setKecamatan(text_kecamatan.getText());
 
             AnggotaKontrol.getKoneksi().updateAnggota(agt);
             JOptionPane.showMessageDialog(null, "Anggota berhasil dirubah!");
@@ -582,6 +592,7 @@ public class FormAnggota extends javax.swing.JFrame {
             text_kecamatan.setText(agt.getKecamatan());
 
             dialog_anggota.setVisible(false);
+            text_biaya.setEditable(false);
         } catch (SQLException ex) {
             Logger.getLogger(FormAnggota.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -605,9 +616,7 @@ public class FormAnggota extends javax.swing.JFrame {
 //            ex.printStackTrace();
 //        }
 
-        Connection kon = null;
-        Koneksi con = new Koneksi();
-        kon = con.getConnection();
+        Connection kon = new Koneksi().getConnection();
 
         String reportSource = "./src/Lap/LapPelanggan.jasper";
 
@@ -620,6 +629,10 @@ public class FormAnggota extends javax.swing.JFrame {
             ex.printStackTrace();
         }
     }//GEN-LAST:event_button_cetakActionPerformed
+
+    private void button_batalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_batalActionPerformed
+        resetdefault();
+    }//GEN-LAST:event_button_batalActionPerformed
 
     public void resetdefault() {
         text_idAnggota.setText("");
@@ -639,6 +652,8 @@ public class FormAnggota extends javax.swing.JFrame {
         button_tambah.setEnabled(true);
         button_ubah.setEnabled(false);
         button_hapus.setEnabled(false);
+        text_biaya.setEditable(true);
+        text_biaya.setText("");
     }
 
     public void custom() {
@@ -799,6 +814,7 @@ public class FormAnggota extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton button_batal;
     private javax.swing.JButton button_cetak;
     private javax.swing.JButton button_hapus;
     private javax.swing.JButton button_tabel;

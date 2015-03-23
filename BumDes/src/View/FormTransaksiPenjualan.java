@@ -13,6 +13,7 @@ import Custom.Tanggal;
 import Kelas.Anggota;
 import Kelas.Pemakaian;
 import Kelas.Transaksi;
+import Koneksi.Koneksi;
 import Kontrol.AnggotaKontrol;
 import Kontrol.PemakaianKontrol;
 import Kontrol.PengaturanKontrol;
@@ -22,13 +23,20 @@ import TabelModel.HistoriTM;
 import TabelModel.TransaksiJualAllTM;
 import TabelModel.TransaksiJualTM;
 import java.awt.Color;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableCellRenderer;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -59,6 +67,11 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
             dialog_cariP.setLocationRelativeTo(null);
             dialog_cariP.setTitle("DATA ANGGOTA");
             label_noTrans.setVisible(false);
+            
+            dialog_blmBayar.setVisible(false);
+            dialog_blmBayar.setSize(673, 413);
+            dialog_blmBayar.setLocationRelativeTo(null);
+            dialog_blmBayar.setTitle("DATA ANGGOTA BLM BAYAR");
             update();
 
         } catch (SQLException ex) {
@@ -104,6 +117,14 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         text_key = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         tabel_pelanggan = new javax.swing.JTable();
+        dialog_blmBayar = new javax.swing.JDialog();
+        jPanel11 = new javax.swing.JPanel();
+        jPanel12 = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        text_key1 = new javax.swing.JTextField();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tabel_blmBayar = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -144,6 +165,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tabel_histori = new javax.swing.JTable();
+        button_blmBayar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -354,6 +376,53 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
 
         dialog_cariP.getContentPane().add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 380));
 
+        dialog_blmBayar.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel15.setText("DATA PELANGGAN BLM BAYAR");
+        jPanel12.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 640, 40));
+
+        jPanel11.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 70));
+
+        jLabel24.setText("KEYWORD");
+        jPanel11.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 100, 20));
+
+        text_key1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                text_key1KeyReleased(evt);
+            }
+        });
+        jPanel11.add(text_key1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, 470, -1));
+
+        tabel_blmBayar.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tabel_blmBayar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabel_blmBayarMouseClicked(evt);
+            }
+        });
+        jScrollPane5.setViewportView(tabel_blmBayar);
+
+        jPanel11.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 620, 220));
+
+        dialog_blmBayar.getContentPane().add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 380));
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -554,12 +623,20 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tabel_histori.setSelectionForeground(new java.awt.Color(0, 0, 0));
         tabel_histori.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tabel_historiMouseClicked(evt);
             }
         });
         jScrollPane4.setViewportView(tabel_histori);
+
+        button_blmBayar.setText("BLM BAYAR");
+        button_blmBayar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_blmBayarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -629,13 +706,15 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(button_tambah)
-                .addGap(37, 37, 37)
+                .addGap(18, 18, 18)
                 .addComponent(button_ubah)
-                .addGap(39, 39, 39)
+                .addGap(18, 18, 18)
                 .addComponent(button_hapus)
-                .addGap(25, 25, 25)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(button_blmBayar, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(button_tabel)
-                .addGap(45, 45, 45))
+                .addGap(27, 27, 27))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane4)
@@ -711,12 +790,12 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
                             .addComponent(text_pembayaran, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(label_status, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(button_hapus)
+                    .addComponent(button_ubah)
                     .addComponent(button_tambah)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(button_hapus)
-                        .addComponent(button_ubah))
-                    .addComponent(button_tabel))
+                    .addComponent(button_tabel)
+                    .addComponent(button_blmBayar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -906,6 +985,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
                 trans.setTotal(Double.parseDouble(text_total.getText()));
                 TransaksiKontrol.getKoneksi().jual_insertTransaksi(trans);
                 JOptionPane.showMessageDialog(null, "Transaksi berhasil!");
+                cetakNota();
 
                 //rubah pemakaian air bulan tsb. set air yg barus dibayar dengan 0
                 Pemakaian pem = new Pemakaian(trans.getNoTrans(), idAnggota,
@@ -1187,6 +1267,32 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         label_noTrans.setVisible(true);
     }//GEN-LAST:event_tabel_historiMouseClicked
 
+    private void text_key1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_text_key1KeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_text_key1KeyReleased
+
+    private void tabel_blmBayarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabel_blmBayarMouseClicked
+        try {
+            int row1 = tabel_blmBayar.getSelectedRow();
+            List<Anggota> agt = AnggotaKontrol.getKoneksi().selectAnggota2(tabel_blmBayar.getValueAt(row1, 1).toString());
+            text_noPelanggan.setText(agt.get(0).getIdAnggota());
+            text_nama.setText(agt.get(0).getNamaAnggota());
+
+            List<Pemakaian> pm = PemakaianKontrol.getKoneksi().selectHistoriPemakaian(text_noPelanggan.getText());
+            HistoriTM model = new HistoriTM(pm);
+            tabel_histori.setModel(model);
+            tabel_histori.setDefaultRenderer(Object.class, new RenderWarnaWarni(Color.white, Color.yellow, Color.green));
+            dialog_blmBayar.setVisible(false);
+        } catch (SQLException ex) {
+            Logger.getLogger(FormTransaksiPenjualan.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_tabel_blmBayarMouseClicked
+
+    private void button_blmBayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_blmBayarActionPerformed
+        updateBlmBayar();
+        dialog_blmBayar.setVisible(true);
+    }//GEN-LAST:event_button_blmBayarActionPerformed
+
     public void update() {
         try {
             List<Transaksi> agt = TransaksiKontrol.getKoneksi().jual_selectTransaksi();
@@ -1382,6 +1488,31 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
             return 12;
         }
     }
+    
+    public void cetakNota(){
+        Connection kon = new Koneksi().getConnection();
+        String reportSource = "./src/Lap/NotaBuktiPembayaran.jasper";
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("noTrans", label_noTrans.getText());
+        params.put("tahun", Tanggal.getTanggal2().split("-")[0]);
+        try {
+            JasperPrint jasperPrint = JasperFillManager.fillReport(reportSource, params, kon);
+            JasperViewer.viewReport(jasperPrint, false);
+        } catch (JRException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    public void updateBlmBayar(){
+        try {
+            List<Pemakaian> agt = PemakaianKontrol.getKoneksi().selectBlmBayar();
+            HistoriTM model = new HistoriTM(agt);
+            tabel_blmBayar.setModel(model);
+            tabel_blmBayar.setDefaultRenderer(Object.class, new RenderWarnaWarni(Color.white, Color.yellow, Color.green));
+        } catch (SQLException ex) {
+            Logger.getLogger(FormPemakaianAir.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
 //    public String generateJatuhTempo(String bulan) {
 //        String tanggal = Tanggal.getTanggal2();
@@ -1468,6 +1599,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton button_blmBayar;
     private javax.swing.JButton button_hapus;
     private javax.swing.JButton button_pelanggan;
     private javax.swing.JButton button_tabel;
@@ -1477,6 +1609,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
     private javax.swing.JComboBox cb_tahun;
     private javax.swing.JComboBox cb_tanggal;
     private javax.swing.JComboBox combo_bulan;
+    private javax.swing.JDialog dialog_blmBayar;
     private javax.swing.JDialog dialog_cariP;
     private javax.swing.JDialog dialog_pembelian;
     private javax.swing.JLabel jLabel1;
@@ -1485,6 +1618,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
@@ -1494,6 +1628,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1519,6 +1654,8 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -1531,12 +1668,14 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JLabel label_alamatNotelp;
     private javax.swing.JLabel label_jmlBeli;
     private javax.swing.JLabel label_namaDesa;
     private javax.swing.JLabel label_noTrans;
     private javax.swing.JLabel label_status;
     private javax.swing.JLabel label_tanggal;
+    private javax.swing.JTable tabel_blmBayar;
     private javax.swing.JTable tabel_histori;
     private javax.swing.JTable tabel_pelanggan;
     private javax.swing.JTable tabel_penjualan;
@@ -1547,6 +1686,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
     private javax.swing.JTextField text_denda;
     private javax.swing.JTextField text_hargaSatuan;
     private javax.swing.JTextField text_key;
+    private javax.swing.JTextField text_key1;
     private javax.swing.JTextField text_nama;
     private javax.swing.JTextField text_noPelanggan;
     private javax.swing.JTextField text_pembayaran;

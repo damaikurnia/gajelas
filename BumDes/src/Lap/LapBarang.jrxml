@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3a403dad-e5d8-4538-905d-af50f76df5a8">
 	<property name="ireport.zoom" value="2.0"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="226"/>
 	<property name="ireport.y" value="0"/>
 	<queryString>
 		<![CDATA[select *,sysdate() from barang]]>
@@ -175,10 +175,10 @@
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{totalaset}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[Double.toString($F{totalaset}).split("\\.")[0]]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -207,10 +207,10 @@
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{totalaset}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{totalAset}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="70" y="0" width="253" height="20" uuid="233f9a08-219e-4592-8477-76e175ab81f4"/>

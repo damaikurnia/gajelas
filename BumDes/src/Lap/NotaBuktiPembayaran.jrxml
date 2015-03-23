@@ -4,8 +4,9 @@
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="noTrans" class="java.lang.String"/>
+	<parameter name="tahun" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[SELECT a.idanggota, a.namaanggota, a.alamat, p.airterakhir, t.jumlah, p.bulan, p.tahun, 
+		<![CDATA[SELECT a.idanggota, a.namaanggota, a.alamat, p.airterakhir, t.jumlah, p.bulan,  
 t.total, t.denda FROM pemakaian p, transaksi t, anggota a 
 WHERE a.idanggota = t.idanggota AND t.idanggota = p.idanggota 
 AND p.notransaksi = t.notransaksi AND t.notransaksi = $P{noTrans};]]>
@@ -26,9 +27,6 @@ AND p.notransaksi = t.notransaksi AND t.notransaksi = $P{noTrans};]]>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="bulan" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="tahun" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="total" class="java.lang.Integer">
@@ -128,7 +126,7 @@ AND p.notransaksi = t.notransaksi AND t.notransaksi = $P{noTrans};]]>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{airterakhir}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[Double.toString($F{airterakhir}).split("\\.")[0]]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="379" y="20" width="89" height="20" uuid="6926de67-f6a0-46f6-a3e2-1767eef242fe"/>
@@ -202,7 +200,7 @@ AND p.notransaksi = t.notransaksi AND t.notransaksi = $P{noTrans};]]>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{tahun}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{tahun}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="156" y="0" width="17" height="20" uuid="c8fa7a38-6958-40db-bab7-232731125dc9"/>

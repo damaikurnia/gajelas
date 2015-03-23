@@ -563,6 +563,11 @@ public class FormPemakaianAir extends javax.swing.JFrame {
         jPanel3.add(button_simpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 240, 160, 40));
 
         jButton4.setText("BATAL");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
         jPanel3.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 240, 80, 40));
 
         button_histori.setText("HISTORI PELANGGAN");
@@ -594,6 +599,11 @@ public class FormPemakaianAir extends javax.swing.JFrame {
         jPanel3.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
         button_rubah.setText("RUBAH");
+        button_rubah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_rubahActionPerformed(evt);
+            }
+        });
         jPanel3.add(button_rubah, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 240, 140, 40));
 
         label_tanggal.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -789,7 +799,7 @@ public class FormPemakaianAir extends javax.swing.JFrame {
                 text_airlunas.setText(Double.toString(dataBaru.getAirlunas()).split("\\.")[0]);
                 text_airterakhir.setText(Double.toString(dataBaru.getAirterakhir()).split("\\.")[0]);
                 text_airdibayar.setText(Double.toString(dataBaru.getAirdibayar()).split("\\.")[0]);
-                label_noTrans.setText(pem.getNotransaksi());
+                label_noTrans.setText(dataBaru.getNotransaksi());
                 text_airterakhir.setEditable(true);
                 label_noTrans.setVisible(true);
             } else {
@@ -889,6 +899,28 @@ public class FormPemakaianAir extends javax.swing.JFrame {
         update("");
         dialog_cariPHistori.setVisible(true);
     }//GEN-LAST:event_button_cariActionPerformed
+
+    private void button_rubahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_rubahActionPerformed
+        if (text_airlunas.getText().equals(text_airterakhir.getText())) {
+            JOptionPane.showMessageDialog(null, "Anda tidak dapat merubah data. Transaksi telah lunas");
+        } else {
+            try {
+                Pemakaian pem = new Pemakaian(label_noTrans.getText(), null,
+                        Double.parseDouble(text_airlunas.getText()),
+                        Double.parseDouble(text_airterakhir.getText()),
+                        Double.parseDouble(text_airdibayar.getText()), null, null);
+                PemakaianKontrol.getKoneksi().updatePemakaian(pem);
+                JOptionPane.showMessageDialog(null, "Transaksi berhasil dirubah");
+                resetDefault();
+            } catch (SQLException ex) {
+                Logger.getLogger(FormPemakaianAir.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_button_rubahActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        resetDefault();
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     public void update(String key) {
         try {

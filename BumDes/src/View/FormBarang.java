@@ -8,15 +8,23 @@ package View;
 import Custom.RataKanan;
 import Kelas.Barang;
 import Kelas.Profil;
+import Koneksi.Koneksi;
 import Kontrol.BarangKontrol;
 import Kontrol.PengaturanKontrol;
 import TabelModel.BarangTM;
+import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableCellRenderer;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -83,6 +91,7 @@ public class FormBarang extends javax.swing.JFrame {
         text_nama = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         text_totalAset = new javax.swing.JTextField();
+        button_cetak = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -260,6 +269,14 @@ public class FormBarang extends javax.swing.JFrame {
         jLabel9.setText("STOK SAAT INI");
         jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
         jPanel3.add(text_totalAset, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, 210, -1));
+
+        button_cetak.setText("CETAK");
+        button_cetak.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_cetakActionPerformed(evt);
+            }
+        });
+        jPanel3.add(button_cetak, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 240, -1, -1));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 750, 310));
 
@@ -465,6 +482,21 @@ public class FormBarang extends javax.swing.JFrame {
         a.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    private void button_cetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_cetakActionPerformed
+        Connection kon = new Koneksi().getConnection();
+
+        String reportSource = "./src/Lap/LapBarang.jasper";
+
+        Map<String, Object> params = new HashMap<String, Object>();
+        try {
+            JasperPrint jasperPrint = JasperFillManager.fillReport(reportSource, params, kon);
+            JasperViewer.viewReport(jasperPrint, false);
+
+        } catch (JRException ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_button_cetakActionPerformed
+
     public void update() {
         try {
             List<Barang> brg = BarangKontrol.getKoneksi().selectBarang();
@@ -532,6 +564,7 @@ public class FormBarang extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton button_cetak;
     private javax.swing.JButton button_hapus;
     private javax.swing.JButton button_simpan;
     private javax.swing.JButton button_tabel;
