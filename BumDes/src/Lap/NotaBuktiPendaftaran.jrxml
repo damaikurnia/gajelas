@@ -4,8 +4,9 @@
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="noTrans" class="java.lang.String"/>
+	<parameter name="tanggal" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[SELECT a.idanggota, a.namaanggota, a.alamat, p.airterakhir, t.jumlah, p.bulan, p.tahun, 
+		<![CDATA[SELECT a.idanggota, a.namaanggota, a.alamat, p.airterakhir, t.jumlah, p.bulan, 
 t.total, t.denda FROM pemakaian p, transaksi t, anggota a 
 WHERE a.idanggota = t.idanggota AND t.idanggota = p.idanggota 
 AND p.idanggota = t.idanggota AND t.notransaksi = $P{noTrans};]]>
@@ -26,9 +27,6 @@ AND p.idanggota = t.idanggota AND t.notransaksi = $P{noTrans};]]>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="bulan" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="tahun" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="total" class="java.lang.Integer">
@@ -181,7 +179,7 @@ AND p.idanggota = t.idanggota AND t.notransaksi = $P{noTrans};]]>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{tahun}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{tanggal}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="156" y="0" width="17" height="20" uuid="c8fa7a38-6958-40db-bab7-232731125dc9"/>

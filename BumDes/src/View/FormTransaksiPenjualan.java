@@ -6,6 +6,7 @@
 package View;
 
 import Custom.RataKanan;
+import Custom.RenderWarnaWarni;
 //import Kelas.Barang;
 import Kelas.Profil;
 import Custom.Tanggal;
@@ -20,7 +21,9 @@ import TabelModel.AnggotaTM;
 import TabelModel.HistoriTM;
 import TabelModel.TransaksiJualAllTM;
 import TabelModel.TransaksiJualTM;
+import java.awt.Color;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -910,11 +913,6 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
                         0, null, null);
                 PemakaianKontrol.getKoneksi().updatePemakaian(pem);//update pemakaian transaksi
 
-//                //buat transaksi untuk bulan berikutnya
-//                String tanggalBln = generateBulanTahun(Tanggal.getTanggal2());
-//                pem = new Pemakaian(generateKodeBaru(trans.getNoTrans()), idAnggota,
-//                        Double.parseDouble(text_airbln.getText()), 0, 0, tanggalBln.split("-")[0], tanggalBln.split("-")[1]);
-//                PemakaianKontrol.getKoneksi().insertPemakaian(pem);
                 update();
                 defaultnya();
             } catch (SQLException ex) {
@@ -1093,6 +1091,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
 
             List<Pemakaian> pm = PemakaianKontrol.getKoneksi().selectHistoriPemakaian(text_noPelanggan.getText());
             HistoriTM model = new HistoriTM(pm);
+            tabel_histori.setDefaultRenderer(Object.class, new RenderWarnaWarni(Color.white, Color.yellow, Color.green));
             tabel_histori.setModel(model);
             dialog_cariP.setVisible(false);
         } catch (SQLException ex) {
@@ -1164,10 +1163,26 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Lunas nih");
             text_pembayaran.setEditable(false);
             button_tambah.setEnabled(false);
+            label_status.setText("STATUS : LUNAS");
         } else {
             //membandingkan hari jatuh tempo dan hari sekarang
-            
-            //set denda (kalo lewat)
+            String jatuhTempo = tabel_histori.getValueAt(row1, 5).toString();
+            jatuhTempo = jatuhTempo.split("-")[2] + "-" + jatuhTempo.split("-")[1] + "-" + jatuhTempo.split("-")[0];
+            String tanggalSkrg = Tanggal.getTanggal2();
+
+            if (tanggalSkrg.compareTo(jatuhTempo) == -1 || tanggalSkrg.compareTo(jatuhTempo) == 0) {//kalo ga lewat jatuhTempo
+                text_denda.setText("0");
+                double total = Double.parseDouble(text_airdibayar.getText()) * Double.parseDouble(text_hargaSatuan.getText());
+                text_total.setText(Double.toString(total).split("\\.")[0]);
+                label_status.setText("STATUS : BLM LUNAS");
+            } else {//kalo denda
+                double total = Double.parseDouble(text_airdibayar.getText()) * Double.parseDouble(text_hargaSatuan.getText());
+                double denda = total * 0.02;
+                total = total + denda;
+                text_denda.setText(Double.toString(denda).split("\\.")[0]);
+                text_total.setText(Double.toString(total).split("\\.")[0]);
+                label_status.setText("STATUS : BLM LUNAS (DENDA)");
+            }
         }
         label_noTrans.setVisible(true);
     }//GEN-LAST:event_tabel_historiMouseClicked
@@ -1259,8 +1274,12 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         text_total.setText("0");
         text_denda.setText("0");
         text_pembayaran.setText("0");
+        combo_bulan.setSelectedIndex(0);
         text_noPelanggan.setEditable(true);
         label_noTrans.setVisible(false);
+        List<Pemakaian> pem = new ArrayList<Pemakaian>();
+        HistoriTM htm = new HistoriTM(pem);
+        tabel_histori.setModel(htm);
     }
 
     public void customnya() {

@@ -512,9 +512,9 @@ public class FormAnggota extends javax.swing.JFrame {
                 agt.setProvinsi(text_provinsi.getText());
                 agt.setKecamatan(text_kecamatan.getText());
 
-                AnggotaKontrol.getKoneksi().insertAnggota(agt);
+                AnggotaKontrol.getKoneksi().insertAnggota(agt);//buat database anggota
                 String tanggalBln = generateBulanTahun(Tanggal.getTanggal2());
-                Pemakaian pem = new Pemakaian(generateKode(agt), agt, 0, 0, 0, tanggalBln.split("-")[0], tanggalBln.split("-")[1]);
+                Pemakaian pem = new Pemakaian(generateKode(agt), agt, 0, 0, 0, tanggalBln.split("-")[0], cariTanggalJatuhTempo());
                 PemakaianKontrol.getKoneksi().insertPemakaian(pem);
                 insertKeTransaksi(agt);
                 JOptionPane.showMessageDialog(null, "Anggota berhasil ditambahkan!");
@@ -720,6 +720,7 @@ public class FormAnggota extends javax.swing.JFrame {
 
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("noTrans", agt.getNoTrans());
+        params.put("tanggal", Tanggal.getTanggal2().split("-")[0]);
         try {
             JasperPrint jasperPrint = JasperFillManager.fillReport(reportSource, params, kon);
             JasperViewer.viewReport(jasperPrint, false);
@@ -727,6 +728,32 @@ public class FormAnggota extends javax.swing.JFrame {
         } catch (JRException ex) {
             ex.printStackTrace();
         }
+    }
+    
+    public String cariTanggalJatuhTempo() {
+        String tanggal = Tanggal.getTanggal2();//ambil tanggal sekarang
+        String jatuhTempo = "";
+        if (tanggal.split("-")[1].equals("12")) {//kalo bulan desember, jatuh tempo ke bln 1 thn selanjutnya
+            String tgl = "10";
+            String bulan = "01";
+            int tahun = Integer.parseInt(tanggal.split("-")[0]);
+            tahun = tahun + 1;
+            jatuhTempo = Integer.toString(tahun) + "-" + bulan + "-" + tgl;
+        } else {
+            String tgl = "10";
+            int bulan = Integer.parseInt(tanggal.split("-")[1]);
+            String bln = "";
+            if (bulan >= 9) {
+                bulan = bulan + 1;
+                bln = Integer.toString(bulan);
+            } else {
+                bulan = bulan + 1;
+                bln = "0" + Integer.toString(bulan);
+            }
+            String tahun = tanggal.split("-")[0];
+            jatuhTempo = tahun + "-" + bln + "-" + tgl;
+        }
+        return jatuhTempo;
     }
 
     /**

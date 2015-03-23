@@ -13,15 +13,15 @@ import Custom.Tanggal;
  */
 public class Main {
     public static void main(String[] args) {
-        String tanggal = "2015-09-30";
-        String jatuhTempo = "";
-        int bulan = Integer.parseInt(tanggal.split("-")[1]);
-
-        if (bulan <= 9) {
-            jatuhTempo = tanggal.split("-")[0] + "-0" + Integer.toString(bulan) + "-10";
-        } else {
-            jatuhTempo = tanggal.split("-")[0] + "-" + Integer.toString(bulan) + "-10";
-        }
+        String tanggal = "2015-03-09";
+        String jatuhTempo = "2015-03-10";
+        
+        System.out.println(tanggal.compareTo(jatuhTempo));
+        //efek compare to
+        // 0 --> sama
+        // 1 --> tanggal1 lebih besar dari tanggal2
+        //-1 --> tanggal1 lebih kecil dari tanggal2 (nodenda)
+        jatuhTempo = jatuhTempo.split("-")[2]+"-"+jatuhTempo.split("-")[1]+"-"+jatuhTempo.split("-")[0];
         System.out.println(jatuhTempo);
     }
 }
