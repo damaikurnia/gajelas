@@ -67,7 +67,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
             dialog_cariP.setLocationRelativeTo(null);
             dialog_cariP.setTitle("DATA ANGGOTA");
             label_noTrans.setVisible(false);
-            
+
             dialog_blmBayar.setVisible(false);
             dialog_blmBayar.setSize(673, 413);
             dialog_blmBayar.setLocationRelativeTo(null);
@@ -134,8 +134,6 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         button_tambah = new javax.swing.JButton();
-        button_ubah = new javax.swing.JButton();
-        button_hapus = new javax.swing.JButton();
         button_tabel = new javax.swing.JButton();
         text_noPelanggan = new javax.swing.JTextField();
         label_noTrans = new javax.swing.JLabel();
@@ -478,20 +476,6 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
             }
         });
 
-        button_ubah.setText("UBAH");
-        button_ubah.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button_ubahActionPerformed(evt);
-            }
-        });
-
-        button_hapus.setText("HAPUS");
-        button_hapus.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button_hapusActionPerformed(evt);
-            }
-        });
-
         button_tabel.setText("TABEL TRANSAKSI PEMBELIAN");
         button_tabel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -683,7 +667,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
                         .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(40, 40, 40)
                         .addComponent(text_nama, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -707,10 +691,6 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(button_tambah)
                 .addGap(18, 18, 18)
-                .addComponent(button_ubah)
-                .addGap(18, 18, 18)
-                .addComponent(button_hapus)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(button_blmBayar, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(button_tabel)
@@ -791,8 +771,6 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
                         .addComponent(label_status, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(button_hapus)
-                    .addComponent(button_ubah)
                     .addComponent(button_tambah)
                     .addComponent(button_tabel)
                     .addComponent(button_blmBayar))
@@ -1001,44 +979,6 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_button_tambahActionPerformed
 
-    private void button_ubahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_ubahActionPerformed
-//        try {
-//            Transaksi trans = new Transaksi();
-//            trans.setNoTrans(text_noTrans.getText());
-//            Anggota idAnggota = AnggotaKontrol.getKoneksi().cariIdAnggota(combo_Anggota.getSelectedItem().toString());
-//            trans.setIdAnggota(new Anggota(idAnggota.getIdAnggota(), combo_Anggota.getSelectedItem().toString(),
-//                    "", "", "", "", 0, 0, "", "", "", ""));
-//            trans.setJumlah(Integer.parseInt(text_jmlBeli.getText()));
-//            trans.setHargaSatuan(Double.parseDouble(text_hargaSatuan.getText()));
-//            trans.setTotal(Double.parseDouble(text_total.getText()));
-//
-//            TransaksiKontrol.getKoneksi().jual_updateTransaksi(trans);
-////            Barang bar = BarangKontrol.getKoneksi().selectBarang2(idAnggota);
-////            int stokSmntara = bar.getStok();
-////            stokSmntara = stokSmntara - Integer.parseInt(label_jmlBeli.getText());
-////            bar.setStok(stokSmntara + trans.getJumlah());
-////            BarangKontrol.getKoneksi().updateBarang(bar);
-////            JOptionPane.showMessageDialog(null, "Update barang berhasil!");
-////            JOptionPane.showMessageDialog(null, "Stok " + bar.getNamaBarang() + " saat ini adalah = " + bar.getStok());
-//            update();
-//            defaultnya();
-//        } catch (SQLException ex) {
-//            Logger.getLogger(FormTransaksiPenjualan.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-    }//GEN-LAST:event_button_ubahActionPerformed
-
-    private void button_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_hapusActionPerformed
-        try {
-            Transaksi trans = new Transaksi();
-            trans.setNoTrans(text_noPelanggan.getText());
-            TransaksiKontrol.getKoneksi().deleteTransaksi(trans);
-            update();
-            defaultnya();
-        } catch (SQLException ex) {
-            Logger.getLogger(FormTransaksiPenjualan.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_button_hapusActionPerformed
-
     private void text_airdibayarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_text_airdibayarKeyReleased
         if (text_airdibayar.getText().equals("")) {
 
@@ -1233,38 +1173,43 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
 
     private void tabel_historiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabel_historiMouseClicked
         int row1 = tabel_histori.getSelectedRow();
-        label_noTrans.setText(tabel_histori.getValueAt(row1, 0).toString());
-        combo_bulan.setSelectedItem(tabel_histori.getValueAt(row1, 4).toString());
-        text_airawal.setText(tabel_histori.getValueAt(row1, 1).toString());
-        text_airbln.setText(tabel_histori.getValueAt(row1, 2).toString());
-        text_airdibayar.setText(tabel_histori.getValueAt(row1, 3).toString());
-
-        if (text_airawal.getText().equals(text_airbln.getText()) && !text_airbln.getText().equals("0")) {
-            JOptionPane.showMessageDialog(null, "Lunas nih");
-            text_pembayaran.setEditable(false);
-            button_tambah.setEnabled(false);
-            label_status.setText("STATUS : LUNAS");
+        if (row1 != 0) {
+            JOptionPane.showMessageDialog(null, "Tidak dapat membayar bulan berikut. silahkan membayar tagihan untuk bulan "
+                    + tabel_histori.getValueAt(0, 4).toString() + " terlebih dahulu!");
         } else {
-            //membandingkan hari jatuh tempo dan hari sekarang
-            String jatuhTempo = tabel_histori.getValueAt(row1, 5).toString();
-            jatuhTempo = jatuhTempo.split("-")[2] + "-" + jatuhTempo.split("-")[1] + "-" + jatuhTempo.split("-")[0];
-            String tanggalSkrg = Tanggal.getTanggal2();
+            label_noTrans.setText(tabel_histori.getValueAt(row1, 0).toString());
+            combo_bulan.setSelectedItem(tabel_histori.getValueAt(row1, 4).toString());
+            text_airawal.setText(tabel_histori.getValueAt(row1, 1).toString());
+            text_airbln.setText(tabel_histori.getValueAt(row1, 2).toString());
+            text_airdibayar.setText(tabel_histori.getValueAt(row1, 3).toString());
 
-            if (tanggalSkrg.compareTo(jatuhTempo) == -1 || tanggalSkrg.compareTo(jatuhTempo) == 0) {//kalo ga lewat jatuhTempo
-                text_denda.setText("0");
-                double total = Double.parseDouble(text_airdibayar.getText()) * Double.parseDouble(text_hargaSatuan.getText());
-                text_total.setText(Double.toString(total).split("\\.")[0]);
-                label_status.setText("STATUS : BLM LUNAS");
-            } else {//kalo denda
-                double total = Double.parseDouble(text_airdibayar.getText()) * Double.parseDouble(text_hargaSatuan.getText());
-                double denda = total * 0.02;
-                total = total + denda;
-                text_denda.setText(Double.toString(denda).split("\\.")[0]);
-                text_total.setText(Double.toString(total).split("\\.")[0]);
-                label_status.setText("STATUS : BLM LUNAS (DENDA)");
+            if (text_airawal.getText().equals(text_airbln.getText()) && !text_airbln.getText().equals("0")) {
+                JOptionPane.showMessageDialog(null, "Lunas nih");
+                text_pembayaran.setEditable(false);
+                button_tambah.setEnabled(false);
+                label_status.setText("STATUS : LUNAS");
+            } else {
+                //membandingkan hari jatuh tempo dan hari sekarang
+                String jatuhTempo = tabel_histori.getValueAt(row1, 5).toString();
+                jatuhTempo = jatuhTempo.split("-")[2] + "-" + jatuhTempo.split("-")[1] + "-" + jatuhTempo.split("-")[0];
+                String tanggalSkrg = Tanggal.getTanggal2();
+
+                if (tanggalSkrg.compareTo(jatuhTempo) == -1 || tanggalSkrg.compareTo(jatuhTempo) == 0) {//kalo ga lewat jatuhTempo
+                    text_denda.setText("0");
+                    double total = Double.parseDouble(text_airdibayar.getText()) * Double.parseDouble(text_hargaSatuan.getText());
+                    text_total.setText(Double.toString(total).split("\\.")[0]);
+                    label_status.setText("STATUS : BLM LUNAS");
+                } else {//kalo denda
+                    double total = Double.parseDouble(text_airdibayar.getText()) * Double.parseDouble(text_hargaSatuan.getText());
+                    double denda = total * 0.02;
+                    total = total + denda;
+                    text_denda.setText(Double.toString(denda).split("\\.")[0]);
+                    text_total.setText(Double.toString(total).split("\\.")[0]);
+                    label_status.setText("STATUS : BLM LUNAS (DENDA)");
+                }
             }
+            label_noTrans.setVisible(true);
         }
-        label_noTrans.setVisible(true);
     }//GEN-LAST:event_tabel_historiMouseClicked
 
     private void text_key1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_text_key1KeyReleased
@@ -1369,8 +1314,6 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
 
     public void defaultnya() {
         button_tambah.setEnabled(true);
-        button_ubah.setEnabled(false);
-        button_hapus.setEnabled(false);
         text_noPelanggan.setText("");
         text_nama.setText("");
         text_airawal.setText("0");
@@ -1390,8 +1333,6 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
 
     public void customnya() {
         button_tambah.setEnabled(false);
-        button_ubah.setEnabled(true);
-        button_hapus.setEnabled(true);
         text_noPelanggan.setEditable(false);
     }
 
@@ -1488,8 +1429,8 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
             return 12;
         }
     }
-    
-    public void cetakNota(){
+
+    public void cetakNota() {
         Connection kon = new Koneksi().getConnection();
         String reportSource = "./src/Lap/NotaBuktiPembayaran.jasper";
         Map<String, Object> params = new HashMap<String, Object>();
@@ -1502,8 +1443,8 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
             ex.printStackTrace();
         }
     }
-    
-    public void updateBlmBayar(){
+
+    public void updateBlmBayar() {
         try {
             List<Pemakaian> agt = PemakaianKontrol.getKoneksi().selectBlmBayar();
             HistoriTM model = new HistoriTM(agt);
@@ -1600,11 +1541,9 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton button_blmBayar;
-    private javax.swing.JButton button_hapus;
     private javax.swing.JButton button_pelanggan;
     private javax.swing.JButton button_tabel;
     private javax.swing.JButton button_tambah;
-    private javax.swing.JButton button_ubah;
     private javax.swing.JComboBox cb_bulan;
     private javax.swing.JComboBox cb_tahun;
     private javax.swing.JComboBox cb_tanggal;

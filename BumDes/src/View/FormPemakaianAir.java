@@ -5,6 +5,7 @@
  */
 package View;
 
+import Custom.RenderWarnaWarni;
 import Custom.Tanggal;
 import Kelas.Anggota;
 import Kelas.Pemakaian;
@@ -14,6 +15,7 @@ import Kontrol.PemakaianKontrol;
 import Kontrol.PengaturanKontrol;
 import TabelModel.AnggotaTM;
 import TabelModel.HistoriTM;
+import java.awt.Color;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -57,6 +59,7 @@ public class FormPemakaianAir extends javax.swing.JFrame {
             String bulan = generateBulanTahun(Tanggal.getTanggal2());
             label_bulan.setText(bulan.split("-")[0]);
             text_airterakhir.setEditable(true);
+            label_status.setVisible(false);
         } catch (SQLException ex) {
             Logger.getLogger(FormPemakaianAir.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -122,7 +125,7 @@ public class FormPemakaianAir extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         text_noPelanggan = new javax.swing.JTextField();
         button_pelanggan = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
+        label_status = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         text_airdibayar = new javax.swing.JTextField();
@@ -143,6 +146,7 @@ public class FormPemakaianAir extends javax.swing.JFrame {
         button_rubah = new javax.swing.JButton();
         label_tanggal = new javax.swing.JLabel();
         label_bulan = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -248,17 +252,30 @@ public class FormPemakaianAir extends javax.swing.JFrame {
 
         jLabel20.setText("ALAMAT");
 
+        text_DNoPelanggan.setEditable(false);
+
+        text_DNama.setEditable(false);
+
         jLabel21.setText("DUSUN");
+
+        text_DDusun.setEditable(false);
 
         jLabel22.setText("TELP");
 
+        text_DNoTelp.setEditable(false);
+
+        text_DAlamat.setEditable(false);
         text_DAlamat.setColumns(20);
         text_DAlamat.setRows(5);
         jScrollPane4.setViewportView(text_DAlamat);
 
         jLabel23.setText("RT / RW");
 
+        text_DRT.setEditable(false);
+
         jLabel24.setText("/");
+
+        text_DRW.setEditable(false);
 
         button_cari.setText("...");
         button_cari.addActionListener(new java.awt.event.ActionListener() {
@@ -512,9 +529,10 @@ public class FormPemakaianAir extends javax.swing.JFrame {
         });
         jPanel3.add(button_pelanggan, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 60, -1, 30));
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel4.setText("DEBIT AIR HARUS DIBAYAR");
-        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 170, -1, -1));
+        label_status.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        label_status.setForeground(new java.awt.Color(255, 0, 0));
+        label_status.setText("TIDAK DAPAT MEMASUKKAN DATA");
+        jPanel3.add(label_status, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 200, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setText("NAMA");
@@ -613,6 +631,10 @@ public class FormPemakaianAir extends javax.swing.JFrame {
         label_bulan.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         label_bulan.setText("<<bulan>>");
         jPanel3.add(label_bulan, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 60, 140, 30));
+
+        jLabel27.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel27.setText("DEBIT AIR HARUS DIBAYAR");
+        jPanel3.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 170, -1, -1));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 750, 290));
 
@@ -782,6 +804,16 @@ public class FormPemakaianAir extends javax.swing.JFrame {
             label_noTrans.setText(pem.getNotransaksi());
             if (pem.getNotransaksi() == null) {//kalo kosong, buat baru
                 JOptionPane.showMessageDialog(null, "Buat Baru");
+                //cek riwayat tunggakan pengguna
+                List<Pemakaian> riwayat = PemakaianKontrol.getKoneksi().cekDendaPelanggan(new Pemakaian(jatuhTempo, new Anggota(text_noPelanggan.getText(), jatuhTempo, jatuhTempo, jatuhTempo, jatuhTempo, jatuhTempo, row1, row1, jatuhTempo, jatuhTempo, jatuhTempo, jatuhTempo, jatuhTempo), row1, row1, row1, jatuhTempo, jatuhTempo));
+                if (riwayat.size() >= 2) {
+                    JOptionPane.showMessageDialog(null, "Anggota ini telah denda lebih dari 2 bulan, pemakaian bulan ini akan diputus sementara sampai anggota yang bersangkutan telah membayar");
+                    text_airterakhir.setEditable(false);
+                    label_status.setVisible(true);
+                } else {
+                    text_airterakhir.setEditable(true);
+                    label_status.setVisible(false);
+                }
 
                 //cari data bln sblmnya
                 String tanggalSblm = cariTanggalJatuhTempoSblm();
@@ -800,7 +832,7 @@ public class FormPemakaianAir extends javax.swing.JFrame {
                 text_airterakhir.setText(Double.toString(dataBaru.getAirterakhir()).split("\\.")[0]);
                 text_airdibayar.setText(Double.toString(dataBaru.getAirdibayar()).split("\\.")[0]);
                 label_noTrans.setText(dataBaru.getNotransaksi());
-                text_airterakhir.setEditable(true);
+//                text_airterakhir.setEditable(true);
                 label_noTrans.setVisible(true);
             } else {
                 text_airlunas.setText(Double.toString(pem.getAirlunas()).split("\\.")[0]);
@@ -811,8 +843,17 @@ public class FormPemakaianAir extends javax.swing.JFrame {
                     text_airterakhir.setEditable(false);
                 } else {
                     JOptionPane.showMessageDialog(null, "Udah ada, tampilkan aja");
+
+                    List<Pemakaian> riwayat = PemakaianKontrol.getKoneksi().cekDendaPelanggan(pem);
+                    if (riwayat.size() >= 2) {
+                        JOptionPane.showMessageDialog(null, "Anggota ini telah denda lebih dari 2 bulan, pemakaian bulan ini akan diputus sementara sampai anggota yang bersangkutan telah membayar");
+                        text_airterakhir.setEditable(false);
+                        label_status.setVisible(true);
+                    } else {
+                        text_airterakhir.setEditable(true);
+                        label_status.setVisible(false);
+                    }
                     label_noTrans.setVisible(true);
-                    text_airterakhir.setEditable(true);
                 }
             }
             dialog_cariP.setVisible(false);
@@ -889,6 +930,7 @@ public class FormPemakaianAir extends javax.swing.JFrame {
             List<Pemakaian> pm = PemakaianKontrol.getKoneksi().selectHistoriPemakaian(text_DNoPelanggan.getText());
             HistoriTM model = new HistoriTM(pm);
             tabel_histori.setModel(model);
+            tabel_histori.setDefaultRenderer(Object.class, new RenderWarnaWarni(Color.white, Color.yellow, Color.green));
             dialog_cariPHistori.setVisible(false);
         } catch (SQLException ex) {
             Logger.getLogger(FormPemakaianAir.class.getName()).log(Level.SEVERE, null, ex);
@@ -942,6 +984,7 @@ public class FormPemakaianAir extends javax.swing.JFrame {
         label_noTrans.setText("");
         text_airterakhir.setText("");
         label_noTrans.setVisible(false);
+        label_status.setVisible(false);
     }
 
     public String konversiBulan(String B) {
@@ -1139,8 +1182,8 @@ public class FormPemakaianAir extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -1181,6 +1224,7 @@ public class FormPemakaianAir extends javax.swing.JFrame {
     private javax.swing.JLabel label_bulan;
     private javax.swing.JLabel label_namaDesa;
     private javax.swing.JLabel label_noTrans;
+    private javax.swing.JLabel label_status;
     private javax.swing.JLabel label_tanggal;
     private javax.swing.JTable tabel_histori;
     private javax.swing.JTable tabel_pelanggan;

@@ -71,7 +71,7 @@ public class PemakaianKontrol {
         conn.close();
         return agt;
     }
-    
+
 //    public List<Anggota> selectAnggota2(String key) throws SQLException {
 //        PreparedStatement stmt = null;
 //        ResultSet result = null;
@@ -99,7 +99,6 @@ public class PemakaianKontrol {
 //        conn.close();
 //        return agt;
 //    }
-
 //    public void deleteAnggota(Anggota agt) throws SQLException {
 //        PreparedStatement stmt = null;
 //        conn.setAutoCommit(false);
@@ -111,7 +110,6 @@ public class PemakaianKontrol {
 //        conn.commit();
 //        conn.close();
 //    }
-
     public void insertPemakaian(Pemakaian pem) throws SQLException {
         PreparedStatement stmt = null;
         conn.setAutoCommit(false);
@@ -129,7 +127,7 @@ public class PemakaianKontrol {
         conn.commit();
         conn.close();
     }
-    
+
 //    public Anggota cariIdAnggota(String nama) throws SQLException{
 //        PreparedStatement stmt = null;
 //        ResultSet result = null;
@@ -150,7 +148,6 @@ public class PemakaianKontrol {
 //        conn.close();
 //        return agt;
 //    }
-    
 //    public List<Pemakaian> selectPemakaianBulanan(Pemakaian pem) throws SQLException {
 //        PreparedStatement stmt = null;
 //        ResultSet result = null;
@@ -174,7 +171,6 @@ public class PemakaianKontrol {
 //        conn.close();
 //        return agt;
 //    }
-    
     public List<Pemakaian> selectHistoriPemakaian(String idanggota) throws SQLException {
         PreparedStatement stmt = null;
         ResultSet result = null;
@@ -198,13 +194,40 @@ public class PemakaianKontrol {
         conn.close();
         return agt;
     }
-    
+
     public List<Pemakaian> selectBlmBayar() throws SQLException {
         PreparedStatement stmt = null;
         ResultSet result = null;
         conn.setAutoCommit(false);
         String query = "SELECT * FROM pemakaian WHERE airlunas <> airterakhir AND airterakhir <> 0;";
         stmt = conn.prepareStatement(query);
+        result = stmt.executeQuery();
+        List<Pemakaian> agt = new ArrayList<Pemakaian>();
+        while (result.next()) {
+            Pemakaian pemm = new Pemakaian();
+            pemm.setNotransaksi(result.getString(1));
+            pemm.setIdanggota(new Anggota(result.getString(2), "", "", "", "", "", 0, 0, "", "", "", "", ""));
+            pemm.setAirlunas(result.getDouble(3));
+            pemm.setAirterakhir(result.getDouble(4));
+            pemm.setAirdibayar(result.getDouble(5));
+            pemm.setBulan(result.getString(6));
+            pemm.setJatuhtempo(result.getString(7));
+            agt.add(pemm);
+        }
+        conn.close();
+        return agt;
+    }
+
+    public List<Pemakaian> cekDendaPelanggan(Pemakaian pel) throws SQLException {
+        PreparedStatement stmt = null;
+        ResultSet result = null;
+        conn.setAutoCommit(false);
+        String query = "SELECT *,DATEDIFF(jatuhtempo,sysdate()) \n"
+                + "from pemakaian \n"
+                + "where idanggota = ? and DATEDIFF(jatuhtempo,sysdate()) < 0 \n"
+                + "AND airlunas <> airterakhir and airdibayar <>0;";
+        stmt = conn.prepareStatement(query);
+        stmt.setString(1, pel.getIdanggota().getIdAnggota());
         result = stmt.executeQuery();
         List<Pemakaian> agt = new ArrayList<Pemakaian>();
         while (result.next()) {
