@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -613,14 +614,14 @@ public class FormAnggota extends javax.swing.JFrame {
         try {
             Anggota agt = new Anggota();
             agt.setIdAnggota(text_idAnggota.getText());
-         
+
             //konfigurasi simpan file dan rename file dlu
             String path = new File(".").getCanonicalPath();
 //            System.out.println(file + " " + path);
             Anggota prof = AnggotaKontrol.getKoneksi().selectAnggota(text_idAnggota.getText());
             File f = new File(path + "/Gambar/" + prof.getLogo());
             f.delete();
-            
+
             AnggotaKontrol.getKoneksi().deleteAnggota(agt);
             JOptionPane.showMessageDialog(null, "Anggota berhasil dihapus!");
             resetdefault();
@@ -649,13 +650,13 @@ public class FormAnggota extends javax.swing.JFrame {
             text_telp.setText(agt.getNoTelp());
             text_ktp.setText(agt.getNoKTP());
             text_kecamatan.setText(agt.getKecamatan());
-            
+
             Anggota foto = AnggotaKontrol.getKoneksi().selectAnggota(agt.getIdAnggota());
             String path = new File(".").getCanonicalPath();
             Toolkit toolkit = Toolkit.getDefaultToolkit();
-            Image image = toolkit.getImage(path+"/Gambar/"+foto.getLogo());
+            Image image = toolkit.getImage(path + "/Gambar/" + foto.getLogo());
 //            Image imagedResized = image.getScaledInstance(200, 250, Image.SCALE_DEFAULT);
-            Image imagedResized = image.getScaledInstance(175, 145, Image.SCALE_DEFAULT);
+            Image imagedResized = image.getScaledInstance(175, 250, Image.SCALE_DEFAULT);
             ImageIcon imageIcon = new ImageIcon(imagedResized);
 
             label_Gambar.setIcon(imageIcon);
@@ -712,7 +713,7 @@ public class FormAnggota extends javax.swing.JFrame {
 
             Toolkit toolkit = Toolkit.getDefaultToolkit();
             Image image = toolkit.getImage(jfc.getSelectedFile().getAbsolutePath());
-            Image imagedResized = image.getScaledInstance(200, 250, Image.SCALE_DEFAULT);
+            Image imagedResized = image.getScaledInstance(175, 250, Image.SCALE_DEFAULT);
             ImageIcon imageIcon = new ImageIcon(imagedResized);
 
             label_Gambar.setIcon(imageIcon);
@@ -744,6 +745,9 @@ public class FormAnggota extends javax.swing.JFrame {
         button_hapus.setEnabled(false);
         text_biaya.setEditable(true);
         text_biaya.setText("");
+
+        label_Gambar.setIcon(null);
+        label_namaFile.setText("");
     }
 
     public void custom() {

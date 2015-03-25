@@ -16,22 +16,7 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="51" splitType="Stretch">
-			<staticText>
-				<reportElement x="0" y="0" width="555" height="31" uuid="a0327b64-1f07-4412-acd4-52349a2ea260"/>
-				<textElement textAlignment="Center">
-					<font fontName="Times New Roman" size="24" isBold="true"/>
-				</textElement>
-				<text><![CDATA[TABEL DATA PELANGGAN AIR BERSIH]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="0" y="31" width="555" height="19" uuid="36773afa-a462-4632-bce6-c79c7da9b6df"/>
-				<textElement textAlignment="Center">
-					<font fontName="Times New Roman" size="16" isBold="true"/>
-				</textElement>
-				<text><![CDATA[BADAN USAHA MILIK DESA (BUMDES)]]></text>
-			</staticText>
-		</band>
+		<band height="100" splitType="Stretch"/>
 	</title>
 	<detail>
 		<band height="71" splitType="Stretch">
