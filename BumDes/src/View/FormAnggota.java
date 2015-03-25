@@ -16,6 +16,10 @@ import Kontrol.PemakaianKontrol;
 import Kontrol.PengaturanKontrol;
 import Kontrol.TransaksiKontrol;
 import TabelModel.AnggotaTM;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -23,17 +27,22 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.view.JasperViewer;
+import org.apache.commons.io.FileUtils;
 
 /**
  *
  * @author damaikurnia
  */
 public class FormAnggota extends javax.swing.JFrame {
+
+    File file;
 
     /**
      * Creates new form FormAir
@@ -51,6 +60,7 @@ public class FormAnggota extends javax.swing.JFrame {
             dialog_anggota.setSize(627, 350);
             dialog_anggota.setLocationRelativeTo(null);
             dialog_anggota.setTitle("DATA ANGGOTA");
+            label_namaFile.setVisible(false);
         } catch (SQLException ex) {
             Logger.getLogger(FormAnggota.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -114,6 +124,9 @@ public class FormAnggota extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         text_biaya = new javax.swing.JTextField();
         button_batal = new javax.swing.JButton();
+        label_Gambar = new javax.swing.JLabel();
+        button_upload = new javax.swing.JButton();
+        label_namaFile = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -207,8 +220,8 @@ public class FormAnggota extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(label_namaDesa, javax.swing.GroupLayout.DEFAULT_SIZE, 728, Short.MAX_VALUE)
-                    .addComponent(label_alamatNotelp, javax.swing.GroupLayout.DEFAULT_SIZE, 728, Short.MAX_VALUE))
+                    .addComponent(label_namaDesa, javax.swing.GroupLayout.DEFAULT_SIZE, 848, Short.MAX_VALUE)
+                    .addComponent(label_alamatNotelp, javax.swing.GroupLayout.DEFAULT_SIZE, 848, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -223,7 +236,7 @@ public class FormAnggota extends javax.swing.JFrame {
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 110));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 870, 110));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -360,9 +373,23 @@ public class FormAnggota extends javax.swing.JFrame {
         });
         jPanel3.add(button_batal, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 320, -1, -1));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 750, 360));
+        label_Gambar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel3.add(label_Gambar, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 60, 160, 200));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 490));
+        button_upload.setText("UPLOAD");
+        button_upload.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_uploadActionPerformed(evt);
+            }
+        });
+        jPanel3.add(button_upload, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 270, 160, -1));
+
+        label_namaFile.setText("jLabel20");
+        jPanel3.add(label_namaFile, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 40, 160, -1));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 870, 360));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 870, 490));
 
         jMenu1.setText("HOME");
         jMenu1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -506,6 +533,13 @@ public class FormAnggota extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Pembayaran Kurang");
         } else {
             try {
+                //konfigurasi simpan file dan rename file dlu
+                String path = new File(".").getCanonicalPath();
+//            System.out.println(file + " " + path);
+                FileUtils.copyFileToDirectory(file, new File(path + "/Gambar")); //copy file ke folder image
+                file = new File(path + "/Gambar/" + label_namaFile.getText());//set lokasi file
+                file.renameTo(new File(path + "/Gambar/" + text_idAnggota.getText() + "." + label_namaFile.getText().split("\\.")[1]));//rename file dgn nim
+
                 Anggota agt = new Anggota();
                 agt.setIdAnggota(text_idAnggota.getText());
                 agt.setNamaAnggota(text_nama.getText());
@@ -520,6 +554,7 @@ public class FormAnggota extends javax.swing.JFrame {
                 agt.setKota(text_kota.getText());
                 agt.setProvinsi(text_provinsi.getText());
                 agt.setKecamatan(text_kecamatan.getText());
+                agt.setLogo(text_idAnggota.getText() + "." + label_namaFile.getText().split("\\.")[1]);
 
                 AnggotaKontrol.getKoneksi().insertAnggota(agt);//buat database anggota
                 String tanggalBln = generateBulanTahun(Tanggal.getTanggal2());
@@ -530,12 +565,24 @@ public class FormAnggota extends javax.swing.JFrame {
                 resetdefault();
             } catch (SQLException ex) {
                 Logger.getLogger(FormAnggota.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(FormAnggota.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_button_tambahActionPerformed
 
     private void button_ubahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_ubahActionPerformed
         try {
+            //konfigurasi simpan file dan rename file dlu
+            String path = new File(".").getCanonicalPath();
+//            System.out.println(file + " " + path);
+            Anggota prof = AnggotaKontrol.getKoneksi().selectAnggota(text_idAnggota.getText());
+            FileUtils.copyFileToDirectory(file, new File(path + "/Gambar")); //copy file ke folder image
+            File f = new File(path + "/Gambar/" + prof.getLogo());
+            f.delete();
+            file = new File(path + "/Gambar/" + label_namaFile.getText());//set lokasi file
+            file.renameTo(new File(path + "/Gambar/" + text_idAnggota.getText() + "." + label_namaFile.getText().split("\\.")[1]));//rename file dgn nim
+
             Anggota agt = new Anggota();
             agt.setIdAnggota(text_idAnggota.getText());
             agt.setNamaAnggota(text_nama.getText());
@@ -550,11 +597,14 @@ public class FormAnggota extends javax.swing.JFrame {
             agt.setKota(text_kota.getText());
             agt.setProvinsi(text_provinsi.getText());
             agt.setKecamatan(text_kecamatan.getText());
+            agt.setLogo(text_idAnggota.getText() + "." + label_namaFile.getText().split("\\.")[1]);
 
             AnggotaKontrol.getKoneksi().updateAnggota(agt);
             JOptionPane.showMessageDialog(null, "Anggota berhasil dirubah!");
             resetdefault();
         } catch (SQLException ex) {
+            Logger.getLogger(FormAnggota.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
             Logger.getLogger(FormAnggota.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_button_ubahActionPerformed
@@ -563,11 +613,20 @@ public class FormAnggota extends javax.swing.JFrame {
         try {
             Anggota agt = new Anggota();
             agt.setIdAnggota(text_idAnggota.getText());
-
+         
+            //konfigurasi simpan file dan rename file dlu
+            String path = new File(".").getCanonicalPath();
+//            System.out.println(file + " " + path);
+            Anggota prof = AnggotaKontrol.getKoneksi().selectAnggota(text_idAnggota.getText());
+            File f = new File(path + "/Gambar/" + prof.getLogo());
+            f.delete();
+            
             AnggotaKontrol.getKoneksi().deleteAnggota(agt);
             JOptionPane.showMessageDialog(null, "Anggota berhasil dihapus!");
             resetdefault();
         } catch (SQLException ex) {
+            Logger.getLogger(FormAnggota.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
             Logger.getLogger(FormAnggota.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_button_hapusActionPerformed
@@ -590,10 +649,23 @@ public class FormAnggota extends javax.swing.JFrame {
             text_telp.setText(agt.getNoTelp());
             text_ktp.setText(agt.getNoKTP());
             text_kecamatan.setText(agt.getKecamatan());
+            
+            Anggota foto = AnggotaKontrol.getKoneksi().selectAnggota(agt.getIdAnggota());
+            String path = new File(".").getCanonicalPath();
+            Toolkit toolkit = Toolkit.getDefaultToolkit();
+            Image image = toolkit.getImage(path+"/Gambar/"+foto.getLogo());
+//            Image imagedResized = image.getScaledInstance(200, 250, Image.SCALE_DEFAULT);
+            Image imagedResized = image.getScaledInstance(175, 145, Image.SCALE_DEFAULT);
+            ImageIcon imageIcon = new ImageIcon(imagedResized);
+
+            label_Gambar.setIcon(imageIcon);
+            label_namaFile.setText(foto.getLogo());
 
             dialog_anggota.setVisible(false);
             text_biaya.setEditable(false);
         } catch (SQLException ex) {
+            Logger.getLogger(FormAnggota.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
             Logger.getLogger(FormAnggota.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_tabel_anggotaMouseClicked
@@ -633,6 +705,24 @@ public class FormAnggota extends javax.swing.JFrame {
     private void button_batalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_batalActionPerformed
         resetdefault();
     }//GEN-LAST:event_button_batalActionPerformed
+
+    private void button_uploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_uploadActionPerformed
+        JFileChooser jfc = new JFileChooser();
+        if (jfc.showOpenDialog(label_Gambar) == JFileChooser.APPROVE_OPTION) {
+
+            Toolkit toolkit = Toolkit.getDefaultToolkit();
+            Image image = toolkit.getImage(jfc.getSelectedFile().getAbsolutePath());
+            Image imagedResized = image.getScaledInstance(200, 250, Image.SCALE_DEFAULT);
+            ImageIcon imageIcon = new ImageIcon(imagedResized);
+
+            label_Gambar.setIcon(imageIcon);
+            label_namaFile.setText(jfc.getSelectedFile().getName());//nama file nya
+//            System.out.println("jLabelnamaFile : " + label_namaFile.getText());
+
+            file = new File(jfc.getSelectedFile().getPath()); // file untuk dikopi
+//            System.out.println("file : " + file.getPath());
+        }
+    }//GEN-LAST:event_button_uploadActionPerformed
 
     public void resetdefault() {
         text_idAnggota.setText("");
@@ -744,7 +834,7 @@ public class FormAnggota extends javax.swing.JFrame {
             ex.printStackTrace();
         }
     }
-    
+
     public String cariTanggalJatuhTempo() {
         String tanggal = Tanggal.getTanggal2();//ambil tanggal sekarang
         String jatuhTempo = "";
@@ -820,6 +910,7 @@ public class FormAnggota extends javax.swing.JFrame {
     private javax.swing.JButton button_tabel;
     private javax.swing.JButton button_tambah;
     private javax.swing.JButton button_ubah;
+    private javax.swing.JButton button_upload;
     private javax.swing.JDialog dialog_anggota;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -862,8 +953,10 @@ public class FormAnggota extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JLabel label_Gambar;
     private javax.swing.JLabel label_alamatNotelp;
     private javax.swing.JLabel label_namaDesa;
+    private javax.swing.JLabel label_namaFile;
     private javax.swing.JTable tabel_anggota;
     private javax.swing.JTextArea text_alamat;
     private javax.swing.JTextField text_biaya;

@@ -23,6 +23,7 @@ public class Anggota {
     String kota;
     String provinsi;
     String kecamatan;
+    String logo;
 
     public Anggota(String id, String nm, String pk, String almt, String telp, String ktp,
             int rt, int rw, String dusun, String dsa, String kota, String prov, String kec) {
@@ -224,5 +225,19 @@ public class Anggota {
      */
     public void setKecamatan(String kecamatan) {
         this.kecamatan = kecamatan;
+    }
+
+    /**
+     * @return the logo
+     */
+    public String getLogo() {
+        return logo;
+    }
+
+    /**
+     * @param logo the logo to set
+     */
+    public void setLogo(String logo) {
+        this.logo = logo;
     }
 }

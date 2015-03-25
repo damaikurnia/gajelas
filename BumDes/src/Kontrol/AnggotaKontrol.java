@@ -37,7 +37,8 @@ public class AnggotaKontrol {
         conn.setAutoCommit(false);
         String query = "update anggota set namaanggota = ?, pekerjaan = ?,"
                 + "alamat = ?,rt = ?, rw = ?, dusun = ?,desa = ?, kota = ?,"
-                + "provinsi = ?, telp = ?, noKTP = ?,kecamatan = ? where idanggota = ?";
+                + "provinsi = ?, telp = ?, noKTP = ?,kecamatan = ?,logo = ? "
+                + "where idanggota = ?";
         stmt = conn.prepareStatement(query);
         stmt.setString(1, agt.getNamaAnggota());
         stmt.setString(2, agt.getPekerjaan());
@@ -50,8 +51,9 @@ public class AnggotaKontrol {
         stmt.setString(9, agt.getProvinsi());
         stmt.setString(10, agt.getNoTelp());
         stmt.setString(11, agt.getNoKTP());
-        stmt.setString(12, agt.getIdAnggota());
-        stmt.setString(13, agt.getKecamatan());
+        stmt.setString(12, agt.getKecamatan());
+        stmt.setString(13, agt.getLogo());
+        stmt.setString(14, agt.getIdAnggota());
 
         stmt.executeUpdate();
         conn.commit();
@@ -122,7 +124,7 @@ public class AnggotaKontrol {
     public void insertAnggota(Anggota agt) throws SQLException {
         PreparedStatement stmt = null;
         conn.setAutoCommit(false);
-        String query = "INSERT INTO anggota VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String query = "INSERT INTO anggota VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         stmt = conn.prepareStatement(query);
         stmt.setString(1, agt.getIdAnggota());
         stmt.setString(2, agt.getNamaAnggota());
@@ -137,6 +139,7 @@ public class AnggotaKontrol {
         stmt.setString(11, agt.getKota());
         stmt.setString(12, agt.getProvinsi());
         stmt.setString(13, agt.getKecamatan());
+        stmt.setString(14, agt.getLogo());
 
         stmt.executeUpdate();
         conn.commit();
@@ -188,6 +191,7 @@ public class AnggotaKontrol {
             bar.setKota(result.getString(11));
             bar.setProvinsi(result.getString(12));
             bar.setKecamatan(result.getString(13));
+            bar.setLogo(result.getString(14));
         }
         conn.close();
         return bar;
