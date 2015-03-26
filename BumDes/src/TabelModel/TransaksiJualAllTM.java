@@ -29,7 +29,7 @@ public class TransaksiJualAllTM extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 6;
+        return 7;
     }
 
     @Override
@@ -41,12 +41,14 @@ public class TransaksiJualAllTM extends AbstractTableModel {
             case 1:
                 return d.getNoTrans();
             case 2:
-                return d.getIdAnggota().getNamaAnggota();
+                return d.getIdAnggota().getIdAnggota();
             case 3:
-                return d.getJumlah();
+                return d.getIdAnggota().getNamaAnggota();
             case 4:
-                return Double.toString(d.getHargaSatuan()).split("\\.")[0];
+                return d.getJumlah();
             case 5:
+                return Double.toString(d.getHargaSatuan()).split("\\.")[0];
+            case 6:
                 return Double.toString(d.getTotal()).split("\\.")[0];
             default:
                 return "";
@@ -63,10 +65,12 @@ public class TransaksiJualAllTM extends AbstractTableModel {
             case 2:
                 return "PELANGGAN";
             case 3:
-                return "JUMLAH";
+                return "NAMA";
             case 4:
-                return "HARGA SATUAN";
+                return "JUMLAH";
             case 5:
+                return "HARGA SATUAN";
+            case 6:
                 return "TOTAL";
             default:
                 return "";

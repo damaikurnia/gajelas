@@ -218,29 +218,29 @@ public class TransaksiKontrol {
         return trans;
     }
 
-    public List<Transaksi> jual_selectTransaksiAll(String t) throws SQLException {
+    public List<Transaksi> jual_selectTransaksiAll(String dari, String sampai) throws SQLException {
         PreparedStatement stmt = null;
         ResultSet result = null;
         conn.setAutoCommit(false);
-        String query = "SELECT a.tanggaltransaksi,a.notransaksi, "
-                + "b.namaanggota,a.jumlah,a.hargasatuan,a.total \n"
-                + "FROM transaksi a, anggota b "
-                + "WHERE a.idanggota = b.idanggota AND a.jenistransaksi = 'PENJUALAN' "
-                + "AND a.tanggaltransaksi LIKE (?) "
-                + "order by a.tanggaltransaksi";
+        String query = "SELECT t.notransaksi,t.idanggota, a.namaanggota, t.tanggaltransaksi, t.jumlah,t.hargasatuan, t.denda,t.total\n"
+                + "FROM transaksi t, anggota a \n"
+                + "where t.idanggota = a.idanggota and t.jenistransaksi = 'PENJUALAN' \n"
+                + "AND tanggaltransaksi between ? and ?;";
         stmt = conn.prepareStatement(query);
-        stmt.setString(1, t);
+        stmt.setString(1, dari);
+        stmt.setString(2, sampai);
         result = stmt.executeQuery();
         List<Transaksi> trans = new ArrayList<Transaksi>();
         while (result.next()) {
             Transaksi trs = new Transaksi();
-            String tgl = result.getString(1);
+            trs.setNoTrans(result.getString(1));
+            trs.setIdAnggota(new Anggota(result.getString(2),result.getString(3), dari, dari, query, dari, 0, 0, query, dari, dari, dari, query));
+            String tgl = result.getString(4);
             trs.setTanggalTransaksi(tgl.split("-")[2] + "-" + tgl.split("-")[1] + "-" + tgl.split("-")[0]);
-            trs.setNoTrans(result.getString(2));
-            trs.setIdAnggota(new Anggota("", result.getString(3), "", "", "", "", 0, 0, "", "", "", "", ""));
-            trs.setJumlah(result.getInt(4));
-            trs.setHargaSatuan(result.getDouble(5));
-            trs.setTotal(result.getDouble(6));
+            trs.setJumlah(result.getInt(5));
+            trs.setHargaSatuan(result.getInt(6));
+            trs.setDenda(result.getInt(7));
+            trs.setTotal(result.getDouble(8));
             trans.add(trs);
         }
         conn.close();
@@ -319,9 +319,8 @@ public class TransaksiKontrol {
         conn.close();
         return cek;
     }
-    
+
     //=========================================================================
-    
     public void daftar_insertTransaksi(Transaksi trans) throws SQLException {
         PreparedStatement stmt = null;
         conn.setAutoCommit(false);
@@ -332,7 +331,7 @@ public class TransaksiKontrol {
         stmt.setString(3, trans.getIdAnggota().getIdAnggota());
         stmt.setString(4, Tanggal.getTanggal2());
         stmt.setString(5, "DAFTAR");
-        stmt.setInt(6, 1);
+        stmt.setInt(6, 0);
         stmt.setDouble(7, trans.getHargaSatuan());
         stmt.setDouble(8, 0);
         stmt.setDouble(9, trans.getTotal());
