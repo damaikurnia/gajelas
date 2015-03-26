@@ -39,7 +39,7 @@
 	<title>
 		<band height="100" splitType="Stretch">
 			<staticText>
-				<reportElement x="220" y="2" width="102" height="20" uuid="a271750b-914d-4271-aa0e-dd7c629b58c5"/>
+				<reportElement x="215" y="2" width="142" height="20" uuid="a271750b-914d-4271-aa0e-dd7c629b58c5"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="14" isBold="true"/>
 				</textElement>
@@ -75,10 +75,10 @@
 			</staticText>
 			<image>
 				<reportElement x="2" y="2" width="105" height="98" uuid="39855cbc-82b9-4b84-97ac-eac203219d68"/>
-				<imageExpression><![CDATA["/home/damaikurnia/NetBeansProjects/trunk/BumDes/Gambar/logodesa.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["C:\\Users\\damaikurnia\\Documents\\NetBeansProjects\\trunk\\BumDes\\Gambar\\logodesa.jpg"]]></imageExpression>
 			</image>
 			<textField>
-				<reportElement x="322" y="2" width="100" height="20" uuid="bd492475-13bf-44f4-b7dd-e123d432e3cc"/>
+				<reportElement x="357" y="2" width="100" height="20" uuid="bd492475-13bf-44f4-b7dd-e123d432e3cc"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="14" isBold="true"/>
 				</textElement>
@@ -99,14 +99,14 @@
 				<textFieldExpression><![CDATA[$F{alamatdesa}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="322" y="60" width="21" height="20" uuid="96e4d3c9-669f-4a07-aa21-4b9d1d1b4a3f"/>
+				<reportElement x="322" y="60" width="32" height="20" uuid="96e4d3c9-669f-4a07-aa21-4b9d1d1b4a3f"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman"/>
 				</textElement>
 				<text><![CDATA[Desa]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="343" y="60" width="95" height="20" uuid="c8d1391f-0b5d-4037-b0e4-54c06d8c0124"/>
+				<reportElement x="354" y="60" width="95" height="20" uuid="c8d1391f-0b5d-4037-b0e4-54c06d8c0124"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman"/>
 				</textElement>

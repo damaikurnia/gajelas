@@ -1,0 +1,2 @@
+"/home/damaikurnia/NetBeansProjects/trunk/BumDes/Gambar/logodesa.jpg"
+"C:\\Users\\damaikurnia\\Documents\\NetBeansProjects\\trunk\\BumDes\\Gambar\\logodesa.jpg"

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3a403dad-e5d8-4538-905d-af50f76df5a8">
-	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
@@ -34,9 +34,9 @@
 	<title>
 		<band height="100" splitType="Stretch">
 			<subreport>
-				<reportElement x="0" y="0" width="555" height="100" uuid="38ccd327-3967-4b12-8848-f234fd6245e4"/>
+				<reportElement x="0" y="0" width="555" height="100" uuid="4b63df5c-4cb5-4de2-812e-c723cd38aa13"/>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "KopSurat.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA["C:\\Users\\damaikurnia\\Documents\\NetBeansProjects\\trunk\\BumDes\\src\\Lap\\KopSurat.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 	</title>

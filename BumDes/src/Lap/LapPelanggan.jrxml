@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c503ae63-ecc3-4b88-9745-a6b4dfb1362f">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="121"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["/home/damaikurnia/NetBeansProjects/trunk/BumDes/src/iReport/"]]></defaultValueExpression>
 	</parameter>
@@ -18,16 +18,34 @@
 	<title>
 		<band height="100" splitType="Stretch">
 			<subreport>
-				<reportElement x="0" y="0" width="555" height="100" uuid="18248527-94f8-4934-892c-6ed721ae483b"/>
+				<reportElement x="0" y="0" width="555" height="100" uuid="76efd97e-0ab6-4f83-907e-074c2fa5d659"/>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "KopSurat.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA["C:\\Users\\damaikurnia\\Documents\\NetBeansProjects\\trunk\\BumDes\\src\\Lap\\KopSurat.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 	</title>
+	<pageHeader>
+		<band height="30">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="30" uuid="2852af08-ea3e-4793-9c50-898ac3a31552"/>
+				<box>
+					<pen lineStyle="Double"/>
+					<topPen lineWidth="3.0" lineStyle="Double"/>
+					<leftPen lineStyle="Double"/>
+					<bottomPen lineStyle="Double"/>
+					<rightPen lineStyle="Double"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DATA PELANGGAN]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
 	<detail>
 		<band height="71" splitType="Stretch">
 			<subreport>
-				<reportElement x="0" y="1" width="555" height="70" uuid="ec5b1380-5948-401a-b9f0-8e48a19f9770"/>
+				<reportElement x="0" y="0" width="555" height="70" uuid="ec5b1380-5948-401a-b9f0-8e48a19f9770"/>
 				<subreportParameter name="parameterSub">
 					<subreportParameterExpression><![CDATA[$F{dusun}]]></subreportParameterExpression>
 				</subreportParameter>
