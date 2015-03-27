@@ -13,18 +13,17 @@
 		<defaultValueExpression><![CDATA[$P{tSampai}]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[SELECT t.notransaksi,t.idanggota, a.namaanggota, t.tanggaltransaksi, t.jumlah,t.hargasatuan, t.denda,t.total
-FROM transaksi t, anggota a 
-where t.idanggota = a.idanggota and t.jenistransaksi = 'PENJUALAN' 
-AND tanggaltransaksi between $P{tDari} and $P{tSampai};]]>
+		<![CDATA[SELECT a.notransaksi, a.idbarang, b.namabarang, a.tanggaltransaksi, a.jumlah, a.hargasatuan, a.total 
+FROM transaksi a, barang b WHERE a.idbarang = b.idbarang AND a.tanggaltransaksi BETWEEN $P{tDari} AND $P{tSampai} AND a.jenistransaksi = 'PEMBELIAN'
+ORDER BY a.tanggaltransaksi;]]>
 	</queryString>
 	<field name="notransaksi" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="idanggota" class="java.lang.String">
+	<field name="idbarang" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="namaanggota" class="java.lang.String">
+	<field name="namabarang" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="tanggaltransaksi" class="java.sql.Date">
@@ -34,9 +33,6 @@ AND tanggaltransaksi between $P{tDari} and $P{tSampai};]]>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="hargasatuan" class="java.lang.Integer">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="denda" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="total" class="java.lang.Integer">
@@ -77,7 +73,7 @@ AND tanggaltransaksi between $P{tDari} and $P{tSampai};]]>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[LAPORAN PENDAPATAN AIR BERSIH]]></text>
+				<text><![CDATA[LAPORAN PEMBELIAN BARANG]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="144" y="30" width="73" height="14" uuid="edc08320-a6bd-46af-8eee-dcff8e4667e1"/>
@@ -124,7 +120,7 @@ AND tanggaltransaksi between $P{tDari} and $P{tSampai};]]>
 	<columnHeader>
 		<band height="23" splitType="Stretch">
 			<staticText>
-				<reportElement x="73" y="1" width="79" height="22" uuid="f1625c5e-9255-47be-aacc-06cf23ef8569"/>
+				<reportElement x="100" y="1" width="79" height="22" backcolor="#99FFFF" uuid="f1625c5e-9255-47be-aacc-06cf23ef8569"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -137,7 +133,7 @@ AND tanggaltransaksi between $P{tDari} and $P{tSampai};]]>
 				<text><![CDATA[NO TRANS]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="152" y="1" width="66" height="22" uuid="8c8ac37b-043d-423e-a1fb-97c7bc7f4b61"/>
+				<reportElement x="179" y="1" width="66" height="22" backcolor="#99FFFF" uuid="8c8ac37b-043d-423e-a1fb-97c7bc7f4b61"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -150,7 +146,7 @@ AND tanggaltransaksi between $P{tDari} and $P{tSampai};]]>
 				<text><![CDATA[KODE]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="218" y="1" width="79" height="22" uuid="90dafaa5-e4b5-466f-8822-294725ed0f5c"/>
+				<reportElement x="245" y="1" width="79" height="22" backcolor="#99FFFF" uuid="90dafaa5-e4b5-466f-8822-294725ed0f5c"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -163,7 +159,7 @@ AND tanggaltransaksi between $P{tDari} and $P{tSampai};]]>
 				<text><![CDATA[NAMA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="1" width="73" height="22" uuid="fcd9df0f-9747-48c1-b44e-793aeb4cfb71"/>
+				<reportElement x="27" y="1" width="73" height="22" backcolor="#99FFFF" uuid="fcd9df0f-9747-48c1-b44e-793aeb4cfb71"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -176,7 +172,7 @@ AND tanggaltransaksi between $P{tDari} and $P{tSampai};]]>
 				<text><![CDATA[TGL TRANS]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="297" y="1" width="54" height="22" uuid="ad993f10-1c53-4904-9289-0f84585e4b10"/>
+				<reportElement x="324" y="1" width="54" height="22" backcolor="#99FFFF" uuid="ad993f10-1c53-4904-9289-0f84585e4b10"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -189,7 +185,7 @@ AND tanggaltransaksi between $P{tDari} and $P{tSampai};]]>
 				<text><![CDATA[JUMLAH]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="351" y="1" width="70" height="22" uuid="929abb94-6b82-4f4c-9629-40f6a3a751dd"/>
+				<reportElement x="378" y="1" width="70" height="22" backcolor="#99FFFF" uuid="929abb94-6b82-4f4c-9629-40f6a3a751dd"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -202,20 +198,7 @@ AND tanggaltransaksi between $P{tDari} and $P{tSampai};]]>
 				<text><![CDATA[HARGA SATUAN]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="421" y="1" width="49" height="22" uuid="9358b9d8-cc61-44c2-85ec-cecad7dab13c"/>
-				<box>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[DENDA]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="470" y="1" width="85" height="22" uuid="059924b9-2f2f-4b5e-b1aa-40a30a0129bd"/>
+				<reportElement x="448" y="1" width="85" height="22" backcolor="#99FFFF" uuid="059924b9-2f2f-4b5e-b1aa-40a30a0129bd"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -232,7 +215,7 @@ AND tanggaltransaksi between $P{tDari} and $P{tSampai};]]>
 	<detail>
 		<band height="16" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="73" height="15" uuid="a2b490ca-2807-415f-81de-4833c2fbfeb1"/>
+				<reportElement x="27" y="0" width="73" height="15" uuid="a2b490ca-2807-415f-81de-4833c2fbfeb1"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -245,7 +228,7 @@ AND tanggaltransaksi between $P{tDari} and $P{tSampai};]]>
 				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($F{tanggaltransaksi})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="73" y="0" width="79" height="15" uuid="e2ba80e0-3830-417d-81db-ded8aeca08e4"/>
+				<reportElement x="100" y="0" width="79" height="15" uuid="e2ba80e0-3830-417d-81db-ded8aeca08e4"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -258,7 +241,7 @@ AND tanggaltransaksi between $P{tDari} and $P{tSampai};]]>
 				<textFieldExpression><![CDATA[$F{notransaksi}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="152" y="0" width="66" height="15" uuid="6b49e6b8-8fb3-4f88-bc40-336cde725180"/>
+				<reportElement x="179" y="0" width="66" height="15" uuid="6b49e6b8-8fb3-4f88-bc40-336cde725180"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -268,10 +251,10 @@ AND tanggaltransaksi between $P{tDari} and $P{tSampai};]]>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{idanggota}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{idbarang}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="218" y="0" width="79" height="15" uuid="b047798a-ab1c-4e1b-8477-f295609c0848"/>
+				<reportElement x="245" y="0" width="79" height="15" uuid="b047798a-ab1c-4e1b-8477-f295609c0848"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -281,10 +264,10 @@ AND tanggaltransaksi between $P{tDari} and $P{tSampai};]]>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{namaanggota}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{namabarang}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="297" y="0" width="54" height="15" uuid="23104bab-badc-4ac5-b386-69421e00d2f8"/>
+				<reportElement x="324" y="0" width="54" height="15" uuid="23104bab-badc-4ac5-b386-69421e00d2f8"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -297,7 +280,7 @@ AND tanggaltransaksi between $P{tDari} and $P{tSampai};]]>
 				<textFieldExpression><![CDATA[$F{jumlah}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="351" y="0" width="70" height="15" uuid="e9f36918-bb07-4086-90ae-acc33944e32c"/>
+				<reportElement x="378" y="0" width="70" height="15" uuid="e9f36918-bb07-4086-90ae-acc33944e32c"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -310,20 +293,7 @@ AND tanggaltransaksi between $P{tDari} and $P{tSampai};]]>
 				<textFieldExpression><![CDATA[$F{hargasatuan}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="421" y="0" width="49" height="15" uuid="b08eb3df-4eb9-4711-871c-6465ee957e51"/>
-				<box>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="12"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{denda}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="470" y="0" width="85" height="15" uuid="4b07773d-a796-44ee-9bf3-de056214ac20"/>
+				<reportElement x="448" y="0" width="85" height="15" uuid="4b07773d-a796-44ee-9bf3-de056214ac20"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -340,14 +310,14 @@ AND tanggaltransaksi between $P{tDari} and $P{tSampai};]]>
 	<summary>
 		<band height="14" splitType="Stretch">
 			<staticText>
-				<reportElement x="335" y="0" width="135" height="14" uuid="51ed921e-6732-4e8c-ae3a-108209077a3d"/>
+				<reportElement x="313" y="0" width="135" height="14" uuid="51ed921e-6732-4e8c-ae3a-108209077a3d"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[TOTAL PENDAPATAN]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="470" y="0" width="85" height="14" uuid="ffe0f6ce-98aa-40c4-a2f7-0e0a3a99baef"/>
+				<reportElement x="448" y="0" width="85" height="14" uuid="ffe0f6ce-98aa-40c4-a2f7-0e0a3a99baef"/>
 				<box>
 					<topPen lineWidth="0.0"/>
 					<leftPen lineWidth="0.0"/>

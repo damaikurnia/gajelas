@@ -78,19 +78,6 @@
                 <Property name="useNullLayout" type="boolean" value="false"/>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JLabel" name="jLabel4">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Tahoma" size="11" style="1"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="TANGGAL"/>
-                  </Properties>
-                  <Constraints>
-                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="20" y="40" width="-1" height="20"/>
-                    </Constraint>
-                  </Constraints>
-                </Component>
                 <Component class="javax.swing.JLabel" name="jLabel7">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -104,99 +91,63 @@
                     </Constraint>
                   </Constraints>
                 </Component>
-                <Component class="javax.swing.JComboBox" name="cb_tahun">
+                <Component class="javax.swing.JLabel" name="jLabel11">
                   <Properties>
-                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="3">
-                        <StringItem index="0" value="-"/>
-                        <StringItem index="1" value="2014"/>
-                        <StringItem index="2" value="2015"/>
-                      </StringArray>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Tahoma" size="11" style="1"/>
                     </Property>
+                    <Property name="text" type="java.lang.String" value="TANGGAL"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_tahunActionPerformed"/>
-                  </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="250" y="40" width="-1" height="-1"/>
+                      <AbsoluteConstraints x="20" y="30" width="-1" height="30"/>
                     </Constraint>
                   </Constraints>
                 </Component>
-                <Component class="javax.swing.JComboBox" name="cb_tanggal">
+                <Component class="com.toedter.calendar.JDateChooser" name="date_dari">
                   <Properties>
-                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="32">
-                        <StringItem index="0" value="-"/>
-                        <StringItem index="1" value="1"/>
-                        <StringItem index="2" value="2"/>
-                        <StringItem index="3" value="3"/>
-                        <StringItem index="4" value="4"/>
-                        <StringItem index="5" value="5"/>
-                        <StringItem index="6" value="6"/>
-                        <StringItem index="7" value="7"/>
-                        <StringItem index="8" value="8"/>
-                        <StringItem index="9" value="9"/>
-                        <StringItem index="10" value="10"/>
-                        <StringItem index="11" value="11"/>
-                        <StringItem index="12" value="12"/>
-                        <StringItem index="13" value="13"/>
-                        <StringItem index="14" value="14"/>
-                        <StringItem index="15" value="15"/>
-                        <StringItem index="16" value="16"/>
-                        <StringItem index="17" value="17"/>
-                        <StringItem index="18" value="18"/>
-                        <StringItem index="19" value="19"/>
-                        <StringItem index="20" value="20"/>
-                        <StringItem index="21" value="21"/>
-                        <StringItem index="22" value="22"/>
-                        <StringItem index="23" value="23"/>
-                        <StringItem index="24" value="24"/>
-                        <StringItem index="25" value="25"/>
-                        <StringItem index="26" value="26"/>
-                        <StringItem index="27" value="27"/>
-                        <StringItem index="28" value="28"/>
-                        <StringItem index="29" value="29"/>
-                        <StringItem index="30" value="30"/>
-                        <StringItem index="31" value="31"/>
-                      </StringArray>
-                    </Property>
+                    <Property name="dateFormatString" type="java.lang.String" value="dd-MMM-yyyy"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_tanggalActionPerformed"/>
-                  </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="90" y="40" width="-1" height="-1"/>
+                      <AbsoluteConstraints x="90" y="30" width="150" height="30"/>
                     </Constraint>
                   </Constraints>
                 </Component>
-                <Component class="javax.swing.JComboBox" name="cb_bulan">
+                <Component class="javax.swing.JLabel" name="jLabel4">
                   <Properties>
-                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="13">
-                        <StringItem index="0" value="-"/>
-                        <StringItem index="1" value="JANUARI"/>
-                        <StringItem index="2" value="FEBRUARI"/>
-                        <StringItem index="3" value="MARET"/>
-                        <StringItem index="4" value="APRIL"/>
-                        <StringItem index="5" value="MEI"/>
-                        <StringItem index="6" value="JUNI"/>
-                        <StringItem index="7" value="JULI"/>
-                        <StringItem index="8" value="AGUSTUS"/>
-                        <StringItem index="9" value="SEPTEMBER"/>
-                        <StringItem index="10" value="OKTOBER"/>
-                        <StringItem index="11" value="NOVEMBER"/>
-                        <StringItem index="12" value="DESEMBER"/>
-                      </StringArray>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Tahoma" size="14" style="1"/>
                     </Property>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
+                    <Property name="text" type="java.lang.String" value="-"/>
+                  </Properties>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="250" y="30" width="10" height="30"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+                <Component class="com.toedter.calendar.JDateChooser" name="date_sampai">
+                  <Properties>
+                    <Property name="dateFormatString" type="java.lang.String" value="dd-MMM-yyyy"/>
+                  </Properties>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="270" y="30" width="150" height="30"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+                <Component class="javax.swing.JButton" name="button_tampil">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="TAMPIL"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_bulanActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button_tampilActionPerformed"/>
                   </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="140" y="40" width="-1" height="-1"/>
+                      <AbsoluteConstraints x="440" y="30" width="-1" height="30"/>
                     </Constraint>
                   </Constraints>
                 </Component>
@@ -263,6 +214,19 @@
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="490" y="260" width="170" height="-1"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+                <Component class="javax.swing.JButton" name="button_cetak">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="CETAK"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button_cetakActionPerformed"/>
+                  </Events>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="10" y="260" width="170" height="30"/>
                     </Constraint>
                   </Constraints>
                 </Component>

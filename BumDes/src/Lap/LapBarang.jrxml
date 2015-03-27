@@ -43,18 +43,6 @@
 	<pageHeader>
 		<band height="39" splitType="Stretch">
 			<staticText>
-				<reportElement x="214" y="19" width="53" height="20" uuid="bae57cef-5f05-49fb-92ec-e40c5a920660"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="12"/>
-				</textElement>
-				<text><![CDATA[PERIODE]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="267" y="19" width="92" height="20" uuid="320129bc-3f8e-461d-9052-b98bfcf1a66c"/>
-				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{sysdate()}]]></textFieldExpression>
-			</textField>
-			<staticText>
 				<reportElement x="0" y="0" width="555" height="20" uuid="d20057cb-3de7-4068-b3a9-2d3193edfab7"/>
 				<box>
 					<topPen lineWidth="3.0" lineStyle="Double"/>
@@ -186,8 +174,8 @@
 			</textField>
 		</band>
 	</detail>
-	<columnFooter>
-		<band height="20" splitType="Stretch">
+	<summary>
+		<band height="21">
 			<textField>
 				<reportElement x="323" y="0" width="76" height="20" uuid="4f6804f4-0f61-4ec2-b8fe-0b2c1cae2c7f"/>
 				<box>
@@ -231,5 +219,5 @@
 				<text><![CDATA[TOTAL]]></text>
 			</staticText>
 		</band>
-	</columnFooter>
+	</summary>
 </jasperReport>

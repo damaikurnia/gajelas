@@ -74,7 +74,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
             dialog_blmBayar.setSize(673, 413);
             dialog_blmBayar.setLocationRelativeTo(null);
             dialog_blmBayar.setTitle("DATA ANGGOTA BLM BAYAR");
-            
+
             //set date hari ini
             GregorianCalendar gc = new GregorianCalendar();
             date_dari.setDate(gc.getTime());
@@ -257,6 +257,11 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         jPanel7.add(text_ttlbeliall, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 340, 170, -1));
 
         jButton1.setText("CETAK");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel7.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 140, 30));
 
         jPanel4.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 670, 380));
@@ -1097,8 +1102,23 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
     private void button_tampilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_tampilActionPerformed
         String tglDari = new SimpleDateFormat("yyyy-MM-dd").format(date_dari.getDate());
         String tglSampai = new SimpleDateFormat("yyyy-MM-dd").format(date_sampai.getDate());
-        update2(tglDari,tglSampai);
+        update2(tglDari, tglSampai);
     }//GEN-LAST:event_button_tampilActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Connection kon = new Koneksi().getConnection();
+        String reportSource = "./src/Lap/LapPenjualanAir.jasper";
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("tDari", new SimpleDateFormat("yyyy-MM-dd").format(date_dari.getDate()));
+        params.put("tSampai", new SimpleDateFormat("yyyy-MM-dd").format(date_sampai.getDate()));
+        try {
+            JasperPrint jasperPrint = JasperFillManager.fillReport(reportSource, params, kon);
+            JasperViewer.viewReport(jasperPrint, false);
+
+        } catch (JRException ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 //    public void update() {
 //        try {
@@ -1121,10 +1141,9 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
 //            Logger.getLogger(FormAnggota.class.getName()).log(Level.SEVERE, null, ex);
 //        }
 //    }
-
-    public void update2(String tglDari,String tglSampai) {
+    public void update2(String tglDari, String tglSampai) {
         try {
-            List<Transaksi> agt = TransaksiKontrol.getKoneksi().jual_selectTransaksiAll(tglDari,tglSampai);
+            List<Transaksi> agt = TransaksiKontrol.getKoneksi().jual_selectTransaksiAll(tglDari, tglSampai);
             TransaksiJualAllTM model = new TransaksiJualAllTM(agt);
             tabel_penjualan2.setModel(model);
 
@@ -1376,6 +1395,22 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(FormTransaksiPenjualan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>

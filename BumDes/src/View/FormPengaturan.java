@@ -31,38 +31,13 @@ public class FormPengaturan extends javax.swing.JFrame {
      * Creates new form FormAir
      */
     public FormPengaturan() {
-        try {
-            initComponents();
-            this.setLocationRelativeTo(null);
-            Profil prof = PengaturanKontrol.getKoneksi().tampilProfil();
-            label_namaDesa.setText("BADAN USAHA MILIK DESA " + prof.getNamadesa());
-            label_alamatNotelp.setText(prof.getAlamatdesa() + " - " + prof.getNotelp());
-            text_namadesa.setText(prof.getNamadesa());
-            text_alamatdesa.setText(prof.getAlamatdesa());
-            text_noTelp.setText(prof.getNotelp());
-            text_desa.setText(prof.getDesa());
-            text_kecamatan.setText(prof.getKecamatan());
-            text_kabupaten.setText(prof.getKabupaten());
-            text_provinsi.setText(prof.getProvinsi());
-            text_email.setText(prof.getEmail());
 
-            String path = new File(".").getCanonicalPath();
-            Toolkit toolkit = Toolkit.getDefaultToolkit();
-            Image image = toolkit.getImage(path + "/Gambar/" + prof.getLogo());
-//            Image imagedResized = image.getScaledInstance(200, 250, Image.SCALE_DEFAULT);
-            Image imagedResized = image.getScaledInstance(175, 145, Image.SCALE_DEFAULT);
-            ImageIcon imageIcon = new ImageIcon(imagedResized);
+        initComponents();
+        this.setLocationRelativeTo(null);
+        isiProfil();
 
-            label_gambar.setIcon(imageIcon);
-            label_namaFile.setText(prof.getLogo());
-            label_namaFile.setVisible(false);
-            
-            sinkronGambar();
-        } catch (SQLException ex) {
-            Logger.getLogger(FormPengaturan.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(FormPengaturan.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        sinkronGambar();
+
     }
 
     /**
@@ -145,8 +120,8 @@ public class FormPengaturan extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(label_namaDesa, javax.swing.GroupLayout.PREFERRED_SIZE, 483, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 483, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label_alamatNotelp, javax.swing.GroupLayout.PREFERRED_SIZE, 483, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(label_alamatNotelp, javax.swing.GroupLayout.PREFERRED_SIZE, 767, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(178, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,7 +132,7 @@ public class FormPengaturan extends javax.swing.JFrame {
                 .addComponent(label_namaDesa, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(label_alamatNotelp)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addGap(0, 22, Short.MAX_VALUE))
             .addComponent(label_kop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -490,6 +465,8 @@ public class FormPengaturan extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -502,13 +479,46 @@ public class FormPengaturan extends javax.swing.JFrame {
     public void sinkronGambar() {
         try {
             Profil prof = PengaturanKontrol.getKoneksi().tampilProfil();
-            String path = new File(".").getCanonicalPath()+"/Gambar/"+prof.getLogo();
-            
+            String path = new File(".").getCanonicalPath() + "/Gambar/" + prof.getLogo();
+
             Toolkit toolkit = Toolkit.getDefaultToolkit();
             Image image = toolkit.getImage(path);
-            Image imagedResized = image.getScaledInstance(110,100, Image.SCALE_DEFAULT);
+            Image imagedResized = image.getScaledInstance(110, 100, Image.SCALE_DEFAULT);
             ImageIcon imageIcon = new ImageIcon(imagedResized);
             label_kop.setIcon(imageIcon);
+        } catch (IOException ex) {
+            Logger.getLogger(FormPengaturan.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(FormPengaturan.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void isiProfil() {
+        try {
+            Profil prof = PengaturanKontrol.getKoneksi().tampilProfil();
+            label_namaDesa.setText("BADAN USAHA MILIK DESA " + prof.getNamadesa());
+            label_alamatNotelp.setText(prof.getAlamatdesa()+" "+prof.getDesa()+" "+prof.getKecamatan()
+                    +" "+prof.getKabupaten()+" "+prof.getProvinsi()
+                    + " - " + prof.getNotelp());
+            text_namadesa.setText(prof.getNamadesa());
+            text_alamatdesa.setText(prof.getAlamatdesa());
+            text_noTelp.setText(prof.getNotelp());
+            text_desa.setText(prof.getDesa());
+            text_kecamatan.setText(prof.getKecamatan());
+            text_kabupaten.setText(prof.getKabupaten());
+            text_provinsi.setText(prof.getProvinsi());
+            text_email.setText(prof.getEmail());
+
+            String path = new File(".").getCanonicalPath();
+            Toolkit toolkit = Toolkit.getDefaultToolkit();
+            Image image = toolkit.getImage(path + "/Gambar/" + prof.getLogo());
+//            Image imagedResized = image.getScaledInstance(200, 250, Image.SCALE_DEFAULT);
+            Image imagedResized = image.getScaledInstance(175, 145, Image.SCALE_DEFAULT);
+            ImageIcon imageIcon = new ImageIcon(imagedResized);
+
+            label_gambar.setIcon(imageIcon);
+            label_namaFile.setText(prof.getLogo());
+            label_namaFile.setVisible(false);
         } catch (IOException ex) {
             Logger.getLogger(FormPengaturan.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
