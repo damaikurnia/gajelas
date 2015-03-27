@@ -7,7 +7,6 @@ package View;
 
 import Custom.RataKanan;
 import Custom.RenderWarnaWarni;
-//import Kelas.Barang;
 import Kelas.Profil;
 import Custom.Tanggal;
 import Kelas.Anggota;
@@ -21,8 +20,11 @@ import Kontrol.TransaksiKontrol;
 import TabelModel.AnggotaTM;
 import TabelModel.HistoriTM;
 import TabelModel.TransaksiJualAllTM;
-import TabelModel.TransaksiJualTM;
 import java.awt.Color;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -33,6 +35,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableCellRenderer;
 import net.sf.jasperreports.engine.JRException;
@@ -50,12 +53,9 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
      * Creates new form FormAir
      */
     public FormTransaksiPenjualan() {
-        try {
             initComponents();
             this.setLocationRelativeTo(null);
-            Profil prof = PengaturanKontrol.getKoneksi().tampilProfil();
-            label_namaDesa.setText("BADAN USAHA MILIK DESA " + prof.getNamadesa());
-            label_alamatNotelp.setText(prof.getAlamatdesa() + " - " + prof.getNotelp());
+            sinkronGambar();
             label_tanggal.setText(Tanggal.getTanggal());
 
             dialog_pembelian.setVisible(false);
@@ -81,9 +81,6 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
             date_sampai.setDate(gc.getTime());
 //            update();
 
-        } catch (SQLException ex) {
-            Logger.getLogger(FormTransaksiPenjualan.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     /**
@@ -133,6 +130,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         label_namaDesa = new javax.swing.JLabel();
         label_alamatNotelp = new javax.swing.JLabel();
+        label_kop = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -376,16 +374,19 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         label_alamatNotelp.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         label_alamatNotelp.setText("<<ALAMAT, NO TELP>>");
 
+        label_kop.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(label_namaDesa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(label_alamatNotelp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addComponent(label_kop, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(label_alamatNotelp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(label_namaDesa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 836, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -397,7 +398,8 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
                 .addComponent(label_namaDesa, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(label_alamatNotelp)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
+            .addComponent(label_kop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -523,11 +525,6 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         jLabel22.setText("NAMA PELANGGAN");
 
         combo_bulan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "JANUARI", "FEBRUARI", "MARET", "APRIL", "MEI", "JUNI", "JULI", "AGUSTUS", "SEPTEMBER", "OKTOBER", "NOVEMBER", "DESEMBER" }));
-        combo_bulan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                combo_bulanActionPerformed(evt);
-            }
-        });
 
         jLabel23.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -608,7 +605,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
                         .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(40, 40, 40)
                         .addComponent(text_nama, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -741,7 +738,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -975,58 +972,6 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
             Logger.getLogger(FormTransaksiPenjualan.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_tabel_pelangganMouseClicked
-
-    private void combo_bulanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_bulanActionPerformed
-//        try {
-//            if (text_noPelanggan.getText().equals("")) {
-//            } else {
-//                String noPelanggan = text_noPelanggan.getText();
-//                String namaPelanggan = text_nama.getText();
-//                String bulan = combo_bulan.getSelectedItem().toString();
-//
-//                Pemakaian p = new Pemakaian("", new Anggota(noPelanggan,
-//                        namaPelanggan, "", "", "", "", 0, 0, "", "", "", "", ""), 0, 0, 0,
-//                        bulan, "");
-//                Pemakaian pem = PemakaianKontrol.getKoneksi().selectPemakaian(p);
-//                text_noPelanggan.setText(pem.getIdanggota().getIdAnggota());
-//                text_airawal.setText(Double.toString(pem.getAirlunas()).split("\\.")[0]);
-//                text_airbln.setText(Double.toString(pem.getAirterakhir()).split("\\.")[0]);
-//                text_airdibayar.setText(Double.toString(pem.getAirdibayar()).split("\\.")[0]);
-//                label_noTrans.setText(pem.getNotransaksi());
-//                dialog_cariP.setVisible(false);
-//                label_noTrans.setVisible(true);
-//                String tanggal = Tanggal.getTanggal2();
-//                double total = Integer.parseInt(text_airdibayar.getText())
-//                        * Integer.parseInt(text_hargaSatuan.getText());
-//                double dend = 0;
-//
-//                if (TransaksiKontrol.getKoneksi().jual_selectTransaksiCek(label_noTrans.getText()) == true) {
-//                    label_status.setText("STATUS : LUNAS");
-//                    total = total + dend;
-//                    text_denda.setText(Double.toString(dend).split("\\.")[0]);
-//                    text_total.setText(Double.toString(total).split("\\.")[0]);
-//                } else { //kalo belum bayar
-//                    int blnSkrg = Integer.parseInt(tanggal.split("-")[1]);
-//                    int blnPemb = generateBulantoInt(bulan);
-//                    label_status.setText("STATUS : BLM LUNAS");
-////                    System.out.println(blnSkrg + " " + blnPemb);
-//                    if (blnPemb < blnSkrg && Integer.parseInt(tanggal.split("-")[2]) > 10) {//kalo denda
-//                        JOptionPane.showMessageDialog(null, "Denda Nih");
-//                        dend = total * 0.02;
-//                        total = total + dend;
-//                        text_denda.setText(Double.toString(dend).split("\\.")[0]);
-//                        text_total.setText(Double.toString(total).split("\\.")[0]);
-//                    } else {//kalo ga denda
-//                        total = total + dend;
-//                        text_denda.setText(Double.toString(dend).split("\\.")[0]);
-//                        text_total.setText(Double.toString(total).split("\\.")[0]);
-//                    }
-//                }
-//            }
-//        } catch (Exception ex) {
-//            JOptionPane.showMessageDialog(null, "Data Pelanggan tidak tersedia");
-//        }
-    }//GEN-LAST:event_combo_bulanActionPerformed
 
     private void tabel_historiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabel_historiMouseClicked
         int row1 = tabel_histori.getSelectedRow();
@@ -1335,6 +1280,28 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
             Logger.getLogger(FormPemakaianAir.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public void sinkronGambar() {
+        try {
+            Profil prof = PengaturanKontrol.getKoneksi().tampilProfil();
+            label_namaDesa.setText("BADAN USAHA MILIK DESA " + prof.getNamadesa());
+            label_alamatNotelp.setText(prof.getAlamatdesa()+" "+prof.getDesa()+" "+prof.getKecamatan()
+                    +" "+prof.getKabupaten()+" "+prof.getProvinsi()
+                    + " - " + prof.getNotelp());
+            
+            String path = new File(".").getCanonicalPath() + "/Gambar/" + prof.getLogo();
+
+            Toolkit toolkit = Toolkit.getDefaultToolkit();
+            Image image = toolkit.getImage(path);
+            Image imagedResized = image.getScaledInstance(110, 100, Image.SCALE_DEFAULT);
+            ImageIcon imageIcon = new ImageIcon(imagedResized);
+            label_kop.setIcon(imageIcon);
+        } catch (IOException ex) {
+            Logger.getLogger(FormPengaturan.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(FormPengaturan.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
 //    public String generateJatuhTempo(String bulan) {
 //        String tanggal = Tanggal.getTanggal2();
@@ -1505,6 +1472,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JLabel label_alamatNotelp;
     private javax.swing.JLabel label_jmlBeli;
+    private javax.swing.JLabel label_kop;
     private javax.swing.JLabel label_namaDesa;
     private javax.swing.JLabel label_noTrans;
     private javax.swing.JLabel label_status;

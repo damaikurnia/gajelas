@@ -49,22 +49,15 @@ public class FormAnggota extends javax.swing.JFrame {
      * Creates new form FormAir
      */
     public FormAnggota() {
-        try {
-            initComponents();
-            this.setLocationRelativeTo(null);
-            Profil prof = PengaturanKontrol.getKoneksi().tampilProfil();
-            label_namaDesa.setText("BADAN USAHA MILIK DESA " + prof.getNamadesa());
-            label_alamatNotelp.setText(prof.getAlamatdesa() + " - " + prof.getNotelp());
+        initComponents();
+        this.setLocationRelativeTo(null);
 
-            resetdefault();
-            dialog_anggota.setVisible(false);
-            dialog_anggota.setSize(627, 350);
-            dialog_anggota.setLocationRelativeTo(null);
-            dialog_anggota.setTitle("DATA ANGGOTA");
-            label_namaFile.setVisible(false);
-        } catch (SQLException ex) {
-            Logger.getLogger(FormAnggota.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        sinkronGambar();
+        dialog_anggota.setVisible(false);
+        dialog_anggota.setSize(627, 350);
+        dialog_anggota.setLocationRelativeTo(null);
+        dialog_anggota.setTitle("DATA ANGGOTA");
+        label_namaFile.setVisible(false);
     }
 
     /**
@@ -82,11 +75,13 @@ public class FormAnggota extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tabel_anggota = new javax.swing.JTable();
+        button_cetak = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         label_namaDesa = new javax.swing.JLabel();
         label_alamatNotelp = new javax.swing.JLabel();
+        label_kop = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -120,7 +115,6 @@ public class FormAnggota extends javax.swing.JFrame {
         text_rt = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         text_kecamatan = new javax.swing.JTextField();
-        button_cetak = new javax.swing.JButton();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         text_biaya = new javax.swing.JTextField();
@@ -128,6 +122,7 @@ public class FormAnggota extends javax.swing.JFrame {
         label_Gambar = new javax.swing.JLabel();
         button_upload = new javax.swing.JButton();
         label_namaFile = new javax.swing.JLabel();
+        button_cetakNota = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -169,7 +164,7 @@ public class FormAnggota extends javax.swing.JFrame {
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -195,7 +190,15 @@ public class FormAnggota extends javax.swing.JFrame {
 
         jPanel10.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 590, 200));
 
-        dialog_anggota.getContentPane().add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, 310));
+        button_cetak.setText("CETAK DAFTAR ANGGOTA");
+        button_cetak.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_cetakActionPerformed(evt);
+            }
+        });
+        jPanel10.add(button_cetak, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 310, -1, -1));
+
+        dialog_anggota.getContentPane().add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, 350));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -213,16 +216,19 @@ public class FormAnggota extends javax.swing.JFrame {
         label_alamatNotelp.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         label_alamatNotelp.setText("<<ALAMAT, NO TELP>>");
 
+        label_kop.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(label_namaDesa, javax.swing.GroupLayout.DEFAULT_SIZE, 848, Short.MAX_VALUE)
-                    .addComponent(label_alamatNotelp, javax.swing.GroupLayout.DEFAULT_SIZE, 848, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addComponent(label_kop, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(label_namaDesa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 730, Short.MAX_VALUE)
+                    .addComponent(label_alamatNotelp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -234,7 +240,8 @@ public class FormAnggota extends javax.swing.JFrame {
                 .addComponent(label_namaDesa, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(label_alamatNotelp)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
+            .addComponent(label_kop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 870, 110));
@@ -349,14 +356,6 @@ public class FormAnggota extends javax.swing.JFrame {
         jPanel3.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 90, -1, 20));
         jPanel3.add(text_kecamatan, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 60, 190, -1));
 
-        button_cetak.setText("CETAK");
-        button_cetak.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button_cetakActionPerformed(evt);
-            }
-        });
-        jPanel3.add(button_cetak, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 320, -1, -1));
-
         jLabel18.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel18.setText("TOTAL BIAYA");
         jPanel3.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 270, -1, 20));
@@ -372,7 +371,7 @@ public class FormAnggota extends javax.swing.JFrame {
                 button_batalActionPerformed(evt);
             }
         });
-        jPanel3.add(button_batal, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 320, -1, -1));
+        jPanel3.add(button_batal, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 320, -1, -1));
 
         label_Gambar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel3.add(label_Gambar, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 60, 160, 200));
@@ -387,6 +386,14 @@ public class FormAnggota extends javax.swing.JFrame {
 
         label_namaFile.setText("jLabel20");
         jPanel3.add(label_namaFile, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 40, 160, -1));
+
+        button_cetakNota.setText("CETAK NOTA ");
+        button_cetakNota.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_cetakNotaActionPerformed(evt);
+            }
+        });
+        jPanel3.add(button_cetakNota, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 320, -1, -1));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 870, 360));
 
@@ -678,26 +685,12 @@ public class FormAnggota extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void button_cetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_cetakActionPerformed
-//        JasperPrint jasperPrint = null;
-//        try {
-////            JasperCompileManager.compileReportToFile("./src/iReport/LapPelanggan.jrxml");
-//            jasperPrint = JasperFillManager.fillReport("/LapNya/LapPelanggan.jasper", new HashMap(),
-//                    new Koneksi().getConnection());
-//            JasperViewer jasperViewer = new JasperViewer(jasperPrint);
-//            jasperViewer.setVisible(true);
-//        } catch (JRException ex) {
-//            ex.printStackTrace();
-//        }
-
         Connection kon = new Koneksi().getConnection();
-
         String reportSource = "./src/Lap/LapPelanggan.jasper";
-
         Map<String, Object> params = new HashMap<String, Object>();
         try {
             JasperPrint jasperPrint = JasperFillManager.fillReport(reportSource, params, kon);
             JasperViewer.viewReport(jasperPrint, false);
-
         } catch (JRException ex) {
             ex.printStackTrace();
         }
@@ -724,6 +717,16 @@ public class FormAnggota extends javax.swing.JFrame {
 //            System.out.println("file : " + file.getPath());
         }
     }//GEN-LAST:event_button_uploadActionPerformed
+
+    private void button_cetakNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_cetakNotaActionPerformed
+        if (text_idAnggota.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Anggota tidak ditemukan.");
+        } else {
+            Transaksi trs = new Transaksi();
+            trs.setNoTrans(text_idAnggota.getText()+"-0");
+            cetakKuitansi(trs);
+        }
+    }//GEN-LAST:event_button_cetakNotaActionPerformed
 
     public void resetdefault() {
         text_idAnggota.setText("");
@@ -865,6 +868,28 @@ public class FormAnggota extends javax.swing.JFrame {
         return jatuhTempo;
     }
 
+    public void sinkronGambar() {
+        try {
+            Profil prof = PengaturanKontrol.getKoneksi().tampilProfil();
+            label_namaDesa.setText("BADAN USAHA MILIK DESA " + prof.getNamadesa());
+            label_alamatNotelp.setText(prof.getAlamatdesa() + " " + prof.getDesa() + " " + prof.getKecamatan()
+                    + " " + prof.getKabupaten() + " " + prof.getProvinsi()
+                    + " - " + prof.getNotelp());
+
+            String path = new File(".").getCanonicalPath() + "/Gambar/" + prof.getLogo();
+
+            Toolkit toolkit = Toolkit.getDefaultToolkit();
+            Image image = toolkit.getImage(path);
+            Image imagedResized = image.getScaledInstance(110, 100, Image.SCALE_DEFAULT);
+            ImageIcon imageIcon = new ImageIcon(imagedResized);
+            label_kop.setIcon(imageIcon);
+        } catch (IOException ex) {
+            Logger.getLogger(FormPengaturan.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(FormPengaturan.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -910,6 +935,7 @@ public class FormAnggota extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton button_batal;
     private javax.swing.JButton button_cetak;
+    private javax.swing.JButton button_cetakNota;
     private javax.swing.JButton button_hapus;
     private javax.swing.JButton button_tabel;
     private javax.swing.JButton button_tambah;
@@ -959,6 +985,7 @@ public class FormAnggota extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel label_Gambar;
     private javax.swing.JLabel label_alamatNotelp;
+    private javax.swing.JLabel label_kop;
     private javax.swing.JLabel label_namaDesa;
     private javax.swing.JLabel label_namaFile;
     private javax.swing.JTable tabel_anggota;

@@ -16,6 +16,10 @@ import Kontrol.PengaturanKontrol;
 import Kontrol.TransaksiKontrol;
 import TabelModel.TransaksiBeliAllTM;
 import TabelModel.TransaksiBeliTM;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -25,6 +29,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableCellRenderer;
 import net.sf.jasperreports.engine.JRException;
@@ -45,10 +50,6 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
         try {
             initComponents();
             this.setLocationRelativeTo(null);
-            Profil prof = PengaturanKontrol.getKoneksi().tampilProfil();
-            label_namaDesa.setText("BADAN USAHA MILIK DESA " + prof.getNamadesa());
-            label_alamatNotelp.setText(prof.getAlamatdesa() + " - " + prof.getNotelp());
-            label_tanggal.setText(Tanggal.getTanggal());
 
             dialog_pembelian.setVisible(false);
             dialog_pembelian.setSize(688, 475);
@@ -58,6 +59,7 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
             update();
             isiList();
             
+            sinkronGambar();
             GregorianCalendar gc = new GregorianCalendar();
             date_dari.setDate(gc.getTime());
             date_sampai.setDate(gc.getTime());
@@ -97,6 +99,7 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         label_namaDesa = new javax.swing.JLabel();
         label_alamatNotelp = new javax.swing.JLabel();
+        label_kop = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -238,16 +241,19 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
         label_alamatNotelp.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         label_alamatNotelp.setText("<<ALAMAT, NO TELP>>");
 
+        label_kop.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(label_namaDesa, javax.swing.GroupLayout.DEFAULT_SIZE, 728, Short.MAX_VALUE)
-                    .addComponent(label_alamatNotelp, javax.swing.GroupLayout.DEFAULT_SIZE, 728, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addComponent(label_kop, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(label_alamatNotelp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(label_namaDesa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 611, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -259,7 +265,8 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
                 .addComponent(label_namaDesa, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(label_alamatNotelp)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
+            .addComponent(label_kop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 110));
@@ -769,6 +776,28 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
         combo_barang.setEnabled(false);
         text_noTrans.setEditable(false);
     }
+    
+    public void sinkronGambar() {
+        try {
+            Profil prof = PengaturanKontrol.getKoneksi().tampilProfil();
+            label_namaDesa.setText("BADAN USAHA MILIK DESA " + prof.getNamadesa());
+            label_alamatNotelp.setText(prof.getAlamatdesa()+" "+prof.getDesa()+" "+prof.getKecamatan()
+                    +" "+prof.getKabupaten()+" "+prof.getProvinsi()
+                    + " - " + prof.getNotelp());
+            
+            String path = new File(".").getCanonicalPath() + "/Gambar/" + prof.getLogo();
+
+            Toolkit toolkit = Toolkit.getDefaultToolkit();
+            Image image = toolkit.getImage(path);
+            Image imagedResized = image.getScaledInstance(110, 100, Image.SCALE_DEFAULT);
+            ImageIcon imageIcon = new ImageIcon(imagedResized);
+            label_kop.setIcon(imageIcon);
+        } catch (IOException ex) {
+            Logger.getLogger(FormPengaturan.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(FormPengaturan.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -873,6 +902,7 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel label_alamatNotelp;
     private javax.swing.JLabel label_jmlBeli;
+    private javax.swing.JLabel label_kop;
     private javax.swing.JLabel label_namaDesa;
     private javax.swing.JLabel label_tanggal;
     private javax.swing.JTable tabel_pembelian;

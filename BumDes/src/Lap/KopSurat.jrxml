@@ -75,7 +75,7 @@
 			</staticText>
 			<image>
 				<reportElement x="2" y="2" width="105" height="98" uuid="39855cbc-82b9-4b84-97ac-eac203219d68"/>
-				<imageExpression><![CDATA["C:\\Users\\damaikurnia\\Documents\\NetBeansProjects\\trunk\\BumDes\\Gambar\\logodesa.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["/home/damaikurnia/NetBeansProjects/trunk/BumDes/Gambar/logodesa.jpg"]]></imageExpression>
 			</image>
 			<textField>
 				<reportElement x="357" y="2" width="100" height="20" uuid="bd492475-13bf-44f4-b7dd-e123d432e3cc"/>

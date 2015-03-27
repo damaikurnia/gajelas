@@ -34,9 +34,9 @@
 	<title>
 		<band height="100" splitType="Stretch">
 			<subreport>
-				<reportElement x="0" y="0" width="555" height="100" uuid="4b63df5c-4cb5-4de2-812e-c723cd38aa13"/>
+				<reportElement x="0" y="0" width="555" height="100" uuid="22de2793-b079-4bb5-a93b-cfd8edbdd130"/>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression><![CDATA["C:\\Users\\damaikurnia\\Documents\\NetBeansProjects\\trunk\\BumDes\\src\\Lap\\KopSurat.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "KopSurat.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 	</title>

@@ -7,9 +7,14 @@ package View;
 
 import Kelas.Profil;
 import Kontrol.PengaturanKontrol;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -21,15 +26,9 @@ public class FormKegiatan extends javax.swing.JFrame {
      * Creates new form FormAir
      */
     public FormKegiatan() {
-        try {
-            initComponents();
-            this.setLocationRelativeTo(null);
-            Profil prof = PengaturanKontrol.getKoneksi().tampilProfil();
-            label_namaDesa.setText("BADAN USAHA MILIK DESA "+prof.getNamadesa());
-            label_alamatNotelp.setText(prof.getAlamatdesa()+" - "+prof.getNotelp());
-        } catch (SQLException ex) {
-            Logger.getLogger(FormKegiatan.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        initComponents();
+        this.setLocationRelativeTo(null);
+        sinkronGambar();
     }
 
     /**
@@ -46,6 +45,7 @@ public class FormKegiatan extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         label_namaDesa = new javax.swing.JLabel();
         label_alamatNotelp = new javax.swing.JLabel();
+        label_kop = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -78,16 +78,19 @@ public class FormKegiatan extends javax.swing.JFrame {
         label_alamatNotelp.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         label_alamatNotelp.setText("<<ALAMAT, NO TELP>>");
 
+        label_kop.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addComponent(label_kop, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 966, Short.MAX_VALUE)
-                    .addComponent(label_namaDesa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(label_alamatNotelp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(label_alamatNotelp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(label_namaDesa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 855, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -100,6 +103,7 @@ public class FormKegiatan extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(label_alamatNotelp)
                 .addContainerGap(17, Short.MAX_VALUE))
+            .addComponent(label_kop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -333,6 +337,28 @@ public class FormKegiatan extends javax.swing.JFrame {
             }
         });
     }
+    
+    public void sinkronGambar() {
+        try {
+            Profil prof = PengaturanKontrol.getKoneksi().tampilProfil();
+            label_namaDesa.setText("BADAN USAHA MILIK DESA " + prof.getNamadesa());
+            label_alamatNotelp.setText(prof.getAlamatdesa()+" "+prof.getDesa()+" "+prof.getKecamatan()
+                    +" "+prof.getKabupaten()+" "+prof.getProvinsi()
+                    + " - " + prof.getNotelp());
+            
+            String path = new File(".").getCanonicalPath() + "/Gambar/" + prof.getLogo();
+
+            Toolkit toolkit = Toolkit.getDefaultToolkit();
+            Image image = toolkit.getImage(path);
+            Image imagedResized = image.getScaledInstance(110, 100, Image.SCALE_DEFAULT);
+            ImageIcon imageIcon = new ImageIcon(imagedResized);
+            label_kop.setIcon(imageIcon);
+        } catch (IOException ex) {
+            Logger.getLogger(FormPengaturan.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(FormPengaturan.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -357,6 +383,7 @@ public class FormKegiatan extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel label_alamatNotelp;
+    private javax.swing.JLabel label_kop;
     private javax.swing.JLabel label_namaDesa;
     // End of variables declaration//GEN-END:variables
 }

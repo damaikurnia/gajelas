@@ -26,16 +26,11 @@ public class FormAir extends javax.swing.JFrame {
      * Creates new form FormAir
      */
     public FormAir() {
-        try {
-            initComponents();
-            this.setLocationRelativeTo(null);
-            Profil prof = PengaturanKontrol.getKoneksi().tampilProfil();
-            label_namaDesa.setText("BADAN USAHA MILIK DESA "+prof.getNamadesa());
-            label_alamatNotelp.setText(prof.getAlamatdesa()+" - "+prof.getNotelp());
-            sinkronGambar();
-        } catch (SQLException ex) {
-            Logger.getLogger(FormAir.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
+        initComponents();
+        this.setLocationRelativeTo(null);
+        sinkronGambar();
+
     }
 
     /**
@@ -97,9 +92,9 @@ public class FormAir extends javax.swing.JFrame {
                 .addComponent(label_kop, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label_namaDesa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(label_alamatNotelp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 609, Short.MAX_VALUE))
+                    .addComponent(label_namaDesa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 607, Short.MAX_VALUE)
+                    .addComponent(label_alamatNotelp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -111,7 +106,7 @@ public class FormAir extends javax.swing.JFrame {
                 .addComponent(label_namaDesa, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(label_alamatNotelp)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
             .addComponent(label_kop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -315,15 +310,20 @@ public class FormAir extends javax.swing.JFrame {
             }
         });
     }
-    
+
     public void sinkronGambar() {
         try {
             Profil prof = PengaturanKontrol.getKoneksi().tampilProfil();
-            String path = new File(".").getCanonicalPath()+"/Gambar/"+prof.getLogo();
+            label_namaDesa.setText("BADAN USAHA MILIK DESA " + prof.getNamadesa());
+            label_alamatNotelp.setText(prof.getAlamatdesa()+" "+prof.getDesa()+" "+prof.getKecamatan()
+                    +" "+prof.getKabupaten()+" "+prof.getProvinsi()
+                    + " - " + prof.getNotelp());
             
+            String path = new File(".").getCanonicalPath() + "/Gambar/" + prof.getLogo();
+
             Toolkit toolkit = Toolkit.getDefaultToolkit();
             Image image = toolkit.getImage(path);
-            Image imagedResized = image.getScaledInstance(110,100, Image.SCALE_DEFAULT);
+            Image imagedResized = image.getScaledInstance(110, 100, Image.SCALE_DEFAULT);
             ImageIcon imageIcon = new ImageIcon(imagedResized);
             label_kop.setIcon(imageIcon);
         } catch (IOException ex) {

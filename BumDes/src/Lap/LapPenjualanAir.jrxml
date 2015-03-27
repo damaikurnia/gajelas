@@ -51,9 +51,9 @@ AND tanggaltransaksi between $P{tDari} and $P{tSampai};]]>
 	<title>
 		<band height="100" splitType="Stretch">
 			<subreport>
-				<reportElement x="-19" y="-19" width="597" height="118" uuid="d141ccda-34ed-45c2-8326-4a04f2c51cfa"/>
+				<reportElement x="0" y="0" width="555" height="100" uuid="6fed98fa-c5d1-4b16-b854-209781e8d433"/>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression><![CDATA["C:\\Users\\damaikurnia\\Documents\\NetBeansProjects\\trunk\\BumDes\\src\\Lap\\KopSurat.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA["/home/damaikurnia/NetBeansProjects/trunk/BumDes/src/Lap/KopSurat.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 	</title>
