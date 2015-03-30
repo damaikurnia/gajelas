@@ -30,6 +30,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableCellRenderer;
 import net.sf.jasperreports.engine.JRException;
@@ -50,6 +51,7 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
         try {
             initComponents();
             this.setLocationRelativeTo(null);
+            setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH);
 
             dialog_pembelian.setVisible(false);
             dialog_pembelian.setSize(688, 475);
@@ -127,17 +129,12 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
-        jMenu7 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu5 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem9 = new javax.swing.JMenuItem();
+        jMenuItem10 = new javax.swing.JMenuItem();
+        jMenuItem11 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenuItem8 = new javax.swing.JMenuItem();
 
@@ -226,10 +223,8 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
         dialog_pembelian.getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 430));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
+        jPanel2.setBackground(new java.awt.Color(153, 153, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -249,11 +244,11 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addComponent(label_kop, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(label_alamatNotelp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(label_namaDesa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 611, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(label_namaDesa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(label_alamatNotelp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -269,20 +264,16 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
             .addComponent(label_kop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 110));
-
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("FORM TRANSAKSI PEMBELIAN");
-        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 730, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("BARANG");
-        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 110, -1));
 
         button_tambah.setText("TAMBAH");
         button_tambah.addActionListener(new java.awt.event.ActionListener() {
@@ -290,7 +281,6 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
                 button_tambahActionPerformed(evt);
             }
         });
-        jPanel3.add(button_tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 320, -1, -1));
 
         button_ubah.setText("UBAH");
         button_ubah.addActionListener(new java.awt.event.ActionListener() {
@@ -298,7 +288,6 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
                 button_ubahActionPerformed(evt);
             }
         });
-        jPanel3.add(button_ubah, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 320, -1, -1));
 
         button_hapus.setText("HAPUS");
         button_hapus.addActionListener(new java.awt.event.ActionListener() {
@@ -306,7 +295,6 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
                 button_hapusActionPerformed(evt);
             }
         });
-        jPanel3.add(button_hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 320, -1, -1));
 
         button_tabel.setText("TABEL TRANSAKSI PEMBELIAN");
         button_tabel.addActionListener(new java.awt.event.ActionListener() {
@@ -314,26 +302,20 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
                 button_tabelActionPerformed(evt);
             }
         });
-        jPanel3.add(button_tabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 320, -1, -1));
-        jPanel3.add(text_noTrans, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 140, -1));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("NO TRANSAKSI");
-        jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 140, -1));
 
         label_tanggal.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         label_tanggal.setText("Selasa, 17 Februari 2015");
-        jPanel3.add(label_tanggal, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 50, 140, -1));
 
         label_jmlBeli.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         label_jmlBeli.setText("Hari, Tanggal");
-        jPanel3.add(label_jmlBeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 60, 80, -1));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel13.setText("JUMLAH BELI");
-        jPanel3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 80, 110, -1));
 
         text_jmlBeli.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         text_jmlBeli.setText("0");
@@ -342,12 +324,10 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
                 text_jmlBeliKeyReleased(evt);
             }
         });
-        jPanel3.add(text_jmlBeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 100, 110, -1));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel14.setText("HARGA SATUAN");
-        jPanel3.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 80, 120, -1));
 
         text_hargaSatuan.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         text_hargaSatuan.setText("0");
@@ -356,16 +336,13 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
                 text_hargaSatuanKeyReleased(evt);
             }
         });
-        jPanel3.add(text_hargaSatuan, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 100, 120, -1));
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel15.setText("TOTAL");
-        jPanel3.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 80, 120, -1));
 
         text_total.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         text_total.setText("0");
-        jPanel3.add(text_total, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 100, 120, -1));
 
         tabel_pembelian.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -385,30 +362,136 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tabel_pembelian);
 
-        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 690, 100));
-
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("TOTAL TRANSAKSI PEMBELIAN HARI INI");
-        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 290, 330, 20));
-
-        jPanel3.add(combo_barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, 90, -1));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("TRANSAKSI HARI INI");
-        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 690, 20));
 
         text_ttltransbeli.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jPanel3.add(text_ttltransbeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 290, 170, -1));
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel16.setText("Hari, Tanggal");
-        jPanel3.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 50, 80, -1));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 750, 360));
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 730, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(339, 339, 339)
+                        .addComponent(label_jmlBeli, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(80, 80, 80)
+                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(label_tanggal, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(text_noTrans, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(combo_barang, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(text_jmlBeli, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(text_hargaSatuan, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(text_total, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 690, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 690, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(209, 209, 209)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(text_ttltransbeli, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(129, 129, 129)
+                        .addComponent(button_tambah)
+                        .addGap(19, 19, 19)
+                        .addComponent(button_ubah)
+                        .addGap(18, 18, 18)
+                        .addComponent(button_hapus)
+                        .addGap(9, 9, 9)
+                        .addComponent(button_tabel)))
+                .addContainerGap(13, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jLabel5)
+                .addGap(8, 8, 8)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(label_jmlBeli))
+                    .addComponent(jLabel16)
+                    .addComponent(label_tanggal))
+                .addGap(6, 6, 6)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel13)
+                    .addComponent(jLabel14)
+                    .addComponent(jLabel15))
+                .addGap(6, 6, 6)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(combo_barang)
+                    .addComponent(text_noTrans)
+                    .addComponent(text_jmlBeli)
+                    .addComponent(text_hargaSatuan)
+                    .addComponent(text_total))
+                .addGap(26, 26, 26)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(text_ttltransbeli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(button_tambah)
+                    .addComponent(button_ubah)
+                    .addComponent(button_hapus)
+                    .addComponent(button_tabel))
+                .addContainerGap(28, Short.MAX_VALUE))
+        );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 480));
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         jMenu1.setText("HOME");
         jMenu1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -421,72 +504,53 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
 
         jMenu2.setText("BARANG");
         jMenu2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu2MouseClicked(evt);
-            }
-        });
-        jMenuBar1.add(jMenu2);
 
-        jMenu3.setText("ANGGOTA");
-        jMenu3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jMenu3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu3MouseClicked(evt);
-            }
-        });
-        jMenuBar1.add(jMenu3);
-
-        jMenu7.setText("INFORMASI");
-        jMenu7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-
-        jMenuItem3.setText("Pemakaian Air Pelanggan");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
-            }
-        });
-        jMenu7.add(jMenuItem3);
-
-        jMenuBar1.add(jMenu7);
-
-        jMenu4.setText("TRANSAKSI");
-        jMenu4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-
-        jMenuItem1.setText("Pembelian");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        jMenu4.add(jMenuItem1);
-
-        jMenuItem2.setText("Penjualan");
+        jMenuItem2.setText("Registrasi Barang");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
             }
         });
-        jMenu4.add(jMenuItem2);
+        jMenu2.add(jMenuItem2);
 
-        jMenuBar1.add(jMenu4);
+        jMenuItem3.setText("Pembelian Barang");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem3);
 
-        jMenu5.setText("LAPORAN");
-        jMenu5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jMenuBar1.add(jMenu2);
 
-        jMenuItem4.setText("BUM");
-        jMenu5.add(jMenuItem4);
+        jMenu3.setText("PELANGGAN");
+        jMenu3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
-        jMenuItem5.setText("BUK");
-        jMenu5.add(jMenuItem5);
+        jMenuItem9.setText("Pendaftaran Pelanggan Baru");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem9);
 
-        jMenuItem6.setText("JUNRAL");
-        jMenu5.add(jMenuItem6);
+        jMenuItem10.setText("Pemakaian Air Pelanggan");
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem10);
 
-        jMenuItem7.setText("NERACA");
-        jMenu5.add(jMenuItem7);
+        jMenuItem11.setText("Pembayaran Rekening Air");
+        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem11ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem11);
 
-        jMenuBar1.add(jMenu5);
+        jMenuBar1.add(jMenu3);
 
         jMenu6.setText("PENGATURAN");
         jMenu6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -503,48 +567,23 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar1);
 
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
-        FormAir a = new FormAir();
-        this.setVisible(false);
-        a.setVisible(true);
-    }//GEN-LAST:event_jMenu1MouseClicked
-
-    private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
-        FormBarang a = new FormBarang();
-        this.setVisible(false);
-        a.setVisible(true);
-    }//GEN-LAST:event_jMenu2MouseClicked
 
     private void button_tabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_tabelActionPerformed
         dialog_pembelian.setVisible(true);
     }//GEN-LAST:event_button_tabelActionPerformed
-
-    private void jMenu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MouseClicked
-        FormAnggota a = new FormAnggota();
-        this.setVisible(false);
-        a.setVisible(true);
-    }//GEN-LAST:event_jMenu3MouseClicked
-
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        FormTransaksiPembelian a = new FormTransaksiPembelian();
-        this.setVisible(false);
-        a.setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        FormTransaksiPenjualan a = new FormTransaksiPenjualan();
-        this.setVisible(false);
-        a.setVisible(true);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
-
-    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        FormPengaturan a = new FormPengaturan();
-        this.setVisible(false);
-        a.setVisible(true);
-    }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void button_tambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_tambahActionPerformed
         try {
@@ -649,12 +688,6 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
         customnya();
     }//GEN-LAST:event_tabel_pembelianMouseClicked
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        FormPemakaianAir a = new FormPemakaianAir();
-        this.setVisible(false);
-        a.setVisible(true);
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
-
     private void button_tampilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_tampilActionPerformed
         String tglDari = new SimpleDateFormat("yyyy-MM-dd").format(date_dari.getDate());
         String tglSampai = new SimpleDateFormat("yyyy-MM-dd").format(date_sampai.getDate());
@@ -675,6 +708,48 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
             ex.printStackTrace();
         }
     }//GEN-LAST:event_button_cetakActionPerformed
+
+    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
+        FormAir a = new FormAir();
+        this.setVisible(false);
+        a.setVisible(true);
+    }//GEN-LAST:event_jMenu1MouseClicked
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        FormBarang a = new FormBarang();
+        this.setVisible(false);
+        a.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        FormTransaksiPembelian a = new FormTransaksiPembelian();
+        this.setVisible(false);
+        a.setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        FormAnggota a = new FormAnggota();
+        this.setVisible(false);
+        a.setVisible(true);
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+        FormPemakaianAir a = new FormPemakaianAir();
+        this.setVisible(false);
+        a.setVisible(true);
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
+
+    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+        FormTransaksiPenjualan a = new FormTransaksiPenjualan();
+        this.setVisible(false);
+        a.setVisible(true);
+    }//GEN-LAST:event_jMenuItem11ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        FormPengaturan a = new FormPengaturan();
+        this.setVisible(false);
+        a.setVisible(true);
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     public void update() {
         try {
@@ -878,19 +953,14 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
-    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem10;
+    private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

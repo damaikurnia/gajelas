@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="612" pageHeight="270" orientation="Landscape" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="78019496-bac3-476a-ae55-703731405bba">
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="34"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="noTrans" class="java.lang.String"/>
 	<parameter name="tanggal" class="java.lang.String"/>
@@ -45,7 +45,7 @@ AND p.idanggota = t.idanggota AND t.notransaksi = $P{noTrans} and p.airterakhir 
 				<textElement textAlignment="Center">
 					<font fontName="Times New Roman" size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[STRUK BUKTI PENDAFTARAN DAN PEMASANGAN SALURAN AIR]]></text>
+				<text><![CDATA[BUKTI INSTALASI SALURAN AIR BERSIH]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="20" width="572" height="20" uuid="003aca56-227e-4389-976d-214c36448a9c"/>
@@ -140,11 +140,11 @@ AND p.idanggota = t.idanggota AND t.notransaksi = $P{noTrans} and p.airterakhir 
 	<columnHeader>
 		<band height="117" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="87" height="20" uuid="96397e2e-e258-4827-9c5d-76e38c748a3d"/>
+				<reportElement x="0" y="0" width="109" height="20" uuid="96397e2e-e258-4827-9c5d-76e38c748a3d"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
-				<text><![CDATA[Periode		:]]></text>
+				<text><![CDATA[Tanggal Pendaftaran:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="20" width="87" height="20" uuid="d55baa5e-d5ad-4502-b246-525de2825cc9"/>
@@ -154,14 +154,7 @@ AND p.idanggota = t.idanggota AND t.notransaksi = $P{noTrans} and p.airterakhir 
 				<text><![CDATA[Pemasangan	:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="87" y="0" width="69" height="20" uuid="5a3a4e2e-1453-4967-9359-0547a8b71d90"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Times New Roman"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{bulan}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="109" y="20" width="134" height="20" uuid="63b13993-d44d-42e4-a9cb-671294e9b9b7"/>
+				<reportElement x="109" y="20" width="77" height="20" uuid="63b13993-d44d-42e4-a9cb-671294e9b9b7"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman"/>
 				</textElement>
@@ -175,19 +168,12 @@ AND p.idanggota = t.idanggota AND t.notransaksi = $P{noTrans} and p.airterakhir 
 				<text><![CDATA[Rp.]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="173" y="0" width="70" height="20" uuid="a88d4394-f9d0-49d1-8bba-caf4543c895d"/>
+				<reportElement x="109" y="0" width="109" height="20" uuid="a88d4394-f9d0-49d1-8bba-caf4543c895d"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{tanggal}]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement x="156" y="0" width="17" height="20" uuid="c8fa7a38-6958-40db-bab7-232731125dc9"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="12" isBold="false"/>
-				</textElement>
-				<text><![CDATA[-]]></text>
-			</staticText>
 			<staticText>
 				<reportElement x="0" y="40" width="87" height="20" uuid="27e9c175-b2aa-428e-b83c-96d8c1dddf0e"/>
 				<textElement verticalAlignment="Middle">
@@ -203,7 +189,7 @@ AND p.idanggota = t.idanggota AND t.notransaksi = $P{noTrans} and p.airterakhir 
 				<text><![CDATA[Rp.]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="109" y="40" width="134" height="20" uuid="01a70b42-961b-499b-b060-61b5037dcf6c"/>
+				<reportElement x="109" y="40" width="77" height="20" uuid="01a70b42-961b-499b-b060-61b5037dcf6c"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman"/>
 				</textElement>

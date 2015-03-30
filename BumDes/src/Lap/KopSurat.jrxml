@@ -39,11 +39,11 @@
 	<title>
 		<band height="100" splitType="Stretch">
 			<staticText>
-				<reportElement x="215" y="2" width="142" height="20" uuid="a271750b-914d-4271-aa0e-dd7c629b58c5"/>
+				<reportElement x="155" y="2" width="193" height="20" uuid="a271750b-914d-4271-aa0e-dd7c629b58c5"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[PEMERINTAH DESA]]></text>
+				<text><![CDATA[PEMERINTAH KABUPATEN]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="208" y="22" width="99" height="20" uuid="91c4fc64-3eec-405a-8e38-3a5389300a0d"/>
@@ -78,7 +78,7 @@
 				<imageExpression><![CDATA["/home/damaikurnia/NetBeansProjects/trunk/BumDes/Gambar/logodesa.jpg"]]></imageExpression>
 			</image>
 			<textField>
-				<reportElement x="357" y="2" width="100" height="20" uuid="bd492475-13bf-44f4-b7dd-e123d432e3cc"/>
+				<reportElement x="348" y="2" width="126" height="20" uuid="bd492475-13bf-44f4-b7dd-e123d432e3cc"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="14" isBold="true"/>
 				</textElement>

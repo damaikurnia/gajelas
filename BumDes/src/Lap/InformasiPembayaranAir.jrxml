@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="612" pageHeight="270" orientation="Landscape" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="78019496-bac3-476a-ae55-703731405bba">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="612" pageHeight="280" orientation="Landscape" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="78019496-bac3-476a-ae55-703731405bba">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="noTrans" class="java.lang.String"/>
 	<parameter name="tahun" class="java.lang.String"/>
+	<parameter name="alamat" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[SELECT a.idanggota, a.namaanggota, a.alamat, p.airterakhir, t.jumlah, p.bulan,  
-t.total, t.denda FROM pemakaian p, transaksi t, anggota a 
-WHERE a.idanggota = t.idanggota AND t.idanggota = p.idanggota 
-AND p.notransaksi = t.notransaksi AND t.notransaksi = $P{noTrans};]]>
+		<![CDATA[Select a.idanggota, b.namaanggota,a.bulan,a.airlunas,a.airterakhir,a.airdibayar, a.jatuhtempo 
+from pemakaian a, anggota b where a.idanggota = b.idanggota and a.notransaksi = $P{noTrans};]]>
 	</queryString>
 	<field name="idanggota" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -17,22 +16,19 @@ AND p.notransaksi = t.notransaksi AND t.notransaksi = $P{noTrans};]]>
 	<field name="namaanggota" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="alamat" class="java.lang.String">
+	<field name="bulan" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="airlunas" class="java.lang.Double">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="airterakhir" class="java.lang.Double">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="jumlah" class="java.lang.Integer">
+	<field name="airdibayar" class="java.lang.Double">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="bulan" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="total" class="java.lang.Integer">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="denda" class="java.lang.Integer">
+	<field name="jatuhtempo" class="java.sql.Date">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<background>
@@ -45,7 +41,7 @@ AND p.notransaksi = t.notransaksi AND t.notransaksi = $P{noTrans};]]>
 				<textElement textAlignment="Center">
 					<font fontName="Times New Roman" size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[BUKTI PEMBAYARAN REKENING AIR]]></text>
+				<text><![CDATA[INFORMASI PEMBAYARAN REKENING AIR]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="15" width="572" height="17" uuid="003aca56-227e-4389-976d-214c36448a9c"/>
@@ -123,11 +119,11 @@ AND p.notransaksi = t.notransaksi AND t.notransaksi = $P{noTrans};]]>
 				<textFieldExpression><![CDATA[$F{namaanggota}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="87" y="40" width="251" height="20" uuid="b8f17c64-857e-47fd-80ed-29eb52e4d2d2"/>
+				<reportElement x="87" y="40" width="282" height="20" uuid="b8f17c64-857e-47fd-80ed-29eb52e4d2d2"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{alamat}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{alamat}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="482" y="0" width="89" height="20" uuid="2bb2b637-735a-4ec3-83e1-4c980c961708"/>
@@ -141,12 +137,12 @@ AND p.notransaksi = t.notransaksi AND t.notransaksi = $P{noTrans};]]>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{jumlah}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[Double.toString($F{airdibayar}).split("\\.")[0]]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="117" splitType="Stretch">
+		<band height="127" splitType="Stretch">
 			<staticText>
 				<reportElement x="0" y="0" width="87" height="20" uuid="96397e2e-e258-4827-9c5d-76e38c748a3d"/>
 				<textElement verticalAlignment="Middle">
@@ -159,14 +155,7 @@ AND p.notransaksi = t.notransaksi AND t.notransaksi = $P{noTrans};]]>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
-				<text><![CDATA[Tagihan Air	:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="0" y="40" width="87" height="20" uuid="548c5d90-b0d7-4a19-9822-1b735b401fce"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="12"/>
-				</textElement>
-				<text><![CDATA[Denda		:]]></text>
+				<text><![CDATA[Pemakaian Air :]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="87" y="0" width="69" height="20" uuid="5a3a4e2e-1453-4967-9359-0547a8b71d90"/>
@@ -176,32 +165,18 @@ AND p.notransaksi = t.notransaksi AND t.notransaksi = $P{noTrans};]]>
 				<textFieldExpression><![CDATA[$F{bulan}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="109" y="20" width="104" height="20" uuid="63b13993-d44d-42e4-a9cb-671294e9b9b7"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
+				<reportElement x="87" y="20" width="22" height="20" uuid="63b13993-d44d-42e4-a9cb-671294e9b9b7"/>
+				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{total}-$F{denda}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="109" y="40" width="104" height="20" uuid="0910986e-bc6d-47f9-87bc-9a301f40bf4b"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Times New Roman"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{denda}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[Double.toString($F{airdibayar}).split("\\.")[0]]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="87" y="20" width="22" height="20" uuid="5e78d323-d48a-48ea-9c5b-292aa0bdf6d6"/>
+				<reportElement x="109" y="20" width="64" height="20" uuid="5e78d323-d48a-48ea-9c5b-292aa0bdf6d6"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
-				<text><![CDATA[Rp.]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="87" y="40" width="22" height="20" uuid="19068802-7fe1-404d-8647-bfe5b1157290"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="12"/>
-				</textElement>
-				<text><![CDATA[Rp.]]></text>
+				<text><![CDATA[m3     x 500]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="173" y="0" width="70" height="20" uuid="a88d4394-f9d0-49d1-8bba-caf4543c895d"/>
@@ -218,40 +193,61 @@ AND p.notransaksi = t.notransaksi AND t.notransaksi = $P{noTrans};]]>
 				<text><![CDATA[-]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="64" width="87" height="20" uuid="27e9c175-b2aa-428e-b83c-96d8c1dddf0e"/>
+				<reportElement x="0" y="40" width="87" height="20" uuid="27e9c175-b2aa-428e-b83c-96d8c1dddf0e"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
 				<text><![CDATA[Total Tagihan	:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="87" y="64" width="22" height="20" uuid="6fffe0ec-52a9-4be7-b0a4-82f4f089c54c"/>
+				<reportElement x="87" y="40" width="22" height="20" uuid="6fffe0ec-52a9-4be7-b0a4-82f4f089c54c"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
 				<text><![CDATA[Rp.]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="109" y="64" width="104" height="20" uuid="01a70b42-961b-499b-b060-61b5037dcf6c"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
+				<reportElement x="109" y="40" width="134" height="20" uuid="01a70b42-961b-499b-b060-61b5037dcf6c"/>
+				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[Double.toString($F{airdibayar}*500).split("\\.")[0]]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="0" y="81" width="571" height="20" uuid="55d26499-9cf8-4545-a93b-7fbc0ccf80ef"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="12" isBold="true"/>
+					<font fontName="Times New Roman" size="10" isBold="true"/>
 				</textElement>
-				<text><![CDATA[TERIMAKASIH ATAS PEMBAYARAN ANDA]]></text>
+				<text><![CDATA[PEMBAYARAN AIR BULAN TERSEBUT DILAKUKAN SETELAH MENDAPAT SURAT INFORMASI INI.]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="101" width="572" height="13" uuid="0695f0e8-0637-4c33-975a-d95d167224d4"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="10" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Harap simpan bukti ini sebagai bukti pembayaran yang sah]]></text>
+				<text><![CDATA[PALING LAMBAT ADALAH TANGGAL 10 BULAN SETELAH PERIODE PEMBAYARAN]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="0" y="114" width="572" height="13" uuid="afd49a17-d42c-4aa1-82c6-98e342c30768"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[HARAP BAWA STRUK INI UNTUK MELAKUKAN PEMBAYARAN AIR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="60" width="136" height="20" uuid="766086d6-9d83-43fb-bcef-3e85ddb1993c"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Tgl Terakhir Pembayaran :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="139" y="60" width="104" height="20" uuid="f97916eb-fd6f-4d65-a9fb-f0b3eab2d5f3"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($F{jatuhtempo})]]></textFieldExpression>
+			</textField>
 		</band>
 	</columnHeader>
 </jasperReport>

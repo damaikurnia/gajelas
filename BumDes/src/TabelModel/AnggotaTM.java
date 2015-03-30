@@ -41,7 +41,7 @@ public class AnggotaTM extends AbstractTableModel {
             case 1:
                 return d.getNamaAnggota();
             case 2:
-                return d.getAlamat();
+                return d.getAlamat() +" RT/RW "+d.getRt()+"/"+d.getRw()+" "+d.getDusun()+" "+d.getDesa();
             case 3:
                 return d.getDusun();
             case 4:
