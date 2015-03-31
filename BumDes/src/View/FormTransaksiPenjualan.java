@@ -55,33 +55,33 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
      * Creates new form FormAir
      */
     public FormTransaksiPenjualan() {
-            initComponents();
-            this.setLocationRelativeTo(null);
-            setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH);
-            sinkronGambar();
-            label_tanggal.setText(Tanggal.getTanggal());
+        initComponents();
+        this.setLocationRelativeTo(null);
+//        setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH);
+        sinkronGambar();
+        label_tanggal.setText(Tanggal.getTanggal());
 
-            dialog_pembelian.setVisible(false);
-            dialog_pembelian.setSize(675, 540);
-            dialog_pembelian.setLocationRelativeTo(null);
-            dialog_pembelian.setTitle("INFORMASI TRANSAKSI PEMBELIAN");
-            label_jmlBeli.setVisible(false);
+        dialog_pembelian.setVisible(false);
+        dialog_pembelian.setSize(675, 540);
+        dialog_pembelian.setLocationRelativeTo(null);
+        dialog_pembelian.setTitle("INFORMASI TRANSAKSI PEMBELIAN");
+        label_jmlBeli.setVisible(false);
 
-            dialog_cariP.setVisible(false);
-            dialog_cariP.setSize(673, 413);
-            dialog_cariP.setLocationRelativeTo(null);
-            dialog_cariP.setTitle("DATA ANGGOTA");
-            label_noTrans.setVisible(false);
+        dialog_cariP.setVisible(false);
+        dialog_cariP.setSize(673, 413);
+        dialog_cariP.setLocationRelativeTo(null);
+        dialog_cariP.setTitle("DATA ANGGOTA");
+        label_noTrans.setVisible(false);
 
-            dialog_blmBayar.setVisible(false);
-            dialog_blmBayar.setSize(673, 413);
-            dialog_blmBayar.setLocationRelativeTo(null);
-            dialog_blmBayar.setTitle("DATA ANGGOTA BLM BAYAR");
+        dialog_blmBayar.setVisible(false);
+        dialog_blmBayar.setSize(673, 413);
+        dialog_blmBayar.setLocationRelativeTo(null);
+        dialog_blmBayar.setTitle("DATA ANGGOTA BLM BAYAR");
 
-            //set date hari ini
-            GregorianCalendar gc = new GregorianCalendar();
-            date_dari.setDate(gc.getTime());
-            date_sampai.setDate(gc.getTime());
+        //set date hari ini
+        GregorianCalendar gc = new GregorianCalendar();
+        date_dari.setDate(gc.getTime());
+        date_sampai.setDate(gc.getTime());
 //            update();
 
     }
@@ -168,8 +168,8 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         tabel_histori = new javax.swing.JTable();
         button_blmBayar = new javax.swing.JButton();
-        jMenuBar3 = new javax.swing.JMenuBar();
-        jMenu9 = new javax.swing.JMenu();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -177,6 +177,11 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenuItem11 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenu5 = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenuItem8 = new javax.swing.JMenuItem();
 
@@ -738,14 +743,14 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jMenu9.setText("HOME");
-        jMenu9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jMenu9.addMouseListener(new java.awt.event.MouseAdapter() {
+        jMenu1.setText("HOME");
+        jMenu1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu9MouseClicked(evt);
+                jMenu1MouseClicked(evt);
             }
         });
-        jMenuBar3.add(jMenu9);
+        jMenuBar1.add(jMenu1);
 
         jMenu2.setText("BARANG");
         jMenu2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -766,7 +771,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem3);
 
-        jMenuBar3.add(jMenu2);
+        jMenuBar1.add(jMenu2);
 
         jMenu3.setText("PELANGGAN");
         jMenu3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -795,7 +800,39 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem11);
 
-        jMenuBar3.add(jMenu3);
+        jMenuBar1.add(jMenu3);
+
+        jMenu4.setText("PENGELUARAN");
+
+        jMenuItem1.setText("List Pengeluaran");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem1);
+
+        jMenuItem5.setText("Pengeluaran Bulanan");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem5);
+
+        jMenuBar1.add(jMenu4);
+
+        jMenu5.setText("LAPORAN");
+
+        jMenuItem4.setText("PENDAPATAN");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuItem4);
+
+        jMenuBar1.add(jMenu5);
 
         jMenu6.setText("PENGATURAN");
         jMenu6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -808,9 +845,9 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         });
         jMenu6.add(jMenuItem8);
 
-        jMenuBar3.add(jMenu6);
+        jMenuBar1.add(jMenu6);
 
-        setJMenuBar(jMenuBar3);
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -919,25 +956,30 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
     private void tabel_historiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabel_historiMouseClicked
         int row1 = tabel_histori.getSelectedRow();
         int baris = 0;
-        while (Integer.parseInt(tabel_histori.getValueAt(baris, 3).toString()) == 0) {
-            baris++;
-        }
-        if (row1 != baris) {
-            JOptionPane.showMessageDialog(null, "Tidak dapat membayar bulan berikut. silahkan membayar tagihan untuk bulan "
-                    + tabel_histori.getValueAt(baris, 4).toString() + " terlebih dahulu!");
-        } else {
+        if (Integer.parseInt(tabel_histori.getValueAt(baris, 1).toString()) == Integer.parseInt(tabel_histori.getValueAt(baris, 2).toString())) {
+            JOptionPane.showMessageDialog(null, "Transaksi ini telah Lunas");
             label_noTrans.setText(tabel_histori.getValueAt(row1, 0).toString());
             combo_bulan.setSelectedItem(tabel_histori.getValueAt(row1, 4).toString());
             text_airawal.setText(tabel_histori.getValueAt(row1, 1).toString());
             text_airbln.setText(tabel_histori.getValueAt(row1, 2).toString());
             text_airdibayar.setText(tabel_histori.getValueAt(row1, 3).toString());
-
-            if (text_airawal.getText().equals(text_airbln.getText()) && !text_airbln.getText().equals("0")) {
-                JOptionPane.showMessageDialog(null, "Lunas nih");
-                text_pembayaran.setEditable(false);
-                button_tambah.setEnabled(false);
-                label_status.setText("STATUS : LUNAS");
+            text_pembayaran.setEditable(false);
+            button_tambah.setEnabled(false);
+            label_status.setText("STATUS : LUNAS");
+        } else {
+            while (Integer.parseInt(tabel_histori.getValueAt(baris, 3).toString()) == 0) {
+                baris++;
+            }
+            if (row1 != baris) {
+                JOptionPane.showMessageDialog(null, "Tidak dapat membayar bulan berikut. silahkan membayar tagihan untuk bulan "
+                        + tabel_histori.getValueAt(baris, 4).toString() + " terlebih dahulu!");
             } else {
+                label_noTrans.setText(tabel_histori.getValueAt(row1, 0).toString());
+                combo_bulan.setSelectedItem(tabel_histori.getValueAt(row1, 4).toString());
+                text_airawal.setText(tabel_histori.getValueAt(row1, 1).toString());
+                text_airbln.setText(tabel_histori.getValueAt(row1, 2).toString());
+                text_airdibayar.setText(tabel_histori.getValueAt(row1, 3).toString());
+
                 //membandingkan hari jatuh tempo dan hari sekarang
                 String jatuhTempo = tabel_histori.getValueAt(row1, 5).toString();
                 jatuhTempo = jatuhTempo.split("-")[2] + "-" + jatuhTempo.split("-")[1] + "-" + jatuhTempo.split("-")[0];
@@ -956,8 +998,9 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
                     text_total.setText(Double.toString(total).split("\\.")[0]);
                     label_status.setText("STATUS : BLM LUNAS (DENDA)");
                 }
+
+                label_noTrans.setVisible(true);
             }
-            label_noTrans.setVisible(true);
         }
     }//GEN-LAST:event_tabel_historiMouseClicked
 
@@ -1008,11 +1051,11 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jMenu9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu9MouseClicked
+    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
         FormAir a = new FormAir();
         this.setVisible(false);
         a.setVisible(true);
-    }//GEN-LAST:event_jMenu9MouseClicked
+    }//GEN-LAST:event_jMenu1MouseClicked
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         FormBarang a = new FormBarang();
@@ -1043,6 +1086,24 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         this.setVisible(false);
         a.setVisible(true);
     }//GEN-LAST:event_jMenuItem11ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        FormPengeluaran a = new FormPengeluaran();
+        this.setVisible(false);
+        a.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        FormTransaksiPengeluaran a = new FormTransaksiPengeluaran();
+        this.setVisible(false);
+        a.setVisible(true);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        FormLaporanPendapatan a = new FormLaporanPendapatan();
+        this.setVisible(false);
+        a.setVisible(true);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         FormPengaturan a = new FormPengaturan();
@@ -1266,15 +1327,15 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
             Logger.getLogger(FormPemakaianAir.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public void sinkronGambar() {
         try {
             Profil prof = PengaturanKontrol.getKoneksi().tampilProfil();
             label_namaDesa.setText("BADAN USAHA MILIK DESA " + prof.getNamadesa());
-            label_alamatNotelp.setText(prof.getAlamatdesa()+" "+prof.getDesa()+" "+prof.getKecamatan()
-                    +" "+prof.getKabupaten()+" "+prof.getProvinsi()
+            label_alamatNotelp.setText(prof.getAlamatdesa() + " " + prof.getDesa() + " " + prof.getKecamatan()
+                    + " " + prof.getKabupaten() + " " + prof.getProvinsi()
                     + " - " + prof.getNotelp());
-            
+
             String path = new File(".").getCanonicalPath() + "/Gambar/" + prof.getLogo();
 
             Toolkit toolkit = Toolkit.getDefaultToolkit();
@@ -1428,16 +1489,17 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
-    private javax.swing.JMenu jMenu8;
-    private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuBar jMenuBar2;
-    private javax.swing.JMenuBar jMenuBar3;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel jPanel1;

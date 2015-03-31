@@ -5,16 +5,27 @@
  */
 package View;
 
+import Custom.Tanggal;
+import Kelas.Anggota;
+import Kelas.Pemakaian;
+import Kelas.Pengeluaran;
 import Kelas.Profil;
+import Kontrol.AnggotaKontrol;
 import Kontrol.PengaturanKontrol;
+import Kontrol.PengeluaranKontrol;
+import TabelModel.AnggotaTM;
+import TabelModel.PengeluaranTM;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -28,7 +39,14 @@ public class FormPengeluaran extends javax.swing.JFrame {
     public FormPengeluaran() {
         initComponents();
         this.setLocationRelativeTo(null);
+        label_tanggal.setText(Tanggal.getTanggal());
+//        setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH);
         sinkronGambar();
+
+        dialog_cariP.setVisible(false);
+        dialog_cariP.setSize(673, 413);
+        dialog_cariP.setLocationRelativeTo(null);
+        dialog_cariP.setTitle("DATA PENGELUARAN");
     }
 
     /**
@@ -40,6 +58,14 @@ public class FormPengeluaran extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        dialog_cariP = new javax.swing.JDialog();
+        jPanel8 = new javax.swing.JPanel();
+        jPanel9 = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        text_key = new javax.swing.JTextField();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tabel_pengeluaran = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -48,8 +74,18 @@ public class FormPengeluaran extends javax.swing.JFrame {
         label_kop = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jMenuBar2 = new javax.swing.JMenuBar();
-        jMenu8 = new javax.swing.JMenu();
+        jLabel16 = new javax.swing.JLabel();
+        label_tanggal = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        text_kode = new javax.swing.JTextField();
+        text_nama = new javax.swing.JTextField();
+        button_simpan = new javax.swing.JButton();
+        button_batal = new javax.swing.JButton();
+        button_list = new javax.swing.JButton();
+        button_hapus = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -57,11 +93,64 @@ public class FormPengeluaran extends javax.swing.JFrame {
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenuItem11 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenu5 = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenuItem8 = new javax.swing.JMenuItem();
 
+        dialog_cariP.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel12.setText("DATA PENGELUARAN");
+        jPanel9.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 640, 40));
+
+        jPanel8.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 70));
+
+        jLabel19.setText("KEYWORD");
+        jPanel8.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 100, 20));
+
+        text_key.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                text_keyKeyReleased(evt);
+            }
+        });
+        jPanel8.add(text_key, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, 470, -1));
+
+        tabel_pengeluaran.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tabel_pengeluaran.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabel_pengeluaranMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(tabel_pengeluaran);
+
+        jPanel8.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 620, 220));
+
+        dialog_cariP.getContentPane().add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 380));
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel2.setBackground(new java.awt.Color(153, 153, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -85,7 +174,7 @@ public class FormPengeluaran extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(label_alamatNotelp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(label_namaDesa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 855, Short.MAX_VALUE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -101,10 +190,53 @@ public class FormPengeluaran extends javax.swing.JFrame {
             .addComponent(label_kop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel2.setText("FORM PENGELUARAN");
+
+        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel16.setText("Hari, Tanggal");
+
+        label_tanggal.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        label_tanggal.setText("Selasa, 17 Februari 2015");
+
+        jLabel3.setText("KODE");
+
+        jLabel4.setText("NAMA PENGELUARAN");
+
+        button_simpan.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        button_simpan.setText("SIMPAN");
+        button_simpan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_simpanActionPerformed(evt);
+            }
+        });
+
+        button_batal.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        button_batal.setText("BATAL");
+        button_batal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_batalActionPerformed(evt);
+            }
+        });
+
+        button_list.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        button_list.setText("LIST PENGELUARAN");
+        button_list.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_listActionPerformed(evt);
+            }
+        });
+
+        button_hapus.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        button_hapus.setText("HAPUS");
+        button_hapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_hapusActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -112,15 +244,61 @@ public class FormPengeluaran extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(389, 389, 389))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(text_kode, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(text_nama, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(button_simpan)
+                                .addGap(18, 18, 18)
+                                .addComponent(button_batal)
+                                .addGap(18, 18, 18)
+                                .addComponent(button_hapus)
+                                .addGap(18, 18, 18)
+                                .addComponent(button_list)
+                                .addGap(0, 16, Short.MAX_VALUE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(20, 20, 20)
+                        .addComponent(label_tanggal, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
-                .addContainerGap(392, Short.MAX_VALUE))
+                .addGap(7, 7, 7)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel16)
+                    .addComponent(label_tanggal))
+                .addGap(35, 35, 35)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(text_kode, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(text_nama, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(button_simpan)
+                    .addComponent(button_batal)
+                    .addComponent(button_list)
+                    .addComponent(button_hapus))
+                .addGap(67, 67, 67))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -134,19 +312,18 @@ public class FormPengeluaran extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jMenu8.setText("HOME");
-        jMenu8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jMenu8.addMouseListener(new java.awt.event.MouseAdapter() {
+        jMenu1.setText("HOME");
+        jMenu1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu8MouseClicked(evt);
+                jMenu1MouseClicked(evt);
             }
         });
-        jMenuBar2.add(jMenu8);
+        jMenuBar1.add(jMenu1);
 
         jMenu2.setText("BARANG");
         jMenu2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -167,7 +344,7 @@ public class FormPengeluaran extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem3);
 
-        jMenuBar2.add(jMenu2);
+        jMenuBar1.add(jMenu2);
 
         jMenu3.setText("PELANGGAN");
         jMenu3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -196,7 +373,39 @@ public class FormPengeluaran extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem11);
 
-        jMenuBar2.add(jMenu3);
+        jMenuBar1.add(jMenu3);
+
+        jMenu4.setText("PENGELUARAN");
+
+        jMenuItem1.setText("List Pengeluaran");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem1);
+
+        jMenuItem5.setText("Pengeluaran Bulanan");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem5);
+
+        jMenuBar1.add(jMenu4);
+
+        jMenu5.setText("LAPORAN");
+
+        jMenuItem4.setText("PENDAPATAN");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuItem4);
+
+        jMenuBar1.add(jMenu5);
 
         jMenu6.setText("PENGATURAN");
         jMenu6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -209,15 +418,15 @@ public class FormPengeluaran extends javax.swing.JFrame {
         });
         jMenu6.add(jMenuItem8);
 
-        jMenuBar2.add(jMenu6);
+        jMenuBar1.add(jMenu6);
 
-        setJMenuBar(jMenuBar2);
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -227,11 +436,63 @@ public class FormPengeluaran extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenu8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu8MouseClicked
+    private void text_keyKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_text_keyKeyReleased
+        if (text_key.getText().equals("")) {
+            updateTabel("");
+        } else {
+            updateTabel(text_key.getText());
+        }
+    }//GEN-LAST:event_text_keyKeyReleased
+
+    private void tabel_pengeluaranMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabel_pengeluaranMouseClicked
+            int row1 = tabel_pengeluaran.getSelectedRow();
+            text_kode.setText(tabel_pengeluaran.getValueAt(row1, 0).toString());
+            text_nama.setText(tabel_pengeluaran.getValueAt(row1, 1).toString());
+            custom();
+            dialog_cariP.setVisible(false);
+    }//GEN-LAST:event_tabel_pengeluaranMouseClicked
+
+    private void button_simpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_simpanActionPerformed
+        Pengeluaran pem = new Pengeluaran(text_kode.getText(), text_nama.getText());
+        if (text_kode.getText().equals("") || text_nama.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Silahkan mengisi data yang masih kosong");
+        } else {
+            try {
+                if (text_kode.isEditable() == false) {//update
+                    PengeluaranKontrol.getKoneksi().updatePengeluaran(pem);
+                    resetDefault();
+                } else {//insert
+                    PengeluaranKontrol.getKoneksi().insertPengeluaran(pem);
+                    resetDefault();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(FormPengeluaran.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_button_simpanActionPerformed
+
+    private void button_listActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_listActionPerformed
+        updateTabel("");
+        dialog_cariP.setVisible(true);
+    }//GEN-LAST:event_button_listActionPerformed
+
+    private void button_batalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_batalActionPerformed
+        resetDefault();
+    }//GEN-LAST:event_button_batalActionPerformed
+
+    private void button_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_hapusActionPerformed
+        try {
+            PengeluaranKontrol.getKoneksi().deletePengeluaran(new Pengeluaran(text_kode.getText(), text_nama.getText()));
+        } catch (SQLException ex) {
+            Logger.getLogger(FormPengeluaran.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_button_hapusActionPerformed
+
+    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
         FormAir a = new FormAir();
         this.setVisible(false);
         a.setVisible(true);
-    }//GEN-LAST:event_jMenu8MouseClicked
+    }//GEN-LAST:event_jMenu1MouseClicked
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         FormBarang a = new FormBarang();
@@ -262,6 +523,24 @@ public class FormPengeluaran extends javax.swing.JFrame {
         this.setVisible(false);
         a.setVisible(true);
     }//GEN-LAST:event_jMenuItem11ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        FormPengeluaran a = new FormPengeluaran();
+        this.setVisible(false);
+        a.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        FormTransaksiPengeluaran a = new FormTransaksiPengeluaran();
+        this.setVisible(false);
+        a.setVisible(true);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        FormLaporanPendapatan a = new FormLaporanPendapatan();
+        this.setVisible(false);
+        a.setVisible(true);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         FormPengaturan a = new FormPengaturan();
@@ -306,15 +585,15 @@ public class FormPengeluaran extends javax.swing.JFrame {
             }
         });
     }
-    
+
     public void sinkronGambar() {
         try {
             Profil prof = PengaturanKontrol.getKoneksi().tampilProfil();
             label_namaDesa.setText("BADAN USAHA MILIK DESA " + prof.getNamadesa());
-            label_alamatNotelp.setText(prof.getAlamatdesa()+" "+prof.getDesa()+" "+prof.getKecamatan()
-                    +" "+prof.getKabupaten()+" "+prof.getProvinsi()
+            label_alamatNotelp.setText(prof.getAlamatdesa() + " " + prof.getDesa() + " " + prof.getKecamatan()
+                    + " " + prof.getKabupaten() + " " + prof.getProvinsi()
                     + " - " + prof.getNotelp());
-            
+
             String path = new File(".").getCanonicalPath() + "/Gambar/" + prof.getLogo();
 
             Toolkit toolkit = Toolkit.getDefaultToolkit();
@@ -330,26 +609,69 @@ public class FormPengeluaran extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton button_batal;
+    private javax.swing.JButton button_hapus;
+    private javax.swing.JButton button_list;
+    private javax.swing.JButton button_simpan;
+    private javax.swing.JDialog dialog_cariP;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
-    private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel label_alamatNotelp;
     private javax.swing.JLabel label_kop;
     private javax.swing.JLabel label_namaDesa;
+    private javax.swing.JLabel label_tanggal;
+    private javax.swing.JTable tabel_pengeluaran;
+    private javax.swing.JTextField text_key;
+    private javax.swing.JTextField text_kode;
+    private javax.swing.JTextField text_nama;
     // End of variables declaration//GEN-END:variables
+
+    private void resetDefault() {
+        text_kode.setText("");
+        text_nama.setText("");
+        text_kode.setEditable(true);
+        button_hapus.setEnabled(false);
+    }
+
+    private void custom() {
+        text_kode.setEditable(false);
+        button_hapus.setEnabled(true);
+    }
+
+    private void updateTabel(String key) {
+        try {
+            List<Pengeluaran> agt = PengeluaranKontrol.getKoneksi().selectPengeluaran2(key);
+            PengeluaranTM model = new PengeluaranTM(agt);
+            tabel_pengeluaran.setModel(model);
+        } catch (SQLException ex) {
+            Logger.getLogger(FormPemakaianAir.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

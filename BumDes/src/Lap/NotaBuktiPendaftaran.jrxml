@@ -4,20 +4,17 @@
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="noTrans" class="java.lang.String"/>
-	<parameter name="tanggal" class="java.lang.String"/>
+	<parameter name="alamat" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[SELECT a.idanggota, a.namaanggota, a.alamat, p.airterakhir, t.jumlah, p.bulan, 
-t.total, t.denda FROM pemakaian p, transaksi t, anggota a 
+		<![CDATA[SELECT a.idanggota, a.namaanggota, p.airterakhir, t.jumlah, p.bulan, 
+t.total, t.tanggaltransaksi FROM pemakaian p, transaksi t, anggota a 
 WHERE a.idanggota = t.idanggota AND t.idanggota = p.idanggota 
-AND p.idanggota = t.idanggota AND t.notransaksi = $P{noTrans} and p.airterakhir = 0;]]>
+AND p.idanggota = t.idanggota AND t.notransaksi = $P{noTrans};]]>
 	</queryString>
 	<field name="idanggota" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="namaanggota" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="alamat" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="airterakhir" class="java.lang.Double">
@@ -32,7 +29,7 @@ AND p.idanggota = t.idanggota AND t.notransaksi = $P{noTrans} and p.airterakhir 
 	<field name="total" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="denda" class="java.lang.Integer">
+	<field name="tanggaltransaksi" class="java.sql.Date">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<background>
@@ -119,7 +116,7 @@ AND p.idanggota = t.idanggota AND t.notransaksi = $P{noTrans} and p.airterakhir 
 				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{alamat}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{alamat}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="483" y="0" width="89" height="20" uuid="2bb2b637-735a-4ec3-83e1-4c980c961708"/>
@@ -172,7 +169,7 @@ AND p.idanggota = t.idanggota AND t.notransaksi = $P{noTrans} and p.airterakhir 
 				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{tanggal}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($F{tanggaltransaksi})]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="0" y="40" width="87" height="20" uuid="27e9c175-b2aa-428e-b83c-96d8c1dddf0e"/>
