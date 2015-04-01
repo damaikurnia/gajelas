@@ -7,6 +7,7 @@ package View;
 
 import Custom.RataKanan;
 import Custom.RataKiri;
+import Custom.Tanggal;
 import Kelas.Profil;
 import Kelas.Transaksi;
 import Kontrol.PengaturanKontrol;
@@ -50,7 +51,7 @@ public class FormLaporanPendapatan extends javax.swing.JFrame {
             date_dari.setDate(gc.getTime());
             date_sampai.setDate(gc.getTime());
 
-            
+            label_tanggal.setText(Tanggal.getTanggal());
 //        } catch (SQLException ex) {
 //            Logger.getLogger(FormLaporanPendapatan.class.getName()).log(Level.SEVERE, null, ex);
 //        }
@@ -264,8 +265,8 @@ public class FormLaporanPendapatan extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(283, 283, 283)
                         .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(76, 76, 76)
-                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(62, 62, 62)
+                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20)
                         .addComponent(label_tanggal, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()

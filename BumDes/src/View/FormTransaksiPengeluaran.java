@@ -73,6 +73,7 @@ public class FormTransaksiPengeluaran extends javax.swing.JFrame {
             String bulan = generateBulanTahun(Tanggal.getTanggal2());
             label_bulan.setText(bulan.split("-")[0]);
             combo_pengeluaran.setEnabled(false);
+            label_tanggal.setText(Tanggal.getTanggal());
             
             button_cetak.setVisible(false);
         } catch (SQLException ex) {
@@ -395,8 +396,8 @@ public class FormTransaksiPengeluaran extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(label_bulan, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(390, 390, 390)
-                                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(384, 384, 384)
+                                .addComponent(jLabel16)
                                 .addGap(20, 20, 20)
                                 .addComponent(label_tanggal, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel3Layout.createSequentialGroup()

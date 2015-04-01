@@ -289,9 +289,9 @@
                           <Group type="102" attributes="0">
                               <EmptySpace min="-2" pref="283" max="-2" attributes="0"/>
                               <Component id="jLabel12" min="-2" pref="140" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
-                              <Component id="jLabel16" min="-2" pref="80" max="-2" attributes="0"/>
-                              <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
+                              <Component id="jLabel16" min="-2" pref="94" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                               <Component id="label_tanggal" min="-2" pref="140" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">

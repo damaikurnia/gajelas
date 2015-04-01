@@ -225,7 +225,7 @@ public class TransaksiKontrol {
         conn.setAutoCommit(false);
         String query = "SELECT t.notransaksi,t.idanggota, a.namaanggota, t.tanggaltransaksi, t.jumlah,t.hargasatuan, t.denda,t.total\n"
                 + "FROM transaksi t, anggota a \n"
-                + "where t.idanggota = a.idanggota and t.jenistransaksi = 'PENJUALAN' \n"
+                + "where t.idanggota = a.idanggota and (t.jenistransaksi = 'PENJUALAN' OR t.jenistransaksi = 'DAFTAR') \n"
                 + "AND tanggaltransaksi between ? and ?;";
         stmt = conn.prepareStatement(query);
         stmt.setString(1, dari);
@@ -288,8 +288,8 @@ public class TransaksiKontrol {
         PreparedStatement stmt = null;
         ResultSet result = null;
         conn.setAutoCommit(false);
-        String query = "SELECT SUM(total) FROM transaksi "
-                + "WHERE jenistransaksi = 'PENJUALAN'";
+        String query = "SELECT SUM(total) FROM transaksi \n"
+                + "where (jenistransaksi = 'PENJUALAN' OR jenistransaksi = 'DAFTAR');";
         stmt = conn.prepareStatement(query);
         result = stmt.executeQuery();
         String total = "";
@@ -367,7 +367,7 @@ public class TransaksiKontrol {
         conn.close();
         return trans;
     }
-    
+
     public void keluar_insertTransaksi(Transaksi trans) throws SQLException {
         PreparedStatement stmt = null;
         conn.setAutoCommit(false);
@@ -386,7 +386,7 @@ public class TransaksiKontrol {
         conn.commit();
         conn.close();
     }
-    
+
     public void keluar_updateTransaksi(Transaksi trans) throws SQLException {
         PreparedStatement stmt = null;
         conn.setAutoCommit(false);
@@ -401,16 +401,16 @@ public class TransaksiKontrol {
         conn.commit();
         conn.close();
     }
-    
+
     public String keluar_tampilTotalKeluarBulanIni() throws SQLException {
         PreparedStatement stmt = null;
         ResultSet result = null;
         conn.setAutoCommit(false);
         String tanggal[] = Tanggal.getTanggal2().split("-");
         String query = "SELECT SUM(total) FROM transaksi "
-                + "WHERE jenistransaksi = 'PENGELUARAN' AND notransaksi like '%"+tanggal[0]+tanggal[1]+"';";
+                + "WHERE jenistransaksi = 'PENGELUARAN' AND notransaksi like '%" + tanggal[0] + tanggal[1] + "';";
         stmt = conn.prepareStatement(query);
-        
+
         result = stmt.executeQuery();
         String total = "";
         while (result.next()) {
@@ -420,8 +420,8 @@ public class TransaksiKontrol {
         conn.close();
         return total;
     }
-    
-    public List<Transaksi> keluar_selectTransaksi2(String tglDari,String tglSampai) throws SQLException {
+
+    public List<Transaksi> keluar_selectTransaksi2(String tglDari, String tglSampai) throws SQLException {
         PreparedStatement stmt = null;
         ResultSet result = null;
         conn.setAutoCommit(false);
@@ -447,8 +447,8 @@ public class TransaksiKontrol {
         conn.close();
         return trans;
     }
-    
-    public String keluar_tampilTotalKeluarBulanCustom(String tglDari,String tglSampai) throws SQLException {
+
+    public String keluar_tampilTotalKeluarBulanCustom(String tglDari, String tglSampai) throws SQLException {
         PreparedStatement stmt = null;
         ResultSet result = null;
         conn.setAutoCommit(false);

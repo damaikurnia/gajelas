@@ -459,7 +459,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
 
         text_hargaSatuan.setEditable(false);
         text_hargaSatuan.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        text_hargaSatuan.setText("500");
+        text_hargaSatuan.setText("1000");
         text_hargaSatuan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 text_hargaSatuanKeyReleased(evt);
