@@ -15,14 +15,18 @@ public class Konfigurasi {
     int kedua;
     int ketiga;
     int bagimeter;
+    int tglTerakhir;
+    int denda;
     
     public Konfigurasi(){}
-    public Konfigurasi(int abodemen, int pertama, int kedua, int ketiga, int bagi){
+    public Konfigurasi(int abodemen, int pertama, int kedua, int ketiga, int bagi, int tgl, int dend){
         this.abodemen = abodemen;
         this.pertama = pertama;
         this.kedua = kedua;
         this.ketiga = ketiga;
         this.bagimeter = bagi;
+        this.tglTerakhir = tgl;
+        this.denda = dend;
     }
     
     /**
@@ -93,5 +97,33 @@ public class Konfigurasi {
      */
     public void setBagimeter(int bagimeter) {
         this.bagimeter = bagimeter;
+    }
+
+    /**
+     * @return the tglTerakhir
+     */
+    public int getTglTerakhir() {
+        return tglTerakhir;
+    }
+
+    /**
+     * @param tglTerakhir the tglTerakhir to set
+     */
+    public void setTglTerakhir(int tglTerakhir) {
+        this.tglTerakhir = tglTerakhir;
+    }
+
+    /**
+     * @return the denda
+     */
+    public int getDenda() {
+        return denda;
+    }
+
+    /**
+     * @param denda the denda to set
+     */
+    public void setDenda(int denda) {
+        this.denda = denda;
     }
 }

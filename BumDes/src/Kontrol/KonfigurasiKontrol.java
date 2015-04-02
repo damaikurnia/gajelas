@@ -5,15 +5,12 @@
  */
 package Kontrol;
 
-import Kelas.Anggota;
 import Kelas.Konfigurasi;
 import Koneksi.Koneksi;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -37,13 +34,16 @@ public class KonfigurasiKontrol {
         PreparedStatement stmt = null;
         conn.setAutoCommit(false);
         String query = "update konfigurasi set abodemen = ?, pertama = ?,"
-                + "kedua = ?,selanjutnya = ?, bagimeter = ? where idkonfigurasi = 1";
+                + "kedua = ?,selanjutnya = ?, bagimeter = ?,tglterakhir = ?, denda = ?"
+                + " where idkonfigurasi = 1";
         stmt = conn.prepareStatement(query);
         stmt.setInt(1, agt.getAbodemen());
         stmt.setInt(2, agt.getPertama());
         stmt.setInt(3, agt.getKedua());
         stmt.setInt(4, agt.getKetiga());
         stmt.setInt(5, agt.getBagimeter());
+        stmt.setInt(6, agt.getTglTerakhir());
+        stmt.setInt(7, agt.getDenda());
 
         stmt.executeUpdate();
         conn.commit();
@@ -54,7 +54,8 @@ public class KonfigurasiKontrol {
         PreparedStatement stmt = null;
         ResultSet result = null;
         conn.setAutoCommit(false);
-        String query = "select abodemen, pertama, kedua, selanjutnya,bagimeter from konfigurasi where idkonfigurasi = 1";
+        String query = "select abodemen, pertama, kedua, selanjutnya,bagimeter, tglterakhir, denda"
+                + " from konfigurasi where idkonfigurasi = 1";
         stmt = conn.prepareStatement(query);
         result = stmt.executeQuery();
         Konfigurasi kon = new Konfigurasi();
@@ -64,6 +65,8 @@ public class KonfigurasiKontrol {
             kon.setKedua(result.getInt(3));
             kon.setKetiga(result.getInt(4));
             kon.setBagimeter(result.getInt(5));
+            kon.setTglTerakhir(result.getInt(6));
+            kon.setDenda(result.getInt(7));
         }
         conn.close();
         return kon;
