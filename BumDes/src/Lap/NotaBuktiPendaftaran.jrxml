@@ -83,20 +83,6 @@ AND p.idanggota = t.idanggota AND t.notransaksi = $P{noTrans};]]>
 				</textElement>
 				<text><![CDATA[Alamat		:]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="396" y="0" width="87" height="20" uuid="f8d0ad99-8fbd-4bd9-845d-acbe30f629b2"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="12"/>
-				</textElement>
-				<text><![CDATA[Meter kini	:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="396" y="20" width="87" height="20" uuid="3df6f63d-3c39-44bc-adac-1a17865fd4a5"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="12"/>
-				</textElement>
-				<text><![CDATA[Pemakaian	:]]></text>
-			</staticText>
 			<textField>
 				<reportElement x="87" y="0" width="259" height="20" uuid="27e54162-a820-45ba-a47a-744b5031f957"/>
 				<textElement verticalAlignment="Middle">
@@ -117,20 +103,6 @@ AND p.idanggota = t.idanggota AND t.notransaksi = $P{noTrans};]]>
 					<font fontName="Times New Roman"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{alamat}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="483" y="0" width="89" height="20" uuid="2bb2b637-735a-4ec3-83e1-4c980c961708"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Times New Roman"/>
-				</textElement>
-				<textFieldExpression><![CDATA[Double.toString($F{airterakhir}).split("\\.")[0]]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="483" y="20" width="89" height="20" uuid="6926de67-f6a0-46f6-a3e2-1767eef242fe"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Times New Roman"/>
-				</textElement>
-				<textFieldExpression><![CDATA[0]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>

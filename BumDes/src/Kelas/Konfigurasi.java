@@ -17,6 +17,7 @@ public class Konfigurasi {
     int bagimeter;
     int tglTerakhir;
     int denda;
+    int registrasi;
     
     public Konfigurasi(){}
     public Konfigurasi(int abodemen, int pertama, int kedua, int ketiga, int bagi, int tgl, int dend){
@@ -125,5 +126,19 @@ public class Konfigurasi {
      */
     public void setDenda(int denda) {
         this.denda = denda;
+    }
+
+    /**
+     * @return the registrasi
+     */
+    public int getRegistrasi() {
+        return registrasi;
+    }
+
+    /**
+     * @param registrasi the registrasi to set
+     */
+    public void setRegistrasi(int registrasi) {
+        this.registrasi = registrasi;
     }
 }

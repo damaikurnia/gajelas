@@ -34,7 +34,7 @@ public class KonfigurasiKontrol {
         PreparedStatement stmt = null;
         conn.setAutoCommit(false);
         String query = "update konfigurasi set abodemen = ?, pertama = ?,"
-                + "kedua = ?,selanjutnya = ?, bagimeter = ?,tglterakhir = ?, denda = ?"
+                + "kedua = ?,selanjutnya = ?, bagimeter = ?,tglterakhir = ?, denda = ?, registrasi = ?"
                 + " where idkonfigurasi = 1";
         stmt = conn.prepareStatement(query);
         stmt.setInt(1, agt.getAbodemen());
@@ -44,6 +44,7 @@ public class KonfigurasiKontrol {
         stmt.setInt(5, agt.getBagimeter());
         stmt.setInt(6, agt.getTglTerakhir());
         stmt.setInt(7, agt.getDenda());
+        stmt.setInt(8, agt.getRegistrasi());
 
         stmt.executeUpdate();
         conn.commit();
@@ -54,7 +55,7 @@ public class KonfigurasiKontrol {
         PreparedStatement stmt = null;
         ResultSet result = null;
         conn.setAutoCommit(false);
-        String query = "select abodemen, pertama, kedua, selanjutnya,bagimeter, tglterakhir, denda"
+        String query = "select abodemen, pertama, kedua, selanjutnya,bagimeter, tglterakhir, denda,registrasi"
                 + " from konfigurasi where idkonfigurasi = 1";
         stmt = conn.prepareStatement(query);
         result = stmt.executeQuery();
@@ -67,6 +68,7 @@ public class KonfigurasiKontrol {
             kon.setBagimeter(result.getInt(5));
             kon.setTglTerakhir(result.getInt(6));
             kon.setDenda(result.getInt(7));
+            kon.setRegistrasi(result.getInt(8));
         }
         conn.close();
         return kon;

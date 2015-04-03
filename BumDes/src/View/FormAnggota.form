@@ -643,7 +643,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="11" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Biaya Instalasi Pelanggan Baru Rp 50000"/>
+                <Property name="text" type="java.lang.String" value="BIAYA REGISTRASI = Rp 50000"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel5">

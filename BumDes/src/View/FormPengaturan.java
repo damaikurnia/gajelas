@@ -38,7 +38,7 @@ public class FormPengaturan extends javax.swing.JFrame {
 //        setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH);
 
         dialog_konfigair.setVisible(false);
-        dialog_konfigair.setSize(940, 460);
+        dialog_konfigair.setSize(940, 480);
         dialog_konfigair.setLocationRelativeTo(null);
         dialog_konfigair.setTitle("KONFIGURASI AIR");
         isiProfil();
@@ -85,6 +85,9 @@ public class FormPengaturan extends javax.swing.JFrame {
         jPanel8 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         text_denda = new javax.swing.JTextField();
+        jPanel9 = new javax.swing.JPanel();
+        jLabel24 = new javax.swing.JLabel();
+        text_registrasi = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -358,11 +361,41 @@ public class FormPengaturan extends javax.swing.JFrame {
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(text_denda, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addGap(0, 12, Short.MAX_VALUE))
+        );
+
+        jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder("Registrasi"));
+
+        jLabel24.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel24.setText("BIAYA REG");
+
+        text_registrasi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                text_registrasiKeyReleased(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel24)
+                .addGap(35, 35, 35)
+                .addComponent(text_registrasi, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(text_registrasi, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 13, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -376,10 +409,12 @@ public class FormPengaturan extends javax.swing.JFrame {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -387,16 +422,18 @@ public class FormPengaturan extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(144, 144, 144))
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, Short.MAX_VALUE)))
+                        .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(1, 1, 1)
+                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(button_simpanKonfig, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addGap(6, 6, 6))
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -903,7 +940,8 @@ public class FormPengaturan extends javax.swing.JFrame {
         if (!text_abodemen.getText().matches("[0-9]+") || !text_dasartarif.getText().matches("[0-9]+")
                 || !text_pertama.getText().matches("[0-9]+") || !text_kedua.getText().matches("[0-9]+")
                 || !text_selanjutnya.getText().matches("[0-9]+") || !text_tglTerakhir.getText().matches("[0-9]+")
-                || !text_denda.getText().matches("[0-9]+") || Integer.parseInt(text_tglTerakhir.getText()) > 31) {
+                || !text_denda.getText().matches("[0-9]+") || !text_registrasi.getText().matches("[0-9]+") 
+                || Integer.parseInt(text_tglTerakhir.getText()) > 31) {
             if (text_dasartarif.getText().equals("")) {
                 text_dasartarif.setText("0");
             } else {
@@ -929,6 +967,7 @@ public class FormPengaturan extends javax.swing.JFrame {
                 konfig.setKetiga(Integer.parseInt(text_selanjutnya.getText()));
                 konfig.setTglTerakhir(Integer.parseInt(text_tglTerakhir.getText()));
                 konfig.setDenda(Integer.parseInt(text_denda.getText()));
+                konfig.setRegistrasi(Integer.parseInt(text_registrasi.getText()));
 
                 KonfigurasiKontrol.getKoneksi().updateKonfigurasi(konfig);
                 JOptionPane.showMessageDialog(null, "Data berhasil disimpan");
@@ -942,7 +981,8 @@ public class FormPengaturan extends javax.swing.JFrame {
         if (!text_abodemen.getText().matches("[0-9]+") || !text_dasartarif.getText().matches("[0-9]+")
                 || !text_pertama.getText().matches("[0-9]+") || !text_kedua.getText().matches("[0-9]+")
                 || !text_selanjutnya.getText().matches("[0-9]+") || !text_tglTerakhir.getText().matches("[0-9]+")
-                || !text_denda.getText().matches("[0-9]+") || Integer.parseInt(text_tglTerakhir.getText()) > 31) {
+                || !text_denda.getText().matches("[0-9]+") || !text_registrasi.getText().matches("[0-9]+") 
+                || Integer.parseInt(text_tglTerakhir.getText()) > 31) {
             if (text_tglTerakhir.getText().equals("")) {
                 text_tglTerakhir.setText("0");
             } else {
@@ -957,7 +997,8 @@ public class FormPengaturan extends javax.swing.JFrame {
         if (!text_abodemen.getText().matches("[0-9]+") || !text_dasartarif.getText().matches("[0-9]+")
                 || !text_pertama.getText().matches("[0-9]+") || !text_kedua.getText().matches("[0-9]+")
                 || !text_selanjutnya.getText().matches("[0-9]+") || !text_tglTerakhir.getText().matches("[0-9]+")
-                || !text_denda.getText().matches("[0-9]+") || Integer.parseInt(text_tglTerakhir.getText()) > 31) {
+                || !text_denda.getText().matches("[0-9]+") || !text_registrasi.getText().matches("[0-9]+") 
+                || Integer.parseInt(text_tglTerakhir.getText()) > 31) {
             if (text_abodemen.getText().equals("")) {
                 text_abodemen.setText("0");
             } else {
@@ -970,7 +1011,8 @@ public class FormPengaturan extends javax.swing.JFrame {
         if (!text_abodemen.getText().matches("[0-9]+") || !text_dasartarif.getText().matches("[0-9]+")
                 || !text_pertama.getText().matches("[0-9]+") || !text_kedua.getText().matches("[0-9]+")
                 || !text_selanjutnya.getText().matches("[0-9]+") || !text_tglTerakhir.getText().matches("[0-9]+")
-                || !text_denda.getText().matches("[0-9]+") || Integer.parseInt(text_tglTerakhir.getText()) > 31) {
+                || !text_denda.getText().matches("[0-9]+") || !text_registrasi.getText().matches("[0-9]+") 
+                || Integer.parseInt(text_tglTerakhir.getText()) > 31) {
             if (text_pertama.getText().equals("")) {
                 text_pertama.setText("0");
             } else {
@@ -983,7 +1025,8 @@ public class FormPengaturan extends javax.swing.JFrame {
         if (!text_abodemen.getText().matches("[0-9]+") || !text_dasartarif.getText().matches("[0-9]+")
                 || !text_pertama.getText().matches("[0-9]+") || !text_kedua.getText().matches("[0-9]+")
                 || !text_selanjutnya.getText().matches("[0-9]+") || !text_tglTerakhir.getText().matches("[0-9]+")
-                || !text_denda.getText().matches("[0-9]+") || Integer.parseInt(text_tglTerakhir.getText()) > 31) {
+                || !text_denda.getText().matches("[0-9]+") || !text_registrasi.getText().matches("[0-9]+") 
+                || Integer.parseInt(text_tglTerakhir.getText()) > 31) {
             if (text_kedua.getText().equals("")) {
                 text_kedua.setText("0");
             } else {
@@ -996,7 +1039,8 @@ public class FormPengaturan extends javax.swing.JFrame {
         if (!text_abodemen.getText().matches("[0-9]+") || !text_dasartarif.getText().matches("[0-9]+")
                 || !text_pertama.getText().matches("[0-9]+") || !text_kedua.getText().matches("[0-9]+")
                 || !text_selanjutnya.getText().matches("[0-9]+") || !text_tglTerakhir.getText().matches("[0-9]+")
-                || !text_denda.getText().matches("[0-9]+") || Integer.parseInt(text_tglTerakhir.getText()) > 31) {
+                || !text_denda.getText().matches("[0-9]+") || !text_registrasi.getText().matches("[0-9]+") 
+                || Integer.parseInt(text_tglTerakhir.getText()) > 31) {
             if (text_selanjutnya.getText().equals("")) {
                 text_selanjutnya.setText("0");
             } else {
@@ -1009,7 +1053,8 @@ public class FormPengaturan extends javax.swing.JFrame {
         if (!text_abodemen.getText().matches("[0-9]+") || !text_dasartarif.getText().matches("[0-9]+")
                 || !text_pertama.getText().matches("[0-9]+") || !text_kedua.getText().matches("[0-9]+")
                 || !text_selanjutnya.getText().matches("[0-9]+") || !text_tglTerakhir.getText().matches("[0-9]+")
-                || !text_denda.getText().matches("[0-9]+") || Integer.parseInt(text_tglTerakhir.getText()) > 31) {
+                || !text_denda.getText().matches("[0-9]+") || !text_registrasi.getText().matches("[0-9]+") 
+                || Integer.parseInt(text_tglTerakhir.getText()) > 31) {
             if (text_denda.getText().equals("")) {
                 text_denda.setText("0");
             } else {
@@ -1017,6 +1062,20 @@ public class FormPengaturan extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_text_dendaKeyReleased
+
+    private void text_registrasiKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_text_registrasiKeyReleased
+        if (!text_abodemen.getText().matches("[0-9]+") || !text_dasartarif.getText().matches("[0-9]+")
+                || !text_pertama.getText().matches("[0-9]+") || !text_kedua.getText().matches("[0-9]+")
+                || !text_selanjutnya.getText().matches("[0-9]+") || !text_tglTerakhir.getText().matches("[0-9]+")
+                || !text_denda.getText().matches("[0-9]+") || !text_registrasi.getText().matches("[0-9]+") 
+                || Integer.parseInt(text_tglTerakhir.getText()) > 31) {
+            if (text_registrasi.getText().equals("")) {
+                text_registrasi.setText("0");
+            } else {
+                JOptionPane.showMessageDialog(null, "Data harus dalam bentuk angka!");
+            }
+        }
+    }//GEN-LAST:event_text_registrasiKeyReleased
 
     public void update() {
         try {
@@ -1137,6 +1196,7 @@ public class FormPengaturan extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1169,6 +1229,7 @@ public class FormPengaturan extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel label_alamatNotelp;
     private javax.swing.JLabel label_cth;
@@ -1192,6 +1253,7 @@ public class FormPengaturan extends javax.swing.JFrame {
     private javax.swing.JTextField text_noTelp;
     private javax.swing.JTextField text_pertama;
     private javax.swing.JTextField text_provinsi;
+    private javax.swing.JTextField text_registrasi;
     private javax.swing.JTextField text_selanjutnya;
     private javax.swing.JTextField text_tglTerakhir;
     // End of variables declaration//GEN-END:variables
@@ -1201,7 +1263,8 @@ public class FormPengaturan extends javax.swing.JFrame {
         if (!text_abodemen.getText().matches("[0-9]+") || !text_dasartarif.getText().matches("[0-9]+")
                 || !text_pertama.getText().matches("[0-9]+") || !text_kedua.getText().matches("[0-9]+")
                 || !text_selanjutnya.getText().matches("[0-9]+") || !text_tglTerakhir.getText().matches("[0-9]+")
-                || !text_denda.getText().matches("[0-9]+") || Integer.parseInt(text_tglTerakhir.getText()) > 31) {
+                || !text_denda.getText().matches("[0-9]+") || !text_registrasi.getText().matches("[0-9]+") 
+                || Integer.parseInt(text_tglTerakhir.getText()) > 31) {
             cek = false;
         } else {
             cek = true;
@@ -1223,6 +1286,7 @@ public class FormPengaturan extends javax.swing.JFrame {
             text_tglTerakhir.setText(Integer.toString(kon.getTglTerakhir()));
             label_cth.setText("*Cth : Rek. Air bln MARET paling lambat tanggal " + text_tglTerakhir.getText() + " APRIL");
             text_denda.setText(Integer.toString(kon.getDenda()));
+            text_registrasi.setText(Integer.toString(kon.getRegistrasi()));
         } catch (SQLException ex) {
             Logger.getLogger(FormPengaturan.class.getName()).log(Level.SEVERE, null, ex);
         }

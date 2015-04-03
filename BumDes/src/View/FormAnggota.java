@@ -7,11 +7,13 @@ package View;
 
 import Custom.Tanggal;
 import Kelas.Anggota;
+import Kelas.Konfigurasi;
 import Kelas.Pemakaian;
 import Kelas.Profil;
 import Kelas.Transaksi;
 import Koneksi.Koneksi;
 import Kontrol.AnggotaKontrol;
+import Kontrol.KonfigurasiKontrol;
 import Kontrol.PemakaianKontrol;
 import Kontrol.PengaturanKontrol;
 import Kontrol.TransaksiKontrol;
@@ -43,7 +45,7 @@ import org.apache.commons.io.FileUtils;
  * @author damaikurnia
  */
 public class FormAnggota extends javax.swing.JFrame {
-
+    Konfigurasi konfig;
     File file;
 
     /**
@@ -52,7 +54,14 @@ public class FormAnggota extends javax.swing.JFrame {
     public FormAnggota() {
         initComponents();
         this.setLocationRelativeTo(null);
-//        setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH);
+        try {
+            //        setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH);
+            konfig = KonfigurasiKontrol.getKoneksi().selectKonfigurasi();
+            jLabel4.setText("BIAYA REGISTRASI = Rp "+konfig.getRegistrasi());
+        } catch (SQLException ex) {
+            Logger.getLogger(FormAnggota.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         sinkronGambar();
         dialog_anggota.setVisible(false);
         dialog_anggota.setSize(627, 365);
@@ -247,7 +256,7 @@ public class FormAnggota extends javax.swing.JFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel4.setText("Biaya Instalasi Pelanggan Baru Rp 50000");
+        jLabel4.setText("BIAYA REGISTRASI = Rp 50000");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -682,7 +691,7 @@ public class FormAnggota extends javax.swing.JFrame {
     }//GEN-LAST:event_button_tabelActionPerformed
 
     private void button_tambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_tambahActionPerformed
-        if (Double.parseDouble(text_biaya.getText()) < 50000) {
+        if (Double.parseDouble(text_biaya.getText()) < konfig.getRegistrasi()) {
             JOptionPane.showMessageDialog(null, "Pembayaran Kurang");
         } else {
             try {
