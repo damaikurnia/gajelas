@@ -76,6 +76,7 @@ public class FormTransaksiPengeluaran extends javax.swing.JFrame {
             label_tanggal.setText(Tanggal.getTanggal());
             
             button_cetak.setVisible(false);
+            jLabel8.setText("TRANSAKSI BULAN INI ("+label_bulan.getText()+")");
         } catch (SQLException ex) {
             Logger.getLogger(FormTransaksiPengeluaran.class.getName()).log(Level.SEVERE, null, ex);
         }

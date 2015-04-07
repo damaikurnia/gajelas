@@ -45,21 +45,21 @@ public class PengeluaranKontrol {
         conn.close();
     }
 
-//    public List<Pengeluaran> selectPengeluaran() throws SQLException {
-//        PreparedStatement stmt = null;
-//        ResultSet result = null;
-//        conn.setAutoCommit(false);
-//        String query = "SELECT * from pengeluaran";
-//        stmt = conn.prepareStatement(query);
-//        result = stmt.executeQuery();
-//        List<Pengeluaran> brg = new ArrayList<Pengeluaran>();
-//        while (result.next()) {
-//            Pengeluaran bar = new Pengeluaran(result.getString(1), result.getString(2));
-//            brg.add(bar);
-//        }
-//        conn.close();
-//        return brg;
-//    }
+    public List<Pengeluaran> selectPengeluaran() throws SQLException {
+        PreparedStatement stmt = null;
+        ResultSet result = null;
+        conn.setAutoCommit(false);
+        String query = "SELECT * from pengeluaran";
+        stmt = conn.prepareStatement(query);
+        result = stmt.executeQuery();
+        List<Pengeluaran> brg = new ArrayList<Pengeluaran>();
+        while (result.next()) {
+            Pengeluaran bar = new Pengeluaran(result.getString(1), result.getString(2));
+            brg.add(bar);
+        }
+        conn.close();
+        return brg;
+    }
 
     public List<Pengeluaran> selectPengeluaran2(String id) throws SQLException {
         PreparedStatement stmt = null;

@@ -37,11 +37,12 @@ public class FormPengeluaran extends javax.swing.JFrame {
         label_tanggal.setText(Tanggal.getTanggal());
 //        setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH);
         sinkronGambar();
-
+        resetDefault();
         dialog_cariP.setVisible(false);
         dialog_cariP.setSize(673, 413);
         dialog_cariP.setLocationRelativeTo(null);
         dialog_cariP.setTitle("DATA PENGELUARAN");
+        text_kode.setEditable(false);
     }
 
     /**
@@ -200,6 +201,12 @@ public class FormPengeluaran extends javax.swing.JFrame {
         jLabel3.setText("KODE");
 
         jLabel4.setText("NAMA PENGELUARAN");
+
+        text_nama.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                text_namaKeyReleased(evt);
+            }
+        });
 
         button_simpan.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         button_simpan.setText("SIMPAN");
@@ -440,11 +447,11 @@ public class FormPengeluaran extends javax.swing.JFrame {
     }//GEN-LAST:event_text_keyKeyReleased
 
     private void tabel_pengeluaranMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabel_pengeluaranMouseClicked
-            int row1 = tabel_pengeluaran.getSelectedRow();
-            text_kode.setText(tabel_pengeluaran.getValueAt(row1, 0).toString());
-            text_nama.setText(tabel_pengeluaran.getValueAt(row1, 1).toString());
-            custom();
-            dialog_cariP.setVisible(false);
+        int row1 = tabel_pengeluaran.getSelectedRow();
+        text_kode.setText(tabel_pengeluaran.getValueAt(row1, 0).toString());
+        text_nama.setText(tabel_pengeluaran.getValueAt(row1, 1).toString());
+        custom();
+        dialog_cariP.setVisible(false);
     }//GEN-LAST:event_tabel_pengeluaranMouseClicked
 
     private void button_simpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_simpanActionPerformed
@@ -453,12 +460,14 @@ public class FormPengeluaran extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Silahkan mengisi data yang masih kosong");
         } else {
             try {
-                if (text_kode.isEditable() == false) {//update
+                if (button_simpan.getText().equals("UBAH")) {//update
                     PengeluaranKontrol.getKoneksi().updatePengeluaran(pem);
                     resetDefault();
+                    JOptionPane.showMessageDialog(null, "Pengeluaran berhasil dirubah!");
                 } else {//insert
                     PengeluaranKontrol.getKoneksi().insertPengeluaran(pem);
                     resetDefault();
+                    JOptionPane.showMessageDialog(null, "Pengeluaran berhasil ditambah!");
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(FormPengeluaran.class.getName()).log(Level.SEVERE, null, ex);
@@ -543,6 +552,14 @@ public class FormPengeluaran extends javax.swing.JFrame {
         a.setVisible(true);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
+    private void text_namaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_text_namaKeyReleased
+        if (text_nama.getText().equals("")) {
+            button_simpan.setEnabled(false);
+        } else {
+            button_simpan.setEnabled(true);
+        }
+    }//GEN-LAST:event_text_namaKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -580,7 +597,7 @@ public class FormPengeluaran extends javax.swing.JFrame {
             }
         });
     }
-
+    
     public void sinkronGambar() {
         try {
             Profil prof = PengaturanKontrol.getKoneksi().tampilProfil();
@@ -588,9 +605,9 @@ public class FormPengeluaran extends javax.swing.JFrame {
             label_alamatNotelp.setText(prof.getAlamatdesa() + " " + prof.getDesa() + " " + prof.getKecamatan()
                     + " " + prof.getKabupaten() + " " + prof.getProvinsi()
                     + " - " + prof.getNotelp());
-
+            
             String path = new File(".").getCanonicalPath() + "/Gambar/" + prof.getLogo();
-
+            
             Toolkit toolkit = Toolkit.getDefaultToolkit();
             Image image = toolkit.getImage(path);
             Image imagedResized = image.getScaledInstance(110, 100, Image.SCALE_DEFAULT);
@@ -649,17 +666,21 @@ public class FormPengeluaran extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void resetDefault() {
-        text_kode.setText("");
+        buatIDbaru();
         text_nama.setText("");
-        text_kode.setEditable(true);
+        text_kode.setEditable(false);
         button_hapus.setEnabled(false);
+        button_simpan.setText("SIMPAN");
+        button_simpan.setEnabled(false);
     }
-
+    
     private void custom() {
+        button_simpan.setText("UBAH");
+        button_simpan.setEnabled(true);
         text_kode.setEditable(false);
         button_hapus.setEnabled(true);
     }
-
+    
     private void updateTabel(String key) {
         try {
             List<Pengeluaran> agt = PengeluaranKontrol.getKoneksi().selectPengeluaran2(key);
@@ -668,5 +689,33 @@ public class FormPengeluaran extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(FormPemakaianAir.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    private void buatIDbaru() {
+        try {
+            List<Pengeluaran> brg = PengeluaranKontrol.getKoneksi().selectPengeluaran();
+//            JOptionPane.showMessageDialog(null,brg.size());
+            if (brg.size() == 0) {
+                text_kode.setText("P-1");
+            } else {
+                text_kode.setText("P-" + Integer.toString(cekTerbesar(brg)));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FormBarang.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+    public int cekTerbesar(List<Pengeluaran> brg) {
+        int temp = 0;
+        for (int i = 0; i < brg.size(); i++) {
+            if (Integer.parseInt(brg.get(i).getKode().split("-")[1]) > temp) {
+                temp = Integer.parseInt(brg.get(i).getKode().split("-")[1]);
+            } else {
+                temp = temp;
+            }
+        }
+        temp = temp + 1;
+        return temp;
     }
 }

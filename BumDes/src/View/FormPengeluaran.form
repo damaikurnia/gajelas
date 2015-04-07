@@ -502,6 +502,9 @@
             <Component class="javax.swing.JTextField" name="text_kode">
             </Component>
             <Component class="javax.swing.JTextField" name="text_nama">
+              <Events>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="text_namaKeyReleased"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="button_simpan">
               <Properties>
