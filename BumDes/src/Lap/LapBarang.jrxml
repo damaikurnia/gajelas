@@ -3,8 +3,9 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<parameter name="direktori" class="java.lang.String"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["/home/damaikurnia/NetBeansProjects/trunk/BumDes/src/Lap/"]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA[$P{direktori}]]></defaultValueExpression>
 	</parameter>
 	<queryString>
 		<![CDATA[select *,sysdate() from barang]]>
@@ -34,7 +35,7 @@
 	<title>
 		<band height="100" splitType="Stretch">
 			<subreport>
-				<reportElement x="0" y="0" width="555" height="100" uuid="22de2793-b079-4bb5-a93b-cfd8edbdd130"/>
+				<reportElement x="0" y="0" width="555" height="100" uuid="ae74d62d-cd02-404e-95f1-a36b99828af8"/>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "KopSurat.jasper"]]></subreportExpression>
 			</subreport>

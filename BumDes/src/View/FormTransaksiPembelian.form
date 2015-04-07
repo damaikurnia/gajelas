@@ -566,14 +566,16 @@
                               <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                               <Component id="text_ttltransbeli" min="-2" pref="170" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="129" pref="129" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                               <Component id="button_tambah" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="19" pref="19" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="button_ubah" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="button_hapus" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="9" pref="9" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="button_batal" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="button_tabel" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -620,14 +622,22 @@
                           <Component id="jLabel2" min="-2" pref="20" max="-2" attributes="0"/>
                           <Component id="text_ttltransbeli" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="button_tambah" min="-2" max="-2" attributes="0"/>
-                          <Component id="button_ubah" min="-2" max="-2" attributes="0"/>
-                          <Component id="button_hapus" min="-2" max="-2" attributes="0"/>
-                          <Component id="button_tabel" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="button_ubah" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="button_tambah" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="button_hapus" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="button_batal" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="button_tabel" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace pref="28" max="32767" attributes="0"/>
+                      <EmptySpace pref="26" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -684,6 +694,9 @@
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="text_noTrans">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel10">
               <Properties>
@@ -819,6 +832,14 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Hari, Tanggal"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="button_batal">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="BATAL"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button_batalActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

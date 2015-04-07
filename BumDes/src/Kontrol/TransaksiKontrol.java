@@ -76,6 +76,28 @@ public class TransaksiKontrol {
         conn.close();
         return trans;
     }
+    
+    public List<Transaksi> beli_selectTransaksi2() throws SQLException {
+        PreparedStatement stmt = null;
+        ResultSet result = null;
+        conn.setAutoCommit(false);
+        String query = "SELECT * FROM transaksi where jenistransaksi = 'PEMBELIAN';";
+        stmt = conn.prepareStatement(query);
+        result = stmt.executeQuery();
+        List<Transaksi> trans = new ArrayList<Transaksi>();
+        while (result.next()) {
+            Transaksi trs = new Transaksi();
+            trs.setNoTrans(result.getString(1));
+            trs.setIdBarang(new Barang("", result.getString(2), 0, 0));
+            trs.setJumlah(result.getInt(3));
+            trs.setHargaSatuan(result.getDouble(4));
+            trs.setTotal(result.getDouble(5));
+            trans.add(trs);
+        }
+
+        conn.close();
+        return trans;
+    }
 
     public List<Transaksi> beli_selectTransaksiAll(String tDari, String tSampai) throws SQLException {
         PreparedStatement stmt = null;

@@ -6,14 +6,10 @@
 package View;
 
 import Custom.Tanggal;
-import Kelas.Anggota;
-import Kelas.Pemakaian;
 import Kelas.Pengeluaran;
 import Kelas.Profil;
-import Kontrol.AnggotaKontrol;
 import Kontrol.PengaturanKontrol;
 import Kontrol.PengeluaranKontrol;
-import TabelModel.AnggotaTM;
 import TabelModel.PengeluaranTM;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -24,7 +20,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**

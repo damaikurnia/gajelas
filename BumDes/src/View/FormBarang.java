@@ -52,7 +52,9 @@ public class FormBarang extends javax.swing.JFrame {
         dialog_barang.setLocationRelativeTo(null);
         dialog_barang.setTitle("DATA BARANG");
 
+        buatIDbaru();
         sinkronGambar();
+        text_kode.setEditable(false);
     }
 
     /**
@@ -261,8 +263,26 @@ public class FormBarang extends javax.swing.JFrame {
             }
         });
 
+        text_stok.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                text_stokKeyReleased(evt);
+            }
+        });
+
+        text_nama.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                text_namaKeyReleased(evt);
+            }
+        });
+
         jLabel9.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel9.setText("STOK SAAT INI");
+
+        text_totalAset.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                text_totalAsetKeyReleased(evt);
+            }
+        });
 
         button_cetak.setText("CETAK");
         button_cetak.addActionListener(new java.awt.event.ActionListener() {
@@ -568,7 +588,7 @@ public class FormBarang extends javax.swing.JFrame {
     }//GEN-LAST:event_button_cetakActionPerformed
 
     private void button_batalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_batalActionPerformed
-        text_kode.setText("");
+        buatIDbaru();
         text_nama.setText("");
         text_stok.setText("0");
         text_totalAset.setText("0");
@@ -634,6 +654,38 @@ public class FormBarang extends javax.swing.JFrame {
         a.setVisible(true);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
+    private void text_stokKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_text_stokKeyReleased
+        if (!text_stok.getText().matches("[0-9]+") || !text_totalAset.getText().matches("[0-9]+") || text_totalAset.getText().equals("")) {
+            if (text_stok.getText().equals("")) {
+                text_stok.setText("0");
+            } else {
+                button_simpan.setEnabled(false);
+            }
+        } else {
+            button_simpan.setEnabled(true);
+        }
+    }//GEN-LAST:event_text_stokKeyReleased
+
+    private void text_totalAsetKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_text_totalAsetKeyReleased
+        if (!text_stok.getText().matches("[0-9]+") || !text_totalAset.getText().matches("[0-9]+") || text_totalAset.getText().equals("")) {
+            if (text_totalAset.getText().equals("")) {
+                text_totalAset.setText("0");
+            } else {
+                button_simpan.setEnabled(false);
+            }
+        } else {
+            button_simpan.setEnabled(true);
+        }
+    }//GEN-LAST:event_text_totalAsetKeyReleased
+
+    private void text_namaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_text_namaKeyReleased
+        if (!text_stok.getText().matches("[0-9]+") || !text_totalAset.getText().matches("[0-9]+") || text_totalAset.getText().equals("")) {
+            button_simpan.setEnabled(false);
+        } else {
+            button_simpan.setEnabled(true);
+        }
+    }//GEN-LAST:event_text_namaKeyReleased
+
     public void update() {
         try {
             List<Barang> brg = BarangKontrol.getKoneksi().selectBarang();
@@ -643,7 +695,7 @@ public class FormBarang extends javax.swing.JFrame {
             TableCellRenderer kanan = new RataKanan();
             tabel_barang.getColumnModel().getColumn(2).setCellRenderer(kanan);
             tabel_barang.getColumnModel().getColumn(3).setCellRenderer(kanan);
-            
+
             text_ttlaset.setText(BarangKontrol.getKoneksi().tampilTotalAset());
 //        tabelDosen.getColumnModel().getColumn(0).setMaxWidth(70);
 //        tabelDosen.getColumnModel().getColumn(1).setMinWidth(220);
@@ -655,23 +707,22 @@ public class FormBarang extends javax.swing.JFrame {
     }
 
     public void resetDefault() {
+        buatIDbaru();
         button_ubah.setEnabled(false);
         button_hapus.setEnabled(false);
-        text_kode.setEditable(true);
-        text_kode.setText("");
         text_nama.setText("");
         text_stok.setText("");
         text_totalAset.setText("");
     }
-    
+
     public void sinkronGambar() {
         try {
             Profil prof = PengaturanKontrol.getKoneksi().tampilProfil();
             label_namaDesa.setText("BADAN USAHA MILIK DESA " + prof.getNamadesa());
-            label_alamatNotelp.setText(prof.getAlamatdesa()+" "+prof.getDesa()+" "+prof.getKecamatan()
-                    +" "+prof.getKabupaten()+" "+prof.getProvinsi()
+            label_alamatNotelp.setText(prof.getAlamatdesa() + " " + prof.getDesa() + " " + prof.getKecamatan()
+                    + " " + prof.getKabupaten() + " " + prof.getProvinsi()
                     + " - " + prof.getNotelp());
-            
+
             String path = new File(".").getCanonicalPath() + "/Gambar/" + prof.getLogo();
 
             Toolkit toolkit = Toolkit.getDefaultToolkit();
@@ -771,4 +822,32 @@ public class FormBarang extends javax.swing.JFrame {
     private javax.swing.JTextField text_totalAset;
     private javax.swing.JTextField text_ttlaset;
     // End of variables declaration//GEN-END:variables
+
+    private void buatIDbaru() {
+        try {
+            List<Barang> brg = BarangKontrol.getKoneksi().selectBarang();
+//            JOptionPane.showMessageDialog(null,brg.size());
+            if (brg.size() == 0) {
+                text_kode.setText("BRG-1");
+            } else {
+                text_kode.setText("BRG-" + Integer.toString(cekTerbesar(brg)));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FormBarang.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public int cekTerbesar(List<Barang> brg) {
+        int temp = 0;
+        for (int i = 0; i < brg.size(); i++) {
+            if (Integer.parseInt(brg.get(i).getIdBarang().split("-")[1]) > temp) {
+                temp = Integer.parseInt(brg.get(i).getIdBarang().split("-")[1]);
+            } else {
+                temp = temp;
+            }
+        }
+        temp = temp + 1;
+        return temp;
+    }
 }

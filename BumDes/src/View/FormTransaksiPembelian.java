@@ -8,7 +8,6 @@ package View;
 import Custom.RataKanan;
 import Kelas.Barang;
 import Kelas.Profil;
-import Custom.Tanggal;
 import Kelas.Transaksi;
 import Koneksi.Koneksi;
 import Kontrol.BarangKontrol;
@@ -30,7 +29,6 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableCellRenderer;
 import net.sf.jasperreports.engine.JRException;
@@ -60,7 +58,7 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
             label_jmlBeli.setVisible(false);
             update();
             isiList();
-            
+            buatIDbaru();
             sinkronGambar();
             GregorianCalendar gc = new GregorianCalendar();
             date_dari.setDate(gc.getTime());
@@ -126,6 +124,7 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         text_ttltransbeli = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
+        button_batal = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -308,6 +307,8 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
             }
         });
 
+        text_noTrans.setEditable(false);
+
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("NO TRANSAKSI");
@@ -380,6 +381,13 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel16.setText("Hari, Tanggal");
 
+        button_batal.setText("BATAL");
+        button_batal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_batalActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -430,13 +438,15 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
                         .addGap(10, 10, 10)
                         .addComponent(text_ttltransbeli, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(129, 129, 129)
+                        .addGap(41, 41, 41)
                         .addComponent(button_tambah)
-                        .addGap(19, 19, 19)
+                        .addGap(18, 18, 18)
                         .addComponent(button_ubah)
                         .addGap(18, 18, 18)
                         .addComponent(button_hapus)
-                        .addGap(9, 9, 9)
+                        .addGap(18, 18, 18)
+                        .addComponent(button_batal)
+                        .addGap(18, 18, 18)
                         .addComponent(button_tabel)))
                 .addContainerGap(13, Short.MAX_VALUE))
         );
@@ -474,13 +484,18 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(text_ttltransbeli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(button_tambah)
-                    .addComponent(button_ubah)
-                    .addComponent(button_hapus)
-                    .addComponent(button_tabel))
-                .addContainerGap(28, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(button_ubah)
+                            .addComponent(button_tambah)
+                            .addComponent(button_hapus)
+                            .addComponent(button_batal)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(button_tabel)))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -695,11 +710,14 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
 
     private void text_jmlBeliKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_text_jmlBeliKeyReleased
         if (text_jmlBeli.getText().equals("")) {
-
-        } else {
+            text_total.setText("0");
+            text_jmlBeli.setText("0");
+        } else if(text_jmlBeli.getText().matches("[0-9]+")||text_hargaSatuan.getText().matches("[0-9]+")){
             double total = Integer.parseInt(text_jmlBeli.getText())
                     * Integer.parseInt(text_hargaSatuan.getText());
             text_total.setText(Double.toString(total).split("\\.")[0]);
+            
+            button_tambah.setVisible(true);
         }
     }//GEN-LAST:event_text_jmlBeliKeyReleased
 
@@ -723,6 +741,7 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
         text_total.setText(tabel_pembelian.getValueAt(row1, 4).toString());
 
         customnya();
+        
     }//GEN-LAST:event_tabel_pembelianMouseClicked
 
     private void button_tampilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_tampilActionPerformed
@@ -806,6 +825,10 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
         a.setVisible(true);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
+    private void button_batalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_batalActionPerformed
+        defaultnya();
+    }//GEN-LAST:event_button_batalActionPerformed
+
     public void update() {
         try {
             List<Transaksi> agt = TransaksiKontrol.getKoneksi().beli_selectTransaksi();
@@ -888,15 +911,14 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
     }
 
     public void defaultnya() {
-        button_tambah.setEnabled(true);
+        buatIDbaru();
         button_ubah.setEnabled(false);
         button_hapus.setEnabled(false);
+        button_batal.setEnabled(true);
         combo_barang.setEnabled(true);
-        text_noTrans.setText("");
         text_jmlBeli.setText("0");
         text_hargaSatuan.setText("0");
         text_total.setText("0");
-        text_noTrans.setEditable(true);
     }
 
     public void customnya() {
@@ -905,6 +927,7 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
         button_hapus.setEnabled(true);
         combo_barang.setEnabled(false);
         text_noTrans.setEditable(false);
+        button_batal.setEnabled(true);
     }
     
     public void sinkronGambar() {
@@ -978,8 +1001,47 @@ public class FormTransaksiPembelian extends javax.swing.JFrame {
             }
         });
     }
+    
+    private void buatIDbaru() {
+        try {
+            List<Transaksi> brg = TransaksiKontrol.getKoneksi().beli_selectTransaksi2();
+//            JOptionPane.showMessageDialog(null,brg.size());
+            if (brg.size() == 0) {
+                text_noTrans.setText("TB-1");
+            } else {
+                text_noTrans.setText("TB-" + Integer.toString(cekTerbesar(brg)));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FormBarang.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public int cekTerbesar(List<Transaksi> brg) {
+        int temp = 0;
+        for (int i = 0; i < brg.size(); i++) {
+            if (Integer.parseInt(brg.get(i).getNoTrans().split("-")[1]) > temp) {
+                temp = Integer.parseInt(brg.get(i).getNoTrans().split("-")[1]);
+            } else {
+                temp = temp;
+            }
+        }
+        temp = temp + 1;
+        return temp;
+    }
+    
+    public void resetDefault(){
+        buatIDbaru();
+        combo_barang.setSelectedIndex(0);
+        text_jmlBeli.setText("0");
+        text_hargaSatuan.setText("0");
+        text_total.setText("0");
+        
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton button_batal;
     private javax.swing.JButton button_cetak;
     private javax.swing.JButton button_hapus;
     private javax.swing.JButton button_tabel;
