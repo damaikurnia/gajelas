@@ -10,13 +10,13 @@ package Kelas;
  * @author damaikurnia
  */
 public class Pemakaian {
-    private String notransaksi;
-    private Anggota idanggota;
-    private double airlunas;
-    private double airterakhir;
-    private double airdibayar;
-    private String bulan;
-    private String jatuhtempo;
+    String notransaksi;
+    Anggota idanggota;
+    double airlunas;
+    double airterakhir;
+    double airdibayar;
+    String bulan;
+    String jatuhtempo;
     
     public Pemakaian(){}
     

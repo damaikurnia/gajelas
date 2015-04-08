@@ -1041,8 +1041,8 @@ public class FormPemakaianAir extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Buat Baru");
                 //cek riwayat tunggakan pengguna
                 List<Pemakaian> riwayat = PemakaianKontrol.getKoneksi().cekDendaPelanggan(new Pemakaian(jatuhTempo, new Anggota(text_noPelanggan.getText(), jatuhTempo, jatuhTempo, jatuhTempo, jatuhTempo, jatuhTempo, row1, row1, jatuhTempo, jatuhTempo, jatuhTempo, jatuhTempo, jatuhTempo), row1, row1, row1, jatuhTempo, jatuhTempo));
-                if (riwayat.size() >= 2) {
-                    JOptionPane.showMessageDialog(null, "Anggota ini telah denda lebih dari 2 bulan, pemakaian bulan ini akan diputus sementara sampai anggota yang bersangkutan telah membayar");
+                if (riwayat.size() >= 3) {
+                    JOptionPane.showMessageDialog(null, "Anggota ini telah denda lebih dari 3 bulan, pemakaian bulan ini akan diputus sementara sampai anggota yang bersangkutan telah membayar");
                     text_airterakhir.setEditable(false);
                     label_status.setVisible(true);
                 } else {
