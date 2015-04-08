@@ -13,9 +13,17 @@ public class Keluhan {
     String idKeluhan;
     Anggota idAnggota;
     String keterangan;
-    String tglPembuatan;
     String tglPelaksanaan;
+    String status;
 
+    public Keluhan(String id_kel,Anggota id_agt, String ket,String tglPel,String stat){
+        this.idKeluhan = id_kel;
+        this.idAnggota = id_agt;
+        this.keterangan = ket;
+        this.tglPelaksanaan = tglPel;
+        this.status = stat;
+    }
+    
     /**
      * @return the idKeluhan
      */
@@ -59,20 +67,6 @@ public class Keluhan {
     }
 
     /**
-     * @return the tglPembuatan
-     */
-    public String getTglPembuatan() {
-        return tglPembuatan;
-    }
-
-    /**
-     * @param tglPembuatan the tglPembuatan to set
-     */
-    public void setTglPembuatan(String tglPembuatan) {
-        this.tglPembuatan = tglPembuatan;
-    }
-
-    /**
      * @return the tglPelaksanaan
      */
     public String getTglPelaksanaan() {
@@ -85,6 +79,19 @@ public class Keluhan {
     public void setTglPelaksanaan(String tglPelaksanaan) {
         this.tglPelaksanaan = tglPelaksanaan;
     }
-    
+
+    /**
+     * @return the status
+     */
+    public String getStatus() {
+        return status;
+    }
+
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(String status) {
+        this.status = status;
+    }
     
 }
