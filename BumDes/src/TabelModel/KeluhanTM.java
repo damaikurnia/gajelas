@@ -42,7 +42,8 @@ public class KeluhanTM extends AbstractTableModel {
         Keluhan d = agt.get(rowIndex);
         switch (columnIndex) {
             case 0:
-                return d.getTglPelaksanaan();
+                String tgl[] = d.getTglPelaksanaan().split("-");
+                return tgl[2]+"-"+tgl[1]+"-"+tgl[0];
             case 1:
                 List<Anggota> a = null;
                 try {

@@ -10,6 +10,7 @@ package Kelas;
  * @author damaikurnia
  */
 public class Anggota {
+
     String idAnggota;
     String namaAnggota;
     String pekerjaan;
@@ -43,6 +44,10 @@ public class Anggota {
     }
 
     public Anggota() {
+    }
+
+    public Anggota(String id) {
+        this.idAnggota = id;
     }
 
     /**

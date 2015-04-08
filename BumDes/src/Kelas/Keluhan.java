@@ -23,6 +23,7 @@ public class Keluhan {
         this.tglPelaksanaan = tglPel;
         this.status = stat;
     }
+    public Keluhan(){}
     
     /**
      * @return the idKeluhan

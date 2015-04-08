@@ -31,7 +31,7 @@ public class RenderWarnaWarni extends DefaultTableCellRenderer {
         if (airLunas == airTerakhir && airTerakhir != 0) {
             component.setBackground(lunas);
         } else {
-            if (tanggal.compareTo(jatuhTempo) == -1) {
+            if (tanggal.compareTo(jatuhTempo) == -1) {//tanggal = tgl skrg
                 component.setBackground(noDenda);
             } else {
                 component.setBackground(denda);
