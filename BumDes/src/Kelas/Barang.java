@@ -14,14 +14,16 @@ public class Barang {
     String namaBarang;
     int stok;
     double totalAset;
+    String kode;
 
     public Barang(){}
     
-    public Barang(String id, String nama, int stok,double aset){
+    public Barang(String id, String nama, int stok,double aset,String kode){
         this.idBarang = id;
         this.namaBarang = nama;
         this.stok = stok;
         this.totalAset = aset;
+        this.kode = kode;
     }
     
     /**
@@ -78,5 +80,19 @@ public class Barang {
      */
     public void setTotalAset(double totalAset) {
         this.totalAset = totalAset;
+    }
+
+    /**
+     * @return the kode
+     */
+    public String getKode() {
+        return kode;
+    }
+
+    /**
+     * @param kode the kode to set
+     */
+    public void setKode(String kode) {
+        this.kode = kode;
     }
 }

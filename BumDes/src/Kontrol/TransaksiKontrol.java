@@ -58,7 +58,7 @@ public class TransaksiKontrol {
         conn.setAutoCommit(false);
         String query = "SELECT a.notransaksi, b.namabarang,a.jumlah,a.hargasatuan,a.total \n"
                 + "FROM transaksi a, barang b "
-                + "WHERE a.idbarang = b.idbarang AND tanggaltransaksi = ?";
+                + "WHERE a.idbarang = b.idbarang and jenistransaksi = 'PEMBELIAN' AND tanggaltransaksi = ?";
         stmt = conn.prepareStatement(query);
         stmt.setString(1, Tanggal.getTanggal2());
         result = stmt.executeQuery();
@@ -488,5 +488,113 @@ public class TransaksiKontrol {
 
         conn.close();
         return total;
+    }
+    
+    //==========================================================================
+    public List<Transaksi> pakai_selectTransaksi() throws SQLException {
+        PreparedStatement stmt = null;
+        ResultSet result = null;
+        conn.setAutoCommit(false);
+        String query = "SELECT a.notransaksi, b.namabarang,a.jumlah,a.hargasatuan,a.total \n"
+                + "FROM transaksi a, barang b "
+                + "WHERE a.idbarang = b.idbarang and a.jenistransaksi = 'PEMAKAIAN' and a.tanggaltransaksi = ?";
+        stmt = conn.prepareStatement(query);
+        stmt.setString(1, Tanggal.getTanggal2());
+        result = stmt.executeQuery();
+        List<Transaksi> trans = new ArrayList<Transaksi>();
+        while (result.next()) {
+            Transaksi trs = new Transaksi();
+            trs.setNoTrans(result.getString(1));
+            trs.setIdBarang(new Barang("", result.getString(2), 0, 0,""));
+            trs.setJumlah(result.getInt(3));
+            trs.setHargaSatuan(result.getDouble(4));
+            trs.setTotal(result.getDouble(5));
+            trans.add(trs);
+        }
+
+        conn.close();
+        return trans;
+    }
+    
+    public List<Transaksi> pakai_selectTransaksi2() throws SQLException {
+        PreparedStatement stmt = null;
+        ResultSet result = null;
+        conn.setAutoCommit(false);
+        String query = "SELECT * FROM transaksi where jenistransaksi = 'PEMAKAIAN';";
+        stmt = conn.prepareStatement(query);
+        result = stmt.executeQuery();
+        List<Transaksi> trans = new ArrayList<Transaksi>();
+        while (result.next()) {
+            Transaksi trs = new Transaksi();
+            trs.setNoTrans(result.getString(1));
+            trs.setIdBarang(new Barang(result.getString(2),"", 0, 0,""));
+            trs.setIdAnggota(new Anggota(result.getString(3)));
+            trs.setTanggalTransaksi(result.getString(4));
+            trs.setJumlah(result.getInt(6));
+            trs.setTotal(result.getDouble(9));
+            trans.add(trs);
+        }
+
+        conn.close();
+        return trans;
+    }
+    public Transaksi pakai_selectTransaksi3(String idTrans) throws SQLException {
+        PreparedStatement stmt = null;
+        ResultSet result = null;
+        conn.setAutoCommit(false);
+        String query = "SELECT * FROM transaksi where notransaksi = ?;";
+        stmt = conn.prepareStatement(query);
+        stmt.setString(1, idTrans);
+        result = stmt.executeQuery();
+        Transaksi trs = new Transaksi();
+        while (result.next()) {
+            trs.setNoTrans(result.getString(1));
+            trs.setIdBarang(new Barang(result.getString(2),"", 0, 0,""));
+            trs.setIdAnggota(new Anggota(result.getString(3)));
+            trs.setTanggalTransaksi(result.getString(4));
+            trs.setJumlah(result.getInt(6));
+            trs.setTotal(result.getDouble(9));
+        }
+
+        conn.close();
+        return trs;
+    }
+    
+    
+    public void pakai_insertTransaksi(Transaksi trans) throws SQLException {
+        PreparedStatement stmt = null;
+        conn.setAutoCommit(false);
+        String query = "INSERT INTO transaksi VALUES(?,?,?,?,?,?,?,?,?,?)";
+        stmt = conn.prepareStatement(query);
+        stmt.setString(1, trans.getNoTrans());
+        stmt.setString(2, trans.getIdBarang().getIdBarang());
+        stmt.setString(3, "-");
+        stmt.setString(4, Tanggal.getTanggal2());
+        stmt.setString(5, "PEMAKAIAN");
+        stmt.setInt(6, trans.getJumlah());
+        stmt.setDouble(7, trans.getHargaSatuan());
+        stmt.setDouble(8, trans.getDenda());
+        stmt.setDouble(9, trans.getTotal());
+        stmt.setString(10, "5.1.7");
+        stmt.executeUpdate();
+        conn.commit();
+        conn.close();
+    }
+    
+    public void pakai_updateTransaksi(Transaksi trans) throws SQLException {
+        PreparedStatement stmt = null;
+        conn.setAutoCommit(false);
+        String query = "update transaksi set idbarang = ?, jumlah = ?,"
+                + "hargasatuan = ?, total = ? where notransaksi = ?";
+        stmt = conn.prepareStatement(query);
+        stmt.setString(1, trans.getIdBarang().getIdBarang());
+        stmt.setInt(2, trans.getJumlah());
+        stmt.setDouble(3, trans.getHargaSatuan());
+        stmt.setDouble(4, trans.getTotal());
+        stmt.setString(5, trans.getNoTrans());
+
+        stmt.executeUpdate();
+        conn.commit();
+        conn.close();
     }
 }

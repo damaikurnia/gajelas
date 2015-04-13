@@ -35,12 +35,13 @@ public class BarangKontrol {
     public void updateBarang(Barang brg) throws SQLException {
         PreparedStatement stmt = null;
         conn.setAutoCommit(false);
-        String query = "update barang set namabarang = ?, stokbarang = ?, totalaset = ? where idbarang = ?";
+        String query = "update barang set namabarang = ?, stokbarang = ?, totalaset = ?, kode = ? where idbarang = ?";
         stmt = conn.prepareStatement(query);
         stmt.setString(1, brg.getNamaBarang());
         stmt.setInt(2, brg.getStok());
         stmt.setDouble(3, brg.getTotalAset());
-        stmt.setString(4, brg.getIdBarang());
+        stmt.setString(4, brg.getKode());
+        stmt.setString(5, brg.getIdBarang());
 
         stmt.executeUpdate();
         conn.commit();
@@ -56,7 +57,51 @@ public class BarangKontrol {
         result = stmt.executeQuery();
         List<Barang> brg = new ArrayList<Barang>();
         while (result.next()) {
-            Barang bar = new Barang(result.getString(1), result.getString(2), result.getInt(3),result.getDouble(4));
+            Barang bar = new Barang();
+            bar.setIdBarang(result.getString(1));
+            bar.setNamaBarang(result.getString(2));
+            bar.setStok(result.getInt(3));
+            bar.setTotalAset(result.getDouble(4));
+            brg.add(bar);
+        }
+        conn.close();
+        return brg;
+    }
+    
+    public List<Barang> selectBarang_peralatan() throws SQLException {
+        PreparedStatement stmt = null;
+        ResultSet result = null;
+        conn.setAutoCommit(false);
+        String query = "SELECT * from barang where kode = '1.2.2'";
+        stmt = conn.prepareStatement(query);
+        result = stmt.executeQuery();
+        List<Barang> brg = new ArrayList<Barang>();
+        while (result.next()) {
+            Barang bar = new Barang();
+            bar.setIdBarang(result.getString(1));
+            bar.setNamaBarang(result.getString(2));
+            bar.setStok(result.getInt(3));
+            bar.setTotalAset(result.getDouble(4));
+            brg.add(bar);
+        }
+        conn.close();
+        return brg;
+    }
+    
+    public List<Barang> selectBarang_perlengkapan() throws SQLException {
+        PreparedStatement stmt = null;
+        ResultSet result = null;
+        conn.setAutoCommit(false);
+        String query = "SELECT * from barang where kode = '1.1.4'";
+        stmt = conn.prepareStatement(query);
+        result = stmt.executeQuery();
+        List<Barang> brg = new ArrayList<Barang>();
+        while (result.next()) {
+            Barang bar = new Barang();
+            bar.setIdBarang(result.getString(1));
+            bar.setNamaBarang(result.getString(2));
+            bar.setStok(result.getInt(3));
+            bar.setTotalAset(result.getDouble(4));
             brg.add(bar);
         }
         conn.close();
@@ -71,9 +116,13 @@ public class BarangKontrol {
         stmt = conn.prepareStatement(query);
         stmt.setString(1, id);
         result = stmt.executeQuery();
-        Barang bar = null;
+        Barang bar = new Barang();
         while (result.next()) {
-            bar = new Barang(result.getString(1), result.getString(2), result.getInt(3),result.getDouble(4));
+            bar.setIdBarang(result.getString(1));
+            bar.setNamaBarang(result.getString(2));
+            bar.setStok(result.getInt(3));
+            bar.setTotalAset(result.getDouble(4));
+            bar.setKode(result.getString(5));
         }
         conn.close();
         return bar;
@@ -94,23 +143,39 @@ public class BarangKontrol {
     public void insertBarang(Barang brg) throws SQLException {
         PreparedStatement stmt = null;
         conn.setAutoCommit(false);
-        String query = "INSERT INTO barang VALUES(?,?,?,?)";
+        String query = "INSERT INTO barang VALUES(?,?,?,?,?)";
         stmt = conn.prepareStatement(query);
         stmt.setString(1, brg.getIdBarang());
         stmt.setString(2, brg.getNamaBarang());
         stmt.setInt(3, brg.getStok());
         stmt.setDouble(4,brg.getTotalAset());
+        stmt.setString(5, brg.getKode());
 
         stmt.executeUpdate();
         conn.commit();
         conn.close();
     }
     
-    public String tampilTotalAset() throws SQLException{
+    public String tampilTotalAset_peralatan() throws SQLException{
         PreparedStatement stmt = null;
         ResultSet result = null;
         conn.setAutoCommit(false);
-        String query = "SELECT SUM(totalaset) FROM barang";
+        String query = "SELECT SUM(totalaset) FROM barang where kode = '1.2.2'";
+        stmt = conn.prepareStatement(query);
+        result = stmt.executeQuery();
+        String data = "";
+        while (result.next()) {
+            data = result.getString(1);
+        }
+        conn.close();
+        return data;
+    }
+    
+    public String tampilTotalAset_perlengkapan() throws SQLException{
+        PreparedStatement stmt = null;
+        ResultSet result = null;
+        conn.setAutoCommit(false);
+        String query = "SELECT SUM(totalaset) FROM barang where kode = '1.1.4'";
         stmt = conn.prepareStatement(query);
         result = stmt.executeQuery();
         String data = "";
