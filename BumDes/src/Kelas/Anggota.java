@@ -42,12 +42,12 @@ public class Anggota {
         this.provinsi = prov;
         this.kecamatan = kec;
     }
-
-    public Anggota() {
+    
+    public Anggota(String id){
+        this.idAnggota = id;
     }
 
-    public Anggota(String id) {
-        this.idAnggota = id;
+    public Anggota() {
     }
 
     /**

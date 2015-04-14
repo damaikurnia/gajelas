@@ -17,8 +17,8 @@ public class Koneksi {
     Connection connection = null;
     String url = "jdbc:mysql://localhost:3306/airbersih";
     String user = "root";
-//    String password = "root";
-    String password = "";
+    String password = "root";//linux
+//    String password = "";
 
     public Connection getConnection() {
         if (connection == null) {

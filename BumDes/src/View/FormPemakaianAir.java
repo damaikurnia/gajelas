@@ -11,11 +11,13 @@ import Kelas.Anggota;
 import Kelas.Konfigurasi;
 import Kelas.Pemakaian;
 import Kelas.Profil;
+import Kelas.Transaksi;
 import Koneksi.Koneksi;
 import Kontrol.AnggotaKontrol;
 import Kontrol.KonfigurasiKontrol;
 import Kontrol.PemakaianKontrol;
 import Kontrol.PengaturanKontrol;
+import Kontrol.TransaksiKontrol;
 import TabelModel.AnggotaTM;
 import TabelModel.HistoriTM;
 import java.awt.Color;
@@ -1048,27 +1050,42 @@ public class FormPemakaianAir extends javax.swing.JFrame {
                 } else {
                     text_airterakhir.setEditable(true);
                     label_status.setVisible(false);
+
+                    //cari data bln sblmnya
+                    List<Pemakaian> pn = PemakaianKontrol.getKoneksi().selectHistoriPemakaian(text_noPelanggan.getText());
+                    pem = cekTerbesar(pn);
+//                    String tanggalSblm = cariTanggalJatuhTempoSblm();
+//                    pem.setIdanggota(new Anggota(text_noPelanggan.getText(), jatuhTempo, jatuhTempo, jatuhTempo, jatuhTempo, jatuhTempo, row1, row1, jatuhTempo, jatuhTempo, jatuhTempo, jatuhTempo, jatuhTempo));
+//                    pem.setJatuhtempo(tanggalSblm);
+//                    pem = PemakaianKontrol.getKoneksi().selectPemakaian2(pem);
+
+                    //kemudian insert baru
+                    String kodebaru = generateKodeBaru(pem.getNotransaksi());
+                    Pemakaian dataBaru = new Pemakaian(kodebaru,
+                            pem.getIdanggota(), pem.getAirterakhir(), 0, 0, label_bulan.getText(), jatuhTempo);
+                    PemakaianKontrol.getKoneksi().insertPemakaian(dataBaru);
+
+                    //insert ke transaksi sebagai piutang
+                    Transaksi trans = new Transaksi();
+                    trans.setNoTrans(dataBaru.getNotransaksi());
+                    trans.setIdAnggota(dataBaru.getIdanggota());
+                    trans.setJumlah((int) dataBaru.getAirdibayar());
+                    trans.setHargaSatuan(0);
+                    trans.setDenda(0);
+                    Konfigurasi konfig = KonfigurasiKontrol.getKoneksi().selectKonfigurasi();
+                    trans.setTotal(konfig.getAbodemen());
+                    trans.setKode("1.1.3");//kode piutang
+                    TransaksiKontrol.getKoneksi().jual_insertTransaksi(trans);
+
+                    //tampilkan
+                    text_airlunas.setText(Double.toString(dataBaru.getAirlunas()).split("\\.")[0]);
+                    text_airterakhir.setText(Double.toString(dataBaru.getAirterakhir()).split("\\.")[0]);
+                    text_airdibayar.setText(Double.toString(dataBaru.getAirdibayar()).split("\\.")[0]);
+                    label_noTrans.setText(dataBaru.getNotransaksi());
+//                text_airterakhir.setEditable(true);
+                    label_noTrans.setVisible(true);
                 }
 
-                //cari data bln sblmnya
-                String tanggalSblm = cariTanggalJatuhTempoSblm();
-                pem.setIdanggota(new Anggota(text_noPelanggan.getText(), jatuhTempo, jatuhTempo, jatuhTempo, jatuhTempo, jatuhTempo, row1, row1, jatuhTempo, jatuhTempo, jatuhTempo, jatuhTempo, jatuhTempo));
-                pem.setJatuhtempo(tanggalSblm);
-                pem = PemakaianKontrol.getKoneksi().selectPemakaian(pem);
-
-                //kemudian insert baru
-                String kodebaru = generateKodeBaru(pem.getNotransaksi());
-                Pemakaian dataBaru = new Pemakaian(kodebaru,
-                        pem.getIdanggota(), pem.getAirterakhir(), 0, 0, label_bulan.getText(), jatuhTempo);
-                PemakaianKontrol.getKoneksi().insertPemakaian(dataBaru);
-
-                //tampilkan
-                text_airlunas.setText(Double.toString(dataBaru.getAirlunas()).split("\\.")[0]);
-                text_airterakhir.setText(Double.toString(dataBaru.getAirterakhir()).split("\\.")[0]);
-                text_airdibayar.setText(Double.toString(dataBaru.getAirdibayar()).split("\\.")[0]);
-                label_noTrans.setText(dataBaru.getNotransaksi());
-//                text_airterakhir.setEditable(true);
-                label_noTrans.setVisible(true);
             } else {
                 text_airlunas.setText(Double.toString(pem.getAirlunas()).split("\\.")[0]);
                 text_airterakhir.setText(Double.toString(pem.getAirterakhir()).split("\\.")[0]);
@@ -1080,8 +1097,8 @@ public class FormPemakaianAir extends javax.swing.JFrame {
 ////                    JOptionPane.showMessageDialog(null, "Udah ada, tampilkan aja");
 
                     List<Pemakaian> riwayat = PemakaianKontrol.getKoneksi().cekDendaPelanggan(pem);
-                    if (riwayat.size() >= 2) {
-                        JOptionPane.showMessageDialog(null, "Anggota ini telah denda lebih dari 2 bulan, pemakaian bulan ini akan diputus sementara sampai anggota yang bersangkutan telah membayar");
+                    if (riwayat.size() >= 3) {
+                        JOptionPane.showMessageDialog(null, "Anggota ini telah denda lebih dari 3 bulan, pemakaian bulan ini akan diputus sementara sampai anggota yang bersangkutan telah membayar");
                         text_airterakhir.setEditable(false);
                         label_status.setVisible(true);
                     } else {
@@ -1140,6 +1157,13 @@ public class FormPemakaianAir extends javax.swing.JFrame {
                 pem.setAirdibayar(Double.parseDouble(text_airdibayar.getText()));
 
                 PemakaianKontrol.getKoneksi().updatePemakaian(pem);
+
+                //update transaksi (piutang)
+                Transaksi trans = TransaksiKontrol.getKoneksi().jual_selectTransaksi2(label_noTrans.getText());
+                trans.setJumlah((int) pem.getAirdibayar());
+                trans.setTotal(Double.parseDouble(text_total.getText()));
+                TransaksiKontrol.getKoneksi().jual_updateTransaksi(trans);
+                
                 JOptionPane.showMessageDialog(null, "Pemakaian air pelanggan berhasil dirubah!");
                 cetakStruk(pem);
                 resetDefault();
@@ -1730,5 +1754,20 @@ public class FormPemakaianAir extends javax.swing.JFrame {
             label_2.setText("0");
             label_3.setText("0");
         }
+    }
+
+    public Pemakaian cekTerbesar(List<Pemakaian> pem) {
+        int temp = 0;
+        int index = 0;
+        for (int i = 0; i < pem.size(); i++) {
+            if (Integer.parseInt(pem.get(i).getNotransaksi().split("-")[1]) > temp) {
+                temp = Integer.parseInt(pem.get(i).getNotransaksi().split("-")[1]);
+                index = i;
+            } else {
+                temp = temp;
+                index = index;
+            }
+        }
+        return pem.get(index);
     }
 }

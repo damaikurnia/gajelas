@@ -988,21 +988,28 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
             pembayaran = pembayaran - Double.parseDouble(text_total.getText());
             JOptionPane.showMessageDialog(null, "Kembalian Konsumen adalah : " + Double.toString(pembayaran).split("\\.")[0]);
             try {
-                //masukkan data pembayaran lunas ke dalam tabel transaksi
-                Transaksi trans = new Transaksi();
-                trans.setNoTrans(label_noTrans.getText());
-                Anggota idAnggota = new Anggota(text_noPelanggan.getText(), "", "", "", "", "", 0, 0, "", "", "", "", "");
-                trans.setIdAnggota(idAnggota);
+                //update transaksi (pendapatan air)
+                Transaksi trans = TransaksiKontrol.getKoneksi().jual_selectTransaksi2(label_noTrans.getText());
                 trans.setJumlah(Integer.parseInt(text_airdibayar.getText()));
-                trans.setHargaSatuan(0);
-                trans.setDenda(Double.parseDouble(text_denda.getText()));
                 trans.setTotal(Double.parseDouble(text_total.getText()));
-                TransaksiKontrol.getKoneksi().jual_insertTransaksi(trans);
+                trans.setDenda(Double.parseDouble(text_denda.getText()));
+                trans.setKode("4.1.1"); //pendapatan air
+                TransaksiKontrol.getKoneksi().jual_updateTransaksi(trans);
+                
+//                Transaksi trans = new Transaksi();
+//                trans.setNoTrans(label_noTrans.getText());
+//                Anggota idAnggota = new Anggota(text_noPelanggan.getText(), "", "", "", "", "", 0, 0, "", "", "", "", "");
+//                trans.setIdAnggota(idAnggota);
+//                trans.setJumlah(Integer.parseInt(text_airdibayar.getText()));
+//                trans.setHargaSatuan(0);
+//                trans.setDenda(Double.parseDouble(text_denda.getText()));
+//                trans.setTotal(Double.parseDouble(text_total.getText()));
+//                TransaksiKontrol.getKoneksi().jual_insertTransaksi(trans);
                 JOptionPane.showMessageDialog(null, "Transaksi berhasil!");
                 cetakNota();
 
                 //rubah pemakaian air bulan tsb. set air yg barus dibayar dengan 0
-                Pemakaian pem = new Pemakaian(trans.getNoTrans(), idAnggota,
+                Pemakaian pem = new Pemakaian(trans.getNoTrans(), null,
                         Double.parseDouble(text_airterakhir.getText()), Double.parseDouble(text_airterakhir.getText()),
                         0, null, null);
                 PemakaianKontrol.getKoneksi().updatePemakaian(pem);//update pemakaian transaksi
@@ -1050,7 +1057,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
     private void tabel_historiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabel_historiMouseClicked
         int row1 = tabel_histori.getSelectedRow();
         int baris = 0;
-        if (Integer.parseInt(tabel_histori.getValueAt(baris, 1).toString()) == Integer.parseInt(tabel_histori.getValueAt(baris, 2).toString())) {
+        if (Integer.parseInt(tabel_histori.getValueAt(row1, 1).toString()) == Integer.parseInt(tabel_histori.getValueAt(row1, 2).toString())) {
             JOptionPane.showMessageDialog(null, "Transaksi ini telah Lunas");
             label_noTrans.setText(tabel_histori.getValueAt(row1, 0).toString());
             combo_bulan.setSelectedItem(tabel_histori.getValueAt(row1, 4).toString());

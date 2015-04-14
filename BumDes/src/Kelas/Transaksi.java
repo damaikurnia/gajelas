@@ -11,15 +11,16 @@ package Kelas;
  */
 public class Transaksi {
 
-    private String noTrans;
-    private Barang idBarang;
-    private Anggota idAnggota;
-    private String tanggalTransaksi;
-    private String jenisTransaksi;
-    private int jumlah;
-    private double hargaSatuan;
-    private double denda;
-    private double total;
+    String noTrans;
+    Barang idBarang;
+    Anggota idAnggota;
+    String tanggalTransaksi;
+    String jenisTransaksi;
+    int jumlah;
+    double hargaSatuan;
+    double denda;
+    double total;
+    String kode;
 
     /**
      * @return the noTrans
@@ -145,5 +146,19 @@ public class Transaksi {
      */
     public void setDenda(double denda) {
         this.denda = denda;
+    }
+
+    /**
+     * @return the kode
+     */
+    public String getKode() {
+        return kode;
+    }
+
+    /**
+     * @param kode the kode to set
+     */
+    public void setKode(String kode) {
+        this.kode = kode;
     }
 }

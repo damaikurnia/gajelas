@@ -347,7 +347,7 @@ public class FormTransaksiPemakaianBarang extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("TOTAL TRANSAKSI PEMBELIAN HARI INI");
+        jLabel2.setText("TOTAL PEMAKAIAN BARANG HARI INI (Rp)");
 
         combo_barang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -432,7 +432,7 @@ public class FormTransaksiPemakaianBarang extends javax.swing.JFrame {
                                 .addGap(26, 26, 26)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(text_total)
-                                    .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)))
+                                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 136, Short.MAX_VALUE)))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(62, 62, 62)
                                 .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -638,65 +638,75 @@ public class FormTransaksiPemakaianBarang extends javax.swing.JFrame {
     }//GEN-LAST:event_button_tabelActionPerformed
 
     private void button_tambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_tambahActionPerformed
-        try {
-            Transaksi trans = new Transaksi();
-            trans.setNoTrans(text_noTrans.getText());
-            String idBarang = BarangKontrol.getKoneksi().cariIdBarang(combo_barang.getSelectedItem().toString());
-            trans.setIdBarang(new Barang(idBarang, combo_barang.getSelectedItem().toString(), 0, 0,""));
-            trans.setJumlah(Integer.parseInt(text_jmlPemakaian.getText()));
-            trans.setHargaSatuan(0);
-            trans.setTotal(Double.parseDouble(text_total.getText()));
+        if (Integer.parseInt(text_jmlPemakaian.getText()) > Integer.parseInt(label_stok.getText())) {
+            JOptionPane.showMessageDialog(null, "TIDAK DAPAT MEMASUKKAN DATA!\n"
+                    + "JUMLAH PEMAKAIAN LEBIH BESAR DARI STOK YANG ADA");
+        } else {
+            try {
+                Transaksi trans = new Transaksi();
+                trans.setNoTrans(text_noTrans.getText());
+                String idBarang = BarangKontrol.getKoneksi().cariIdBarang(combo_barang.getSelectedItem().toString());
+                trans.setIdBarang(new Barang(idBarang, combo_barang.getSelectedItem().toString(), 0, 0, ""));
+                trans.setJumlah(Integer.parseInt(text_jmlPemakaian.getText()));
+                trans.setHargaSatuan(0);
+                trans.setTotal(Double.parseDouble(text_total.getText()));
 
-            TransaksiKontrol.getKoneksi().pakai_insertTransaksi(trans);//insert ke transaksi
-            
-            Barang bar = BarangKontrol.getKoneksi().selectBarang2(idBarang);
-            int stokSmntara = bar.getStok()-trans.getJumlah();
-            bar.setStok(stokSmntara);
-            double aset = bar.getTotalAset()-trans.getTotal();
-            bar.setTotalAset(aset);
-            BarangKontrol.getKoneksi().updateBarang(bar);
-            JOptionPane.showMessageDialog(null, "Data Pemakaian barang berhasil Ditambah!");
-            JOptionPane.showMessageDialog(null, "Stok " + bar.getNamaBarang() + " saat ini adalah = " + bar.getStok()+"\nAset = "+bar.getTotalAset());
-            update();
-            defaultnya();
-        } catch (SQLException ex) {
-            Logger.getLogger(FormTransaksiPemakaianBarang.class.getName()).log(Level.SEVERE, null, ex);
+                TransaksiKontrol.getKoneksi().pakai_insertTransaksi(trans);//insert ke transaksi
+
+                Barang bar = BarangKontrol.getKoneksi().selectBarang2(idBarang);
+                int stokSmntara = bar.getStok() - trans.getJumlah();
+                bar.setStok(stokSmntara);
+                double aset = bar.getTotalAset() - trans.getTotal();
+                bar.setTotalAset(aset);
+                BarangKontrol.getKoneksi().updateBarang(bar);
+                JOptionPane.showMessageDialog(null, "Data Pemakaian barang berhasil Ditambah!");
+                JOptionPane.showMessageDialog(null, "Stok " + bar.getNamaBarang() + " saat ini adalah = " + bar.getStok() + "\nAset = " + bar.getTotalAset());
+                update();
+                defaultnya();
+            } catch (SQLException ex) {
+                Logger.getLogger(FormTransaksiPemakaianBarang.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_button_tambahActionPerformed
 
     private void button_ubahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_ubahActionPerformed
-        try {
-            //kembalikan value aset barang
-            Transaksi transAwal = TransaksiKontrol.getKoneksi().pakai_selectTransaksi3(text_noTrans.getText());
-            Barang bar = BarangKontrol.getKoneksi().selectBarang2(transAwal.getIdBarang().getIdBarang());
-            int stok = bar.getStok()+transAwal.getJumlah();
-            double totalAset = bar.getTotalAset()+transAwal.getTotal();
-            bar.setStok(stok);
-            bar.setTotalAset(totalAset);
-            BarangKontrol.getKoneksi().updateBarang(bar);
-            
-            //masukkan value baru
-            Transaksi transBaru = transAwal;
-            double satuan = bar.getTotalAset()/stok;
-            double total = satuan*Double.parseDouble(text_jmlPemakaian.getText());
-            transBaru.setJumlah(Integer.parseInt(text_jmlPemakaian.getText()));
-            transBaru.setHargaSatuan(0);
-            transBaru.setTotal(total);
-            TransaksiKontrol.getKoneksi().pakai_updateTransaksi(transBaru);
-            
-            //update barang terbaru
-            int stokSmntara = bar.getStok()-transBaru.getJumlah();//kenapa bisa 59??????
-            bar.setStok(stokSmntara);
-            double aset = bar.getTotalAset()-transBaru.getTotal();
-            bar.setTotalAset(aset);
-            System.out.println(bar.getIdBarang()+bar.getNamaBarang()+bar.getStok()+"-"+bar.getTotalAset());
-//            BarangKontrol.getKoneksi().updateBarang(bar);
-            JOptionPane.showMessageDialog(null, "Data Pemakaian barang berhasil Dirubah!");
-            JOptionPane.showMessageDialog(null, "Stok " + bar.getNamaBarang() + " saat ini adalah = " + bar.getStok()+"\nAset = "+bar.getTotalAset());
-            update();
-            defaultnya();
-        } catch (SQLException ex) {
-            Logger.getLogger(FormTransaksiPemakaianBarang.class.getName()).log(Level.SEVERE, null, ex);
+        if (Integer.parseInt(text_jmlPemakaian.getText()) > Integer.parseInt(label_stok.getText())) {
+            JOptionPane.showMessageDialog(null, "TIDAK DAPAT MEMASUKKAN DATA!\n"
+                    + "JUMLAH PEMAKAIAN LEBIH BESAR DARI STOK YANG ADA");
+        } else {
+            try {
+                //kembalikan value aset barang
+                Transaksi transAwal = TransaksiKontrol.getKoneksi().pakai_selectTransaksi3(text_noTrans.getText());
+                Barang bar = BarangKontrol.getKoneksi().selectBarang2(transAwal.getIdBarang().getIdBarang());
+                int stok = bar.getStok() + transAwal.getJumlah();
+                double totalAset = bar.getTotalAset() + transAwal.getTotal();
+                bar.setStok(stok);
+                bar.setTotalAset(totalAset);
+                BarangKontrol.getKoneksi().updateBarang(bar);
+
+                //masukkan value baru
+                Transaksi transBaru = transAwal;
+                double satuan = bar.getTotalAset() / stok;
+                double total = satuan * Double.parseDouble(text_jmlPemakaian.getText());
+                transBaru.setJumlah(Integer.parseInt(text_jmlPemakaian.getText()));
+                transBaru.setHargaSatuan(0);
+                transBaru.setTotal(total);
+                TransaksiKontrol.getKoneksi().pakai_updateTransaksi(transBaru);
+
+                //update barang terbaru
+                int stokSmntara = stok - transBaru.getJumlah();//kenapa bisa 59??????
+                bar.setStok(stokSmntara);
+                double aset = totalAset - transBaru.getTotal();
+                bar.setTotalAset(aset);
+                System.out.println(bar.getIdBarang() + bar.getNamaBarang() + bar.getStok() + "-" + bar.getTotalAset());
+                BarangKontrol.getKoneksi().updateBarang(bar);
+                JOptionPane.showMessageDialog(null, "Data Pemakaian barang berhasil Dirubah!");
+                JOptionPane.showMessageDialog(null, "Stok " + bar.getNamaBarang() + " saat ini adalah = " + bar.getStok() + "\nAset = " + bar.getTotalAset());
+                update();
+                defaultnya();
+            } catch (SQLException ex) {
+                Logger.getLogger(FormTransaksiPemakaianBarang.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_button_ubahActionPerformed
 
@@ -704,11 +714,11 @@ public class FormTransaksiPemakaianBarang extends javax.swing.JFrame {
         if (text_jmlPemakaian.getText().equals("")) {
             text_total.setText("0");
             text_jmlPemakaian.setText("0");
-        } else if(text_jmlPemakaian.getText().matches("[0-9]+")){
-            double satuan = Double.parseDouble(text_ttlAset.getText())/Double.parseDouble(label_stok.getText());
-            double total = satuan*Double.parseDouble(text_jmlPemakaian.getText());
+        } else if (text_jmlPemakaian.getText().matches("[0-9]+")) {
+            double satuan = Double.parseDouble(text_ttlAset.getText()) / Double.parseDouble(label_stok.getText());
+            double total = satuan * Double.parseDouble(text_jmlPemakaian.getText());
             text_total.setText(Double.toString(total));
-            
+
             button_tambah.setVisible(true);
         }
     }//GEN-LAST:event_text_jmlPemakaianKeyReleased
@@ -721,7 +731,7 @@ public class FormTransaksiPemakaianBarang extends javax.swing.JFrame {
         text_total.setText(tabel_pemakaian.getValueAt(row1, 4).toString());
 
         customnya();
-        
+
     }//GEN-LAST:event_tabel_pemakaianMouseClicked
 
     private void button_tampilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_tampilActionPerformed
@@ -835,7 +845,7 @@ public class FormTransaksiPemakaianBarang extends javax.swing.JFrame {
             tabel_pemakaian.getColumnModel().getColumn(3).setCellRenderer(kanan);
             tabel_pemakaian.getColumnModel().getColumn(4).setCellRenderer(kanan);
 
-            text_ttltransbeli.setText(TransaksiKontrol.getKoneksi().beli_tampilTotalBeliHariIni());
+            text_ttltransbeli.setText(TransaksiKontrol.getKoneksi().pakai_tampilTotalPemakaianHariIni());
 //        tabelDosen.getColumnModel().getColumn(0).setMinWidth(70);
 //        tabelDosen.getColumnModel().getColumn(0).setMaxWidth(70);
 //        tabelDosen.getColumnModel().getColumn(1).setMinWidth(220);
@@ -848,7 +858,7 @@ public class FormTransaksiPemakaianBarang extends javax.swing.JFrame {
 
     public void update2(String tglDari, String tglSampai) {
         try {
-            List<Transaksi> agt = TransaksiKontrol.getKoneksi().beli_selectTransaksiAll(tglDari,tglSampai);
+            List<Transaksi> agt = TransaksiKontrol.getKoneksi().beli_selectTransaksiAll(tglDari, tglSampai);
             TransaksiBeliAllTM model = new TransaksiBeliAllTM(agt);
             tabel_pembelian2.setModel(model);
 
@@ -921,15 +931,15 @@ public class FormTransaksiPemakaianBarang extends javax.swing.JFrame {
         text_noTrans.setEditable(false);
         button_batal.setEnabled(true);
     }
-    
+
     public void sinkronGambar() {
         try {
             Profil prof = PengaturanKontrol.getKoneksi().tampilProfil();
             label_namaDesa.setText("BADAN USAHA MILIK DESA " + prof.getNamadesa());
-            label_alamatNotelp.setText(prof.getAlamatdesa()+" "+prof.getDesa()+" "+prof.getKecamatan()
-                    +" "+prof.getKabupaten()+" "+prof.getProvinsi()
+            label_alamatNotelp.setText(prof.getAlamatdesa() + " " + prof.getDesa() + " " + prof.getKecamatan()
+                    + " " + prof.getKabupaten() + " " + prof.getProvinsi()
                     + " - " + prof.getNotelp());
-            
+
             String path = new File(".").getCanonicalPath() + "/Gambar/" + prof.getLogo();
 
             Toolkit toolkit = Toolkit.getDefaultToolkit();
@@ -1009,7 +1019,7 @@ public class FormTransaksiPemakaianBarang extends javax.swing.JFrame {
             }
         });
     }
-    
+
     private void buatIDbaru() {
         try {
             List<Transaksi> brg = TransaksiKontrol.getKoneksi().pakai_selectTransaksi2();
@@ -1037,14 +1047,13 @@ public class FormTransaksiPemakaianBarang extends javax.swing.JFrame {
         temp = temp + 1;
         return temp;
     }
-    
-    public void resetDefault(){
+
+    public void resetDefault() {
         buatIDbaru();
         combo_barang.setSelectedIndex(0);
         text_jmlPemakaian.setText("0");
         text_total.setText("0");
-        
-        
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -779,7 +779,7 @@
                   <Font name="Tahoma" size="14" style="1"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="TOTAL TRANSAKSI PEMBELIAN HARI INI"/>
+                <Property name="text" type="java.lang.String" value="TOTAL PEMAKAIAN BARANG HARI INI (Rp)"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="combo_barang">

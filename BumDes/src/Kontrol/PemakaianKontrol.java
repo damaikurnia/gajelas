@@ -71,6 +71,28 @@ public class PemakaianKontrol {
         conn.close();
         return agt;
     }
+    
+    public Pemakaian selectPemakaian2(String id) throws SQLException {
+        PreparedStatement stmt = null;
+        ResultSet result = null;
+        conn.setAutoCommit(false);
+        String query = "SELECT * FROM pemakaian WHERE notransaksi = ?";
+        stmt = conn.prepareStatement(query);
+        stmt.setString(1, id);
+        result = stmt.executeQuery();
+        Pemakaian agt = new Pemakaian();
+        while (result.next()) {
+            agt.setNotransaksi(result.getString(1));
+            agt.setIdanggota(new Anggota(result.getString(2), "", "", "", "", "", 0, 0, "", "", "", "", ""));
+            agt.setAirlunas(result.getDouble(3));
+            agt.setAirterakhir(result.getDouble(4));
+            agt.setAirdibayar(result.getDouble(5));
+            agt.setBulan(result.getString(6));
+            agt.setJatuhtempo(result.getString(7));
+        }
+        conn.close();
+        return agt;
+    }
 
 //    public List<Anggota> selectAnggota2(String key) throws SQLException {
 //        PreparedStatement stmt = null;
