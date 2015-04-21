@@ -67,7 +67,7 @@ public class TransaksiKontrol {
         while (result.next()) {
             Transaksi trs = new Transaksi();
             trs.setNoTrans(result.getString(1));
-            trs.setIdBarang(new Barang("", result.getString(2), 0, 0,""));
+            trs.setIdBarang(new Barang("", result.getString(2), 0, 0, ""));
             trs.setJumlah(result.getInt(3));
             trs.setHargaSatuan(result.getDouble(4));
             trs.setTotal(result.getDouble(5));
@@ -89,7 +89,7 @@ public class TransaksiKontrol {
         while (result.next()) {
             Transaksi trs = new Transaksi();
             trs.setNoTrans(result.getString(1));
-            trs.setIdBarang(new Barang("", result.getString(2), 0, 0,""));
+            trs.setIdBarang(new Barang("", result.getString(2), 0, 0, ""));
             trs.setJumlah(result.getInt(3));
             trs.setHargaSatuan(result.getDouble(4));
             trs.setTotal(result.getDouble(5));
@@ -118,7 +118,7 @@ public class TransaksiKontrol {
         while (result.next()) {
             Transaksi trs = new Transaksi();
             trs.setNoTrans(result.getString(1));
-            trs.setIdBarang(new Barang(result.getString(2), result.getString(3), 0, 0,""));
+            trs.setIdBarang(new Barang(result.getString(2), result.getString(3), 0, 0, ""));
             String tgl = result.getString(4);
             trs.setTanggalTransaksi(tgl.split("-")[2] + "-" + tgl.split("-")[1] + "-" + tgl.split("-")[0]);
             trs.setJumlah(result.getInt(5));
@@ -331,13 +331,16 @@ public class TransaksiKontrol {
         return total;
     }
 
-    public String jual_tampilTotalBeliAll() throws SQLException {
+    public String jual_tampilTotalBeliAll(String tgSampai, String tglDari) throws SQLException {
         PreparedStatement stmt = null;
         ResultSet result = null;
         conn.setAutoCommit(false);
-        String query = "SELECT SUM(total) FROM transaksi \n"
-                + "where (jenistransaksi = 'PENJUALAN' OR jenistransaksi = 'DAFTAR');";
+        String query = "select sum(total) from transaksi \n"
+                + "where tanggaltransaksi between ? and ? and kode = '4.1.1'\n"
+                + "group by kode;";
         stmt = conn.prepareStatement(query);
+        stmt.setString(1, tgSampai);
+        stmt.setString(2, tglDari);
         result = stmt.executeQuery();
         String total = "";
         while (result.next()) {
@@ -369,7 +372,6 @@ public class TransaksiKontrol {
     }
 
     //PENDAFTARAN BARU PELANGGAN =============================================
-
     public void daftar_insertTransaksi(Transaksi trans) throws SQLException {
         PreparedStatement stmt = null;
         conn.setAutoCommit(false);
@@ -405,7 +407,7 @@ public class TransaksiKontrol {
         while (result.next()) {
             Transaksi trs = new Transaksi();
             trs.setNoTrans(result.getString(1));
-            trs.setIdBarang(new Barang(result.getString(2), "", 0, 0,""));
+            trs.setIdBarang(new Barang(result.getString(2), "", 0, 0, ""));
             trs.setTanggalTransaksi(result.getString(3));
             trs.setJenisTransaksi(result.getString(4));
             trs.setTotal(result.getDouble(5));
@@ -486,7 +488,7 @@ public class TransaksiKontrol {
         while (result.next()) {
             Transaksi trs = new Transaksi();
             trs.setNoTrans(result.getString(1));
-            trs.setIdBarang(new Barang(result.getString(2), "", 0, 0,""));
+            trs.setIdBarang(new Barang(result.getString(2), "", 0, 0, ""));
             trs.setTanggalTransaksi(result.getString(3));
             trs.setJenisTransaksi(result.getString(4));
             trs.setTotal(result.getDouble(5));
@@ -502,15 +504,16 @@ public class TransaksiKontrol {
         ResultSet result = null;
         conn.setAutoCommit(false);
         String tanggal[] = Tanggal.getTanggal2().split("-");
-        String query = "SELECT SUM(total) FROM transaksi "
-                + "WHERE jenistransaksi = 'PENGELUARAN' AND tanggaltransaksi BETWEEN ? AND ?";
+        String query = "select a.kode,b.keterangan, sum(a.total) from transaksi a, akun b \n"
+                + "where a.kode = b.kode and a.tanggaltransaksi between ? and ? and a.kode like '5.1.%'\n"
+                + "group by a.kode;";
         stmt = conn.prepareStatement(query);
         stmt.setString(1, tglDari);
         stmt.setString(2, tglSampai);
         result = stmt.executeQuery();
         String total = "";
         while (result.next()) {
-            total = result.getString(1);
+            total = result.getString(3);
         }
 
         conn.close();
