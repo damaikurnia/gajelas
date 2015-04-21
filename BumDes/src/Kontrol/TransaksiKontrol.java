@@ -67,7 +67,7 @@ public class TransaksiKontrol {
         while (result.next()) {
             Transaksi trs = new Transaksi();
             trs.setNoTrans(result.getString(1));
-            trs.setIdBarang(new Barang("", result.getString(2), 0, 0));
+            trs.setIdBarang(new Barang("", result.getString(2), 0, 0,""));
             trs.setJumlah(result.getInt(3));
             trs.setHargaSatuan(result.getDouble(4));
             trs.setTotal(result.getDouble(5));
@@ -89,7 +89,7 @@ public class TransaksiKontrol {
         while (result.next()) {
             Transaksi trs = new Transaksi();
             trs.setNoTrans(result.getString(1));
-            trs.setIdBarang(new Barang("", result.getString(2), 0, 0));
+            trs.setIdBarang(new Barang("", result.getString(2), 0, 0,""));
             trs.setJumlah(result.getInt(3));
             trs.setHargaSatuan(result.getDouble(4));
             trs.setTotal(result.getDouble(5));
@@ -118,7 +118,7 @@ public class TransaksiKontrol {
         while (result.next()) {
             Transaksi trs = new Transaksi();
             trs.setNoTrans(result.getString(1));
-            trs.setIdBarang(new Barang(result.getString(2), result.getString(3), 0, 0));
+            trs.setIdBarang(new Barang(result.getString(2), result.getString(3), 0, 0,""));
             String tgl = result.getString(4);
             trs.setTanggalTransaksi(tgl.split("-")[2] + "-" + tgl.split("-")[1] + "-" + tgl.split("-")[0]);
             trs.setJumlah(result.getInt(5));
@@ -405,7 +405,7 @@ public class TransaksiKontrol {
         while (result.next()) {
             Transaksi trs = new Transaksi();
             trs.setNoTrans(result.getString(1));
-            trs.setIdBarang(new Barang(result.getString(2), "", 0, 0));
+            trs.setIdBarang(new Barang(result.getString(2), "", 0, 0,""));
             trs.setTanggalTransaksi(result.getString(3));
             trs.setJenisTransaksi(result.getString(4));
             trs.setTotal(result.getDouble(5));
@@ -419,7 +419,7 @@ public class TransaksiKontrol {
     public void keluar_insertTransaksi(Transaksi trans) throws SQLException {
         PreparedStatement stmt = null;
         conn.setAutoCommit(false);
-        String query = "INSERT INTO transaksi VALUES(?,?,?,?,?,?,?,?,?)";
+        String query = "INSERT INTO transaksi VALUES(?,?,?,?,?,?,?,?,?,?)";
         stmt = conn.prepareStatement(query);
         stmt.setString(1, trans.getNoTrans());
         stmt.setString(2, trans.getIdBarang().getIdBarang());
@@ -430,6 +430,7 @@ public class TransaksiKontrol {
         stmt.setDouble(7, trans.getHargaSatuan());
         stmt.setDouble(8, trans.getDenda());
         stmt.setDouble(9, trans.getTotal());
+        stmt.setString(10, trans.getKode());
         stmt.executeUpdate();
         conn.commit();
         conn.close();
@@ -485,7 +486,7 @@ public class TransaksiKontrol {
         while (result.next()) {
             Transaksi trs = new Transaksi();
             trs.setNoTrans(result.getString(1));
-            trs.setIdBarang(new Barang(result.getString(2), "", 0, 0));
+            trs.setIdBarang(new Barang(result.getString(2), "", 0, 0,""));
             trs.setTanggalTransaksi(result.getString(3));
             trs.setJenisTransaksi(result.getString(4));
             trs.setTotal(result.getDouble(5));

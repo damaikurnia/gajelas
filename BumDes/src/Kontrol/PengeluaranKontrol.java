@@ -54,7 +54,7 @@ public class PengeluaranKontrol {
         result = stmt.executeQuery();
         List<Pengeluaran> brg = new ArrayList<Pengeluaran>();
         while (result.next()) {
-            Pengeluaran bar = new Pengeluaran(result.getString(1), result.getString(2));
+            Pengeluaran bar = new Pengeluaran(result.getString(1), result.getString(2),"");
             brg.add(bar);
         }
         conn.close();
@@ -70,7 +70,7 @@ public class PengeluaranKontrol {
         result = stmt.executeQuery();
         List<Pengeluaran> bar = new ArrayList<Pengeluaran>();
         while (result.next()) {
-            bar.add(new Pengeluaran(result.getString(1), result.getString(2)));
+            bar.add(new Pengeluaran(result.getString(1), result.getString(2),""));
         }
         conn.close();
         return bar;
@@ -91,10 +91,11 @@ public class PengeluaranKontrol {
     public void insertPengeluaran(Pengeluaran brg) throws SQLException {
         PreparedStatement stmt = null;
         conn.setAutoCommit(false);
-        String query = "INSERT INTO pengeluaran VALUES(?,?)";
+        String query = "INSERT INTO pengeluaran VALUES(?,?,?)";
         stmt = conn.prepareStatement(query);
         stmt.setString(1, brg.getKode());
         stmt.setString(2, brg.getNamaPengeluaran());
+        stmt.setString(3, brg.getKodeAkun());
 
         stmt.executeUpdate();
         conn.commit();

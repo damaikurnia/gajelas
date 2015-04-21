@@ -13,10 +13,12 @@ public class Pengeluaran {
 
     String kode;
     String namaPengeluaran;
+    String kodeAkun;
 
-    public Pengeluaran(String kode, String nama) {
+    public Pengeluaran(String kode, String nama,String kodeAkun) {
         this.kode = kode;
         this.namaPengeluaran = nama;
+        this.kodeAkun = kodeAkun;
     }
 
     /**
@@ -45,6 +47,20 @@ public class Pengeluaran {
      */
     public void setNamaPengeluaran(String namaPengeluaran) {
         this.namaPengeluaran = namaPengeluaran;
+    }
+
+    /**
+     * @return the kodeAkun
+     */
+    public String getKodeAkun() {
+        return kodeAkun;
+    }
+
+    /**
+     * @param kodeAkun the kodeAkun to set
+     */
+    public void setKodeAkun(String kodeAkun) {
+        this.kodeAkun = kodeAkun;
     }
 
 }

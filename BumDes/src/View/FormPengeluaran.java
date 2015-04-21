@@ -140,7 +140,7 @@ public class FormPengeluaran extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(tabel_pengeluaran);
 
-        jPanel8.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 620, 220));
+        jPanel8.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 620, 210));
 
         dialog_cariP.getContentPane().add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 380));
 
@@ -448,14 +448,18 @@ public class FormPengeluaran extends javax.swing.JFrame {
 
     private void tabel_pengeluaranMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabel_pengeluaranMouseClicked
         int row1 = tabel_pengeluaran.getSelectedRow();
-        text_kode.setText(tabel_pengeluaran.getValueAt(row1, 0).toString());
-        text_nama.setText(tabel_pengeluaran.getValueAt(row1, 1).toString());
-        custom();
-        dialog_cariP.setVisible(false);
+        if (Integer.parseInt(tabel_pengeluaran.getValueAt(row1, 0).toString().split("-")[1]) <= 6) {
+            JOptionPane.showMessageDialog(null, "Data tidak bisa dirubah!");
+        } else {
+            text_kode.setText(tabel_pengeluaran.getValueAt(row1, 0).toString());
+            text_nama.setText(tabel_pengeluaran.getValueAt(row1, 1).toString());
+            custom();
+            dialog_cariP.setVisible(false);
+        }
     }//GEN-LAST:event_tabel_pengeluaranMouseClicked
 
     private void button_simpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_simpanActionPerformed
-        Pengeluaran pem = new Pengeluaran(text_kode.getText(), text_nama.getText());
+        Pengeluaran pem = new Pengeluaran(text_kode.getText(), text_nama.getText(),"5.1.6");
         if (text_kode.getText().equals("") || text_nama.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Silahkan mengisi data yang masih kosong");
         } else {
@@ -486,7 +490,7 @@ public class FormPengeluaran extends javax.swing.JFrame {
 
     private void button_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_hapusActionPerformed
         try {
-            PengeluaranKontrol.getKoneksi().deletePengeluaran(new Pengeluaran(text_kode.getText(), text_nama.getText()));
+            PengeluaranKontrol.getKoneksi().deletePengeluaran(new Pengeluaran(text_kode.getText(), text_nama.getText(),""));
         } catch (SQLException ex) {
             Logger.getLogger(FormPengeluaran.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -597,7 +601,7 @@ public class FormPengeluaran extends javax.swing.JFrame {
             }
         });
     }
-    
+
     public void sinkronGambar() {
         try {
             Profil prof = PengaturanKontrol.getKoneksi().tampilProfil();
@@ -605,9 +609,9 @@ public class FormPengeluaran extends javax.swing.JFrame {
             label_alamatNotelp.setText(prof.getAlamatdesa() + " " + prof.getDesa() + " " + prof.getKecamatan()
                     + " " + prof.getKabupaten() + " " + prof.getProvinsi()
                     + " - " + prof.getNotelp());
-            
+
             String path = new File(".").getCanonicalPath() + "/Gambar/" + prof.getLogo();
-            
+
             Toolkit toolkit = Toolkit.getDefaultToolkit();
             Image image = toolkit.getImage(path);
             Image imagedResized = image.getScaledInstance(110, 100, Image.SCALE_DEFAULT);
@@ -673,14 +677,14 @@ public class FormPengeluaran extends javax.swing.JFrame {
         button_simpan.setText("SIMPAN");
         button_simpan.setEnabled(false);
     }
-    
+
     private void custom() {
         button_simpan.setText("UBAH");
         button_simpan.setEnabled(true);
         text_kode.setEditable(false);
         button_hapus.setEnabled(true);
     }
-    
+
     private void updateTabel(String key) {
         try {
             List<Pengeluaran> agt = PengeluaranKontrol.getKoneksi().selectPengeluaran2(key);
@@ -690,7 +694,7 @@ public class FormPengeluaran extends javax.swing.JFrame {
             Logger.getLogger(FormPemakaianAir.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     private void buatIDbaru() {
         try {
             List<Pengeluaran> brg = PengeluaranKontrol.getKoneksi().selectPengeluaran();
@@ -703,9 +707,9 @@ public class FormPengeluaran extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(FormBarang.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
-    
+
     public int cekTerbesar(List<Pengeluaran> brg) {
         int temp = 0;
         for (int i = 0; i < brg.size(); i++) {

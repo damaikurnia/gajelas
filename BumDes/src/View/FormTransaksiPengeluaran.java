@@ -17,8 +17,6 @@ import Kontrol.BarangKontrol;
 import Kontrol.PengaturanKontrol;
 import Kontrol.PengeluaranKontrol;
 import Kontrol.TransaksiKontrol;
-import TabelModel.TransaksiBeliAllTM;
-import TabelModel.TransaksiBeliTM;
 import TabelModel.TransaksiKeluarTM;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -34,7 +32,6 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableCellRenderer;
 import net.sf.jasperreports.engine.JRException;
@@ -74,9 +71,9 @@ public class FormTransaksiPengeluaran extends javax.swing.JFrame {
             label_bulan.setText(bulan.split("-")[0]);
             combo_pengeluaran.setEnabled(false);
             label_tanggal.setText(Tanggal.getTanggal());
-            
+
             button_cetak.setVisible(false);
-            jLabel8.setText("TRANSAKSI BULAN INI ("+label_bulan.getText()+")");
+            jLabel8.setText("TRANSAKSI BULAN INI (" + label_bulan.getText() + ")");
         } catch (SQLException ex) {
             Logger.getLogger(FormTransaksiPengeluaran.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -615,7 +612,7 @@ public class FormTransaksiPengeluaran extends javax.swing.JFrame {
             Transaksi trans = new Transaksi();
             trans.setNoTrans(text_noTrans.getText());
             String idBarang = BarangKontrol.getKoneksi().cariIdBarang(combo_pengeluaran.getSelectedItem().toString());
-            trans.setIdBarang(new Barang(idBarang, combo_pengeluaran.getSelectedItem().toString(), 0, 0));
+            trans.setIdBarang(new Barang(idBarang, combo_pengeluaran.getSelectedItem().toString(), 0, 0, ""));
 
             TransaksiKontrol.getKoneksi().deleteTransaksi(trans);
             Barang bar = BarangKontrol.getKoneksi().selectBarang2(idBarang);
@@ -667,7 +664,7 @@ public class FormTransaksiPengeluaran extends javax.swing.JFrame {
             trans.setNoTrans(text_noTrans.getText());
             trans.setTanggalTransaksi(new SimpleDateFormat("yyyy-MM-dd").format(date_tanggal.getDate()));
             trans.setTotal(Double.parseDouble(text_total.getText()));
-            
+
             TransaksiKontrol.getKoneksi().keluar_updateTransaksi(trans);
             JOptionPane.showMessageDialog(null, "Update Pengeluaran berhasil!");
             update();
@@ -750,13 +747,19 @@ public class FormTransaksiPengeluaran extends javax.swing.JFrame {
     public void update() {
         try {
             List<Transaksi> agt = TransaksiKontrol.getKoneksi().keluar_selectTransaksi();
+            List<Pengeluaran> pen = PengeluaranKontrol.getKoneksi().selectPengeluaran2("");
             if (agt.size() == 0) {
-                List<Pengeluaran> pen = PengeluaranKontrol.getKoneksi().selectPengeluaran2("");
                 for (int i = 0; i < pen.size(); i++) {
+                    String kodeAkun = "";
+                    if (Integer.parseInt(pen.get(i).getKode().split("-")[1]) <= 5) {
+                        kodeAkun = "5.1." + Integer.parseInt(pen.get(i).getKode().split("-")[1]);
+                    } else {
+                        kodeAkun = "5.1.6";
+                    }
                     Transaksi trans = new Transaksi();
                     String tanggal[] = Tanggal.getTanggal2().split("-");
                     trans.setNoTrans(pen.get(i).getKode() + "-" + tanggal[0] + tanggal[1]);
-                    trans.setIdBarang(new Barang(pen.get(i).getKode(), pen.get(i).getNamaPengeluaran(), i, i));
+                    trans.setIdBarang(new Barang(pen.get(i).getKode(), pen.get(i).getNamaPengeluaran(), i, i, ""));
                     trans.setIdAnggota(new Anggota("-", null, null, null, null, null, i, i, null, null, null, null, null));
                     trans.setTanggalTransaksi(Tanggal.getTanggal2());
                     trans.setJenisTransaksi("PENGELUARAN");
@@ -764,6 +767,7 @@ public class FormTransaksiPengeluaran extends javax.swing.JFrame {
                     trans.setHargaSatuan(0);
                     trans.setDenda(0);
                     trans.setTotal(0);
+                    trans.setKode(kodeAkun);
                     TransaksiKontrol.getKoneksi().keluar_insertTransaksi(trans);
                 }
                 agt = TransaksiKontrol.getKoneksi().keluar_selectTransaksi();
@@ -776,8 +780,46 @@ public class FormTransaksiPengeluaran extends javax.swing.JFrame {
 //            tabel_pengeluaran.getColumnModel().getColumn(4).setCellRenderer(kanan);
 
                 text_totalBulan.setText(TransaksiKontrol.getKoneksi().keluar_tampilTotalKeluarBulanIni());
+            } else if (agt.size() != pen.size()) {
+                JOptionPane.showMessageDialog(null, "Gak size");
+                for (int i = 0; i < pen.size(); i++) {
+                    boolean cek = false;
+                    for (int j = 0; j < agt.size(); j++) {
+                        if (pen.get(i).getKode().equals(agt.get(j).getIdBarang().getIdBarang())) {
+                            cek = true;
+                        } else {
+                            cek = cek;
+                        }
+
+                    }
+                    if (cek == false) {
+                        Transaksi trans = new Transaksi();
+                        String tanggal[] = Tanggal.getTanggal2().split("-");
+                        trans.setNoTrans(pen.get(i).getKode() + "-" + tanggal[0] + tanggal[1]);
+                        trans.setIdBarang(new Barang(pen.get(i).getKode(), pen.get(i).getNamaPengeluaran(), i, i, ""));
+                        trans.setIdAnggota(new Anggota("-", null, null, null, null, null, i, i, null, null, null, null, null));
+                        trans.setTanggalTransaksi(Tanggal.getTanggal2());
+                        trans.setJenisTransaksi("PENGELUARAN");
+                        trans.setJumlah(0);
+                        trans.setHargaSatuan(0);
+                        trans.setDenda(0);
+                        trans.setTotal(0);
+                        trans.setKode("5.1.6");
+                        TransaksiKontrol.getKoneksi().keluar_insertTransaksi(trans);
+                    }
+                }
+                agt = TransaksiKontrol.getKoneksi().keluar_selectTransaksi();
+                TransaksiKeluarTM model = new TransaksiKeluarTM(agt);
+                tabel_pengeluaran.setModel(model);
+
+                TableCellRenderer kanan = new RataKanan();
+//            tabel_pengeluaran.getColumnModel().getColumn(2).setCellRenderer(kanan);
+                tabel_pengeluaran.getColumnModel().getColumn(3).setCellRenderer(kanan);
+//            tabel_pengeluaran.getColumnModel().getColumn(4).setCellRenderer(kanan);
+
+                text_totalBulan.setText(TransaksiKontrol.getKoneksi().keluar_tampilTotalKeluarBulanIni());
             } else {
-                
+
                 TransaksiKeluarTM model = new TransaksiKeluarTM(agt);
                 tabel_pengeluaran.setModel(model);
 
@@ -803,14 +845,14 @@ public class FormTransaksiPengeluaran extends javax.swing.JFrame {
             List<Transaksi> agt = TransaksiKontrol.getKoneksi().keluar_selectTransaksi2(tglDari, tglSampai);
 
             TransaksiKeluarTM model = new TransaksiKeluarTM(agt);
-                tabel_pengeluaran2.setModel(model);
+            tabel_pengeluaran2.setModel(model);
 
-                TableCellRenderer kanan = new RataKanan();
+            TableCellRenderer kanan = new RataKanan();
 //            tabel_pengeluaran.getColumnModel().getColumn(2).setCellRenderer(kanan);
-                tabel_pengeluaran2.getColumnModel().getColumn(3).setCellRenderer(kanan);
+            tabel_pengeluaran2.getColumnModel().getColumn(3).setCellRenderer(kanan);
 //            tabel_pengeluaran.getColumnModel().getColumn(4).setCellRenderer(kanan);
 
-                text_ttlbeliall.setText(TransaksiKontrol.getKoneksi().keluar_tampilTotalKeluarBulanCustom(tglDari,tglSampai));
+            text_ttlbeliall.setText(TransaksiKontrol.getKoneksi().keluar_tampilTotalKeluarBulanCustom(tglDari, tglSampai));
         } catch (SQLException ex) {
             Logger.getLogger(FormAnggota.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -858,7 +900,7 @@ public class FormTransaksiPengeluaran extends javax.swing.JFrame {
         button_hapus.setEnabled(false);
         text_noTrans.setText("");
         text_total.setText("0");
-        
+
         text_noTrans.setEditable(true);
     }
 
