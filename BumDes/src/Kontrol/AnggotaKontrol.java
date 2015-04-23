@@ -214,4 +214,23 @@ public class AnggotaKontrol {
         conn.close();
         return agt;
     }
+    
+    public List<Anggota> selectAnggotaPerDusun(String dusun) throws SQLException{
+        PreparedStatement stmt = null;
+        ResultSet result = null;
+        conn.setAutoCommit(false);
+        String query = "select idanggota from anggota where dusun = ?;";
+        stmt = conn.prepareStatement(query);
+        stmt.setString(1, dusun);
+        result = stmt.executeQuery();
+        List<Anggota> agt = new ArrayList<Anggota>();
+        while (result.next()) {
+            Anggota bar = new Anggota();
+            bar.setIdAnggota(result.getString(1));
+            agt.add(bar);
+        }
+
+        conn.close();
+        return agt;
+    }
 }

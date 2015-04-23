@@ -828,20 +828,20 @@
                 <Property name="text" type="java.lang.String" value="NAMA PELANGGAN"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="button_tambah">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="TAMBAH PELANGGAN"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button_tambahActionPerformed"/>
-              </Events>
-            </Component>
             <Component class="javax.swing.JButton" name="button_ubah">
               <Properties>
                 <Property name="text" type="java.lang.String" value="UBAH"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button_ubahActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="button_tambah">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="TAMBAH PELANGGAN"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button_tambahActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="button_hapus">
@@ -881,6 +881,9 @@
             <Component class="javax.swing.JTextField" name="text_idAnggota">
             </Component>
             <Component class="javax.swing.JTextField" name="text_nama">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="text_namaActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="text_pekerjaan">
             </Component>

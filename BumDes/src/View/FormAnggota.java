@@ -10,12 +10,14 @@ import Kelas.Anggota;
 import Kelas.Konfigurasi;
 import Kelas.Pemakaian;
 import Kelas.Profil;
+import Kelas.Trans;
 import Kelas.Transaksi;
 import Koneksi.Koneksi;
 import Kontrol.AnggotaKontrol;
 import Kontrol.KonfigurasiKontrol;
 import Kontrol.PemakaianKontrol;
 import Kontrol.PengaturanKontrol;
+import Kontrol.TransKontrol;
 import Kontrol.TransaksiKontrol;
 import TabelModel.AnggotaTM;
 import TabelModel.DusunTM;
@@ -65,7 +67,7 @@ public class FormAnggota extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(FormAnggota.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         SinkronDusun();
         sinkronGambar();
         SinkronAlamat();
@@ -117,8 +119,8 @@ public class FormAnggota extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        button_tambah = new javax.swing.JButton();
         button_ubah = new javax.swing.JButton();
+        button_tambah = new javax.swing.JButton();
         button_hapus = new javax.swing.JButton();
         button_tabel = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
@@ -388,17 +390,17 @@ public class FormAnggota extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel7.setText("NAMA PELANGGAN");
 
-        button_tambah.setText("TAMBAH PELANGGAN");
-        button_tambah.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button_tambahActionPerformed(evt);
-            }
-        });
-
         button_ubah.setText("UBAH");
         button_ubah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 button_ubahActionPerformed(evt);
+            }
+        });
+
+        button_tambah.setText("TAMBAH PELANGGAN");
+        button_tambah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_tambahActionPerformed(evt);
             }
         });
 
@@ -421,6 +423,12 @@ public class FormAnggota extends javax.swing.JFrame {
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel9.setText("ALAMAT");
+
+        text_nama.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                text_namaActionPerformed(evt);
+            }
+        });
 
         text_alamat.setColumns(20);
         text_alamat.setRows(5);
@@ -855,6 +863,15 @@ public class FormAnggota extends javax.swing.JFrame {
                 Pemakaian pem = new Pemakaian(generateKode(agt), agt, 0, 0, 0, tanggalBln.split("-")[0], cariTanggalJatuhTempo());
                 PemakaianKontrol.getKoneksi().insertPemakaian(pem);
                 insertKeTransaksi(agt);
+
+                //insertTransNeraca //pendapatan(debit), modal(debit), kas (debit)
+                Trans t = new Trans("1.1.1", konfig.getRegistrasi(), 0);//kas
+                TransKontrol.getKoneksi().insertTransaksi(t);
+                t = new Trans("4.1.1", konfig.getRegistrasi(), 0);//pendapatan air
+                TransKontrol.getKoneksi().insertTransaksi(t);
+                t = new Trans("3.1.1", konfig.getRegistrasi(), 0);//modal
+                TransKontrol.getKoneksi().insertTransaksi(t);
+
                 JOptionPane.showMessageDialog(null, "Anggota berhasil ditambahkan!");
                 resetdefault();
             } catch (SQLException ex) {
@@ -1075,15 +1092,31 @@ public class FormAnggota extends javax.swing.JFrame {
     private void button_tambahDusunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_tambahDusunActionPerformed
         JOptionPane.showMessageDialog(null, "Dusun Berhasil Ditambah");
         Anggota agt = new Anggota();
-        agt.setDusun(text_addDusun.getText());
+        agt.setDusun(text_addDusun.getText().toUpperCase());
         dusun.add(agt);
-        
+
         SinkronDusun();
     }//GEN-LAST:event_button_tambahDusunActionPerformed
 
     private void combo_dusunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_dusunActionPerformed
-        SinkronAlamat();
+        try {
+            SinkronAlamat();
+            String kodeDusub = combo_dusun.getSelectedItem().toString().substring(0, 3);
+            List<Anggota> agt = AnggotaKontrol.getKoneksi().selectAnggotaPerDusun(combo_dusun.getSelectedItem().toString());
+            String kodebaru = cariKodeAnggotaBaru(agt);
+            if (kodebaru.equals("0")) {
+                text_idAnggota.setText(combo_dusun.getSelectedItem().toString().substring(0, 3) + ".1");
+            } else {
+                text_idAnggota.setText(kodebaru);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FormAnggota.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_combo_dusunActionPerformed
+
+    private void text_namaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_text_namaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_text_namaActionPerformed
 
     public void resetdefault() {
         text_idAnggota.setText("");
@@ -1168,7 +1201,7 @@ public class FormAnggota extends javax.swing.JFrame {
     public void insertKeTransaksi(Anggota agt) {
         try {
             Konfigurasi konfig = KonfigurasiKontrol.getKoneksi().selectKonfigurasi();
-            
+
             Transaksi trans = new Transaksi();
             trans.setNoTrans(agt.getIdAnggota() + "-0");
             trans.setIdAnggota(agt);
@@ -1259,12 +1292,29 @@ public class FormAnggota extends javax.swing.JFrame {
         DusunTM model = new DusunTM(dusun);
         tabel_dusun.setModel(model);
     }
-    
+
     public void SinkronAlamat() {
         text_kecamatan.setText(prof.getKecamatan());
         text_desa.setText(prof.getDesa());
         text_kota.setText(prof.getKabupaten());
         text_provinsi.setText(prof.getProvinsi());
+    }
+
+    public String cariKodeAnggotaBaru(List<Anggota> agt) {
+        if (agt.size() == 0) {
+            return "0";
+        } else {
+            int terbesar = 0;
+            for (int i = 0; i < agt.size(); i++) {
+                if (Integer.parseInt(agt.get(i).getIdAnggota().split("\\.")[1]) > terbesar) {
+                    terbesar = Integer.parseInt(agt.get(i).getIdAnggota().split("\\.")[1]);
+                } else {
+                    terbesar = terbesar;
+                }
+            }
+            terbesar++;
+            return agt.get(0).getIdAnggota().split("\\.")[0] + "." + Integer.toString(terbesar);
+        }
     }
 
     /**

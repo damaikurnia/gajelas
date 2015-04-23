@@ -20,7 +20,7 @@ public class Transaksi {
     double hargaSatuan;
     double denda;
     double total;
-    String kode;
+//    String kode;
 
     /**
      * @return the noTrans
@@ -147,18 +147,18 @@ public class Transaksi {
     public void setDenda(double denda) {
         this.denda = denda;
     }
-
-    /**
-     * @return the kode
-     */
-    public String getKode() {
-        return kode;
-    }
-
-    /**
-     * @param kode the kode to set
-     */
-    public void setKode(String kode) {
-        this.kode = kode;
-    }
+//
+//    /**
+//     * @return the kode
+//     */
+//    public String getKode() {
+//        return kode;
+//    }
+//
+//    /**
+//     * @param kode the kode to set
+//     */
+//    public void setKode(String kode) {
+//        this.kode = kode;
+//    }
 }
