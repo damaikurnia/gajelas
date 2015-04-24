@@ -8,15 +8,18 @@ package View;
 import Custom.RenderWarnaWarni;
 import Custom.Tanggal;
 import Kelas.Anggota;
+import Kelas.Barang;
 import Kelas.Konfigurasi;
 import Kelas.Pemakaian;
 import Kelas.Profil;
+import Kelas.Trans;
 import Kelas.Transaksi;
 import Koneksi.Koneksi;
 import Kontrol.AnggotaKontrol;
 import Kontrol.KonfigurasiKontrol;
 import Kontrol.PemakaianKontrol;
 import Kontrol.PengaturanKontrol;
+import Kontrol.TransKontrol;
 import Kontrol.TransaksiKontrol;
 import TabelModel.AnggotaTM;
 import TabelModel.HistoriTM;
@@ -73,7 +76,7 @@ public class FormPemakaianAir extends javax.swing.JFrame {
             dialog_histori.setLocationRelativeTo(null);
             dialog_histori.setTitle("FORM HISTORI PELANGGAN");
 
-            label_noTrans.setVisible(false);
+            label_noTrans.setVisible(true);
             label_tanggal.setText(Tanggal.getTanggal());
             String bulan = generateBulanTahun(Tanggal.getTanggal2());
             label_bulan.setText(bulan.split("-")[0]);
@@ -248,7 +251,7 @@ public class FormPemakaianAir extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tabel_pelanggan);
 
-        jPanel4.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 620, 220));
+        jPanel4.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 620, 210));
 
         dialog_cariP.getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 380));
 
@@ -730,7 +733,7 @@ public class FormPemakaianAir extends javax.swing.JFrame {
                 .addGroup(panel_perincianLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(panel_perincianLayout.createSequentialGroup()
                         .addGap(1, 1, 1)
-                        .addComponent(text_ketiga, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE))
+                        .addComponent(text_ketiga))
                     .addComponent(label_ketiga, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
@@ -1074,7 +1077,6 @@ public class FormPemakaianAir extends javax.swing.JFrame {
                     trans.setDenda(0);
                     Konfigurasi konfig = KonfigurasiKontrol.getKoneksi().selectKonfigurasi();
                     trans.setTotal(konfig.getAbodemen());
-                    trans.setKode("1.1.3");//kode piutang
                     TransaksiKontrol.getKoneksi().jual_insertTransaksi(trans);
 
                     //tampilkan
@@ -1093,19 +1095,22 @@ public class FormPemakaianAir extends javax.swing.JFrame {
                 if (text_airlunas.getText().equals(text_airterakhir.getText()) && !text_airlunas.getText().equals("0")) {
                     JOptionPane.showMessageDialog(null, "Pemakaian Air pelanggan LUNAS");
                     text_airterakhir.setEditable(false);
+                } else if (text_airterakhir.getText().equals("0")) {
+                    text_airterakhir.setEditable(true);
                 } else {
-////                    JOptionPane.showMessageDialog(null, "Udah ada, tampilkan aja");
-
-                    List<Pemakaian> riwayat = PemakaianKontrol.getKoneksi().cekDendaPelanggan(pem);
-                    if (riwayat.size() >= 3) {
-                        JOptionPane.showMessageDialog(null, "Anggota ini telah denda lebih dari 3 bulan, pemakaian bulan ini akan diputus sementara sampai anggota yang bersangkutan telah membayar");
-                        text_airterakhir.setEditable(false);
-                        label_status.setVisible(true);
-                    } else {
-                        text_airterakhir.setEditable(true);
-                        label_status.setVisible(false);
-                    }
-                    label_noTrans.setVisible(true);
+                    JOptionPane.showMessageDialog(null, "Anda tidak dapat mengubah data air!");
+                    button_simpan.setEnabled(false);
+                    text_airterakhir.setEditable(false);
+//                    List<Pemakaian> riwayat = PemakaianKontrol.getKoneksi().cekDendaPelanggan(pem);
+//                    if (riwayat.size() >= 3) {
+//                        JOptionPane.showMessageDialog(null, "Anggota ini telah denda lebih dari 3 bulan, pemakaian bulan ini akan diputus sementara sampai anggota yang bersangkutan telah membayar");
+//                        text_airterakhir.setEditable(false);
+//                        label_status.setVisible(true);
+//                    } else {
+//                        text_airterakhir.setEditable(true);
+//                        label_status.setVisible(false);
+//                    }
+//                    label_noTrans.setVisible(true);
                 }
             }
             dialog_cariP.setVisible(false);
@@ -1158,12 +1163,21 @@ public class FormPemakaianAir extends javax.swing.JFrame {
 
                 PemakaianKontrol.getKoneksi().updatePemakaian(pem);
 
-                //update transaksi (piutang)
-                Transaksi trans = TransaksiKontrol.getKoneksi().jual_selectTransaksi2(label_noTrans.getText());
+                //insert transaksi (piutang)
+                Transaksi trans = new Transaksi();
+                trans.setNoTrans(label_noTrans.getText());
+                trans.setIdBarang(new Barang("-", "-", WIDTH, WIDTH, null));
+                trans.setIdAnggota(new Anggota(text_noPelanggan.getText()));
                 trans.setJumlah((int) pem.getAirdibayar());
                 trans.setTotal(Double.parseDouble(text_total.getText()));
-                TransaksiKontrol.getKoneksi().jual_updateTransaksi(trans);
-                
+                TransaksiKontrol.getKoneksi().jual_insertTransaksi(trans);asdasd
+
+                //pendapatan piutang (piutang (debit), modal(debit))
+                Trans piutang = new Trans("1.1.3", (long) trans.getTotal(), 0);
+                Trans modal = new Trans("3.1.1", (long) trans.getTotal(), 0);
+                TransKontrol.getKoneksi().insertTransaksi(piutang);
+                TransKontrol.getKoneksi().insertTransaksi(modal);
+
                 JOptionPane.showMessageDialog(null, "Pemakaian air pelanggan berhasil dirubah!");
                 cetakStruk(pem);
                 resetDefault();

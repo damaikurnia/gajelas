@@ -201,7 +201,7 @@ public class TransaksiKontrol {
     public void jual_insertTransaksi(Transaksi trans) throws SQLException {
         PreparedStatement stmt = null;
         conn.setAutoCommit(false);
-        String query = "INSERT INTO transaksi VALUES(?,?,?,?,?,?,?,?,?,?)";
+        String query = "INSERT INTO transaksi VALUES(?,?,?,?,?,?,?,?,?)";
         stmt = conn.prepareStatement(query);
         stmt.setString(1, trans.getNoTrans());
         stmt.setString(2, "-");
@@ -212,7 +212,6 @@ public class TransaksiKontrol {
         stmt.setDouble(7, trans.getHargaSatuan());
         stmt.setDouble(8, trans.getDenda());
         stmt.setDouble(9, trans.getTotal());
-        stmt.setString(10, trans.getKode());
         stmt.executeUpdate();
         conn.commit();
         conn.close();
@@ -298,14 +297,13 @@ public class TransaksiKontrol {
         PreparedStatement stmt = null;
         conn.setAutoCommit(false);
         String query = "update transaksi set idanggota = ?, jumlah = ?,"
-                + "hargasatuan = ?, total = ?, kode = ? where notransaksi = ?";
+                + "hargasatuan = ?, total = ? where notransaksi = ?";
         stmt = conn.prepareStatement(query);
         stmt.setString(1, trans.getIdAnggota().getIdAnggota());
         stmt.setInt(2, trans.getJumlah());
         stmt.setDouble(3, trans.getHargaSatuan());
         stmt.setDouble(4, trans.getTotal());
-        stmt.setString(5, trans.getKode());
-        stmt.setString(6, trans.getNoTrans());
+        stmt.setString(5, trans.getNoTrans());
 
         stmt.executeUpdate();
         conn.commit();
@@ -421,7 +419,7 @@ public class TransaksiKontrol {
     public void keluar_insertTransaksi(Transaksi trans) throws SQLException {
         PreparedStatement stmt = null;
         conn.setAutoCommit(false);
-        String query = "INSERT INTO transaksi VALUES(?,?,?,?,?,?,?,?,?,?)";
+        String query = "INSERT INTO transaksi VALUES(?,?,?,?,?,?,?,?,?)";
         stmt = conn.prepareStatement(query);
         stmt.setString(1, trans.getNoTrans());
         stmt.setString(2, trans.getIdBarang().getIdBarang());
@@ -432,7 +430,6 @@ public class TransaksiKontrol {
         stmt.setDouble(7, trans.getHargaSatuan());
         stmt.setDouble(8, trans.getDenda());
         stmt.setDouble(9, trans.getTotal());
-        stmt.setString(10, trans.getKode());
         stmt.executeUpdate();
         conn.commit();
         conn.close();
