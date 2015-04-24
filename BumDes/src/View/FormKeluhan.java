@@ -534,7 +534,7 @@ public class FormKeluhan extends javax.swing.JFrame {
 
     private void button_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_hapusActionPerformed
         try {
-            Barang brg = new Barang(text_kode.getText(), null, WIDTH, WIDTH);
+            Barang brg = new Barang(text_kode.getText(), null, WIDTH, WIDTH,"");
             BarangKontrol.getKoneksi().deleteBarang(brg);
             resetDefault();
             update();

@@ -8,9 +8,11 @@ package View;
 import Custom.RataKanan;
 import Kelas.Barang;
 import Kelas.Profil;
+import Kelas.Trans;
 import Koneksi.Koneksi;
 import Kontrol.BarangKontrol;
 import Kontrol.PengaturanKontrol;
+import Kontrol.TransKontrol;
 import TabelModel.BarangTM;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -575,17 +577,35 @@ public class FormBarang extends javax.swing.JFrame {
 
                 BarangKontrol.getKoneksi().insertBarang(brg);
                 JOptionPane.showMessageDialog(null, "Barang berhasil ditambahkan!");
-            } else {
-                Barang brg = new Barang();
-                brg.setIdBarang(text_kode.getText());
-                brg.setNamaBarang(text_nama.getText());
-                brg.setStok(Integer.parseInt(text_stok.getText()));
-                brg.setTotalAset(Double.parseDouble(text_totalAset.getText()));
-                brg.setKode(carikode(combo_kategori.getSelectedItem().toString()));
 
-                BarangKontrol.getKoneksi().updateBarang(brg);
-                JOptionPane.showMessageDialog(null, "Barang Berhasil diupdate!");
+                if (combo_kategori.getSelectedItem().toString().equals("PERLENGKAPAN USAHA")) {
+                    //insert ke trans (perlengkapan debit, modal debit)
+                    Trans perlengkapan = new Trans("1.1.4", (long) brg.getTotalAset(), 0);
+                    Trans modal = new Trans("3.1.1", (long) brg.getTotalAset(), 0);
+                    
+                    TransKontrol.getKoneksi().insertTransaksi(perlengkapan);
+                    TransKontrol.getKoneksi().insertTransaksi(modal);
+                } else {
+                    //insert ke trans (peralatan debit, modal debit)
+                    Trans peralatan = new Trans("1.2.2", (long) brg.getTotalAset(), 0);
+                    Trans modal = new Trans("3.1.1", (long) brg.getTotalAset(), 0);
+                    
+                    TransKontrol.getKoneksi().insertTransaksi(peralatan);
+                    TransKontrol.getKoneksi().insertTransaksi(modal);
+                }
+
             }
+//            else {
+//                Barang brg = new Barang();
+//                brg.setIdBarang(text_kode.getText());
+//                brg.setNamaBarang(text_nama.getText());
+//                brg.setStok(Integer.parseInt(text_stok.getText()));
+//                brg.setTotalAset(Double.parseDouble(text_totalAset.getText()));
+//                brg.setKode(carikode(combo_kategori.getSelectedItem().toString()));
+//
+//                BarangKontrol.getKoneksi().updateBarang(brg);
+//                JOptionPane.showMessageDialog(null, "Barang Berhasil diupdate!");
+//            }
             resetDefault();
         } catch (SQLException ex) {
             Logger.getLogger(FormBarang.class.getName()).log(Level.SEVERE, null, ex);
@@ -764,11 +784,19 @@ public class FormBarang extends javax.swing.JFrame {
         text_stok.setText("");
         text_totalAset.setText("");
         button_simpan.setText("SIMPAN");
+
+        text_nama.setEditable(true);
+        text_stok.setEditable(true);
+        text_totalAset.setEditable(true);
+        combo_kategori.setEnabled(true);
     }
 
     public void customnya() {
         text_kode.setEditable(false);
-        button_simpan.setText("UBAH");
+        text_nama.setEditable(false);
+        text_stok.setEditable(false);
+        text_totalAset.setEditable(false);
+        combo_kategori.setEnabled(false);
         dialog_barang.setVisible(false);
     }
 
