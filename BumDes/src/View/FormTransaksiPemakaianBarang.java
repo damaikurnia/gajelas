@@ -8,10 +8,12 @@ package View;
 import Custom.RataKanan;
 import Kelas.Barang;
 import Kelas.Profil;
+import Kelas.Trans;
 import Kelas.Transaksi;
 import Koneksi.Koneksi;
 import Kontrol.BarangKontrol;
 import Kontrol.PengaturanKontrol;
+import Kontrol.TransKontrol;
 import Kontrol.TransaksiKontrol;
 import TabelModel.TransaksiBeliAllTM;
 import TabelModel.TransaksiBeliTM;
@@ -103,7 +105,6 @@ public class FormTransaksiPemakaianBarang extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         button_tambah = new javax.swing.JButton();
-        button_ubah = new javax.swing.JButton();
         button_tabel = new javax.swing.JButton();
         text_noTrans = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
@@ -284,13 +285,6 @@ public class FormTransaksiPemakaianBarang extends javax.swing.JFrame {
             }
         });
 
-        button_ubah.setText("UBAH");
-        button_ubah.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button_ubahActionPerformed(evt);
-            }
-        });
-
         button_tabel.setText("TABEL TRANSAKSI PEMBELIAN");
         button_tabel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -443,12 +437,10 @@ public class FormTransaksiPemakaianBarang extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(button_tambah)
                 .addGap(18, 18, 18)
-                .addComponent(button_ubah)
-                .addGap(101, 101, 101)
                 .addComponent(button_batal)
                 .addGap(18, 18, 18)
                 .addComponent(button_tabel)
-                .addGap(106, 106, 106))
+                .addGap(256, 256, 256))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -485,17 +477,12 @@ public class FormTransaksiPemakaianBarang extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(text_ttltransbeli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(button_ubah)
-                            .addComponent(button_tambah)
-                            .addComponent(button_batal)))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(button_tabel)))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addGap(10, 10, 10)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(button_tambah)
+                    .addComponent(button_batal)
+                    .addComponent(button_tabel))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -652,6 +639,13 @@ public class FormTransaksiPemakaianBarang extends javax.swing.JFrame {
                 trans.setTotal(Double.parseDouble(text_total.getText()));
 
                 TransaksiKontrol.getKoneksi().pakai_insertTransaksi(trans);//insert ke transaksi
+                
+                //pemakaian perlengkapan (perlengkapan (kredit), modal(kredit))
+                Trans perlengkapan = new Trans("1.1.4", 0, (long) trans.getTotal());
+                Trans modal = new Trans("3.1.1", 0, (long) trans.getTotal());
+                
+                TransKontrol.getKoneksi().insertTransaksi(perlengkapan);
+                TransKontrol.getKoneksi().insertTransaksi(modal);
 
                 Barang bar = BarangKontrol.getKoneksi().selectBarang2(idBarang);
                 int stokSmntara = bar.getStok() - trans.getJumlah();
@@ -668,47 +662,6 @@ public class FormTransaksiPemakaianBarang extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_button_tambahActionPerformed
-
-    private void button_ubahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_ubahActionPerformed
-        if (Integer.parseInt(text_jmlPemakaian.getText()) > Integer.parseInt(label_stok.getText())) {
-            JOptionPane.showMessageDialog(null, "TIDAK DAPAT MEMASUKKAN DATA!\n"
-                    + "JUMLAH PEMAKAIAN LEBIH BESAR DARI STOK YANG ADA");
-        } else {
-            try {
-                //kembalikan value aset barang
-                Transaksi transAwal = TransaksiKontrol.getKoneksi().pakai_selectTransaksi3(text_noTrans.getText());
-                Barang bar = BarangKontrol.getKoneksi().selectBarang2(transAwal.getIdBarang().getIdBarang());
-                int stok = bar.getStok() + transAwal.getJumlah();
-                double totalAset = bar.getTotalAset() + transAwal.getTotal();
-                bar.setStok(stok);
-                bar.setTotalAset(totalAset);
-                BarangKontrol.getKoneksi().updateBarang(bar);
-
-                //masukkan value baru
-                Transaksi transBaru = transAwal;
-                double satuan = bar.getTotalAset() / stok;
-                double total = satuan * Double.parseDouble(text_jmlPemakaian.getText());
-                transBaru.setJumlah(Integer.parseInt(text_jmlPemakaian.getText()));
-                transBaru.setHargaSatuan(0);
-                transBaru.setTotal(total);
-                TransaksiKontrol.getKoneksi().pakai_updateTransaksi(transBaru);
-
-                //update barang terbaru
-                int stokSmntara = stok - transBaru.getJumlah();//kenapa bisa 59??????
-                bar.setStok(stokSmntara);
-                double aset = totalAset - transBaru.getTotal();
-                bar.setTotalAset(aset);
-                System.out.println(bar.getIdBarang() + bar.getNamaBarang() + bar.getStok() + "-" + bar.getTotalAset());
-                BarangKontrol.getKoneksi().updateBarang(bar);
-                JOptionPane.showMessageDialog(null, "Data Pemakaian barang berhasil Dirubah!");
-                JOptionPane.showMessageDialog(null, "Stok " + bar.getNamaBarang() + " saat ini adalah = " + bar.getStok() + "\nAset = " + bar.getTotalAset());
-                update();
-                defaultnya();
-            } catch (SQLException ex) {
-                Logger.getLogger(FormTransaksiPemakaianBarang.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }//GEN-LAST:event_button_ubahActionPerformed
 
     private void text_jmlPemakaianKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_text_jmlPemakaianKeyReleased
         if (text_jmlPemakaian.getText().equals("")) {
@@ -917,7 +870,6 @@ public class FormTransaksiPemakaianBarang extends javax.swing.JFrame {
 
     public void defaultnya() {
         buatIDbaru();
-        button_ubah.setEnabled(false);
         button_batal.setEnabled(true);
         combo_barang.setEnabled(true);
         text_jmlPemakaian.setText("0");
@@ -926,7 +878,6 @@ public class FormTransaksiPemakaianBarang extends javax.swing.JFrame {
 
     public void customnya() {
         button_tambah.setEnabled(false);
-        button_ubah.setEnabled(true);
         combo_barang.setEnabled(false);
         text_noTrans.setEditable(false);
         button_batal.setEnabled(true);
@@ -1062,7 +1013,6 @@ public class FormTransaksiPemakaianBarang extends javax.swing.JFrame {
     private javax.swing.JButton button_tabel;
     private javax.swing.JButton button_tambah;
     private javax.swing.JButton button_tampil;
-    private javax.swing.JButton button_ubah;
     private javax.swing.JComboBox combo_barang;
     private com.toedter.calendar.JDateChooser date_dari;
     private com.toedter.calendar.JDateChooser date_sampai;

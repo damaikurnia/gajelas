@@ -201,4 +201,20 @@ public class BarangKontrol {
         conn.close();
         return data;
     }
+    
+    public String cariKodeAkunBarang(String nama) throws SQLException{
+        PreparedStatement stmt = null;
+        ResultSet result = null;
+        conn.setAutoCommit(false);
+        String query = "SELECT kode FROM barang where namabarang = ?";
+        stmt = conn.prepareStatement(query);
+        stmt.setString(1, nama);
+        result = stmt.executeQuery();
+        String data = "";
+        while (result.next()) {
+            data = result.getString(1);
+        }
+        conn.close();
+        return data;
+    }
 }

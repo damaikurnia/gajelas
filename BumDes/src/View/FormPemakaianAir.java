@@ -1170,7 +1170,7 @@ public class FormPemakaianAir extends javax.swing.JFrame {
                 trans.setIdAnggota(new Anggota(text_noPelanggan.getText()));
                 trans.setJumlah((int) pem.getAirdibayar());
                 trans.setTotal(Double.parseDouble(text_total.getText()));
-                TransaksiKontrol.getKoneksi().jual_insertTransaksi(trans);asdasd
+//                TransaksiKontrol.getKoneksi().jual_insertTransaksi(trans);
 
                 //pendapatan piutang (piutang (debit), modal(debit))
                 Trans piutang = new Trans("1.1.3", (long) trans.getTotal(), 0);

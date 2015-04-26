@@ -82,7 +82,8 @@ public class TransaksiKontrol {
         PreparedStatement stmt = null;
         ResultSet result = null;
         conn.setAutoCommit(false);
-        String query = "SELECT * FROM transaksi where jenistransaksi = 'PEMBELIAN';";
+        String query = "SELECT notransaksi,idbarang,jumlah,hargasatuan,total\n"
+                + "FROM transaksi where jenistransaksi like 'PEMBELIAN%';";
         stmt = conn.prepareStatement(query);
         result = stmt.executeQuery();
         List<Transaksi> trans = new ArrayList<Transaksi>();
@@ -151,9 +152,10 @@ public class TransaksiKontrol {
         stmt.setString(2, trans.getIdBarang().getIdBarang());
         stmt.setString(3, "-");
         stmt.setString(4, Tanggal.getTanggal2());
-        stmt.setString(5, "PEMBELIAN");
+//        stmt.setString(5, "PEMBELIAN");
+        stmt.setString(5, trans.getJenisTransaksi());
         stmt.setInt(6, trans.getJumlah());
-        stmt.setDouble(7, trans.getHargaSatuan());
+        stmt.setDouble(7, 0);
         stmt.setDouble(8, 0);
         stmt.setDouble(9, trans.getTotal());
         stmt.executeUpdate();
@@ -591,7 +593,7 @@ public class TransaksiKontrol {
     public void pakai_insertTransaksi(Transaksi trans) throws SQLException {
         PreparedStatement stmt = null;
         conn.setAutoCommit(false);
-        String query = "INSERT INTO transaksi VALUES(?,?,?,?,?,?,?,?,?,?)";
+        String query = "INSERT INTO transaksi VALUES(?,?,?,?,?,?,?,?,?)";
         stmt = conn.prepareStatement(query);
         stmt.setString(1, trans.getNoTrans());
         stmt.setString(2, trans.getIdBarang().getIdBarang());
@@ -602,7 +604,6 @@ public class TransaksiKontrol {
         stmt.setDouble(7, trans.getHargaSatuan());
         stmt.setDouble(8, trans.getDenda());
         stmt.setDouble(9, trans.getTotal());
-        stmt.setString(10, "5.1.7");
         stmt.executeUpdate();
         conn.commit();
         conn.close();
