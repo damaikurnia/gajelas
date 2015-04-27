@@ -5,41 +5,27 @@
  */
 package View;
 
-import Custom.RataKanan;
-import Kelas.Barang;
 import Kelas.Profil;
 import Custom.Tanggal;
-import Kelas.Anggota;
-import Kelas.Pengeluaran;
+import Kelas.Barang;
 import Kelas.Trans;
 import Kelas.Transaksi;
-import Koneksi.Koneksi;
 import Kontrol.BarangKontrol;
 import Kontrol.PengaturanKontrol;
-import Kontrol.PengeluaranKontrol;
 import Kontrol.TransKontrol;
 import Kontrol.TransaksiKontrol;
-import TabelModel.TransaksiKeluarTM;
+import TabelModel.TransaksiHutangTM;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import javax.swing.table.TableCellRenderer;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -56,26 +42,18 @@ public class FormTransaksiPembayaranHutang extends javax.swing.JFrame {
             this.setLocationRelativeTo(null);
 //            setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH);
 
-            dialog_pembelian.setVisible(false);
-            dialog_pembelian.setSize(688, 475);
-            dialog_pembelian.setLocationRelativeTo(null);
-            dialog_pembelian.setTitle("DATA ANGGOTA");
             update();
             isiList();
 
             sinkronGambar();
             GregorianCalendar gc = new GregorianCalendar();
-            date_dari.setDate(gc.getTime());
-            date_sampai.setDate(gc.getTime());
             date_tanggal.setDate(gc.getTime());
 
-            String bulan = generateBulanTahun(Tanggal.getTanggal2());
-            label_bulan.setText(bulan.split("-")[0]);
-            combo_pengeluaran.setEnabled(false);
+            combo_barang.setEnabled(false);
             label_tanggal.setText(Tanggal.getTanggal());
+            defaultnya();
+            date_tanggal.setEnabled(false);
 
-            button_cetak.setVisible(false);
-            jLabel8.setText("TRANSAKSI BULAN INI (" + label_bulan.getText() + ")");
         } catch (SQLException ex) {
             Logger.getLogger(FormTransaksiPembayaranHutang.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -90,23 +68,6 @@ public class FormTransaksiPembayaranHutang extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        dialog_pembelian = new javax.swing.JDialog();
-        jPanel4 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jPanel6 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        date_dari = new com.toedter.calendar.JDateChooser();
-        jLabel4 = new javax.swing.JLabel();
-        date_sampai = new com.toedter.calendar.JDateChooser();
-        button_tampil = new javax.swing.JButton();
-        jPanel7 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tabel_pengeluaran2 = new javax.swing.JTable();
-        jLabel9 = new javax.swing.JLabel();
-        text_ttlbeliall = new javax.swing.JTextField();
-        button_cetak = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -117,7 +78,6 @@ public class FormTransaksiPembayaranHutang extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         button_ubah = new javax.swing.JButton();
-        button_tabel = new javax.swing.JButton();
         text_noTrans = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         label_tanggal = new javax.swing.JLabel();
@@ -127,12 +87,11 @@ public class FormTransaksiPembayaranHutang extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabel_hutang = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
-        combo_pengeluaran = new javax.swing.JComboBox();
+        combo_barang = new javax.swing.JComboBox();
         jLabel8 = new javax.swing.JLabel();
         text_totalBulan = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         date_tanggal = new com.toedter.calendar.JDateChooser();
-        label_bulan = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -149,90 +108,6 @@ public class FormTransaksiPembayaranHutang extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenuItem8 = new javax.swing.JMenuItem();
-
-        dialog_pembelian.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("TABEL SELURUH TRANSAKSI PENGELUARAN");
-        jPanel5.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 650, 40));
-
-        jPanel4.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 60));
-
-        jPanel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel7.setText("TAMPIL BERDASARKAN");
-        jPanel6.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
-
-        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel11.setText("TANGGAL");
-        jPanel6.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, 30));
-
-        date_dari.setDateFormatString("dd-MMM-yyyy");
-        jPanel6.add(date_dari, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, 150, 30));
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("-");
-        jPanel6.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 30, 10, 30));
-
-        date_sampai.setDateFormatString("dd-MMM-yyyy");
-        jPanel6.add(date_sampai, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 30, 150, 30));
-
-        button_tampil.setText("TAMPIL");
-        button_tampil.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button_tampilActionPerformed(evt);
-            }
-        });
-        jPanel6.add(button_tampil, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 30, -1, 30));
-
-        jPanel4.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 670, 70));
-
-        jPanel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        tabel_pengeluaran2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane2.setViewportView(tabel_pengeluaran2);
-
-        jPanel7.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 650, 220));
-
-        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel9.setText("TOTAL TRANSAKSI BELI");
-        jPanel7.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 260, 130, 20));
-
-        text_ttlbeliall.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jPanel7.add(text_ttlbeliall, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 260, 170, -1));
-
-        button_cetak.setText("CETAK");
-        button_cetak.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button_cetakActionPerformed(evt);
-            }
-        });
-        jPanel7.add(button_cetak, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 170, 30));
-
-        jPanel4.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 670, 300));
-
-        dialog_pembelian.getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 430));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -285,19 +160,13 @@ public class FormTransaksiPembayaranHutang extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("PENGELUARAN");
+        jLabel6.setText("BARANG");
 
+        button_ubah.setFont(new java.awt.Font("Cantarell", 1, 15)); // NOI18N
         button_ubah.setText("BAYAR HUTANG");
         button_ubah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 button_ubahActionPerformed(evt);
-            }
-        });
-
-        button_tabel.setText("LIHAT TRANSAKSI PENGELUARAN BULAN LALU");
-        button_tabel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button_tabelActionPerformed(evt);
             }
         });
 
@@ -344,25 +213,17 @@ public class FormTransaksiPembayaranHutang extends javax.swing.JFrame {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("TOTAL HUTANG YANG MASIH BELUM DIBAYAR");
 
-        combo_pengeluaran.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                combo_pengeluaranActionPerformed(evt);
-            }
-        });
-
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setText("TRANSAKSI BULAN INI");
+        jLabel8.setText("DAFTAR HUTANG");
 
+        text_totalBulan.setEditable(false);
         text_totalBulan.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel16.setText("Hari, Tanggal");
 
         date_tanggal.setDateFormatString("dd-MM-yyyy");
-
-        label_bulan.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        label_bulan.setText("label_bulan");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -377,8 +238,7 @@ public class FormTransaksiPembayaranHutang extends javax.swing.JFrame {
                         .addGap(29, 29, 29)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(label_bulan, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(384, 384, 384)
+                                .addGap(464, 464, 464)
                                 .addComponent(jLabel16)
                                 .addGap(20, 20, 20)
                                 .addComponent(label_tanggal, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -391,23 +251,13 @@ public class FormTransaksiPembayaranHutang extends javax.swing.JFrame {
                                     .addGroup(jPanel3Layout.createSequentialGroup()
                                         .addComponent(text_noTrans, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(combo_pengeluaran, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(combo_barang, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(date_tanggal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(39, 39, 39)
                                 .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(72, 72, 72)
-                        .addComponent(button_ubah)
-                        .addGap(84, 84, 84)
-                        .addComponent(button_tabel))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(text_total, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 690, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(jPanel3Layout.createSequentialGroup()
                             .addGap(186, 186, 186)
@@ -416,7 +266,14 @@ public class FormTransaksiPembayaranHutang extends javax.swing.JFrame {
                             .addComponent(text_totalBulan, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel3Layout.createSequentialGroup()
                             .addGap(29, 29, 29)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 690, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 690, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(button_ubah, javax.swing.GroupLayout.PREFERRED_SIZE, 690, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(text_total, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 690, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(13, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -426,9 +283,7 @@ public class FormTransaksiPembayaranHutang extends javax.swing.JFrame {
                 .addComponent(jLabel5)
                 .addGap(8, 8, 8)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel16)
-                        .addComponent(label_bulan))
+                    .addComponent(jLabel16)
                     .addComponent(label_tanggal))
                 .addGap(16, 16, 16)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -439,7 +294,7 @@ public class FormTransaksiPembayaranHutang extends javax.swing.JFrame {
                             .addComponent(jLabel15))
                         .addGap(6, 6, 6)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(combo_pengeluaran)
+                            .addComponent(combo_barang)
                             .addComponent(text_noTrans)
                             .addComponent(text_total)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -454,11 +309,9 @@ public class FormTransaksiPembayaranHutang extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(text_totalBulan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(button_ubah)
-                    .addComponent(button_tabel))
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(button_ubah)
+                .addGap(18, 18, 18))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -596,79 +449,36 @@ public class FormTransaksiPembayaranHutang extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void button_tabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_tabelActionPerformed
-        dialog_pembelian.setVisible(true);
-    }//GEN-LAST:event_button_tabelActionPerformed
-
     private void tabel_hutangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabel_hutangMouseClicked
         int row1 = tabel_hutang.getSelectedRow();
-        if (!tabel_hutang.getValueAt(row1, 3).toString().equals("0")) {
-            JOptionPane.showMessageDialog(null, "Anda tidak dapat mengubah data!");
-        } else {
-            text_noTrans.setText(tabel_hutang.getValueAt(row1, 1).toString());
-            combo_pengeluaran.setSelectedItem(tabel_hutang.getValueAt(row1, 2).toString());
-            text_total.setText(tabel_hutang.getValueAt(row1, 3).toString());
-
-            customnya();
-        }
+        text_noTrans.setText(tabel_hutang.getValueAt(row1, 0).toString());
+        combo_barang.setSelectedItem(tabel_hutang.getValueAt(row1, 2).toString());
+        text_total.setText(tabel_hutang.getValueAt(row1, 5).toString());
+        
+        button_ubah.setEnabled(true);
     }//GEN-LAST:event_tabel_hutangMouseClicked
-
-    private void button_tampilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_tampilActionPerformed
-        String tglDari = new SimpleDateFormat("yyyy-MM-dd").format(date_dari.getDate());
-        String tglSampai = new SimpleDateFormat("yyyy-MM-dd").format(date_sampai.getDate());
-        update2(tglDari, tglSampai);
-    }//GEN-LAST:event_button_tampilActionPerformed
-
-    private void button_cetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_cetakActionPerformed
-        Connection kon = new Koneksi().getConnection();
-        String reportSource = "./src/Lap/LapTransaksiPembelian.jasper";
-        Map<String, Object> params = new HashMap<String, Object>();
-        params.put("tDari", new SimpleDateFormat("yyyy-MM-dd").format(date_dari.getDate()));
-        params.put("tSampai", new SimpleDateFormat("yyyy-MM-dd").format(date_sampai.getDate()));
-        try {
-            JasperPrint jasperPrint = JasperFillManager.fillReport(reportSource, params, kon);
-            JasperViewer.viewReport(jasperPrint, false);
-
-        } catch (JRException ex) {
-            ex.printStackTrace();
-        }
-    }//GEN-LAST:event_button_cetakActionPerformed
 
     private void button_ubahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_ubahActionPerformed
         try {
-            String kodeAkun = TransaksiKontrol.getKoneksi().keluar_tampilKodeAkun(text_noTrans.getText());
             Transaksi trans = new Transaksi();
             trans.setNoTrans(text_noTrans.getText());
-            trans.setTanggalTransaksi(new SimpleDateFormat("yyyy-MM-dd").format(date_tanggal.getDate()));
-            trans.setTotal(Double.parseDouble(text_total.getText()));
 
-            TransaksiKontrol.getKoneksi().keluar_updateTransaksi(trans);
-            
-            //pembayaran beban kas (kredit), modal (kredit), beban x (debit) -- nanti beban ga usah diakumulasi lagi karena sudah dikurangi di modal
-            Trans beban = new Trans(kodeAkun, (long) trans.getTotal(), 0);
-            Trans kas = new Trans("1.1.1", 0, (long) trans.getTotal());
-            Trans modal = new Trans("3.1.1", 0, (long) trans.getTotal());
-            
-            TransKontrol.getKoneksi().insertTransaksi(beban);
+            TransaksiKontrol.getKoneksi().hutang_updateTransaksi(trans.getNoTrans());
+
+            //pembayaran hutang-- kas (kredit), hutang (kredit)
+            Trans hutang = new Trans("2.1.1", 0, Long.parseLong(text_total.getText()));
+            Trans kas = new Trans("1.1.1", 0, Long.parseLong(text_total.getText()));
+
+            TransKontrol.getKoneksi().insertTransaksi(hutang);
             TransKontrol.getKoneksi().insertTransaksi(kas);
-            TransKontrol.getKoneksi().insertTransaksi(modal);
-            JOptionPane.showMessageDialog(null, "Update Pengeluaran berhasil!");
+            JOptionPane.showMessageDialog(null, "Update Hutang berhasil!");
             update();
-//            defaultnya();
+            
+            defaultnya();
         } catch (SQLException ex) {
             Logger.getLogger(FormTransaksiPembayaranHutang.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_button_ubahActionPerformed
-
-    private void combo_pengeluaranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_pengeluaranActionPerformed
-        try {
-            List<Pengeluaran> pen = PengeluaranKontrol.getKoneksi().selectPengeluaran2(combo_pengeluaran.getSelectedItem().toString());
-            String tanggal[] = Tanggal.getTanggal2().split("-");
-            text_noTrans.setText(pen.get(0).getKode() + "-" + tanggal[0] + tanggal[1]);
-        } catch (SQLException ex) {
-            Logger.getLogger(FormTransaksiPembayaranHutang.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_combo_pengeluaranActionPerformed
 
     private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
         FormAir a = new FormAir();
@@ -730,167 +540,19 @@ public class FormTransaksiPembayaranHutang extends javax.swing.JFrame {
         a.setVisible(true);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
-    public void update() {
-        try {
-            List<Transaksi> agt = TransaksiKontrol.getKoneksi().keluar_selectTransaksi();
-            List<Pengeluaran> pen = PengeluaranKontrol.getKoneksi().selectPengeluaran2("");
-            if (agt.size() == 0) {
-                for (int i = 0; i < pen.size(); i++) {
-                    String kodeAkun = "";
-                    if (Integer.parseInt(pen.get(i).getKode().split("-")[1]) <= 5) {
-                        kodeAkun = "5.1." + Integer.parseInt(pen.get(i).getKode().split("-")[1]);
-                    } else {
-                        kodeAkun = "5.1.6";
-                    }
-                    Transaksi trans = new Transaksi();
-                    String tanggal[] = Tanggal.getTanggal2().split("-");
-                    trans.setNoTrans(pen.get(i).getKode() + "-" + tanggal[0] + tanggal[1]);
-                    trans.setIdBarang(new Barang(pen.get(i).getKode(), pen.get(i).getNamaPengeluaran(), i, i, ""));
-                    trans.setIdAnggota(new Anggota("-", null, null, null, null, null, i, i, null, null, null, null, null));
-                    trans.setTanggalTransaksi(Tanggal.getTanggal2());
-                    trans.setJenisTransaksi("PENGELUARAN");
-                    trans.setJumlah(0);
-                    trans.setHargaSatuan(0);
-                    trans.setDenda(0);
-                    trans.setTotal(0);
-                    TransaksiKontrol.getKoneksi().keluar_insertTransaksi(trans);
-                }
-                agt = TransaksiKontrol.getKoneksi().keluar_selectTransaksi();
-                TransaksiKeluarTM model = new TransaksiKeluarTM(agt);
-                tabel_hutang.setModel(model);
-
-                TableCellRenderer kanan = new RataKanan();
-//            tabel_pengeluaran.getColumnModel().getColumn(2).setCellRenderer(kanan);
-                tabel_hutang.getColumnModel().getColumn(3).setCellRenderer(kanan);
-//            tabel_pengeluaran.getColumnModel().getColumn(4).setCellRenderer(kanan);
-
-                text_totalBulan.setText(TransaksiKontrol.getKoneksi().keluar_tampilTotalKeluarBulanIni());
-            } else if (agt.size() != pen.size()) {
-                JOptionPane.showMessageDialog(null, "Gak size");
-                for (int i = 0; i < pen.size(); i++) {
-                    boolean cek = false;
-                    for (int j = 0; j < agt.size(); j++) {
-                        if (pen.get(i).getKode().equals(agt.get(j).getIdBarang().getIdBarang())) {
-                            cek = true;
-                        } else {
-                            cek = cek;
-                        }
-
-                    }
-                    if (cek == false) {
-                        Transaksi trans = new Transaksi();
-                        String tanggal[] = Tanggal.getTanggal2().split("-");
-                        trans.setNoTrans(pen.get(i).getKode() + "-" + tanggal[0] + tanggal[1]);
-                        trans.setIdBarang(new Barang(pen.get(i).getKode(), pen.get(i).getNamaPengeluaran(), i, i, ""));
-                        trans.setIdAnggota(new Anggota("-", null, null, null, null, null, i, i, null, null, null, null, null));
-                        trans.setTanggalTransaksi(Tanggal.getTanggal2());
-                        trans.setJenisTransaksi("PENGELUARAN");
-                        trans.setJumlah(0);
-                        trans.setHargaSatuan(0);
-                        trans.setDenda(0);
-                        trans.setTotal(0);
-                        TransaksiKontrol.getKoneksi().keluar_insertTransaksi(trans);
-                    }
-                }
-                agt = TransaksiKontrol.getKoneksi().keluar_selectTransaksi();
-                TransaksiKeluarTM model = new TransaksiKeluarTM(agt);
-                tabel_hutang.setModel(model);
-
-                TableCellRenderer kanan = new RataKanan();
-//            tabel_pengeluaran.getColumnModel().getColumn(2).setCellRenderer(kanan);
-                tabel_hutang.getColumnModel().getColumn(3).setCellRenderer(kanan);
-//            tabel_pengeluaran.getColumnModel().getColumn(4).setCellRenderer(kanan);
-
-                text_totalBulan.setText(TransaksiKontrol.getKoneksi().keluar_tampilTotalKeluarBulanIni());
-            } else {
-
-                TransaksiKeluarTM model = new TransaksiKeluarTM(agt);
-                tabel_hutang.setModel(model);
-
-                TableCellRenderer kanan = new RataKanan();
-//            tabel_pengeluaran.getColumnModel().getColumn(2).setCellRenderer(kanan);
-                tabel_hutang.getColumnModel().getColumn(3).setCellRenderer(kanan);
-//            tabel_pengeluaran.getColumnModel().getColumn(4).setCellRenderer(kanan);
-
-                text_totalBulan.setText(TransaksiKontrol.getKoneksi().keluar_tampilTotalKeluarBulanIni());
-//        tabelDosen.getColumnModel().getColumn(0).setMinWidth(70);
-//        tabelDosen.getColumnModel().getColumn(0).setMaxWidth(70);
-//        tabelDosen.getColumnModel().getColumn(1).setMinWidth(220);
-//        tabelDosen.getColumnModel().getColumn(1).setMaxWidth(220);
-//            tabelDosen.setDefaultRenderer(Object.class, new renderWarnaWarni(Color.lightGray, Color.white));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(FormAnggota.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    public void update2(String tglDari, String tglSampai) {
-        try {
-            List<Transaksi> agt = TransaksiKontrol.getKoneksi().keluar_selectTransaksi2(tglDari, tglSampai);
-
-            TransaksiKeluarTM model = new TransaksiKeluarTM(agt);
-            tabel_pengeluaran2.setModel(model);
-
-            TableCellRenderer kanan = new RataKanan();
-//            tabel_pengeluaran.getColumnModel().getColumn(2).setCellRenderer(kanan);
-            tabel_pengeluaran2.getColumnModel().getColumn(3).setCellRenderer(kanan);
-//            tabel_pengeluaran.getColumnModel().getColumn(4).setCellRenderer(kanan);
-
-            text_ttlbeliall.setText(TransaksiKontrol.getKoneksi().keluar_tampilTotalKeluarBulanCustom(tglDari, tglSampai));
-        } catch (SQLException ex) {
-            Logger.getLogger(FormAnggota.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    public String konversiBulan(String bulan) {
-        if (bulan.equals("JANUARI")) {
-            return "01";
-        } else if (bulan.equals("FEBRUARI")) {
-            return "02";
-        } else if (bulan.equals("MARET")) {
-            return "03";
-        } else if (bulan.equals("APRIL")) {
-            return "04";
-        } else if (bulan.equals("MEI")) {
-            return "05";
-        } else if (bulan.equals("JUNI")) {
-            return "06";
-        } else if (bulan.equals("JULI")) {
-            return "07";
-        } else if (bulan.equals("AGUSTUS")) {
-            return "08";
-        } else if (bulan.equals("SEPTEMBER")) {
-            return "09";
-        } else if (bulan.equals("OKTOBER")) {
-            return "10";
-        } else if (bulan.equals("NOVEMBER")) {
-            return "11";
-        } else if (bulan.equals("DESEMBER")) {
-            return "12";
-        } else {
-            return "-";
-        }
+    public void update() throws SQLException {
+        List<Transaksi> hutang = TransaksiKontrol.getKoneksi().hutang_selectTransaksi();
+        TransaksiHutangTM a = new TransaksiHutangTM(hutang);
+        tabel_hutang.setModel(a);
+        
+        text_totalBulan.setText(TransaksiKontrol.getKoneksi().hutang_selectTotalHutang());
     }
 
     public void isiList() throws SQLException {
-        List<Pengeluaran> brg = PengeluaranKontrol.getKoneksi().selectPengeluaran2("");
-        for (Pengeluaran b : brg) {
-            combo_pengeluaran.addItem(b.getNamaPengeluaran());
+        List<Barang> brg = BarangKontrol.getKoneksi().selectBarang();
+        for (Barang b : brg) {
+            combo_barang.addItem(b.getNamaBarang());
         }
-    }
-
-    public void defaultnya() {
-        button_ubah.setEnabled(false);
-        text_noTrans.setText("");
-        text_total.setText("0");
-
-        text_noTrans.setEditable(true);
-    }
-
-    public void customnya() {
-        button_ubah.setEnabled(true);
-        combo_pengeluaran.setEnabled(false);
-        text_noTrans.setEditable(false);
     }
 
     public void sinkronGambar() {
@@ -1014,29 +676,18 @@ public class FormTransaksiPembayaranHutang extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton button_cetak;
-    private javax.swing.JButton button_tabel;
-    private javax.swing.JButton button_tampil;
     private javax.swing.JButton button_ubah;
-    private javax.swing.JComboBox combo_pengeluaran;
-    private com.toedter.calendar.JDateChooser date_dari;
-    private com.toedter.calendar.JDateChooser date_sampai;
+    private javax.swing.JComboBox combo_barang;
     private com.toedter.calendar.JDateChooser date_tanggal;
-    private javax.swing.JDialog dialog_pembelian;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -1056,50 +707,22 @@ public class FormTransaksiPembayaranHutang extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel label_alamatNotelp;
-    private javax.swing.JLabel label_bulan;
     private javax.swing.JLabel label_kop;
     private javax.swing.JLabel label_namaDesa;
     private javax.swing.JLabel label_tanggal;
     private javax.swing.JTable tabel_hutang;
-    private javax.swing.JTable tabel_pengeluaran2;
     private javax.swing.JTextField text_noTrans;
     private javax.swing.JTextField text_total;
     private javax.swing.JTextField text_totalBulan;
-    private javax.swing.JTextField text_ttlbeliall;
     // End of variables declaration//GEN-END:variables
 
-    private String generateBulanTahun(String tanggal) {
-        if (tanggal.split("-")[1].equals("01")) {
-            return "JANUARI-" + tanggal.split("-")[0];
-        } else if (tanggal.split("-")[1].equals("02")) {
-            return "FEBRUARI-" + tanggal.split("-")[0];
-        } else if (tanggal.split("-")[1].equals("03")) {
-            return "MARET-" + tanggal.split("-")[0];
-        } else if (tanggal.split("-")[1].equals("04")) {
-            return "APRIL-" + tanggal.split("-")[0];
-        } else if (tanggal.split("-")[1].equals("05")) {
-            return "MEI-" + tanggal.split("-")[0];
-        } else if (tanggal.split("-")[1].equals("06")) {
-            return "JUNI-" + tanggal.split("-")[0];
-        } else if (tanggal.split("-")[1].equals("07")) {
-            return "JULI-" + tanggal.split("-")[0];
-        } else if (tanggal.split("-")[1].equals("08")) {
-            return "AGUSTUS-" + tanggal.split("-")[0];
-        } else if (tanggal.split("-")[1].equals("09")) {
-            return "SEPTEMBER-" + tanggal.split("-")[0];
-        } else if (tanggal.split("-")[1].equals("10")) {
-            return "OKTOBER-" + tanggal.split("-")[0];
-        } else if (tanggal.split("-")[1].equals("11")) {
-            return "NOVEMBER-" + tanggal.split("-")[0];
-        } else {
-            return "DESEMBER-" + tanggal.split("-")[0];
-        }
+    private void defaultnya() {
+        button_ubah.setEnabled(false);
+        text_noTrans.setText("");
+        text_total.setText("");
+        combo_barang.setSelectedIndex(0);
     }
+
 }

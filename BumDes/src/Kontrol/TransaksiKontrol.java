@@ -518,7 +518,7 @@ public class TransaksiKontrol {
         conn.close();
         return total;
     }
-    
+
     public String keluar_tampilKodeAkun(String notransaksi) throws SQLException {
         PreparedStatement stmt = null;
         ResultSet result = null;
@@ -660,6 +660,59 @@ public class TransaksiKontrol {
             total = result.getString(1);
         }
 
+        conn.close();
+        return total;
+    }
+
+    //HUTANG USAHA==============================================================
+    public List<Transaksi> hutang_selectTransaksi() throws SQLException {//menampilkan list hutang
+        PreparedStatement stmt = null;
+        ResultSet result = null;
+        conn.setAutoCommit(false);
+        String query = "SELECT a.notransaksi,a.idbarang,b.namabarang,a.tanggaltransaksi,a.jumlah,a.total\n"
+                + "FROM transaksi a, barang b where a.idbarang = b.idbarang \n"
+                + "and a.jenistransaksi = 'PEMBELIAN KREDIT';";
+        stmt = conn.prepareStatement(query);
+        result = stmt.executeQuery();
+        List<Transaksi> trans = new ArrayList<Transaksi>();
+        while (result.next()) {
+            Transaksi trs = new Transaksi();
+            trs.setNoTrans(result.getString(1));
+            trs.setIdBarang(new Barang(result.getString(2), result.getString(3), 0, 0, ""));
+            trs.setTanggalTransaksi(result.getString(4));
+            trs.setJumlah(result.getInt(5));
+            trs.setTotal(result.getDouble(6));
+            trans.add(trs);
+        }
+
+        conn.close();
+        return trans;
+    }
+
+    //pembayaran hutang usaha
+    public void hutang_updateTransaksi(String noTransaksi) throws SQLException {//pergantian status transaksi jadi lunas
+        PreparedStatement stmt = null;
+        conn.setAutoCommit(false);
+        String query = "update transaksi set jenistransaksi = 'PEMBELIAN' where notransaksi = ?";
+        stmt = conn.prepareStatement(query);
+        stmt.setString(1, noTransaksi);
+
+        stmt.executeUpdate();
+        conn.commit();
+        conn.close();
+    }
+
+    public String hutang_selectTotalHutang() throws SQLException {//menampilkan list hutang
+        PreparedStatement stmt = null;
+        ResultSet result = null;
+        conn.setAutoCommit(false);
+        String query = "SELECT sum(total) FROM transaksi where jenistransaksi = 'PEMBELIAN KREDIT';";
+        stmt = conn.prepareStatement(query);
+        result = stmt.executeQuery();
+        String total = null;
+        while (result.next()) {
+            total = result.getString(1);
+        }
         conn.close();
         return total;
     }

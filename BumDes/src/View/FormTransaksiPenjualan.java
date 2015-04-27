@@ -1018,12 +1018,12 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
                     TransKontrol.getKoneksi().insertTransaksi(kas);
                     TransKontrol.getKoneksi().insertTransaksi(pendapatan);
 
-                    //+ denda (kas(debit), modal(debit), pendapatan air(debit)
-                    Trans pendapatan2 = new Trans("1.1.1", (long) trans.getDenda(), 0);
+                    //+ denda (kas(debit), modal(debit), pendapatan denda(debit)
+                    Trans penddenda = new Trans("4.1.2", (long) trans.getDenda(), 0);
                     Trans modal = new Trans("3.1.1", (long) trans.getDenda(), 0);
                     Trans kas2 = new Trans("1.1.1", (long) trans.getDenda(), 0);
 
-                    TransKontrol.getKoneksi().insertTransaksi(pendapatan2);
+                    TransKontrol.getKoneksi().insertTransaksi(penddenda);
                     TransKontrol.getKoneksi().insertTransaksi(modal);
                     TransKontrol.getKoneksi().insertTransaksi(kas2);
                 }
