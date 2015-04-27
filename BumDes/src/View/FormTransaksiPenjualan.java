@@ -13,12 +13,14 @@ import Custom.Tanggal;
 import Kelas.Anggota;
 import Kelas.Konfigurasi;
 import Kelas.Pemakaian;
+import Kelas.Trans;
 import Kelas.Transaksi;
 import Koneksi.Koneksi;
 import Kontrol.AnggotaKontrol;
 import Kontrol.KonfigurasiKontrol;
 import Kontrol.PemakaianKontrol;
 import Kontrol.PengaturanKontrol;
+import Kontrol.TransKontrol;
 import Kontrol.TransaksiKontrol;
 import TabelModel.AnggotaTM;
 import TabelModel.HistoriTM;
@@ -990,12 +992,42 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
             try {
                 //update transaksi (pendapatan air)
                 Transaksi trans = TransaksiKontrol.getKoneksi().jual_selectTransaksi2(label_noTrans.getText());
+                trans.setIdAnggota(new Anggota(text_noPelanggan.getText()));
                 trans.setJumlah(Integer.parseInt(text_airdibayar.getText()));
                 trans.setTotal(Double.parseDouble(text_total.getText()));
                 trans.setDenda(Double.parseDouble(text_denda.getText()));
-                trans.setKode("4.1.1"); //pendapatan air
                 TransaksiKontrol.getKoneksi().jual_updateTransaksi(trans);
-                
+
+                if (trans.getDenda() == 0) {
+                    //pembayaran piutang (piutang (kredit), kas (debit), pendapatan air(debit))
+                    Trans piutang = new Trans("1.1.3", 0, (long) trans.getTotal());
+                    Trans kas = new Trans("1.1.1", (long) trans.getTotal(), 0);
+                    Trans pendapatan = new Trans("4.1.1", (long) trans.getTotal(), 0);
+
+                    TransKontrol.getKoneksi().insertTransaksi(piutang);
+                    TransKontrol.getKoneksi().insertTransaksi(kas);
+                    TransKontrol.getKoneksi().insertTransaksi(pendapatan);
+                } else {
+                    //pembayaran piutang (piutang (kredit), kas (debit), pendapatan air(debit)) )
+                    double totalNonDenda = trans.getTotal() - trans.getDenda();
+                    Trans piutang = new Trans("1.1.3", 0, (long) totalNonDenda);
+                    Trans kas = new Trans("1.1.1", (long) totalNonDenda, 0);
+                    Trans pendapatan = new Trans("4.1.1", (long) totalNonDenda, 0);
+
+                    TransKontrol.getKoneksi().insertTransaksi(piutang);
+                    TransKontrol.getKoneksi().insertTransaksi(kas);
+                    TransKontrol.getKoneksi().insertTransaksi(pendapatan);
+
+                    //+ denda (kas(debit), modal(debit), pendapatan air(debit)
+                    Trans pendapatan2 = new Trans("1.1.1", (long) trans.getDenda(), 0);
+                    Trans modal = new Trans("3.1.1", (long) trans.getDenda(), 0);
+                    Trans kas2 = new Trans("1.1.1", (long) trans.getDenda(), 0);
+
+                    TransKontrol.getKoneksi().insertTransaksi(pendapatan2);
+                    TransKontrol.getKoneksi().insertTransaksi(modal);
+                    TransKontrol.getKoneksi().insertTransaksi(kas2);
+                }
+
 //                Transaksi trans = new Transaksi();
 //                trans.setNoTrans(label_noTrans.getText());
 //                Anggota idAnggota = new Anggota(text_noPelanggan.getText(), "", "", "", "", "", 0, 0, "", "", "", "", "");
@@ -1096,8 +1128,8 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
                 text_denda.setText(Integer.toString(konfig.getDenda()));
 
                 double total = Double.parseDouble(text_abodemen.getText()) + Double.parseDouble(text_pertama.getText())
-                        + Double.parseDouble(text_kedua.getText()) + Double.parseDouble(text_ketiga.getText() + 
-                                Double.parseDouble(text_denda.getText()));
+                        + Double.parseDouble(text_kedua.getText()) + Double.parseDouble(text_ketiga.getText()
+                                + Double.parseDouble(text_denda.getText()));
                 text_total.setText(Double.toString(total).split("\\.")[0]);
                 label_status.setText("STATUS : BLM LUNAS (DENDA)");
             }
@@ -1247,7 +1279,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
             tabel_penjualan2.getColumnModel().getColumn(5).setCellRenderer(kanan);
             tabel_penjualan2.getColumnModel().getColumn(6).setCellRenderer(kanan);
 
-            text_ttlbeliall.setText(TransaksiKontrol.getKoneksi().jual_tampilTotalBeliAll());
+//            text_ttlbeliall.setText(TransaksiKontrol.getKoneksi().jual_tampilTotalBeliAll());
 //        tabelDosen.getColumnModel().getColumn(0).setMinWidth(70);
 //        tabelDosen.getColumnModel().getColumn(0).setMaxWidth(70);
 //        tabelDosen.getColumnModel().getColumn(1).setMinWidth(220);

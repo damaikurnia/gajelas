@@ -1166,11 +1166,12 @@ public class FormPemakaianAir extends javax.swing.JFrame {
                 //insert transaksi (piutang)
                 Transaksi trans = new Transaksi();
                 trans.setNoTrans(label_noTrans.getText());
-                trans.setIdBarang(new Barang("-", "-", WIDTH, WIDTH, null));
                 trans.setIdAnggota(new Anggota(text_noPelanggan.getText()));
                 trans.setJumlah((int) pem.getAirdibayar());
+                trans.setHargaSatuan(0);
+                trans.setDenda(0);
                 trans.setTotal(Double.parseDouble(text_total.getText()));
-//                TransaksiKontrol.getKoneksi().jual_insertTransaksi(trans);
+                TransaksiKontrol.getKoneksi().jual_insertTransaksi(trans);
 
                 //pendapatan piutang (piutang (debit), modal(debit))
                 Trans piutang = new Trans("1.1.3", (long) trans.getTotal(), 0);

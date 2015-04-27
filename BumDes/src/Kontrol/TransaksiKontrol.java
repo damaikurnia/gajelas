@@ -518,6 +518,25 @@ public class TransaksiKontrol {
         conn.close();
         return total;
     }
+    
+    public String keluar_tampilKodeAkun(String notransaksi) throws SQLException {
+        PreparedStatement stmt = null;
+        ResultSet result = null;
+        conn.setAutoCommit(false);
+        String query = "select a.kodeakun from pengeluaran a, "
+                + "transaksi b where a.kode = b.idbarang "
+                + "and b.notransaksi = ?;";
+        stmt = conn.prepareStatement(query);
+        stmt.setString(1, notransaksi);
+        result = stmt.executeQuery();
+        String total = "";
+        while (result.next()) {
+            total = result.getString(1);
+        }
+
+        conn.close();
+        return total;
+    }
 
     //PEMAKAIAN BARANG =======================================================
     public List<Transaksi> pakai_selectTransaksi() throws SQLException {

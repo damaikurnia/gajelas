@@ -15,8 +15,11 @@ import java.util.Date;
 public class Main {
 
     public static void main(String[] args) {
-        String regex = "[0-9]+";
-        String data = "2";
-        System.out.println(data.matches(regex));
+//        String regex = "[0-9]+";
+//        String data = "2";
+//        System.out.println(data.matches(regex));
+        
+        double data = 0.0;
+        System.out.println(data==0);
     }
 }
