@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8cf09692-0029-4ad1-9f5d-5c517aa3d3ba">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="abbe7cfd-95fa-468a-9a69-cff438fb7f21">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
-	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["C:\\Users\\damaikurnia\\Documents\\NetBeansProjects\\BUMDES\\trunk\\BumDes\\src\\Lap\\"]]></defaultValueExpression>
-	</parameter>
+	<property name="ireport.y" value="12"/>
 	<queryString>
-		<![CDATA[SELECT * from anggota;]]>
+		<![CDATA[SELECT * FROM anggota;]]>
 	</queryString>
 	<field name="idanggota" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -55,29 +52,57 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="76" splitType="Stretch">
+		<band height="79" splitType="Stretch">
 			<subreport>
-				<reportElement x="0" y="-19" width="802" height="94" uuid="42e21cfe-a761-47aa-a141-e03d0ce174df"/>
+				<reportElement x="0" y="0" width="802" height="79" uuid="01de0827-9db3-413f-b739-a8acb06450fd"/>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "KopSuratLandscape.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA["/home/damaikurnia/NetBeansProjects/Pak Han/trunk/BumDes/src/Lap/KopSuratLandscape.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="35" splitType="Stretch"/>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="802" height="20" uuid="2b7a114c-e0a4-4adc-be61-8a8d24cf1ae8"/>
+				<box>
+					<topPen lineWidth="3.0" lineStyle="Double"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NERACA]]></text>
+			</staticText>
+		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="61" splitType="Stretch"/>
+		<band height="319">
+			<subreport>
+				<reportElement x="0" y="0" width="384" height="100" uuid="ec057a8c-cdb3-42a8-a416-f28b97303685"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["/home/damaikurnia/NetBeansProjects/Pak Han/trunk/BumDes/src/Lap/NERACA_AktivaLancar.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="0" y="114" width="384" height="100" uuid="38790abc-6309-434a-8400-d882dc0f01de"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["/home/damaikurnia/NetBeansProjects/Pak Han/trunk/BumDes/src/Lap/NERACA_AktivaTetap.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="409" y="0" width="381" height="58" uuid="b16b8ef0-3071-4226-b221-f74756e866ce"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["/home/damaikurnia/NetBeansProjects/Pak Han/trunk/BumDes/src/Lap/NERACA_Modal.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="409" y="70" width="381" height="62" uuid="6082886f-bdf8-40ea-89ac-f060d8ac102f"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["/home/damaikurnia/NetBeansProjects/Pak Han/trunk/BumDes/src/Lap/NERACA_KewajibanLancar.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="409" y="143" width="381" height="100" uuid="6509b2f2-721d-458e-a6b1-d20bba0d49f6"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["/home/damaikurnia/NetBeansProjects/Pak Han/trunk/BumDes/src/Lap/NERACA_KewajibanTetap.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
 	</columnHeader>
-	<detail>
-		<band height="125" splitType="Stretch"/>
-	</detail>
-	<columnFooter>
-		<band height="45" splitType="Stretch"/>
-	</columnFooter>
-	<pageFooter>
-		<band height="54" splitType="Stretch"/>
-	</pageFooter>
 	<summary>
 		<band height="42" splitType="Stretch"/>
 	</summary>

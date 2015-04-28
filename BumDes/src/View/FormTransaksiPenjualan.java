@@ -1069,44 +1069,28 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
                 TransaksiKontrol.getKoneksi().jual_updateTransaksi(trans);
 
                 if (trans.getDenda() == 0) {
-                    //pembayaran piutang (piutang (kredit), kas (debit), pendapatan air(debit))
+                    //pembayaran piutang (piutang (kredit), pendapatan air(debit))
                     Trans piutang = new Trans("1.1.3", 0, (long) trans.getTotal());
-                    Trans kas = new Trans("1.1.1", (long) trans.getTotal(), 0);
                     Trans pendapatan = new Trans("4.1.1", (long) trans.getTotal(), 0);
 
                     TransKontrol.getKoneksi().insertTransaksi(piutang);
-                    TransKontrol.getKoneksi().insertTransaksi(kas);
                     TransKontrol.getKoneksi().insertTransaksi(pendapatan);
                 } else {
-                    //pembayaran piutang (piutang (kredit), kas (debit), pendapatan air(debit)) )
+                    //pembayaran piutang (piutang (kredit), pendapatan air(debit)) )
                     double totalNonDenda = trans.getTotal() - trans.getDenda();
                     Trans piutang = new Trans("1.1.3", 0, (long) totalNonDenda);
-                    Trans kas = new Trans("1.1.1", (long) totalNonDenda, 0);
                     Trans pendapatan = new Trans("4.1.1", (long) totalNonDenda, 0);
 
                     TransKontrol.getKoneksi().insertTransaksi(piutang);
-                    TransKontrol.getKoneksi().insertTransaksi(kas);
                     TransKontrol.getKoneksi().insertTransaksi(pendapatan);
 
-                    //+ denda (kas(debit), modal(debit), pendapatan denda(debit)
-                    Trans penddenda = new Trans("4.1.2", (long) trans.getDenda(), 0);
+                    //+ denda (modal(debit), pendapatan denda(debit)
+                    Trans penddenda = new Trans("4.1.2", (long) trans.getDenda(), 0);//pendapatan denda
                     Trans modal = new Trans("3.1.1", (long) trans.getDenda(), 0);
-                    Trans kas2 = new Trans("1.1.1", (long) trans.getDenda(), 0);
 
                     TransKontrol.getKoneksi().insertTransaksi(penddenda);
                     TransKontrol.getKoneksi().insertTransaksi(modal);
-                    TransKontrol.getKoneksi().insertTransaksi(kas2);
                 }
-
-//                Transaksi trans = new Transaksi();
-//                trans.setNoTrans(label_noTrans.getText());
-//                Anggota idAnggota = new Anggota(text_noPelanggan.getText(), "", "", "", "", "", 0, 0, "", "", "", "", "");
-//                trans.setIdAnggota(idAnggota);
-//                trans.setJumlah(Integer.parseInt(text_airdibayar.getText()));
-//                trans.setHargaSatuan(0);
-//                trans.setDenda(Double.parseDouble(text_denda.getText()));
-//                trans.setTotal(Double.parseDouble(text_total.getText()));
-//                TransaksiKontrol.getKoneksi().jual_insertTransaksi(trans);
                 JOptionPane.showMessageDialog(null, "Transaksi berhasil!");
                 cetakNota();
 
