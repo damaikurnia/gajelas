@@ -3,6 +3,9 @@
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[WHERE department_id IN(20,50)]]>
+	</queryString>
 	<background>
 		<band splitType="Stretch"/>
 	</background>

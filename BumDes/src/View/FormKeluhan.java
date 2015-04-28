@@ -391,8 +391,8 @@ public class FormKeluhan extends javax.swing.JFrame {
         jMenu2.setText("BARANG");
         jMenu2.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
 
-        jMenuItem2.setBackground(java.awt.Color.black);
-        jMenuItem2.setForeground(java.awt.Color.white);
+        jMenuItem2.setBackground(java.awt.Color.white);
+        jMenuItem2.setForeground(java.awt.Color.black);
         jMenuItem2.setText("Registrasi Barang");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -401,8 +401,8 @@ public class FormKeluhan extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem2);
 
-        jMenuItem3.setBackground(java.awt.Color.black);
-        jMenuItem3.setForeground(java.awt.Color.white);
+        jMenuItem3.setBackground(java.awt.Color.white);
+        jMenuItem3.setForeground(java.awt.Color.black);
         jMenuItem3.setText("Pembelian Barang");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -411,8 +411,8 @@ public class FormKeluhan extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem3);
 
-        jMenuItem13.setBackground(java.awt.Color.black);
-        jMenuItem13.setForeground(java.awt.Color.white);
+        jMenuItem13.setBackground(java.awt.Color.white);
+        jMenuItem13.setForeground(java.awt.Color.black);
         jMenuItem13.setText("Pemakaian Barang");
         jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -427,8 +427,8 @@ public class FormKeluhan extends javax.swing.JFrame {
         jMenu3.setText("PELANGGAN");
         jMenu3.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
 
-        jMenuItem9.setBackground(java.awt.Color.black);
-        jMenuItem9.setForeground(java.awt.Color.white);
+        jMenuItem9.setBackground(java.awt.Color.white);
+        jMenuItem9.setForeground(java.awt.Color.black);
         jMenuItem9.setText("Pendaftaran Pelanggan Baru");
         jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -437,8 +437,8 @@ public class FormKeluhan extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem9);
 
-        jMenuItem10.setBackground(java.awt.Color.black);
-        jMenuItem10.setForeground(java.awt.Color.white);
+        jMenuItem10.setBackground(java.awt.Color.white);
+        jMenuItem10.setForeground(java.awt.Color.black);
         jMenuItem10.setText("Pemakaian Air Pelanggan");
         jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -447,8 +447,8 @@ public class FormKeluhan extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem10);
 
-        jMenuItem11.setBackground(java.awt.Color.black);
-        jMenuItem11.setForeground(java.awt.Color.white);
+        jMenuItem11.setBackground(java.awt.Color.white);
+        jMenuItem11.setForeground(java.awt.Color.black);
         jMenuItem11.setText("Pembayaran Rekening Air");
         jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -457,8 +457,8 @@ public class FormKeluhan extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem11);
 
-        jMenuItem7.setBackground(java.awt.Color.black);
-        jMenuItem7.setForeground(java.awt.Color.white);
+        jMenuItem7.setBackground(java.awt.Color.white);
+        jMenuItem7.setForeground(java.awt.Color.black);
         jMenuItem7.setText("Informasi Keluhan Pelanggan");
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -473,8 +473,8 @@ public class FormKeluhan extends javax.swing.JFrame {
         jMenu4.setText("PENGELUARAN");
         jMenu4.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
 
-        jMenuItem1.setBackground(java.awt.Color.black);
-        jMenuItem1.setForeground(java.awt.Color.white);
+        jMenuItem1.setBackground(java.awt.Color.white);
+        jMenuItem1.setForeground(java.awt.Color.black);
         jMenuItem1.setText("List Pengeluaran");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -483,8 +483,8 @@ public class FormKeluhan extends javax.swing.JFrame {
         });
         jMenu4.add(jMenuItem1);
 
-        jMenuItem5.setBackground(java.awt.Color.black);
-        jMenuItem5.setForeground(java.awt.Color.white);
+        jMenuItem5.setBackground(java.awt.Color.white);
+        jMenuItem5.setForeground(java.awt.Color.black);
         jMenuItem5.setText("Pengeluaran Bulanan");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -493,8 +493,8 @@ public class FormKeluhan extends javax.swing.JFrame {
         });
         jMenu4.add(jMenuItem5);
 
-        jMenuItem6.setBackground(java.awt.Color.black);
-        jMenuItem6.setForeground(java.awt.Color.white);
+        jMenuItem6.setBackground(java.awt.Color.white);
+        jMenuItem6.setForeground(java.awt.Color.black);
         jMenuItem6.setText("Pembayaran Hutang");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -509,8 +509,8 @@ public class FormKeluhan extends javax.swing.JFrame {
         jMenu5.setText("LAPORAN");
         jMenu5.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
 
-        jMenuItem4.setBackground(java.awt.Color.black);
-        jMenuItem4.setForeground(java.awt.Color.white);
+        jMenuItem4.setBackground(java.awt.Color.white);
+        jMenuItem4.setForeground(java.awt.Color.black);
         jMenuItem4.setText("Laba - Rugi");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -519,8 +519,8 @@ public class FormKeluhan extends javax.swing.JFrame {
         });
         jMenu5.add(jMenuItem4);
 
-        jMenuItem12.setBackground(java.awt.Color.black);
-        jMenuItem12.setForeground(java.awt.Color.white);
+        jMenuItem12.setBackground(java.awt.Color.white);
+        jMenuItem12.setForeground(java.awt.Color.black);
         jMenuItem12.setText("Neraca");
         jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -535,8 +535,8 @@ public class FormKeluhan extends javax.swing.JFrame {
         jMenu6.setText("PENGATURAN");
         jMenu6.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
 
-        jMenuItem8.setBackground(java.awt.Color.black);
-        jMenuItem8.setForeground(java.awt.Color.white);
+        jMenuItem8.setBackground(java.awt.Color.white);
+        jMenuItem8.setForeground(java.awt.Color.black);
         jMenuItem8.setText("Profil Desa");
         jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -734,14 +734,12 @@ public class FormKeluhan extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        FormLaporanPendapatan a = new FormLaporanPendapatan();
-        this.setVisible(false);
+        FormLabaRugi a = new FormLabaRugi();
         a.setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
         FormNeraca a = new FormNeraca();
-        this.setVisible(false);
         a.setVisible(true);
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 

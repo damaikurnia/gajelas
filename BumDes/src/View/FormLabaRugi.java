@@ -5,16 +5,28 @@
  */
 package View;
 
+import Kelas.Profil;
+import Kontrol.PengaturanKontrol;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.io.File;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+
 /**
  *
  * @author damaikurnia
  */
-public class FormNeraca extends javax.swing.JFrame {
+public class FormLabaRugi extends javax.swing.JFrame {
 
     /**
      * Creates new form FormAir
      */
-    public FormNeraca() {
+    public FormLabaRugi() {
 
         initComponents();
         this.setLocationRelativeTo(null);
@@ -48,7 +60,7 @@ public class FormNeraca extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("NERACA");
+        jLabel3.setText("LABA - RUGI");
         jLabel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -58,7 +70,7 @@ public class FormNeraca extends javax.swing.JFrame {
         jLabel2.setText("TGL AWAL");
 
         jButton1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jButton1.setText("TAMPILKAN NERACA");
+        jButton1.setText("TAMPILKAN LABA-RUGI");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -147,21 +159,23 @@ public class FormNeraca extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormNeraca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormLabaRugi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormNeraca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormLabaRugi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormNeraca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormLabaRugi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FormNeraca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormLabaRugi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormNeraca().setVisible(true);
+                new FormLabaRugi().setVisible(true);
             }
         });
     }

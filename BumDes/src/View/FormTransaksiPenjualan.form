@@ -482,10 +482,10 @@
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="0" green="0" id="black" palette="1" red="0" type="palette"/>
+                  <Color blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
+                  <Color blue="0" green="0" id="black" palette="1" red="0" type="palette"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Registrasi Barang"/>
               </Properties>
@@ -496,10 +496,10 @@
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem3">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="0" green="0" id="black" palette="1" red="0" type="palette"/>
+                  <Color blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
+                  <Color blue="0" green="0" id="black" palette="1" red="0" type="palette"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Pembelian Barang"/>
               </Properties>
@@ -510,10 +510,10 @@
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem13">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="0" green="0" id="black" palette="1" red="0" type="palette"/>
+                  <Color blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
+                  <Color blue="0" green="0" id="black" palette="1" red="0" type="palette"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Pemakaian Barang"/>
               </Properties>
@@ -537,10 +537,10 @@
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem9">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="0" green="0" id="black" palette="1" red="0" type="palette"/>
+                  <Color blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
+                  <Color blue="0" green="0" id="black" palette="1" red="0" type="palette"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Pendaftaran Pelanggan Baru"/>
               </Properties>
@@ -551,10 +551,10 @@
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem10">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="0" green="0" id="black" palette="1" red="0" type="palette"/>
+                  <Color blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
+                  <Color blue="0" green="0" id="black" palette="1" red="0" type="palette"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Pemakaian Air Pelanggan"/>
               </Properties>
@@ -565,10 +565,10 @@
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem11">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="0" green="0" id="black" palette="1" red="0" type="palette"/>
+                  <Color blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
+                  <Color blue="0" green="0" id="black" palette="1" red="0" type="palette"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Pembayaran Rekening Air"/>
               </Properties>
@@ -579,10 +579,10 @@
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem7">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="0" green="0" id="black" palette="1" red="0" type="palette"/>
+                  <Color blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
+                  <Color blue="0" green="0" id="black" palette="1" red="0" type="palette"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Informasi Keluhan Pelanggan"/>
               </Properties>
@@ -606,10 +606,10 @@
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="0" green="0" id="black" palette="1" red="0" type="palette"/>
+                  <Color blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
+                  <Color blue="0" green="0" id="black" palette="1" red="0" type="palette"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="List Pengeluaran"/>
               </Properties>
@@ -620,10 +620,10 @@
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem5">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="0" green="0" id="black" palette="1" red="0" type="palette"/>
+                  <Color blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
+                  <Color blue="0" green="0" id="black" palette="1" red="0" type="palette"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Pengeluaran Bulanan"/>
               </Properties>
@@ -634,10 +634,10 @@
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem6">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="0" green="0" id="black" palette="1" red="0" type="palette"/>
+                  <Color blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
+                  <Color blue="0" green="0" id="black" palette="1" red="0" type="palette"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Pembayaran Hutang"/>
               </Properties>
@@ -661,10 +661,10 @@
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem4">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="0" green="0" id="black" palette="1" red="0" type="palette"/>
+                  <Color blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
+                  <Color blue="0" green="0" id="black" palette="1" red="0" type="palette"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Laba - Rugi"/>
               </Properties>
@@ -675,10 +675,10 @@
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem12">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="0" green="0" id="black" palette="1" red="0" type="palette"/>
+                  <Color blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
+                  <Color blue="0" green="0" id="black" palette="1" red="0" type="palette"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Neraca"/>
               </Properties>
@@ -702,10 +702,10 @@
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem8">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="0" green="0" id="black" palette="1" red="0" type="palette"/>
+                  <Color blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
+                  <Color blue="0" green="0" id="black" palette="1" red="0" type="palette"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Profil Desa"/>
               </Properties>
