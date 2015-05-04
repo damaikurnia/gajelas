@@ -90,7 +90,7 @@ public class TransaksiKontrol {
         while (result.next()) {
             Transaksi trs = new Transaksi();
             trs.setNoTrans(result.getString(1));
-            trs.setIdBarang(new Barang("", result.getString(2), 0, 0, ""));
+            trs.setIdBarang(new Barang("", result.getString(2), 0, 0, "",""));
             trs.setJumlah(result.getInt(3));
             trs.setHargaSatuan(result.getDouble(4));
             trs.setTotal(result.getDouble(5));

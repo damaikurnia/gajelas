@@ -19,7 +19,7 @@ import java.util.List;
  * @author damaikurnia
  */
 public class BarangKontrol {
-    
+
     private Connection conn;
 
     public BarangKontrol(Connection conn) {
@@ -47,7 +47,7 @@ public class BarangKontrol {
         conn.commit();
         conn.close();
     }
-    
+
     public List<Barang> selectBarang() throws SQLException {
         PreparedStatement stmt = null;
         ResultSet result = null;
@@ -67,7 +67,7 @@ public class BarangKontrol {
         conn.close();
         return brg;
     }
-    
+
     public List<Barang> selectBarang_peralatan() throws SQLException {
         PreparedStatement stmt = null;
         ResultSet result = null;
@@ -87,7 +87,7 @@ public class BarangKontrol {
         conn.close();
         return brg;
     }
-    
+
     public List<Barang> selectBarang_perlengkapan() throws SQLException {
         PreparedStatement stmt = null;
         ResultSet result = null;
@@ -107,7 +107,7 @@ public class BarangKontrol {
         conn.close();
         return brg;
     }
-    
+
     public Barang selectBarang2(String id) throws SQLException {
         PreparedStatement stmt = null;
         ResultSet result = null;
@@ -127,8 +127,8 @@ public class BarangKontrol {
         conn.close();
         return bar;
     }
-    
-    public void deleteBarang(Barang brg) throws SQLException{
+
+    public void deleteBarang(Barang brg) throws SQLException {
         PreparedStatement stmt = null;
         conn.setAutoCommit(false);
         String query = "delete from barang where idbarang = ?";
@@ -139,7 +139,7 @@ public class BarangKontrol {
         conn.commit();
         conn.close();
     }
-    
+
     public void insertBarang(Barang brg) throws SQLException {
         PreparedStatement stmt = null;
         conn.setAutoCommit(false);
@@ -148,15 +148,15 @@ public class BarangKontrol {
         stmt.setString(1, brg.getIdBarang());
         stmt.setString(2, brg.getNamaBarang());
         stmt.setInt(3, brg.getStok());
-        stmt.setDouble(4,brg.getTotalAset());
+        stmt.setDouble(4, brg.getTotalAset());
         stmt.setString(5, brg.getKode());
 
         stmt.executeUpdate();
         conn.commit();
         conn.close();
     }
-    
-    public String tampilTotalAset_peralatan() throws SQLException{
+
+    public String tampilTotalAset_peralatan() throws SQLException {
         PreparedStatement stmt = null;
         ResultSet result = null;
         conn.setAutoCommit(false);
@@ -170,8 +170,8 @@ public class BarangKontrol {
         conn.close();
         return data;
     }
-    
-    public String tampilTotalAset_perlengkapan() throws SQLException{
+
+    public String tampilTotalAset_perlengkapan() throws SQLException {
         PreparedStatement stmt = null;
         ResultSet result = null;
         conn.setAutoCommit(false);
@@ -185,8 +185,8 @@ public class BarangKontrol {
         conn.close();
         return data;
     }
-    
-    public String cariIdBarang(String nama) throws SQLException{
+
+    public String cariIdBarang(String nama) throws SQLException {
         PreparedStatement stmt = null;
         ResultSet result = null;
         conn.setAutoCommit(false);
@@ -201,8 +201,8 @@ public class BarangKontrol {
         conn.close();
         return data;
     }
-    
-    public String cariKodeAkunBarang(String nama) throws SQLException{
+
+    public String cariKodeAkunBarang(String nama) throws SQLException {
         PreparedStatement stmt = null;
         ResultSet result = null;
         conn.setAutoCommit(false);
@@ -216,5 +216,23 @@ public class BarangKontrol {
         }
         conn.close();
         return data;
+    }
+
+    //new new-------------------------------------------------------------------
+    public List<Barang> cariKategori() throws SQLException {
+        PreparedStatement stmt = null;
+        ResultSet result = null;
+        conn.setAutoCommit(false);
+        String query = "select kategori from barang group by kategori";
+        stmt = conn.prepareStatement(query);
+        result = stmt.executeQuery();
+        List<Barang> kat = new ArrayList<Barang>();
+        while (result.next()) {
+            Barang bar = new Barang();
+            bar.setKategori(result.getString(1));
+            kat.add(bar);
+        }
+        conn.close();
+        return kat;
     }
 }
