@@ -16,16 +16,20 @@ public class Barang {
     double totalAset;
     String kode;
     String kategori;
+    String tanggalPenyusutan;
+    int jangkawaktu;
 
     public Barang(){}
     
-    public Barang(String id, String nama, int stok,double aset,String kode, String kategori){
+    public Barang(String id, String nama, int stok,double aset,String kode, String kategori,String tgl,int wkt){
         this.idBarang = id;
         this.namaBarang = nama;
         this.stok = stok;
         this.totalAset = aset;
         this.kode = kode;
         this.kategori = kategori;
+        this.tanggalPenyusutan = tgl;
+        this.jangkawaktu = wkt;
     }
     
     /**
@@ -110,5 +114,33 @@ public class Barang {
      */
     public void setKategori(String kategori) {
         this.kategori = kategori;
+    }
+
+    /**
+     * @return the tanggalPenyusutan
+     */
+    public String getTanggalPenyusutan() {
+        return tanggalPenyusutan;
+    }
+
+    /**
+     * @param tanggalPenyusutan the tanggalPenyusutan to set
+     */
+    public void setTanggalPenyusutan(String tanggalPenyusutan) {
+        this.tanggalPenyusutan = tanggalPenyusutan;
+    }
+
+    /**
+     * @return the jangkawaktu
+     */
+    public int getJangkawaktu() {
+        return jangkawaktu;
+    }
+
+    /**
+     * @param jangkawaktu the jangkawaktu to set
+     */
+    public void setJangkawaktu(int jangkawaktu) {
+        this.jangkawaktu = jangkawaktu;
     }
 }

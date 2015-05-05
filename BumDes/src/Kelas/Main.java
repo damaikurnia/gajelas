@@ -19,7 +19,14 @@ public class Main {
 //        String data = "2";
 //        System.out.println(data.matches(regex));
         
-        double data = 0.0;
-        System.out.println(data==0);
+//        double data = 0.0;
+//        System.out.println(data==0);
+        
+//        String data= "1 Tahun";
+//        System.out.println(data.split(" ")[0]);
+        
+//        int tahun = Integer.parseInt(Tanggal.getTanggal2().split("-")[0]);
+//        tahun = tahun+1;
+//        System.out.println(tahun);
     }
 }

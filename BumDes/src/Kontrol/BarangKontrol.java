@@ -32,22 +32,6 @@ public class BarangKontrol {
         return login;
     }
 
-    public void updateBarang(Barang brg) throws SQLException {
-        PreparedStatement stmt = null;
-        conn.setAutoCommit(false);
-        String query = "update barang set namabarang = ?, stokbarang = ?, totalaset = ?, kode = ? where idbarang = ?";
-        stmt = conn.prepareStatement(query);
-        stmt.setString(1, brg.getNamaBarang());
-        stmt.setInt(2, brg.getStok());
-        stmt.setDouble(3, brg.getTotalAset());
-        stmt.setString(4, brg.getKode());
-        stmt.setString(5, brg.getIdBarang());
-
-        stmt.executeUpdate();
-        conn.commit();
-        conn.close();
-    }
-
     public List<Barang> selectBarang() throws SQLException {
         PreparedStatement stmt = null;
         ResultSet result = null;
@@ -108,48 +92,19 @@ public class BarangKontrol {
         return brg;
     }
 
-    public Barang selectBarang2(String id) throws SQLException {
-        PreparedStatement stmt = null;
-        ResultSet result = null;
-        conn.setAutoCommit(false);
-        String query = "SELECT * from barang where idbarang = ?";
-        stmt = conn.prepareStatement(query);
-        stmt.setString(1, id);
-        result = stmt.executeQuery();
-        Barang bar = new Barang();
-        while (result.next()) {
-            bar.setIdBarang(result.getString(1));
-            bar.setNamaBarang(result.getString(2));
-            bar.setStok(result.getInt(3));
-            bar.setTotalAset(result.getDouble(4));
-            bar.setKode(result.getString(5));
-        }
-        conn.close();
-        return bar;
-    }
-
-    public void deleteBarang(Barang brg) throws SQLException {
-        PreparedStatement stmt = null;
-        conn.setAutoCommit(false);
-        String query = "delete from barang where idbarang = ?";
-        stmt = conn.prepareStatement(query);
-        stmt.setString(1, brg.getIdBarang());
-
-        stmt.executeUpdate();
-        conn.commit();
-        conn.close();
-    }
-
     public void insertBarang(Barang brg) throws SQLException {
         PreparedStatement stmt = null;
         conn.setAutoCommit(false);
-        String query = "INSERT INTO barang VALUES(?,?,?,?,?)";
+        String query = "INSERT INTO barang VALUES(?,?,?,?,?,?,?,?)";
         stmt = conn.prepareStatement(query);
         stmt.setString(1, brg.getIdBarang());
         stmt.setString(2, brg.getNamaBarang());
         stmt.setInt(3, brg.getStok());
         stmt.setDouble(4, brg.getTotalAset());
         stmt.setString(5, brg.getKode());
+        stmt.setString(6, brg.getKategori());
+        stmt.setString(7, brg.getTanggalPenyusutan());
+        stmt.setInt(8, brg.getJangkawaktu());
 
         stmt.executeUpdate();
         conn.commit();

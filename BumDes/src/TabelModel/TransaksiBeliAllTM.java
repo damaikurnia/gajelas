@@ -29,7 +29,7 @@ public class TransaksiBeliAllTM extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 6;
+        return 7;
     }
 
     @Override
@@ -37,17 +37,20 @@ public class TransaksiBeliAllTM extends AbstractTableModel {
         Transaksi d = trans.get(rowIndex);
         switch (columnIndex) {
             case 0:
-                return d.getTanggalTransaksi();
+                String[] konversi = d.getTanggalTransaksi().split("-");
+                return konversi[2]+"-"+konversi[1]+"-"+konversi[0];
             case 1:
                 return d.getNoTrans();
             case 2:
                 return d.getIdBarang().getNamaBarang();
             case 3:
-                return d.getJumlah();
+                return d.getIdBarang().getKategori();
             case 4:
-                return Double.toString(d.getHargaSatuan()).split("\\.")[0];
+                return d.getJumlah();
             case 5:
                 return Double.toString(d.getTotal()).split("\\.")[0];
+            case 6:
+                return d.getJenisTransaksi();
             default:
                 return "";
         }
@@ -59,15 +62,17 @@ public class TransaksiBeliAllTM extends AbstractTableModel {
             case 0:
                 return "TANGGAL";
             case 1:
-                return "NO TRANSAKSI";
+                return "KODE";
             case 2:
-                return "BARANG";
+                return "NAMA BARANG";
             case 3:
-                return "JUMLAH";
+                return "KATEGORI";
             case 4:
-                return "HARGA SATUAN";
+                return "JUMLAH";
             case 5:
                 return "TOTAL";
+            case 6:
+                return "JENIS TRANSAKSI";
             default:
                 return "";
         }
