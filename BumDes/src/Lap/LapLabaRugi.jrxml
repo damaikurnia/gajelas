@@ -2,23 +2,20 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a1816212-ee33-4965-bd69-256c6a9ad21b">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="109"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="tglDari" class="java.lang.String">
 		<defaultValueExpression><![CDATA[$P{tglDari}]]></defaultValueExpression>
 	</parameter>
 	<parameter name="tglSkrg" class="java.lang.String">
 		<defaultValueExpression><![CDATA[$P{tglSkrg}]]></defaultValueExpression>
 	</parameter>
-	<parameter name="pajak" class="java.lang.String"/>
-	<parameter name="totBeban" class="java.lang.String"/>
 	<parameter name="labaBersih" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[select sum(total) from transaksi
-where tanggaltransaksi between $P{tglDari} 
-and $P{tglSkrg} and kode = '4.1.1'
-group by kode;]]>
+		<![CDATA[select idbarang from barang;]]>
 	</queryString>
-	<field name="sum(total)" class="java.math.BigDecimal"/>
+	<field name="idbarang" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -38,7 +35,7 @@ group by kode;]]>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["PERIODE "+$P{tglDari}+" - "+$P{tglSkrg}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["PERIODE "+$P{tglDari}.split("-")[2]+"-"+$P{tglDari}.split("-")[1]+"-"+$P{tglDari}.split("-")[0]+" - "+$P{tglSkrg}.split("-")[2]+"-"+$P{tglSkrg}.split("-")[1]+"-"+$P{tglSkrg}.split("-")[0]]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="-20" y="0" width="595" height="20" uuid="d2dd3d27-3b2b-4a28-9e5d-671af19e019c"/>
@@ -53,16 +50,23 @@ group by kode;]]>
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="256">
+		<band height="265">
 			<staticText>
-				<reportElement x="0" y="0" width="100" height="16" uuid="bd9b5c15-81d7-4af1-b31d-cbeeb0459523"/>
+				<reportElement x="0" y="249" width="100" height="16" uuid="03e05803-25a4-46eb-a4e0-9b3d13e3e7a5"/>
 				<textElement>
 					<font fontName="Times New Roman" size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[I.PENDAPATAN]]></text>
+				<text><![CDATA[III.LABA BERSIH]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="455" y="249" width="100" height="16" uuid="97f5a24e-f7cf-45f4-a2aa-387e3660b7b6"/>
+				<textElement textAlignment="Right">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{labaBersih}]]></textFieldExpression>
+			</textField>
 			<subreport>
-				<reportElement x="0" y="16" width="575" height="21" uuid="e809bf81-53cc-4265-ae99-3a578b9fa547"/>
+				<reportElement x="-20" y="13" width="595" height="84" uuid="57a83f75-72f9-4d00-b2b6-3a6dc5cb9bdd"/>
 				<subreportParameter name="dari">
 					<subreportParameterExpression><![CDATA[$P{tglDari}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -72,15 +76,8 @@ group by kode;]]>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA["/home/damaikurnia/NetBeansProjects/Pak Han/trunk/BumDes/src/Lap/LapLabaRugi_pend.jasper"]]></subreportExpression>
 			</subreport>
-			<staticText>
-				<reportElement x="0" y="48" width="100" height="16" uuid="6e54e9e7-ad00-4b03-9262-f5490d848098"/>
-				<textElement>
-					<font fontName="Times New Roman" size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[II.BEBAN]]></text>
-			</staticText>
 			<subreport>
-				<reportElement x="0" y="64" width="575" height="136" uuid="5ae0d5b0-080f-41ff-b2c6-fe723f96f816"/>
+				<reportElement x="-20" y="97" width="595" height="122" uuid="c758d41d-5320-4009-9a86-230703006648"/>
 				<subreportParameter name="dari">
 					<subreportParameterExpression><![CDATA[$P{tglDari}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -90,54 +87,6 @@ group by kode;]]>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA["/home/damaikurnia/NetBeansProjects/Pak Han/trunk/BumDes/src/Lap/LapLabaRugi_Beban.jasper"]]></subreportExpression>
 			</subreport>
-			<staticText>
-				<reportElement x="20" y="201" width="100" height="16" uuid="145bbbb0-8056-4f52-8c00-86a08d354a6c"/>
-				<textElement>
-					<font fontName="Times New Roman" size="12" isBold="false"/>
-				</textElement>
-				<text><![CDATA[PAJAK]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="20" y="217" width="100" height="16" uuid="38a7dd4b-b38e-4df6-b6c9-48a07511d5c0"/>
-				<textElement>
-					<font fontName="Times New Roman" size="12" isBold="false"/>
-				</textElement>
-				<text><![CDATA[TOTAL BEBAN]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="0" y="233" width="100" height="16" uuid="03e05803-25a4-46eb-a4e0-9b3d13e3e7a5"/>
-				<textElement>
-					<font fontName="Times New Roman" size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[III.LABA BERSIH]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="324" y="201" width="100" height="16" uuid="7f83ba09-b242-4c48-be30-668e6b469494"/>
-				<box>
-					<bottomPen lineWidth="3.0"/>
-				</box>
-				<textElement textAlignment="Right">
-					<font fontName="Times New Roman" size="12"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{pajak}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="455" y="217" width="100" height="16" uuid="aa07f4de-108b-4665-9ef9-e97de2b10274"/>
-				<box>
-					<bottomPen lineWidth="3.0"/>
-				</box>
-				<textElement textAlignment="Right">
-					<font fontName="Times New Roman" size="12"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{totBeban}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="455" y="233" width="100" height="16" uuid="97f5a24e-f7cf-45f4-a2aa-387e3660b7b6"/>
-				<textElement textAlignment="Right">
-					<font fontName="Times New Roman" size="12"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{labaBersih}]]></textFieldExpression>
-			</textField>
 		</band>
 	</columnHeader>
 </jasperReport>

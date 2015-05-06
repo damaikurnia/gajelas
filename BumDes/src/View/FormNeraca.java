@@ -165,6 +165,17 @@ public class FormNeraca extends javax.swing.JFrame {
             }
         });
     }
+    
+    public void catatan(){
+//    AKUMULASI (dilakukan setelah lewat dari tahun di barang);
+//        cara hitungnya = totalaset/tahunsisa;
+//        peralatan kantor = total aset - akumulasi;
+//                1. update tabel barang (tahun sisa -1, dan lakukan sampai tahun sisa = 0);
+        
+//        cara menampilkan akumulasi;
+//        di neraca : cek tanggal hari ini lebih besar dari tahun akumulasi tiap barang;
+//        jika ya -> akumulasikan;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

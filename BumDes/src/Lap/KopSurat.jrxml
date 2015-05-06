@@ -39,100 +39,44 @@
 	<title>
 		<band height="100" splitType="Stretch">
 			<staticText>
-				<reportElement x="155" y="2" width="193" height="20" uuid="a271750b-914d-4271-aa0e-dd7c629b58c5"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[PEMERINTAH KABUPATEN]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="208" y="22" width="99" height="20" uuid="91c4fc64-3eec-405a-8e38-3a5389300a0d"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[KECAMATAN]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="132" y="40" width="399" height="20" uuid="d5d4dca0-5648-477c-bddf-d8e138a120c2"/>
-				<textElement verticalAlignment="Middle">
+				<reportElement x="121" y="40" width="434" height="20" uuid="d5d4dca0-5648-477c-bddf-d8e138a120c2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[BADAN USAHA MILIK DESA PENGELOLAAN AIR BERSIH]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="155" y="60" width="38" height="20" uuid="eac7796a-9eac-4ad1-85b0-baf19ab0d0a8"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Times New Roman"/>
-				</textElement>
-				<text><![CDATA[JL. ]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="180" y="80" width="25" height="20" uuid="b7f62a5e-7248-41ec-8321-6175fd295aeb"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Times New Roman"/>
-				</textElement>
-				<text><![CDATA[Telp.]]></text>
 			</staticText>
 			<image>
 				<reportElement x="2" y="2" width="105" height="98" uuid="39855cbc-82b9-4b84-97ac-eac203219d68"/>
 				<imageExpression><![CDATA["/home/damaikurnia/NetBeansProjects/Pak Han/trunk/BumDes/Gambar/logodesa.jpg"]]></imageExpression>
 			</image>
 			<textField>
-				<reportElement x="348" y="2" width="126" height="20" uuid="bd492475-13bf-44f4-b7dd-e123d432e3cc"/>
-				<textElement verticalAlignment="Middle">
+				<reportElement x="121" y="2" width="434" height="20" uuid="bd492475-13bf-44f4-b7dd-e123d432e3cc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="14" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{kabupaten}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["PEMERINTAH KABUPATEN "+$F{kabupaten}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="307" y="22" width="142" height="20" uuid="4d0313da-4317-4d02-9191-531887227185"/>
-				<textElement verticalAlignment="Middle">
+				<reportElement x="121" y="22" width="434" height="20" uuid="4d0313da-4317-4d02-9191-531887227185"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="14" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{kecamatan}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["KECAMATAN "+$F{kecamatan}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="173" y="60" width="148" height="20" uuid="87021c90-ffa6-42c1-a0f2-8943aa65a509"/>
-				<textElement verticalAlignment="Middle">
+				<reportElement x="121" y="60" width="434" height="20" uuid="87021c90-ffa6-42c1-a0f2-8943aa65a509"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{alamatdesa}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="322" y="60" width="32" height="20" uuid="96e4d3c9-669f-4a07-aa21-4b9d1d1b4a3f"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Times New Roman"/>
-				</textElement>
-				<text><![CDATA[Desa]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="354" y="60" width="95" height="20" uuid="c8d1391f-0b5d-4037-b0e4-54c06d8c0124"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Times New Roman"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{desa}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["JL. "+$F{alamatdesa}+" Desa "+$F{desa}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="205" y="80" width="98" height="20" uuid="9022d4d5-7d3d-4da1-9c12-488b71c5785e"/>
-				<textElement verticalAlignment="Middle">
+				<reportElement x="121" y="80" width="434" height="20" uuid="9022d4d5-7d3d-4da1-9c12-488b71c5785e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{notelp}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Telp. "+$F{notelp}+" Email : "+$F{email}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="333" y="80" width="128" height="20" uuid="098f30a7-1094-4b74-b21b-be0c71677781"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Times New Roman"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="302" y="80" width="31" height="20" uuid="82f821fc-7fcf-4f65-b9a9-22b960db7500"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Times New Roman"/>
-				</textElement>
-				<text><![CDATA[Email :]]></text>
-			</staticText>
 		</band>
 	</title>
 </jasperReport>

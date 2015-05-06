@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="60" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d16b2f45-f645-40f4-97db-132ccce0525a">
-	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="0"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="130" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d16b2f45-f645-40f4-97db-132ccce0525a">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="276"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="dari" class="java.lang.String"/>
 	<parameter name="sampai" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[select a.kode,b.keterangan, sum(a.total) from transaksi a, akun b 
-where a.kode = b.kode and a.tanggaltransaksi between $P{dari} and $P{sampai} and a.kode = '4.1.1'
+		<![CDATA[select a.kode,b.keterangan, sum(a.debit),sum(a.kredit),sum(a.debit)-sum(a.kredit) as 'TOTAL' 
+from trans a, akun b 
+where a.kode = b.kode and a.kode like '4.1.%' and a.tanggaltransaksi between $P{dari} and $P{sampai} 
 group by a.kode;]]>
 	</queryString>
 	<field name="kode" class="java.lang.String">
@@ -16,26 +17,65 @@ group by a.kode;]]>
 	<field name="keterangan" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="sum(a.total)" class="java.math.BigDecimal"/>
+	<field name="sum(a.debit)" class="java.math.BigDecimal"/>
+	<field name="sum(a.kredit)" class="java.math.BigDecimal"/>
+	<field name="TOTAL" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="totalPend" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{TOTAL}]]></variableExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
+	<columnHeader>
+		<band height="16">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="16" uuid="300eb1ae-5bc2-4a72-94c6-7d669c0e382b"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[I.PENDAPATAN]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
 	<detail>
 		<band height="20" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="-20" width="266" height="20" uuid="6598854a-7bfa-4550-b150-8b0570f27edf"/>
+				<reportElement x="0" y="0" width="266" height="20" uuid="6598854a-7bfa-4550-b150-8b0570f27edf"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{keterangan}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="351" y="-20" width="173" height="20" uuid="7dabf652-010f-4594-8960-24e8e5e8f1bb"/>
+				<reportElement x="452" y="0" width="103" height="20" uuid="7dabf652-010f-4594-8960-24e8e5e8f1bb"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{sum(a.total)}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{TOTAL}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
+	<summary>
+		<band height="21">
+			<staticText>
+				<reportElement x="0" y="0" width="142" height="20" uuid="c95f8d5d-7ff7-4881-8e05-5a5017929f1f"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL PENDAPATAN]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="452" y="0" width="103" height="20" uuid="9d8b5e22-79bd-4601-a209-b6c2a9dc4813"/>
+				<box>
+					<topPen lineWidth="3.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalPend}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
 </jasperReport>
