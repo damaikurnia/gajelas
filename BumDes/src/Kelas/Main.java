@@ -15,9 +15,9 @@ import java.util.Date;
 public class Main {
 
     public static void main(String[] args) {
-//        String regex = "[0-9]+";
-//        String data = "2";
-//        System.out.println(data.matches(regex));
+        String regex = "[0-9]+";
+        String data = "2";
+        System.out.println(data.matches(regex));
         
 //        double data = 0.0;
 //        System.out.println(data==0);
@@ -29,8 +29,11 @@ public class Main {
 //        tahun = tahun+1;
 //        System.out.println(tahun);
         
-        String tanggal = Tanggal.getTanggal2();
-        System.out.println(tanggal);
-        System.out.println(tanggal.split("-")[2]+"-"+tanggal.split("-")[1]+"-"+tanggal.split("-")[0]);
+//        String tanggal = Tanggal.getTanggal2();
+//        System.out.println(tanggal);
+//        System.out.println(tanggal.split("-")[2]+"-"+tanggal.split("-")[1]+"-"+tanggal.split("-")[0]);
+//        
+//        String data = "6.1.2";
+//        System.out.println(data.split("\\.")[0]);
     }
 }
