@@ -136,7 +136,6 @@ public class FormTransaksiPengeluaran extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem13 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
@@ -152,7 +151,9 @@ public class FormTransaksiPengeluaran extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem12 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
+        jMenuItem14 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         dialog_pembelian.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -492,16 +493,6 @@ public class FormTransaksiPengeluaran extends javax.swing.JFrame {
         jMenu2.setText("BARANG");
         jMenu2.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
 
-        jMenuItem2.setBackground(java.awt.Color.white);
-        jMenuItem2.setForeground(java.awt.Color.black);
-        jMenuItem2.setText("Registrasi Barang");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem2);
-
         jMenuItem3.setBackground(java.awt.Color.white);
         jMenuItem3.setForeground(java.awt.Color.black);
         jMenuItem3.setText("Pembelian Barang");
@@ -636,6 +627,16 @@ public class FormTransaksiPengeluaran extends javax.swing.JFrame {
         jMenu6.setText("PENGATURAN");
         jMenu6.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
 
+        jMenuItem14.setBackground(java.awt.Color.white);
+        jMenuItem14.setForeground(java.awt.Color.black);
+        jMenuItem14.setText("Investasi Awal");
+        jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem14ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuItem14);
+
         jMenuItem8.setBackground(java.awt.Color.white);
         jMenuItem8.setForeground(java.awt.Color.black);
         jMenuItem8.setText("Profil Desa");
@@ -645,6 +646,16 @@ public class FormTransaksiPengeluaran extends javax.swing.JFrame {
             }
         });
         jMenu6.add(jMenuItem8);
+
+        jMenuItem2.setBackground(java.awt.Color.white);
+        jMenuItem2.setForeground(java.awt.Color.black);
+        jMenuItem2.setText("Pengaturan Persentase Laba Bersih");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuItem2);
 
         jMenuBar1.add(jMenu6);
 
@@ -744,14 +755,8 @@ public class FormTransaksiPengeluaran extends javax.swing.JFrame {
         a.setVisible(true);
     }//GEN-LAST:event_jMenu1MouseClicked
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        FormBarang a = new FormBarang();
-        this.setVisible(false);
-        a.setVisible(true);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
-
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        FormTransaksiPembelian a = new FormTransaksiPembelian();
+        FormBarang a = new FormBarang();
         this.setVisible(false);
         a.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
@@ -814,11 +819,22 @@ public class FormTransaksiPengeluaran extends javax.swing.JFrame {
         a.setVisible(true);
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
+    private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
+        FormInvesAwal a = new FormInvesAwal();
+        a.setVisible(true);
+    }//GEN-LAST:event_jMenuItem14ActionPerformed
+
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         FormPengaturan a = new FormPengaturan();
         this.setVisible(false);
         a.setVisible(true);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        FormSHU a = new FormSHU();
+        this.setVisible(false);
+        a.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     public void update() {
         try {
@@ -835,7 +851,7 @@ public class FormTransaksiPengeluaran extends javax.swing.JFrame {
                     Transaksi trans = new Transaksi();
                     String tanggal[] = Tanggal.getTanggal2().split("-");
                     trans.setNoTrans(pen.get(i).getKode() + "-" + tanggal[0] + tanggal[1]);
-                    trans.setIdBarang(new Barang(pen.get(i).getKode(), pen.get(i).getNamaPengeluaran(), i, i, ""));
+                    trans.setIdBarang(new Barang(pen.get(i).getKode(), pen.get(i).getNamaPengeluaran(), i, i, kodeAkun, kodeAkun, kodeAkun, i));
                     trans.setIdAnggota(new Anggota("-", null, null, null, null, null, i, i, null, null, null, null, null));
                     trans.setTanggalTransaksi(Tanggal.getTanggal2());
                     trans.setJenisTransaksi("PENGELUARAN");
@@ -871,7 +887,7 @@ public class FormTransaksiPengeluaran extends javax.swing.JFrame {
                         Transaksi trans = new Transaksi();
                         String tanggal[] = Tanggal.getTanggal2().split("-");
                         trans.setNoTrans(pen.get(i).getKode() + "-" + tanggal[0] + tanggal[1]);
-                        trans.setIdBarang(new Barang(pen.get(i).getKode(), pen.get(i).getNamaPengeluaran(), i, i, ""));
+                        trans.setIdBarang(new Barang(pen.get(i).getKode(), pen.get(i).getNamaPengeluaran(), i, i, null, null, null, i));
                         trans.setIdAnggota(new Anggota("-", null, null, null, null, null, i, i, null, null, null, null, null));
                         trans.setTanggalTransaksi(Tanggal.getTanggal2());
                         trans.setJenisTransaksi("PENGELUARAN");
@@ -1107,6 +1123,7 @@ public class FormTransaksiPengeluaran extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
+    private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;

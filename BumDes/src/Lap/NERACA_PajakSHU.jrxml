@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="380" pageHeight="180" columnWidth="340" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5d1a033c-b65b-4b27-b8a9-251a881f6d93">
+	<property name="ireport.zoom" value="3.0"/>
+	<property name="ireport.x" value="218"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="labaBersih" class="java.lang.String"/>
+	<parameter name="pajak" class="java.lang.String"/>
+	<parameter name="total" class="java.lang.String"/>
+	<parameter name="shu" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select a.kode, a.keterangan, ($P{labaBersih}*(b.persen/100)) as 'isi' 
+from akun a, shu b
+where a.kode = b.kode and a.kode like '3.2.%';]]>
+	</queryString>
+	<field name="kode" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="keterangan" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="isi" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="14">
+			<staticText>
+				<reportElement x="0" y="0" width="218" height="14" uuid="4afb1c4f-4c94-4ec4-a18d-d073447e89a7"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[PAJAK]]></text>
+			</staticText>
+			<textField pattern="#,###">
+				<reportElement x="240" y="0" width="100" height="14" uuid="85c330aa-2e04-495e-aba4-425d288dec09"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{pajak}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="14">
+			<textField>
+				<reportElement x="0" y="0" width="218" height="14" uuid="40ad5024-0281-4894-a2fc-accb9607421b"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{keterangan}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,###">
+				<reportElement x="240" y="0" width="100" height="14" uuid="e1430289-981d-4d40-92fd-76f715c33fd3"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{isi}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="28" splitType="Stretch">
+			<staticText>
+				<reportElement x="153" y="14" width="87" height="14" uuid="ec53f6bb-bd4b-4efc-af2a-6ef04eeb4aaf"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SUBTOTAL Rp.]]></text>
+			</staticText>
+			<textField pattern="#,###">
+				<reportElement x="240" y="14" width="100" height="14" uuid="a22ed13e-67da-4edc-bd94-459c4dce2a18"/>
+				<box>
+					<pen lineStyle="Double"/>
+					<topPen lineWidth="2.0" lineStyle="Double"/>
+					<leftPen lineStyle="Double"/>
+					<bottomPen lineStyle="Double"/>
+					<rightPen lineStyle="Double"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{total}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,###">
+				<reportElement x="240" y="0" width="100" height="14" uuid="06dbdc0e-37d5-4377-8445-f950a5d2decc"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{shu}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="218" height="14" uuid="e7724074-8e26-41f1-be68-90fc8c3e4e70"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[SHU]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

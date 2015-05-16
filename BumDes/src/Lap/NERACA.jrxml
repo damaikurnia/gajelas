@@ -2,52 +2,20 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="abbe7cfd-95fa-468a-9a69-cff438fb7f21">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="12"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="tglDari" class="java.lang.String"/>
+	<parameter name="tglSampai" class="java.lang.String"/>
+	<parameter name="shu_lababersih" class="java.lang.String"/>
+	<parameter name="shu_pajak" class="java.lang.String"/>
+	<parameter name="shu_total" class="java.lang.String"/>
+	<parameter name="total_aktiva" class="java.lang.String"/>
+	<parameter name="total_pasiva" class="java.lang.String"/>
+	<parameter name="aktivalancar_kas" class="java.lang.String"/>
+	<parameter name="shu_shu" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[SELECT * FROM anggota;]]>
+		<![CDATA[SELECT count(kode) FROM akun;]]>
 	</queryString>
-	<field name="idanggota" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="namaanggota" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="pekerjaan" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="alamat" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="telp" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="noKTP" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="rt" class="java.lang.Integer">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="rw" class="java.lang.Integer">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="dusun" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="desa" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="kota" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="provinsi" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="kecamatan" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="logo" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
+	<field name="count(kode)" class="java.lang.Long"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -75,35 +43,132 @@
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="319">
+		<band height="20">
+			<staticText>
+				<reportElement x="21" y="0" width="363" height="20" uuid="1d2d74cc-1871-49e6-9f6e-3caa2e79de0f"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[AKTIVA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="431" y="0" width="362" height="20" uuid="b4f87496-7e6c-4805-a0a5-5b8311a92280"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PASIVA]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="275">
 			<subreport>
-				<reportElement x="0" y="0" width="384" height="100" uuid="ec057a8c-cdb3-42a8-a416-f28b97303685"/>
+				<reportElement x="0" y="0" width="384" height="100" uuid="5edb2b97-322c-4cd9-a052-6b2d76303e0f"/>
+				<subreportParameter name="tDari">
+					<subreportParameterExpression><![CDATA[$P{tglDari}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="kas">
+					<subreportParameterExpression><![CDATA[$P{aktivalancar_kas}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="tSampai">
+					<subreportParameterExpression><![CDATA[$P{tglSampai}]]></subreportParameterExpression>
+				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA["/home/damaikurnia/NetBeansProjects/Pak Han/trunk/BumDes/src/Lap/NERACA_AktivaLancar.jasper"]]></subreportExpression>
 			</subreport>
 			<subreport>
-				<reportElement x="0" y="114" width="384" height="100" uuid="38790abc-6309-434a-8400-d882dc0f01de"/>
+				<reportElement x="0" y="118" width="384" height="100" uuid="9f398830-e48b-4c44-801b-655e2582bc71"/>
+				<subreportParameter name="tDari">
+					<subreportParameterExpression><![CDATA[$P{tglDari}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="tSampai">
+					<subreportParameterExpression><![CDATA[$P{tglSampai}]]></subreportParameterExpression>
+				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA["/home/damaikurnia/NetBeansProjects/Pak Han/trunk/BumDes/src/Lap/NERACA_AktivaTetap.jasper"]]></subreportExpression>
 			</subreport>
 			<subreport>
-				<reportElement x="409" y="0" width="381" height="58" uuid="b16b8ef0-3071-4226-b221-f74756e866ce"/>
+				<reportElement x="416" y="0" width="377" height="28" uuid="5c031667-abfb-42e8-b785-2e4fea36ad2d"/>
+				<subreportParameter name="tDari">
+					<subreportParameterExpression><![CDATA[$P{tglDari}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="tSampai">
+					<subreportParameterExpression><![CDATA[$P{tglSampai}]]></subreportParameterExpression>
+				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA["/home/damaikurnia/NetBeansProjects/Pak Han/trunk/BumDes/src/Lap/NERACA_Modal.jasper"]]></subreportExpression>
 			</subreport>
 			<subreport>
-				<reportElement x="409" y="70" width="381" height="62" uuid="6082886f-bdf8-40ea-89ac-f060d8ac102f"/>
+				<reportElement x="416" y="138" width="377" height="59" uuid="5d9260db-5165-40f1-9e54-fd1dde72a04d"/>
+				<subreportParameter name="tDari">
+					<subreportParameterExpression><![CDATA[$P{tglDari}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="tSampai">
+					<subreportParameterExpression><![CDATA[$P{tglSampai}]]></subreportParameterExpression>
+				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA["/home/damaikurnia/NetBeansProjects/Pak Han/trunk/BumDes/src/Lap/NERACA_KewajibanLancar.jasper"]]></subreportExpression>
 			</subreport>
 			<subreport>
-				<reportElement x="409" y="143" width="381" height="100" uuid="6509b2f2-721d-458e-a6b1-d20bba0d49f6"/>
+				<reportElement x="416" y="197" width="377" height="75" uuid="8ce046ae-8ce9-4269-be14-439330ca566b"/>
+				<subreportParameter name="tDari">
+					<subreportParameterExpression><![CDATA[$P{tglDari}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="tSampai">
+					<subreportParameterExpression><![CDATA[$P{tglSampai}]]></subreportParameterExpression>
+				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA["/home/damaikurnia/NetBeansProjects/Pak Han/trunk/BumDes/src/Lap/NERACA_KewajibanTetap.jasper"]]></subreportExpression>
 			</subreport>
+			<subreport>
+				<reportElement x="416" y="28" width="377" height="100" uuid="43311e46-fb0e-413d-a3e8-7672d8908180"/>
+				<subreportParameter name="total">
+					<subreportParameterExpression><![CDATA[$P{shu_total}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="shu">
+					<subreportParameterExpression><![CDATA[$P{shu_shu}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="pajak">
+					<subreportParameterExpression><![CDATA[$P{shu_pajak}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="labaBersih">
+					<subreportParameterExpression><![CDATA[$P{shu_lababersih}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["/home/damaikurnia/NetBeansProjects/Pak Han/trunk/BumDes/src/Lap/NERACA_PajakSHU.jasper"]]></subreportExpression>
+			</subreport>
 		</band>
-	</columnHeader>
+	</detail>
 	<summary>
-		<band height="42" splitType="Stretch"/>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="21" y="0" width="100" height="20" uuid="42a1c6e3-41d5-45d8-b2e1-e94ed8a6bf97"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL AKTIVA]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="244" y="0" width="100" height="20" uuid="5e6e8542-75cd-43e8-ae7c-a9519957faa3"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{total_aktiva}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="431" y="0" width="100" height="20" uuid="2373a4fb-de27-46d3-8acc-db59c252d743"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL PASIVA]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="664" y="0" width="114" height="20" uuid="91c22732-68cf-4a26-8088-78193f34ff76"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{total_pasiva}]]></textFieldExpression>
+			</textField>
+		</band>
 	</summary>
 </jasperReport>

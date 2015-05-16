@@ -18,9 +18,9 @@
 	<title>
 		<band height="100" splitType="Stretch">
 			<subreport>
-				<reportElement x="0" y="0" width="555" height="100" uuid="d9d9dadd-ab85-4b86-97db-730fbf6c843a"/>
+				<reportElement x="-21" y="0" width="597" height="100" uuid="30760933-e476-49f1-b647-643774165302"/>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression><![CDATA["/home/damaikurnia/NetBeansProjects/trunk/BumDes/src/Lap/KopSurat.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA["/home/damaikurnia/NetBeansProjects/Pak Han/trunk/BumDes/src/Lap/KopSurat.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 	</title>

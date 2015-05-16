@@ -36,25 +36,36 @@ public class KeluhanKontrol {
     public void updateKeluhan(Keluhan kel) throws SQLException {
         PreparedStatement stmt = null;
         conn.setAutoCommit(false);
-        String query = "update keluhan set idanggota = ?, keterangan = ?,"
-                + "tglpelaksanaan = ?, status = ? where idkeluhan = ?";
+        String query = "update keluhan set idanggota = ?, keterangan = ? where idkeluhan = ?";
         stmt = conn.prepareStatement(query);
         stmt.setString(1, kel.getIdAnggota().getIdAnggota());
         stmt.setString(2, kel.getKeterangan());
-        stmt.setString(3, kel.getTglPelaksanaan());
-        stmt.setString(4, kel.getStatus());
-        stmt.setString(5, kel.getIdKeluhan());
+        stmt.setString(3, kel.getIdKeluhan());
+
+        stmt.executeUpdate();
+        conn.commit();
+        conn.close();
+    }
+    
+    public void updateKeluhanSelesai(Keluhan kel) throws SQLException {
+        PreparedStatement stmt = null;
+        conn.setAutoCommit(false);
+        String query = "update keluhan set status = ?, tglpelaksanaan = ? where idkeluhan = ?";
+        stmt = conn.prepareStatement(query);
+        stmt.setString(1, kel.getStatus());
+        stmt.setString(2, kel.getTglPelaksanaan());
+        stmt.setString(3, kel.getIdKeluhan());
 
         stmt.executeUpdate();
         conn.commit();
         conn.close();
     }
 
-    public List<Keluhan> selectKeluhan() throws SQLException {
+    public List<Keluhan> selectKeluhanbelum() throws SQLException {
         PreparedStatement stmt = null;
         ResultSet result = null;
         conn.setAutoCommit(false);
-        String query = "SELECT * from keluhan where tglpelaksanaan > sysdate() OR status = 'BELUM' order by tglpelaksanaan";
+        String query = "SELECT * from keluhan where status = 'BELUM'";
         stmt = conn.prepareStatement(query);
         result = stmt.executeQuery();
         List<Keluhan> agt = new ArrayList<Keluhan>();
@@ -101,35 +112,34 @@ public class KeluhanKontrol {
     public void insertKeluhan(Keluhan kel) throws SQLException {
         PreparedStatement stmt = null;
         conn.setAutoCommit(false);
-        String query = "INSERT INTO keluhan VALUES(?,?,?,?,?)";
+        String query = "INSERT INTO keluhan(idkeluhan,idanggota,keterangan, status) VALUES(?,?,?,?)";
         stmt = conn.prepareStatement(query);
         stmt.setString(1, kel.getIdKeluhan());
         stmt.setString(2, kel.getIdAnggota().getIdAnggota());
         stmt.setString(3, kel.getKeterangan());
-        stmt.setString(4, kel.getTglPelaksanaan());
-        stmt.setString(5, kel.getStatus());
+        stmt.setString(4, "BELUM");
 
         stmt.executeUpdate();
         conn.commit();
         conn.close();
     }
 
-    public String cariIdKeluhan(Keluhan kel) throws SQLException {
-        PreparedStatement stmt = null;
-        ResultSet result = null;
-        conn.setAutoCommit(false);
-        String query = "SELECT * from keluhan where keterangan = ? AND idanggota = ? AND tglpelaksanaan = ?";
-        stmt = conn.prepareStatement(query);
-        stmt.setString(1, kel.getKeterangan());
-        stmt.setString(2, kel.getIdAnggota().getIdAnggota());
-        stmt.setString(3, kel.getTglPelaksanaan());
-        result = stmt.executeQuery();
-        String agt = "";
-        while (result.next()) {
-            agt = result.getString(1);
-        }
-        conn.close();
-        return agt;
-    }
+//    public String cariIdKeluhan(Keluhan kel) throws SQLException {
+//        PreparedStatement stmt = null;
+//        ResultSet result = null;
+//        conn.setAutoCommit(false);
+//        String query = "SELECT * from keluhan where keterangan = ? AND idanggota = ? AND tglpelaksanaan = ?";
+//        stmt = conn.prepareStatement(query);
+//        stmt.setString(1, kel.getKeterangan());
+//        stmt.setString(2, kel.getIdAnggota().getIdAnggota());
+//        stmt.setString(3, kel.getTglPelaksanaan());
+//        result = stmt.executeQuery();
+//        String agt = "";
+//        while (result.next()) {
+//            agt = result.getString(1);
+//        }
+//        conn.close();
+//        return agt;
+//    }
 
 }

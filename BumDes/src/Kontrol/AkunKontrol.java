@@ -105,4 +105,20 @@ public class AkunKontrol {
         conn.close();
         return shu;
     }
+
+    public int persenPajak() throws SQLException {//tampil total beban laba rugi
+        PreparedStatement stmt = null;
+        ResultSet result = null;
+        conn.setAutoCommit(false);
+        String query = "select persen from shu "
+                + "where kode = '5.2.1';";
+        stmt = conn.prepareStatement(query);
+        result = stmt.executeQuery();
+        int persen = 0;
+        while (result.next()) {
+            persen = result.getInt(1);
+        }
+        conn.close();
+        return persen;
+    }
 }

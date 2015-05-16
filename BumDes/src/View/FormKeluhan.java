@@ -7,11 +7,9 @@ package View;
 
 import Custom.Tanggal;
 import Kelas.Anggota;
-import Kelas.Barang;
 import Kelas.Keluhan;
 import Kelas.Profil;
 import Kontrol.AnggotaKontrol;
-import Kontrol.BarangKontrol;
 import Kontrol.KeluhanKontrol;
 import Kontrol.PengaturanKontrol;
 import TabelModel.AnggotaTM;
@@ -21,9 +19,6 @@ import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -50,6 +45,11 @@ public class FormKeluhan extends javax.swing.JFrame {
         dialog_cariP.setLocationRelativeTo(null);
         dialog_cariP.setTitle("DATA PELANGGAN");
 
+        dialog_keluhan.setVisible(false);
+        dialog_keluhan.setSize(675, 420);
+        dialog_keluhan.setLocationRelativeTo(null);
+        dialog_keluhan.setTitle("STATUS KELUHAN");
+
 //        buatIDbaru();
         sinkronGambar();
 //        text_kode.setEditable(false);
@@ -72,6 +72,21 @@ public class FormKeluhan extends javax.swing.JFrame {
         text_key = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabel_pelanggan = new javax.swing.JTable();
+        dialog_keluhan = new javax.swing.JDialog();
+        jPanel9 = new javax.swing.JPanel();
+        jPanel10 = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tabel_keluhan2 = new javax.swing.JTable();
+        button_selesai = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        text_kodeD = new javax.swing.JTextField();
+        label_statusD = new javax.swing.JLabel();
+        text_namaD = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        text_keteranganD = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -82,22 +97,20 @@ public class FormKeluhan extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         button_simpan = new javax.swing.JButton();
         button_hapus = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         button_batal = new javax.swing.JButton();
-        date_tgl = new com.toedter.calendar.JDateChooser();
         text_kode = new javax.swing.JLabel();
         text_anggota = new javax.swing.JTextField();
         button_cariAgt = new javax.swing.JButton();
         text_keterangan = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         tabel_keluhan = new javax.swing.JTable();
+        button_statusKeluhan = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem13 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
@@ -113,7 +126,9 @@ public class FormKeluhan extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem12 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
+        jMenuItem14 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         dialog_cariP.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -161,6 +176,81 @@ public class FormKeluhan extends javax.swing.JFrame {
         jPanel7.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 620, 210));
 
         dialog_cariP.getContentPane().add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 380));
+
+        dialog_keluhan.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel16.setText("DATA PELANGGAN");
+        jPanel10.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 640, 40));
+
+        jPanel9.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 70));
+
+        tabel_keluhan2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tabel_keluhan2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabel_keluhan2MouseClicked(evt);
+            }
+        });
+        jScrollPane4.setViewportView(tabel_keluhan2);
+
+        jPanel9.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 640, 140));
+
+        button_selesai.setFont(new java.awt.Font("Cantarell", 1, 18)); // NOI18N
+        button_selesai.setText("SELESAI DILAKSANAKAN");
+        button_selesai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_selesaiActionPerformed(evt);
+            }
+        });
+        jPanel9.add(button_selesai, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 640, 40));
+
+        jLabel2.setFont(new java.awt.Font("Cantarell", 1, 15)); // NOI18N
+        jLabel2.setText("KODE");
+        jPanel9.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, 20));
+
+        text_kodeD.setEditable(false);
+        jPanel9.add(text_kodeD, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 100, -1));
+
+        label_statusD.setFont(new java.awt.Font("Cantarell", 1, 18)); // NOI18N
+        label_statusD.setText("<<STATUS>>");
+        jPanel9.add(label_statusD, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 80, 110, 20));
+
+        text_namaD.setEditable(false);
+        jPanel9.add(text_namaD, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 230, -1));
+
+        jLabel7.setFont(new java.awt.Font("Cantarell", 1, 15)); // NOI18N
+        jLabel7.setText("NAMA");
+        jPanel9.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, 20));
+
+        jLabel8.setFont(new java.awt.Font("Cantarell", 1, 18)); // NOI18N
+        jLabel8.setText("STATUS");
+        jPanel9.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 80, -1, 20));
+
+        jLabel10.setFont(new java.awt.Font("Cantarell", 1, 15)); // NOI18N
+        jLabel10.setText("KETERANGAN");
+        jPanel9.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, 20));
+
+        text_keteranganD.setEditable(false);
+        jPanel9.add(text_keteranganD, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 140, 480, -1));
+
+        dialog_keluhan.getContentPane().add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 380));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -220,9 +310,7 @@ public class FormKeluhan extends javax.swing.JFrame {
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("KODE");
 
-        jLabel7.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel7.setText("TGL PELAKSANAAN");
-
+        button_simpan.setFont(new java.awt.Font("Cantarell", 1, 18)); // NOI18N
         button_simpan.setText("SIMPAN");
         button_simpan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -230,6 +318,7 @@ public class FormKeluhan extends javax.swing.JFrame {
             }
         });
 
+        button_hapus.setFont(new java.awt.Font("Cantarell", 1, 18)); // NOI18N
         button_hapus.setText("HAPUS");
         button_hapus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -241,15 +330,13 @@ public class FormKeluhan extends javax.swing.JFrame {
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("ANGGOTA");
 
+        button_batal.setFont(new java.awt.Font("Cantarell", 1, 18)); // NOI18N
         button_batal.setText("BATAL");
         button_batal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 button_batalActionPerformed(evt);
             }
         });
-
-        date_tgl.setDateFormatString("dd-MM-yyyy");
-        date_tgl.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         text_kode.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         text_kode.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -291,23 +378,23 @@ public class FormKeluhan extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(tabel_keluhan);
 
+        button_statusKeluhan.setFont(new java.awt.Font("Cantarell", 1, 18)); // NOI18N
+        button_statusKeluhan.setText("STATUS KELUHAN");
+        button_statusKeluhan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_statusKeluhanActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(218, 218, 218)
-                .addComponent(button_simpan)
-                .addGap(18, 18, 18)
-                .addComponent(button_hapus)
-                .addGap(18, 18, 18)
-                .addComponent(button_batal)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane3)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 712, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -322,12 +409,16 @@ public class FormKeluhan extends javax.swing.JFrame {
                                 .addComponent(button_cariAgt, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
-                            .addComponent(text_keterangan))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(date_tgl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(text_keterangan)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(button_simpan, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(button_hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(button_batal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(button_statusKeluhan, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -336,30 +427,25 @@ public class FormKeluhan extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addComponent(jLabel5)
                 .addGap(32, 32, 32)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(date_tgl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(text_kode, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(button_cariAgt, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
-                            .addComponent(text_anggota, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(text_keterangan, javax.swing.GroupLayout.Alignment.LEADING))))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(button_hapus)
-                    .addComponent(button_simpan)
-                    .addComponent(button_batal))
-                .addGap(25, 25, 25))
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(text_kode, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(button_cariAgt, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                    .addComponent(text_anggota, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(text_keterangan, javax.swing.GroupLayout.Alignment.LEADING))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(button_simpan, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                    .addComponent(button_hapus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(button_batal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(button_statusKeluhan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -390,16 +476,6 @@ public class FormKeluhan extends javax.swing.JFrame {
         jMenu2.setBackground(java.awt.Color.black);
         jMenu2.setText("BARANG");
         jMenu2.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-
-        jMenuItem2.setBackground(java.awt.Color.white);
-        jMenuItem2.setForeground(java.awt.Color.black);
-        jMenuItem2.setText("Registrasi Barang");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem2);
 
         jMenuItem3.setBackground(java.awt.Color.white);
         jMenuItem3.setForeground(java.awt.Color.black);
@@ -535,6 +611,16 @@ public class FormKeluhan extends javax.swing.JFrame {
         jMenu6.setText("PENGATURAN");
         jMenu6.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
 
+        jMenuItem14.setBackground(java.awt.Color.white);
+        jMenuItem14.setForeground(java.awt.Color.black);
+        jMenuItem14.setText("Investasi Awal");
+        jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem14ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuItem14);
+
         jMenuItem8.setBackground(java.awt.Color.white);
         jMenuItem8.setForeground(java.awt.Color.black);
         jMenuItem8.setText("Profil Desa");
@@ -544,6 +630,16 @@ public class FormKeluhan extends javax.swing.JFrame {
             }
         });
         jMenu6.add(jMenuItem8);
+
+        jMenuItem2.setBackground(java.awt.Color.white);
+        jMenuItem2.setForeground(java.awt.Color.black);
+        jMenuItem2.setText("Pengaturan Persentase Laba Bersih");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuItem2);
 
         jMenuBar1.add(jMenu6);
 
@@ -564,48 +660,40 @@ public class FormKeluhan extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void button_simpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_simpanActionPerformed
-        if (Tanggal.getTanggal2().compareTo(new SimpleDateFormat("yyyy-MM-dd").format(date_tgl.getDate())) == -1||
-                Tanggal.getTanggal2().compareTo(new SimpleDateFormat("yyyy-MM-dd").format(date_tgl.getDate())) == 0) {//tanggal = tgl skrg
-            if (button_simpan.getText().equals("SIMPAN")) {
-                try {
-                    Keluhan kel = new Keluhan();
-                    kel.setIdKeluhan(text_kode.getText());
-                    kel.setIdAnggota(new Anggota(text_anggota.getText().split("-")[0], null, null, null, null, null, WIDTH, WIDTH, null, null, null, null, null));
-                    kel.setKeterangan(text_keterangan.getText());
-                    kel.setTglPelaksanaan(new SimpleDateFormat("yyyy-MM-dd").format(date_tgl.getDate()));
-                    kel.setStatus("BELUM");
+        if (button_simpan.getText().equals("SIMPAN")) {
+            try {
+                Keluhan kel = new Keluhan();
+                kel.setIdKeluhan(text_kode.getText());
+                kel.setIdAnggota(new Anggota(text_anggota.getText().split("-")[0], null, null, null, null, null, WIDTH, WIDTH, null, null, null, null, null));
+                kel.setKeterangan(text_keterangan.getText());
+                kel.setStatus("BELUM");
 
-                    KeluhanKontrol.getKoneksi().insertKeluhan(kel);
-                    JOptionPane.showMessageDialog(null, "Informasi keluhan berhasil ditambahkan");
-                    resetDefault();
-                } catch (SQLException ex) {
-                    Logger.getLogger(FormKeluhan.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            } else {
-                try {
-                    Keluhan kel = new Keluhan();
-                    kel.setIdKeluhan(text_kode.getText());
-                    kel.setIdAnggota(new Anggota(text_anggota.getText().split("-")[0], null, null, null, null, null, WIDTH, WIDTH, null, null, null, null, null));
-                    kel.setKeterangan(text_keterangan.getText());
-                    kel.setTglPelaksanaan(new SimpleDateFormat("yyyy-MM-dd").format(date_tgl.getDate()));
-                    kel.setStatus("BELUM");
-                    KeluhanKontrol.getKoneksi().updateKeluhan(kel);
-                    JOptionPane.showMessageDialog(null, "Informasi keluhan berhasil dirubah");
-                    resetDefault();
-                } catch (SQLException ex) {
-                    Logger.getLogger(FormKeluhan.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                KeluhanKontrol.getKoneksi().insertKeluhan(kel);
+                JOptionPane.showMessageDialog(null, "Informasi keluhan berhasil ditambahkan");
+                resetDefault();
+            } catch (SQLException ex) {
+                Logger.getLogger(FormKeluhan.class.getName()).log(Level.SEVERE, null, ex);
             }
-            update();
-        } else {
-            JOptionPane.showMessageDialog(null, "Tanggal yang anda masukkan tidak valid. Tgl pelaksanaan harus lebih dari tanggal hari ini");
+        } else {//update
+            try {
+                Keluhan kel = new Keluhan();
+                kel.setIdKeluhan(text_kode.getText());
+                kel.setIdAnggota(new Anggota(text_anggota.getText().split("-")[0], null, null, null, null, null, WIDTH, WIDTH, null, null, null, null, null));
+                kel.setKeterangan(text_keterangan.getText());
+                KeluhanKontrol.getKoneksi().updateKeluhan(kel);
+                JOptionPane.showMessageDialog(null, "Informasi keluhan berhasil dirubah");
+                resetDefault();
+            } catch (SQLException ex) {
+                Logger.getLogger(FormKeluhan.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+        update();
     }//GEN-LAST:event_button_simpanActionPerformed
 
     private void button_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_hapusActionPerformed
         try {
-            Barang brg = new Barang(text_kode.getText(), null, WIDTH, WIDTH,"");
-            BarangKontrol.getKoneksi().deleteBarang(brg);
+            Keluhan brg = new Keluhan(text_kode.getText(), null, null, null, null);
+            KeluhanKontrol.getKoneksi().deleteKeluhan(brg);
             resetDefault();
             update();
             JOptionPane.showMessageDialog(null, "Informasi keluhan berhasil dihapus");
@@ -627,22 +715,20 @@ public class FormKeluhan extends javax.swing.JFrame {
     }//GEN-LAST:event_text_keteranganKeyReleased
 
     private void tabel_keluhanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabel_keluhanMouseClicked
-        try {
-            int row1 = tabel_keluhan.getSelectedRow();
+        int row1 = tabel_keluhan.getSelectedRow();
+        if (tabel_keluhan.getValueAt(row1, 3).toString().equals("SUDAH")) {
+            JOptionPane.showMessageDialog(null, "Anda tidak dapat merubah data ini!");
+        } else {
             Keluhan kel = new Keluhan();
             kel.setIdAnggota(new Anggota(tabel_keluhan.getValueAt(row1, 1).toString().split("-")[0]));
             kel.setKeterangan(tabel_keluhan.getValueAt(row1, 2).toString());
-            String tgl[] = tabel_keluhan.getValueAt(row1, 0).toString().split("-");
-            kel.setTglPelaksanaan(tgl[2] + "-" + tgl[1] + "-" + tgl[0]);
-            kel.setIdKeluhan(KeluhanKontrol.getKoneksi().cariIdKeluhan(kel));
+            kel.setIdKeluhan(tabel_keluhan.getValueAt(row1, 0).toString());
 
             text_kode.setText(kel.getIdKeluhan());
             text_anggota.setText(tabel_keluhan.getValueAt(row1, 1).toString());
             text_keterangan.setText(kel.getKeterangan());
 //            date_tgl.setDateFormatString(tabel_keluhan.getValueAt(row1, 0).toString());
             customnya();
-        } catch (SQLException ex) {
-            Logger.getLogger(FormKeluhan.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_tabel_keluhanMouseClicked
 
@@ -667,20 +753,42 @@ public class FormKeluhan extends javax.swing.JFrame {
         dialog_cariP.setVisible(true);
     }//GEN-LAST:event_button_cariAgtActionPerformed
 
+    private void button_statusKeluhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_statusKeluhanActionPerformed
+        defaultDialog();
+        updateBlm();
+        dialog_keluhan.setVisible(true);
+    }//GEN-LAST:event_button_statusKeluhanActionPerformed
+
+    private void tabel_keluhan2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabel_keluhan2MouseClicked
+        int row1 = tabel_keluhan2.getSelectedRow();
+        text_kodeD.setText(tabel_keluhan2.getValueAt(row1, 0).toString());
+        text_namaD.setText(tabel_keluhan2.getValueAt(row1, 1).toString());
+        text_keteranganD.setText(tabel_keluhan2.getValueAt(row1, 2).toString());
+        label_statusD.setText(tabel_keluhan2.getValueAt(row1, 3).toString());
+        button_selesai.setEnabled(true);
+    }//GEN-LAST:event_tabel_keluhan2MouseClicked
+
+    private void button_selesaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_selesaiActionPerformed
+        try {
+            Keluhan kel = new Keluhan(text_kodeD.getText(), null, null, Tanggal.getTanggal2(), "SUDAH");
+            KeluhanKontrol.getKoneksi().updateKeluhanSelesai(kel);
+            JOptionPane.showMessageDialog(null, "Keluhan berhasil diupdate");
+            updateBlm();
+            defaultDialog();
+            update();
+        } catch (SQLException ex) {
+            Logger.getLogger(FormKeluhan.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_button_selesaiActionPerformed
+
     private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
         FormAir a = new FormAir();
         this.setVisible(false);
         a.setVisible(true);
     }//GEN-LAST:event_jMenu1MouseClicked
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        FormBarang a = new FormBarang();
-        this.setVisible(false);
-        a.setVisible(true);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
-
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        FormTransaksiPembelian a = new FormTransaksiPembelian();
+        FormBarang a = new FormBarang();
         this.setVisible(false);
         a.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
@@ -743,15 +851,36 @@ public class FormKeluhan extends javax.swing.JFrame {
         a.setVisible(true);
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
+    private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
+        FormInvesAwal a = new FormInvesAwal();
+        a.setVisible(true);
+    }//GEN-LAST:event_jMenuItem14ActionPerformed
+
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         FormPengaturan a = new FormPengaturan();
         this.setVisible(false);
         a.setVisible(true);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        FormSHU a = new FormSHU();
+        this.setVisible(false);
+        a.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    public void updateBlm() {
+        try {
+            List<Keluhan> kel = KeluhanKontrol.getKoneksi().selectKeluhanbelum();
+            KeluhanTM model = new KeluhanTM(kel);
+            tabel_keluhan2.setModel(model);
+        } catch (SQLException ex) {
+            Logger.getLogger(FormKeluhan.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     public void update() {
         try {
-            List<Keluhan> kel = KeluhanKontrol.getKoneksi().selectKeluhan();
+            List<Keluhan> kel = KeluhanKontrol.getKoneksi().selectKeluhanAll();
             KeluhanTM model = new KeluhanTM(kel);
             tabel_keluhan.setModel(model);
 
@@ -767,8 +896,6 @@ public class FormKeluhan extends javax.swing.JFrame {
         button_hapus.setEnabled(false);
         text_anggota.setText("");
         text_keterangan.setText("");
-        GregorianCalendar gc = new GregorianCalendar();
-        date_tgl.setDate(gc.getTime());
     }
 
     public void customnya() {
@@ -807,7 +934,6 @@ public class FormKeluhan extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(FormKeluhan.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
     /**
@@ -856,16 +982,22 @@ public class FormKeluhan extends javax.swing.JFrame {
     private javax.swing.JButton button_batal;
     private javax.swing.JButton button_cariAgt;
     private javax.swing.JButton button_hapus;
+    private javax.swing.JButton button_selesai;
     private javax.swing.JButton button_simpan;
-    private com.toedter.calendar.JDateChooser date_tgl;
+    private javax.swing.JButton button_statusKeluhan;
     private javax.swing.JDialog dialog_cariP;
+    private javax.swing.JDialog dialog_keluhan;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -879,6 +1011,7 @@ public class FormKeluhan extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
+    private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
@@ -888,21 +1021,29 @@ public class FormKeluhan extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JLabel label_alamatNotelp;
     private javax.swing.JLabel label_kop;
     private javax.swing.JLabel label_namaDesa;
+    private javax.swing.JLabel label_statusD;
     private javax.swing.JTable tabel_keluhan;
+    private javax.swing.JTable tabel_keluhan2;
     private javax.swing.JTable tabel_pelanggan;
     private javax.swing.JTextField text_anggota;
     private javax.swing.JTextField text_keterangan;
+    private javax.swing.JTextField text_keteranganD;
     private javax.swing.JTextField text_key;
     private javax.swing.JLabel text_kode;
+    private javax.swing.JTextField text_kodeD;
+    private javax.swing.JTextField text_namaD;
     // End of variables declaration//GEN-END:variables
 
     private void buatIDbaru() {
@@ -931,5 +1072,13 @@ public class FormKeluhan extends javax.swing.JFrame {
         }
         temp = temp + 1;
         return temp;
+    }
+
+    public void defaultDialog() {
+        text_kodeD.setText("");
+        text_namaD.setText("");
+        text_keteranganD.setText("");
+        label_statusD.setText("");
+        button_selesai.setEnabled(false);
     }
 }

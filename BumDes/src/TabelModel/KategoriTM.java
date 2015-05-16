@@ -5,7 +5,6 @@
  */
 package TabelModel;
 
-import Kelas.Anggota;
 import Kelas.Barang;
 import java.util.ArrayList;
 import java.util.List;

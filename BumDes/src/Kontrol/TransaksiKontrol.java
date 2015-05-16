@@ -131,35 +131,35 @@ public class TransaksiKontrol {
         return trans;
     }
 
-//    public List<Transaksi> beli_selectTransaksiAll(String tDari, String tSampai) throws SQLException {
-//        PreparedStatement stmt = null;
-//        ResultSet result = null;
-//        conn.setAutoCommit(false);
-//        String query = "SELECT a.notransaksi, a.idbarang, b.namabarang, "
-//                + "a.tanggaltransaksi, a.jumlah, a.hargasatuan, a.total \n"
-//                + "FROM transaksi a, barang b "
-//                + "WHERE a.idbarang = b.idbarang AND a.tanggaltransaksi "
-//                + "BETWEEN ? AND ? AND a.jenistransaksi = 'PEMBELIAN' "
-//                + "ORDER BY a.tanggaltransaksi";
-//        stmt = conn.prepareStatement(query);
-//        stmt.setString(1, tDari);
-//        stmt.setString(2, tSampai);
-//        result = stmt.executeQuery();
-//        List<Transaksi> trans = new ArrayList<Transaksi>();
-//        while (result.next()) {
-//            Transaksi trs = new Transaksi();
-//            trs.setNoTrans(result.getString(1));
-//            trs.setIdBarang(new Barang(result.getString(2), result.getString(3), 0, 0, ""));
-//            String tgl = result.getString(4);
-//            trs.setTanggalTransaksi(tgl.split("-")[2] + "-" + tgl.split("-")[1] + "-" + tgl.split("-")[0]);
-//            trs.setJumlah(result.getInt(5));
-//            trs.setHargaSatuan(result.getInt(6));
-//            trs.setTotal(result.getDouble(7));
-//            trans.add(trs);
-//        }
-//        conn.close();
-//        return trans;
-//    }
+    public List<Transaksi> beli_selectTransaksiAll(String tDari, String tSampai) throws SQLException {
+        PreparedStatement stmt = null;
+        ResultSet result = null;
+        conn.setAutoCommit(false);
+        String query = "SELECT a.notransaksi, a.idbarang, b.namabarang, "
+                + "a.tanggaltransaksi, a.jumlah, a.hargasatuan, a.total \n"
+                + "FROM transaksi a, barang b "
+                + "WHERE a.idbarang = b.idbarang AND a.tanggaltransaksi "
+                + "BETWEEN ? AND ? AND a.jenistransaksi = 'PEMBELIAN' "
+                + "ORDER BY a.tanggaltransaksi";
+        stmt = conn.prepareStatement(query);
+        stmt.setString(1, tDari);
+        stmt.setString(2, tSampai);
+        result = stmt.executeQuery();
+        List<Transaksi> trans = new ArrayList<Transaksi>();
+        while (result.next()) {
+            Transaksi trs = new Transaksi();
+            trs.setNoTrans(result.getString(1));
+            trs.setIdBarang(new Barang(result.getString(2), result.getString(3), 0, 0, query, tDari, tDari, 0));
+            String tgl = result.getString(4);
+            trs.setTanggalTransaksi(tgl.split("-")[2] + "-" + tgl.split("-")[1] + "-" + tgl.split("-")[0]);
+            trs.setJumlah(result.getInt(5));
+            trs.setHargaSatuan(result.getInt(6));
+            trs.setTotal(result.getDouble(7));
+            trans.add(trs);
+        }
+        conn.close();
+        return trans;
+    }
     public void deleteTransaksi(Transaksi trans) throws SQLException {
         PreparedStatement stmt = null;
         conn.setAutoCommit(false);

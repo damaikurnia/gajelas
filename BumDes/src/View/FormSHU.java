@@ -80,7 +80,6 @@ public class FormSHU extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem13 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
@@ -96,7 +95,9 @@ public class FormSHU extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem12 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
+        jMenuItem14 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -332,16 +333,6 @@ public class FormSHU extends javax.swing.JFrame {
         jMenu2.setText("BARANG");
         jMenu2.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
 
-        jMenuItem2.setBackground(java.awt.Color.white);
-        jMenuItem2.setForeground(java.awt.Color.black);
-        jMenuItem2.setText("Registrasi Barang");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem2);
-
         jMenuItem3.setBackground(java.awt.Color.white);
         jMenuItem3.setForeground(java.awt.Color.black);
         jMenuItem3.setText("Pembelian Barang");
@@ -476,6 +467,16 @@ public class FormSHU extends javax.swing.JFrame {
         jMenu6.setText("PENGATURAN");
         jMenu6.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
 
+        jMenuItem14.setBackground(java.awt.Color.white);
+        jMenuItem14.setForeground(java.awt.Color.black);
+        jMenuItem14.setText("Investasi Awal");
+        jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem14ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuItem14);
+
         jMenuItem8.setBackground(java.awt.Color.white);
         jMenuItem8.setForeground(java.awt.Color.black);
         jMenuItem8.setText("Profil Desa");
@@ -485,6 +486,16 @@ public class FormSHU extends javax.swing.JFrame {
             }
         });
         jMenu6.add(jMenuItem8);
+
+        jMenuItem2.setBackground(java.awt.Color.white);
+        jMenuItem2.setForeground(java.awt.Color.black);
+        jMenuItem2.setText("Pengaturan Persentase Laba Bersih");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuItem2);
 
         jMenuBar1.add(jMenu6);
 
@@ -528,88 +539,6 @@ public class FormSHU extends javax.swing.JFrame {
 
     }//GEN-LAST:event_text_keteranganKeyReleased
 
-    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
-        FormAir a = new FormAir();
-        this.setVisible(false);
-        a.setVisible(true);
-    }//GEN-LAST:event_jMenu1MouseClicked
-
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        FormBarang a = new FormBarang();
-        this.setVisible(false);
-        a.setVisible(true);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
-
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        FormTransaksiPembelian a = new FormTransaksiPembelian();
-        this.setVisible(false);
-        a.setVisible(true);
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
-
-    private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
-        FormTransaksiPemakaianBarang a = new FormTransaksiPemakaianBarang();
-        this.setVisible(false);
-        a.setVisible(true);
-    }//GEN-LAST:event_jMenuItem13ActionPerformed
-
-    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
-        FormAnggota a = new FormAnggota();
-        this.setVisible(false);
-        a.setVisible(true);
-    }//GEN-LAST:event_jMenuItem9ActionPerformed
-
-    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
-        FormPemakaianAir a = new FormPemakaianAir();
-        this.setVisible(false);
-        a.setVisible(true);
-    }//GEN-LAST:event_jMenuItem10ActionPerformed
-
-    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
-        FormTransaksiPenjualan a = new FormTransaksiPenjualan();
-        this.setVisible(false);
-        a.setVisible(true);
-    }//GEN-LAST:event_jMenuItem11ActionPerformed
-
-    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        FormKeluhan a = new FormKeluhan();
-        this.setVisible(false);
-        a.setVisible(true);
-    }//GEN-LAST:event_jMenuItem7ActionPerformed
-
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        FormSHU a = new FormSHU();
-        this.setVisible(false);
-        a.setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        FormTransaksiPengeluaran a = new FormTransaksiPengeluaran();
-        this.setVisible(false);
-        a.setVisible(true);
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
-
-    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        FormTransaksiPembayaranHutang a = new FormTransaksiPembayaranHutang();
-        this.setVisible(false);
-        a.setVisible(true);
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
-
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        FormLabaRugi a = new FormLabaRugi();
-        a.setVisible(true);
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
-
-    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
-        FormNeraca a = new FormNeraca();
-        a.setVisible(true);
-    }//GEN-LAST:event_jMenuItem12ActionPerformed
-
-    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        FormPengaturan a = new FormPengaturan();
-        this.setVisible(false);
-        a.setVisible(true);
-    }//GEN-LAST:event_jMenuItem8ActionPerformed
-
     private void text_persenKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_text_persenKeyReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_text_persenKeyReleased
@@ -647,6 +576,93 @@ public class FormSHU extends javax.swing.JFrame {
     private void text_keteranganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_text_keteranganActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_text_keteranganActionPerformed
+
+    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
+        FormAir a = new FormAir();
+        this.setVisible(false);
+        a.setVisible(true);
+    }//GEN-LAST:event_jMenu1MouseClicked
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        FormBarang a = new FormBarang();
+        this.setVisible(false);
+        a.setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
+        FormTransaksiPemakaianBarang a = new FormTransaksiPemakaianBarang();
+        this.setVisible(false);
+        a.setVisible(true);
+    }//GEN-LAST:event_jMenuItem13ActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        FormAnggota a = new FormAnggota();
+        this.setVisible(false);
+        a.setVisible(true);
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+        FormPemakaianAir a = new FormPemakaianAir();
+        this.setVisible(false);
+        a.setVisible(true);
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
+
+    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+        FormTransaksiPenjualan a = new FormTransaksiPenjualan();
+        this.setVisible(false);
+        a.setVisible(true);
+    }//GEN-LAST:event_jMenuItem11ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        FormKeluhan a = new FormKeluhan();
+        this.setVisible(false);
+        a.setVisible(true);
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        FormPengeluaran a = new FormPengeluaran();
+        this.setVisible(false);
+        a.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        FormTransaksiPengeluaran a = new FormTransaksiPengeluaran();
+        this.setVisible(false);
+        a.setVisible(true);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        FormTransaksiPembayaranHutang a = new FormTransaksiPembayaranHutang();
+        this.setVisible(false);
+        a.setVisible(true);
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        FormLabaRugi a = new FormLabaRugi();
+        a.setVisible(true);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
+        FormNeraca a = new FormNeraca();
+        a.setVisible(true);
+    }//GEN-LAST:event_jMenuItem12ActionPerformed
+
+    private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
+        FormInvesAwal a = new FormInvesAwal();
+        a.setVisible(true);
+    }//GEN-LAST:event_jMenuItem14ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        FormPengaturan a = new FormPengaturan();
+        this.setVisible(false);
+        a.setVisible(true);
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        FormSHU a = new FormSHU();
+        this.setVisible(false);
+        a.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -736,6 +752,7 @@ public class FormSHU extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
+    private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;

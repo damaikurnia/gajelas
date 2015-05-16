@@ -51,6 +51,39 @@ public class BarangKontrol {
         conn.close();
         return brg;
     }
+    
+    public Barang selectBarang2(String idbarang) throws SQLException {
+        PreparedStatement stmt = null;
+        ResultSet result = null;
+        conn.setAutoCommit(false);
+        String query = "SELECT idbarang,namabarang,stokbarang,totalaset from barang where idbarang = ?";
+        stmt = conn.prepareStatement(query);
+        stmt.setString(1, idbarang);
+        result = stmt.executeQuery();
+        Barang bar = new Barang();
+        while (result.next()) {
+            bar.setIdBarang(result.getString(1));
+            bar.setNamaBarang(result.getString(2));
+            bar.setStok(result.getInt(3));
+            bar.setTotalAset(result.getDouble(4));
+        }
+        conn.close();
+        return bar;
+    }
+    
+     public void updateBarang(Barang brg) throws SQLException {
+        PreparedStatement stmt = null;
+        conn.setAutoCommit(false);
+        String query = "update barang set stokbarang = ?, totalaset = ? where idbarang = ?";
+        stmt = conn.prepareStatement(query);
+        stmt.setInt(1, brg.getStok());
+        stmt.setDouble(2, brg.getTotalAset());
+        stmt.setString(3, brg.getIdBarang());
+
+        stmt.executeUpdate();
+        conn.commit();
+        conn.close();
+    }
 
     public List<Barang> selectBarang_peralatan() throws SQLException {
         PreparedStatement stmt = null;
@@ -189,5 +222,48 @@ public class BarangKontrol {
         }
         conn.close();
         return kat;
+    }
+    
+    //----------------------AKUMULASI-------------------------------------------
+    
+    public List<Barang> cariBarangAkumulasi() throws SQLException {
+        PreparedStatement stmt = null;
+        ResultSet result = null;
+        conn.setAutoCommit(false);
+        String query = "SELECT * FROM barang "
+                + "where kode = '1.2.2' and sysdate()>tglakumulasi and jangkawaktu >0;";
+        stmt = conn.prepareStatement(query);
+        result = stmt.executeQuery();
+        List<Barang> kat = new ArrayList<Barang>();
+        while (result.next()) {
+            Barang bar = new Barang();
+            bar.setIdBarang(result.getString(1));
+            bar.setNamaBarang(result.getString(2));
+            bar.setStok(result.getInt(3));
+            bar.setTotalAset(result.getDouble(4));
+            bar.setKode(result.getString(5));
+            bar.setKategori(result.getString(6));
+            bar.setTanggalPenyusutan(result.getString(7));
+            bar.setJangkawaktu(result.getInt(8));
+            kat.add(bar);
+        }
+        conn.close();
+        return kat;
+    }
+    
+    public void updateBarangAkumulasi(Barang brg) throws SQLException {
+        PreparedStatement stmt = null;
+        conn.setAutoCommit(false);
+        String query = "update barang set totalaset = ?, tglakumulasi = ?,"
+                + "jangkawaktu = ? where idbarang = ?";
+        stmt = conn.prepareStatement(query);
+        stmt.setDouble(1, brg.getTotalAset());
+        stmt.setString(2, brg.getTanggalPenyusutan());
+        stmt.setInt(3, brg.getJangkawaktu());
+        stmt.setString(4, brg.getIdBarang());
+
+        stmt.executeUpdate();
+        conn.commit();
+        conn.close();
     }
 }

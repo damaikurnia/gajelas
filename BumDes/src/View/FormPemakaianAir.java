@@ -8,7 +8,6 @@ package View;
 import Custom.RenderWarnaWarni;
 import Custom.Tanggal;
 import Kelas.Anggota;
-import Kelas.Barang;
 import Kelas.Konfigurasi;
 import Kelas.Pemakaian;
 import Kelas.Profil;
@@ -36,7 +35,6 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -194,7 +192,6 @@ public class FormPemakaianAir extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem13 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
@@ -210,7 +207,9 @@ public class FormPemakaianAir extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem12 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
+        jMenuItem14 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         dialog_cariP.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -923,16 +922,6 @@ public class FormPemakaianAir extends javax.swing.JFrame {
         jMenu2.setText("BARANG");
         jMenu2.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
 
-        jMenuItem2.setBackground(java.awt.Color.white);
-        jMenuItem2.setForeground(java.awt.Color.black);
-        jMenuItem2.setText("Registrasi Barang");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem2);
-
         jMenuItem3.setBackground(java.awt.Color.white);
         jMenuItem3.setForeground(java.awt.Color.black);
         jMenuItem3.setText("Pembelian Barang");
@@ -1067,6 +1056,16 @@ public class FormPemakaianAir extends javax.swing.JFrame {
         jMenu6.setText("PENGATURAN");
         jMenu6.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
 
+        jMenuItem14.setBackground(java.awt.Color.white);
+        jMenuItem14.setForeground(java.awt.Color.black);
+        jMenuItem14.setText("Investasi Awal");
+        jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem14ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuItem14);
+
         jMenuItem8.setBackground(java.awt.Color.white);
         jMenuItem8.setForeground(java.awt.Color.black);
         jMenuItem8.setText("Profil Desa");
@@ -1076,6 +1075,16 @@ public class FormPemakaianAir extends javax.swing.JFrame {
             }
         });
         jMenu6.add(jMenuItem8);
+
+        jMenuItem2.setBackground(java.awt.Color.white);
+        jMenuItem2.setForeground(java.awt.Color.black);
+        jMenuItem2.setText("Pengaturan Persentase Laba Bersih");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuItem2);
 
         jMenuBar1.add(jMenu6);
 
@@ -1091,7 +1100,7 @@ public class FormPemakaianAir extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 7, Short.MAX_VALUE))
+                .addGap(0, 8, Short.MAX_VALUE))
         );
 
         pack();
@@ -1243,7 +1252,7 @@ public class FormPemakaianAir extends javax.swing.JFrame {
                 trans.setTotal(Double.parseDouble(text_total.getText()));
                 TransaksiKontrol.getKoneksi().jual_insertTransaksi(trans);
 
-                //pendapatan piutang (piutang (debit), modal(debit))
+                //pendapatan piutang (piutang (debit), modal(debit)/sementara)
                 Trans piutang = new Trans("1.1.3", (long) trans.getTotal(), 0);
                 Trans modal = new Trans("3.1.1", (long) trans.getTotal(), 0);
                 TransKontrol.getKoneksi().insertTransaksi(piutang);
@@ -1340,14 +1349,8 @@ public class FormPemakaianAir extends javax.swing.JFrame {
         a.setVisible(true);
     }//GEN-LAST:event_jMenu1MouseClicked
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        FormBarang a = new FormBarang();
-        this.setVisible(false);
-        a.setVisible(true);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
-
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        FormTransaksiPembelian a = new FormTransaksiPembelian();
+        FormBarang a = new FormBarang();
         this.setVisible(false);
         a.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
@@ -1410,11 +1413,22 @@ public class FormPemakaianAir extends javax.swing.JFrame {
         a.setVisible(true);
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
+    private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
+        FormInvesAwal a = new FormInvesAwal();
+        a.setVisible(true);
+    }//GEN-LAST:event_jMenuItem14ActionPerformed
+
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         FormPengaturan a = new FormPengaturan();
         this.setVisible(false);
         a.setVisible(true);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        FormSHU a = new FormSHU();
+        this.setVisible(false);
+        a.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     public void update(String key) {
         try {
@@ -1690,6 +1704,7 @@ public class FormPemakaianAir extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
+    private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;

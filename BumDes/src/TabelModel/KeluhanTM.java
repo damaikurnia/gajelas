@@ -34,7 +34,7 @@ public class KeluhanTM extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 3;
+        return 5;
     }
 
     @Override
@@ -42,8 +42,7 @@ public class KeluhanTM extends AbstractTableModel {
         Keluhan d = agt.get(rowIndex);
         switch (columnIndex) {
             case 0:
-                String tgl[] = d.getTglPelaksanaan().split("-");
-                return tgl[2]+"-"+tgl[1]+"-"+tgl[0];
+                return d.getIdKeluhan();
             case 1:
                 List<Anggota> a = null;
                 try {
@@ -54,6 +53,15 @@ public class KeluhanTM extends AbstractTableModel {
                 return d.getIdAnggota().getIdAnggota() + "-" + a.get(0).getNamaAnggota();
             case 2:
                 return d.getKeterangan();
+            case 3:
+                return d.getStatus();
+            case 4:
+                if (d.getStatus().equals("BELUM")) {
+                    return "-";
+                } else {
+                    String tgl[] = d.getTglPelaksanaan().split("-");
+                    return tgl[2]+"-"+tgl[1]+"-"+tgl[0];
+                }
             default:
                 return "";
         }
@@ -63,11 +71,15 @@ public class KeluhanTM extends AbstractTableModel {
     public String getColumnName(int column) {
         switch (column) {
             case 0:
-                return "TGL PELAKSANAAN";
+                return "KODE";
             case 1:
                 return "ANGGOTA";
             case 2:
                 return "KETERANGAN";
+            case 3:
+                return "STATUS";
+            case 4:
+                return "TGL PENYELESAIAN";
             default:
                 return "";
         }

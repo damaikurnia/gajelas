@@ -6,6 +6,7 @@
 package Kelas;
 
 import Custom.Tanggal;
+import Kontrol.AkunKontrol;
 import java.util.Date;
 
 /**
@@ -15,25 +16,44 @@ import java.util.Date;
 public class Main {
 
     public static void main(String[] args) {
-        String regex = "[0-9]+";
-        String data = "2";
-        System.out.println(data.matches(regex));
-        
+//        String regex = "[0-9]+";
+//        String data = "2";
+//        System.out.println(data.matches(regex));
+
 //        double data = 0.0;
 //        System.out.println(data==0);
-        
 //        String data= "1 Tahun";
 //        System.out.println(data.split(" ")[0]);
-        
 //        int tahun = Integer.parseInt(Tanggal.getTanggal2().split("-")[0]);
 //        tahun = tahun+1;
 //        System.out.println(tahun);
-        
 //        String tanggal = Tanggal.getTanggal2();
 //        System.out.println(tanggal);
 //        System.out.println(tanggal.split("-")[2]+"-"+tanggal.split("-")[1]+"-"+tanggal.split("-")[0]);
 //        
 //        String data = "6.1.2";
 //        System.out.println(data.split("\\.")[0]);
+//        int persen = 1;
+//        double labakotor = 837000.0;
+//        double pajak = labakotor * ((double)persen / (double)100);
+//        System.out.println(pajak);
+        
+//        if (evt.getKeyCode() > 1) {
+//            simpanButton.setEnabled(true);
+//
+//            //membuat terbaca tanpa koma
+//            FormatRibuan fr = new FormatRibuan();
+//            String totalRibuan[] = jumlahAnggaranText.getText().split("\\.");
+//            String totalCetak = "";
+//            for (int i = 0; i < totalRibuan.length; i++) {
+//                totalCetak = totalCetak + totalRibuan[i];
+//            }
+//            jumlahAnggaranText.setText(totalCetak);
+//            System.out.println("totalCetak " + totalCetak);
+//
+//            //membuat koma
+//            jumlahAnggaranText.setText(fr.pisahRibuan(Integer.parseInt(jumlahAnggaranText.getText())));
+//            System.out.println("jumlahAnggaranText.getText() " + jumlahAnggaranText.getText());
+//        }
     }
 }

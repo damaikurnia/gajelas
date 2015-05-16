@@ -40,19 +40,25 @@ public class FormBarang extends javax.swing.JFrame {
 
     public FormBarang() {
 
-        initComponents();
-        this.setLocationRelativeTo(null);
+        try {
+            initComponents();
+            this.setLocationRelativeTo(null);
 //            setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH);
 
-        dialog_kategori.setVisible(false);
-        dialog_kategori.setSize(480, 360);
-        dialog_kategori.setLocationRelativeTo(null);
+            dialog_kategori.setVisible(false);
+            dialog_kategori.setSize(480, 360);
+            dialog_kategori.setLocationRelativeTo(null);
 
-        updateKategori();
-        buatIDbaru();
-        sinkronGambar();
-        defaultnya();
-        updateTabel();
+            kategor = BarangKontrol.getKoneksi().cariKategori();
+
+            updateKategori();
+            buatIDbaru();
+            sinkronGambar();
+            defaultnya();
+            updateTabel();
+        } catch (SQLException ex) {
+            Logger.getLogger(FormBarang.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -110,7 +116,6 @@ public class FormBarang extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem13 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
@@ -126,7 +131,9 @@ public class FormBarang extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem12 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
+        jMenuItem14 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         jPanel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -546,16 +553,6 @@ public class FormBarang extends javax.swing.JFrame {
         jMenu2.setText("BARANG");
         jMenu2.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
 
-        jMenuItem2.setBackground(java.awt.Color.white);
-        jMenuItem2.setForeground(java.awt.Color.black);
-        jMenuItem2.setText("Registrasi Barang");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem2);
-
         jMenuItem3.setBackground(java.awt.Color.white);
         jMenuItem3.setForeground(java.awt.Color.black);
         jMenuItem3.setText("Pembelian Barang");
@@ -690,6 +687,16 @@ public class FormBarang extends javax.swing.JFrame {
         jMenu6.setText("PENGATURAN");
         jMenu6.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
 
+        jMenuItem14.setBackground(java.awt.Color.white);
+        jMenuItem14.setForeground(java.awt.Color.black);
+        jMenuItem14.setText("Investasi Awal");
+        jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem14ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuItem14);
+
         jMenuItem8.setBackground(java.awt.Color.white);
         jMenuItem8.setForeground(java.awt.Color.black);
         jMenuItem8.setText("Profil Desa");
@@ -699,6 +706,16 @@ public class FormBarang extends javax.swing.JFrame {
             }
         });
         jMenu6.add(jMenuItem8);
+
+        jMenuItem2.setBackground(java.awt.Color.white);
+        jMenuItem2.setForeground(java.awt.Color.black);
+        jMenuItem2.setText("Pengaturan Persentase Laba Bersih");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuItem2);
 
         jMenuBar1.add(jMenu6);
 
@@ -724,7 +741,7 @@ public class FormBarang extends javax.swing.JFrame {
             try {
                 Barang bar = new Barang(buatIDbaruBrg(), text_namaBarang.getText(), Integer.parseInt(text_jmlBeli.getText()),
                         Double.parseDouble(text_total.getText()), carikode(combo_jenis.getSelectedItem().toString()),
-                        combo_kategori.getSelectedItem().toString(), "", 0);
+                        combo_kategori.getSelectedItem().toString(), "0000-00-00", 0);
                 BarangKontrol.getKoneksi().insertBarang(bar);
 
                 Transaksi trans = new Transaksi();
@@ -803,17 +820,38 @@ public class FormBarang extends javax.swing.JFrame {
         defaultnya();
     }//GEN-LAST:event_button_batalActionPerformed
 
+    private void button_kategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_kategoriActionPerformed
+        updateKategoriNoDB();
+        dialog_kategori.setVisible(true);
+    }//GEN-LAST:event_button_kategoriActionPerformed
+
+    private void text_kategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_text_kategoriActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_text_kategoriActionPerformed
+
+    private void text_noTransActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_text_noTransActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_text_noTransActionPerformed
+
+    private void button_tambahKategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_tambahKategoriActionPerformed
+        updateKategoriNoDB();
+        JOptionPane.showMessageDialog(null, "Kategori berhasil ditambah");
+        text_kategori.setText("");
+    }//GEN-LAST:event_button_tambahKategoriActionPerformed
+
+    private void combo_jenisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_jenisActionPerformed
+        if (combo_jenis.getSelectedItem().toString().equals("PERLENGKAPAN USAHA")) {
+            combo_penyusutan.setEnabled(false);
+        } else {
+            combo_penyusutan.setEnabled(true);
+        }
+    }//GEN-LAST:event_combo_jenisActionPerformed
+
     private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
         FormAir a = new FormAir();
         this.setVisible(false);
         a.setVisible(true);
     }//GEN-LAST:event_jMenu1MouseClicked
-
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        FormBarang a = new FormBarang();
-        this.setVisible(false);
-        a.setVisible(true);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         FormBarang a = new FormBarang();
@@ -879,60 +917,39 @@ public class FormBarang extends javax.swing.JFrame {
         a.setVisible(true);
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
+    private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
+        FormInvesAwal a = new FormInvesAwal();
+        a.setVisible(true);
+    }//GEN-LAST:event_jMenuItem14ActionPerformed
+
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         FormPengaturan a = new FormPengaturan();
         this.setVisible(false);
         a.setVisible(true);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
-    private void button_kategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_kategoriActionPerformed
-        updateKategoriNoDB();
-        dialog_kategori.setVisible(true);
-    }//GEN-LAST:event_button_kategoriActionPerformed
-
-    private void text_kategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_text_kategoriActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_text_kategoriActionPerformed
-
-    private void text_noTransActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_text_noTransActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_text_noTransActionPerformed
-
-    private void button_tambahKategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_tambahKategoriActionPerformed
-        updateKategoriNoDB();
-        JOptionPane.showMessageDialog(null, "Kategori berhasil ditambah");
-        text_kategori.setText("");
-    }//GEN-LAST:event_button_tambahKategoriActionPerformed
-
-    private void combo_jenisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_jenisActionPerformed
-        if (combo_jenis.getSelectedItem().toString().equals("PERLENGKAPAN USAHA")) {
-            combo_penyusutan.setEnabled(false);
-        } else {
-            combo_penyusutan.setEnabled(true);
-        }
-    }//GEN-LAST:event_combo_jenisActionPerformed
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        FormSHU a = new FormSHU();
+        this.setVisible(false);
+        a.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     public void updateKategori() {
-        try {
-            kategor = BarangKontrol.getKoneksi().cariKategori();
-            KategoriTM model = new KategoriTM(kategor);
-            tabel_kategori.setModel(model);
+        KategoriTM model = new KategoriTM(kategor);
+        tabel_kategori.setModel(model);
 
-            combo_kategori.removeAllItems();
-            for (Barang b : kategor) {
-                combo_kategori.addItem(b.getKategori());
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(FormBarang.class
-                    .getName()).log(Level.SEVERE, null, ex);
+        combo_kategori.removeAllItems();
+        for (Barang b : kategor) {
+            combo_kategori.addItem(b.getKategori());
         }
+
     }
 
     public void updateKategoriNoDB() {
         if (text_kategori.getText().equals("")) {
         } else {
             Barang br = new Barang();
-            br.setKategori(text_kategori.getText());
+            br.setKategori(text_kategori.getText().toUpperCase());
             kategor.add(br);
         }
         KategoriTM model = new KategoriTM(kategor);
@@ -947,14 +964,11 @@ public class FormBarang extends javax.swing.JFrame {
     public void defaultnya() {
         buatIDbaru();
         text_noTrans.setEditable(false);
-        combo_kategori.setSelectedIndex(0);
-        combo_pembayaran.setSelectedIndex(0);
-        combo_penyusutan.setSelectedIndex(0);
         combo_penyusutan.setEnabled(false);
         text_jmlBeli.setText("0");
         text_total.setText("0");
         text_namaBarang.setText("");
-        
+
     }
 
     public void sinkronGambar() {
@@ -1182,8 +1196,8 @@ public class FormBarang extends javax.swing.JFrame {
         }
         return kesimpulan;
     }
-    
-    public void updateTabel(){
+
+    public void updateTabel() {
         try {
             List<Transaksi> trans = TransaksiKontrol.getKoneksi().beli_selectTransaksi();
             TransaksiBeliAllTM tb = new TransaksiBeliAllTM(trans);
@@ -1230,6 +1244,7 @@ public class FormBarang extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
+    private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
