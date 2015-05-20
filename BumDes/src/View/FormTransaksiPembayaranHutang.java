@@ -5,6 +5,7 @@
  */
 package View;
 
+import Custom.FormatRibuan;
 import Kelas.Profil;
 import Custom.Tanggal;
 import Kelas.Barang;
@@ -195,6 +196,11 @@ public class FormTransaksiPembayaranHutang extends javax.swing.JFrame {
         text_total.setEditable(false);
         text_total.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         text_total.setText("0");
+        text_total.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                text_totalActionPerformed(evt);
+            }
+        });
 
         tabel_hutang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -224,6 +230,11 @@ public class FormTransaksiPembayaranHutang extends javax.swing.JFrame {
 
         text_totalBulan.setEditable(false);
         text_totalBulan.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        text_totalBulan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                text_totalBulanActionPerformed(evt);
+            }
+        });
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel16.setText("Hari, Tanggal");
@@ -547,8 +558,8 @@ public class FormTransaksiPembayaranHutang extends javax.swing.JFrame {
             TransaksiKontrol.getKoneksi().hutang_updateTransaksi(trans.getNoTrans());
 
             //pembayaran hutang-- kas (kredit), hutang (kredit)
-            Trans hutang = new Trans("2.1.1", 0, Long.parseLong(text_total.getText()));
-            Trans kas = new Trans("1.1.1", 0, Long.parseLong(text_total.getText()));
+            Trans hutang = new Trans("2.1.1", 0, Long.parseLong(FormatRibuan.gabungRibuan(text_total.getText())));
+            Trans kas = new Trans("1.1.1", 0, Long.parseLong(FormatRibuan.gabungRibuan(text_total.getText())));
 
             TransKontrol.getKoneksi().insertTransaksi(hutang);
             TransKontrol.getKoneksi().insertTransaksi(kas);
@@ -647,6 +658,14 @@ public class FormTransaksiPembayaranHutang extends javax.swing.JFrame {
         this.setVisible(false);
         a.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void text_totalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_text_totalActionPerformed
+        text_total.setText(FormatRibuan.pisahRibuan(text_total.getText()));
+    }//GEN-LAST:event_text_totalActionPerformed
+
+    private void text_totalBulanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_text_totalBulanActionPerformed
+        text_totalBulan.setText(text_totalBulan.getText());
+    }//GEN-LAST:event_text_totalBulanActionPerformed
 
     public void update() throws SQLException {
         List<Transaksi> hutang = TransaksiKontrol.getKoneksi().hutang_selectTransaksi();

@@ -5,6 +5,7 @@
  */
 package TabelModel;
 
+import Custom.FormatRibuan;
 import Kelas.Pengeluaran;
 import Kelas.Transaksi;
 import Kontrol.PengeluaranKontrol;
@@ -56,7 +57,7 @@ public class TransaksiKeluarTM extends AbstractTableModel {
                 }
                 return pen.get(0).getNamaPengeluaran();
             case 3:
-                return Double.toString(d.getTotal()).split("\\.")[0];
+                return FormatRibuan.pisahRibuan(Double.toString(d.getTotal()).split("\\.")[0]);
             default:
                 return "";
         }

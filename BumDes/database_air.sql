@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `airbersih` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `airbersih`;
--- MySQL dump 10.13  Distrib 5.5.43, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.13  Distrib 5.6.24, for debian-linux-gnu (x86_64)
 --
--- Host: 127.0.0.1    Database: airbersih
+-- Host: localhost    Database: airbersih
 -- ------------------------------------------------------
--- Server version	5.5.43-0ubuntu0.14.04.1
+-- Server version	5.6.24-0ubuntu2
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -25,7 +25,7 @@ DROP TABLE IF EXISTS `akun`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `akun` (
-  `kode` varchar(5) NOT NULL,
+  `kode` varchar(7) NOT NULL,
   `keterangan` varchar(100) DEFAULT NULL,
   `gol_akun` varchar(100) DEFAULT NULL,
   `kel_akun` varchar(20) DEFAULT NULL,
@@ -39,7 +39,7 @@ CREATE TABLE `akun` (
 
 LOCK TABLES `akun` WRITE;
 /*!40000 ALTER TABLE `akun` DISABLE KEYS */;
-INSERT INTO `akun` VALUES ('1.1.1','KAS','HARTA_LANCAR','HARTA'),('1.1.2','SURAT BERHARGA','HARTA_LANCAR','HARTA'),('1.1.3','PIUTANG','HARTA_LANCAR','HARTA'),('1.1.4','PERLENGKAPAN','HARTA_LANCAR','HARTA'),('1.2.1','GEDUNG','HARTA_TETAP','HARTA'),('1.2.2','PERALATAN','HARTA_TETAP','HARTA'),('1.2.3','TANAH','HARTA_TETAP','HARTA'),('1.2.4','KENDARAAN','HARTA_TETAP','HARTA'),('2.1.1','HUTANG USAHA','HUTANG_LANCAR','HUTANG'),('2.1.2','PEND. DITERIMA DIMUKA','HUTANG_LANCAR','HUTANG'),('2.1.3','BEBAN YG HARUS DIBAYAR','HUTANG_LANCAR','HUTANG'),('3.1.1','MODAL','MODAL_USAHA','MODAL'),('4.1.1','PENDAPATAN AIR','PENDAPATAN_USAHA','PENDAPATAN'),('5.1.1','SOLAR','BEBAN_USAHA','BEBAN'),('5.1.2','LISTRIK','BEBAN_USAHA','BEBAN'),('5.1.3','GAJI KARYAWAN','BEBAN_USAHA','BEBAN'),('5.1.4','BIAYA TAK TERDUGA','BEBAN_USAHA','BEBAN'),('5.1.5','BIAYA PERBAIKAN','BEBAN_USAHA','BEBAN'),('5.1.6','BIAYA LAIN LAIN','BEBAN_USAHA','BEBAN'),('5.1.7','BEBAN PERLENGKAPAN','BEBAN_USAHA','BEBAN'),('5.2.1','PAJAK','BEBAN_DILUAR_USAHA','BEBAN');
+INSERT INTO `akun` VALUES ('1.1.1','KAS','HARTA_LANCAR','HARTA'),('1.1.2','SURAT BERHARGA','HARTA_LANCAR','HARTA'),('1.1.3','PIUTANG','HARTA_LANCAR','HARTA'),('1.1.4','PERLENGKAPAN','HARTA_LANCAR','HARTA'),('1.2.1','GEDUNG','HARTA_TETAP','HARTA'),('1.2.2','PERALATAN','HARTA_TETAP','HARTA'),('1.2.2.1','AKUM.PENYUSUTAN PERALATAN','AKUMULASI','HARTA'),('1.2.3','TANAH','HARTA_TETAP','HARTA'),('1.2.4','KENDARAAN','HARTA_TETAP','HARTA'),('2.1.1','HUTANG USAHA','HUTANG_LANCAR','HUTANG'),('2.1.2','PEND. DITERIMA DIMUKA','HUTANG_LANCAR','HUTANG'),('2.1.3','BEBAN YG HARUS DIBAYAR','HUTANG_LANCAR','HUTANG'),('3.1.1','MODAL','MODAL_USAHA','MODAL'),('3.2.1','DANA SIMPANAN','PEMBAGIAN_SHU','MODAL'),('3.2.2','DANA SOSIAL','PEMBAGIAN_SHU','MODAL'),('4.1.1','PENDAPATAN AIR','PENDAPATAN_USAHA','PENDAPATAN'),('4.1.2','PENDAPATAN DENDA','PENDAPATAN_USAHA','PENDAPATAN'),('5.1.1','SOLAR','BEBAN_USAHA','BEBAN'),('5.1.2','LISTRIK','BEBAN_USAHA','BEBAN'),('5.1.3','GAJI KARYAWAN','BEBAN_USAHA','BEBAN'),('5.1.4','BIAYA TAK TERDUGA','BEBAN_USAHA','BEBAN'),('5.1.5','BIAYA PERBAIKAN','BEBAN_USAHA','BEBAN'),('5.1.6','BIAYA LAIN LAIN','BEBAN_USAHA','BEBAN'),('5.1.7','BEBAN PERLENGKAPAN','BEBAN_USAHA','BEBAN'),('5.2.1','PAJAK','BEBAN_DILUAR_USAHA','BEBAN');
 /*!40000 ALTER TABLE `akun` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -75,7 +75,7 @@ CREATE TABLE `anggota` (
 
 LOCK TABLES `anggota` WRITE;
 /*!40000 ALTER TABLE `anggota` DISABLE KEYS */;
-INSERT INTO `anggota` VALUES ('SRI.1','Adhi','Pengacara','Durian IV No 19','081222333856','3603120109920002',10,8,'SRIKOYO','BLEBERAN','GUNUNGKIDUL','DIY','PLAYEN','SRI.1.jpg');
+INSERT INTO `anggota` VALUES ('KUL.1','Adhi','Mahasiswa','Durian IV','081222333856','3603120109920002',1,2,'KULON','BLEBERAN','GUNUNGKIDUL','DIY','PLAYEN','KUL.1.jpg');
 /*!40000 ALTER TABLE `anggota` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -92,6 +92,9 @@ CREATE TABLE `barang` (
   `stokbarang` int(100) NOT NULL,
   `totalaset` double NOT NULL,
   `kode` varchar(5) NOT NULL,
+  `kategori` varchar(45) NOT NULL,
+  `tglakumulasi` date DEFAULT NULL,
+  `jangkawaktu` int(4) DEFAULT NULL,
   PRIMARY KEY (`idbarang`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -102,6 +105,7 @@ CREATE TABLE `barang` (
 
 LOCK TABLES `barang` WRITE;
 /*!40000 ALTER TABLE `barang` DISABLE KEYS */;
+INSERT INTO `barang` VALUES ('BRG-1','Pipa Maspion',9,90000,'1.1.4','PIPA','0000-00-00',0),('BRG-2','Toshiba L635',1,2000000,'1.2.2','KOMPUTER','2016-05-15',2);
 /*!40000 ALTER TABLE `barang` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -128,6 +132,7 @@ CREATE TABLE `keluhan` (
 
 LOCK TABLES `keluhan` WRITE;
 /*!40000 ALTER TABLE `keluhan` DISABLE KEYS */;
+INSERT INTO `keluhan` VALUES ('KEL-1','KUL.1','Pipa belom dipasang?','2015-05-16','SUDAH');
 /*!40000 ALTER TABLE `keluhan` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -187,6 +192,31 @@ INSERT INTO `login` VALUES ('AIR','AIR');
 UNLOCK TABLES;
 
 --
+-- Table structure for table `neraca`
+--
+
+DROP TABLE IF EXISTS `neraca`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `neraca` (
+  `no` int(11) NOT NULL AUTO_INCREMENT,
+  `kode` varchar(5) DEFAULT NULL,
+  `total` decimal(65,0) DEFAULT NULL,
+  `tahun` varchar(5) DEFAULT NULL,
+  PRIMARY KEY (`no`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `neraca`
+--
+
+LOCK TABLES `neraca` WRITE;
+/*!40000 ALTER TABLE `neraca` DISABLE KEYS */;
+/*!40000 ALTER TABLE `neraca` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `pemakaian`
 --
 
@@ -211,7 +241,7 @@ CREATE TABLE `pemakaian` (
 
 LOCK TABLES `pemakaian` WRITE;
 /*!40000 ALTER TABLE `pemakaian` DISABLE KEYS */;
-INSERT INTO `pemakaian` VALUES ('SRI.1-1','SRI.1',0,0,0,'APRIL','2015-05-10');
+INSERT INTO `pemakaian` VALUES ('KUL.1-1','KUL.1',2,2,0,'MEI','2015-06-10');
 /*!40000 ALTER TABLE `pemakaian` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -236,7 +266,7 @@ CREATE TABLE `pengeluaran` (
 
 LOCK TABLES `pengeluaran` WRITE;
 /*!40000 ALTER TABLE `pengeluaran` DISABLE KEYS */;
-INSERT INTO `pengeluaran` VALUES ('P-1','Biaya Solar','5.1.1'),('P-2','Biaya Listrik','5.1.2'),('P-3','Gaji Karyawan','5.1.3'),('P-4','Biaya Tak Terduga','5.1.4'),('P-5','Biaya Perbaikan','5.1.5'),('P-6','Biaya Lain Lain','5.1.6'),('P-7','coba','5.1.6');
+INSERT INTO `pengeluaran` VALUES ('P-1','Biaya Solar','5.1.1'),('P-2','Biaya Listrik','5.1.2'),('P-3','Gaji Karyawan','5.1.3'),('P-4','Biaya Tak Terduga','5.1.4'),('P-5','Biaya Perbaikan','5.1.5'),('P-6','Biaya Lain Lain','5.1.6');
 /*!40000 ALTER TABLE `pengeluaran` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -273,6 +303,30 @@ INSERT INTO `profil` VALUES (0,'BLEBERAN','PADUKUHAN','081212321211','BLEBERAN',
 UNLOCK TABLES;
 
 --
+-- Table structure for table `shu`
+--
+
+DROP TABLE IF EXISTS `shu`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `shu` (
+  `kode` varchar(5) NOT NULL,
+  `persen` int(11) DEFAULT NULL,
+  PRIMARY KEY (`kode`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `shu`
+--
+
+LOCK TABLES `shu` WRITE;
+/*!40000 ALTER TABLE `shu` DISABLE KEYS */;
+INSERT INTO `shu` VALUES ('3.2.1',2),('3.2.2',1),('5.2.1',1);
+/*!40000 ALTER TABLE `shu` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `trans`
 --
 
@@ -281,12 +335,12 @@ DROP TABLE IF EXISTS `trans`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `trans` (
   `kodetrans` int(255) NOT NULL AUTO_INCREMENT,
-  `kode` varchar(5) DEFAULT NULL,
+  `kode` varchar(7) DEFAULT NULL,
   `debit` decimal(65,0) DEFAULT NULL,
   `kredit` decimal(65,0) DEFAULT NULL,
   `tanggaltransaksi` date DEFAULT NULL,
   PRIMARY KEY (`kodetrans`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -295,7 +349,7 @@ CREATE TABLE `trans` (
 
 LOCK TABLES `trans` WRITE;
 /*!40000 ALTER TABLE `trans` DISABLE KEYS */;
-INSERT INTO `trans` VALUES (2,'1.1.1',800000,0,'2015-04-23'),(3,'4.1.1',800000,0,'2015-04-23'),(4,'3.1.1',800000,0,'2015-04-23');
+INSERT INTO `trans` VALUES (1,'1.1.1',1000000,0,'2015-05-15'),(2,'3.1.1',1000000,0,'2015-05-15'),(38,'1.1.1',800000,0,'2015-05-15'),(39,'4.1.1',800000,0,'2015-05-15'),(40,'1.1.4',100000,0,'2015-05-15'),(41,'1.1.1',0,100000,'2015-05-15'),(42,'1.2.2',3000000,0,'2015-05-15'),(43,'2.1.1',3000000,0,'2015-05-15'),(44,'1.1.3',7000,0,'2015-05-16'),(45,'3.1.1',7000,0,'2015-05-16'),(46,'1.1.4',0,10000,'2015-05-16'),(47,'3.1.1',0,10000,'2015-05-16'),(48,'2.1.1',0,3000000,'2015-05-16'),(49,'1.1.1',0,3000000,'2015-05-16'),(50,'5.1.1',100000,0,'2015-05-16'),(51,'1.1.1',0,100000,'2015-05-16'),(52,'3.1.1',0,100000,'2015-05-16'),(53,'1.1.3',0,7000,'2015-05-16'),(54,'4.1.1',7000,0,'2015-05-16'),(55,'1.1.1',7000,0,'2015-05-16'),(56,'3.1.1',0,7000,'2015-05-16'),(57,'1.2.2.1',0,1000000,'2015-05-19'),(58,'3.1.1',0,1000000,'2015-05-19'),(59,'5.1.2',150000,0,'2015-05-19'),(60,'1.1.1',0,150000,'2015-05-19'),(61,'3.1.1',0,150000,'2015-05-19');
 /*!40000 ALTER TABLE `trans` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -311,7 +365,7 @@ CREATE TABLE `transaksi` (
   `idbarang` varchar(10) NOT NULL,
   `idanggota` varchar(10) NOT NULL,
   `tanggaltransaksi` date DEFAULT NULL,
-  `jenistransaksi` varchar(15) DEFAULT NULL,
+  `jenistransaksi` varchar(30) DEFAULT NULL,
   `jumlah` int(20) DEFAULT NULL,
   `hargasatuan` int(20) DEFAULT NULL,
   `denda` int(40) DEFAULT NULL,
@@ -326,7 +380,7 @@ CREATE TABLE `transaksi` (
 
 LOCK TABLES `transaksi` WRITE;
 /*!40000 ALTER TABLE `transaksi` DISABLE KEYS */;
-INSERT INTO `transaksi` VALUES ('SRI.1-0','-','SRI.1','2015-04-23','DAFTAR',0,800000,0,800000);
+INSERT INTO `transaksi` VALUES ('KUL.1-0','-','KUL.1','2015-05-15','DAFTAR',0,800000,0,800000),('KUL.1-1','-','KUL.1','2015-05-16','PENJUALAN',2,0,0,7000),('P-1-201505','P-1','-','2015-05-16','PENGELUARAN',0,0,0,100000),('P-2-201505','P-2','-','2015-05-19','PENGELUARAN',0,0,0,150000),('P-3-201505','P-3','-','2015-05-16','PENGELUARAN',0,0,0,0),('P-4-201505','P-4','-','2015-05-16','PENGELUARAN',0,0,0,0),('P-5-201505','P-5','-','2015-05-16','PENGELUARAN',0,0,0,0),('P-6-201505','P-6','-','2015-05-16','PENGELUARAN',0,0,0,0),('TB-1','BRG-1','-','2015-05-15','PEMBELIAN',10,0,0,100000),('TB-2','BRG-2','-','2015-05-15','PEMBELIAN',1,0,0,3000000),('TP-1','BRG-1','-','2015-05-16','PEMAKAIAN',1,0,0,10000);
 /*!40000 ALTER TABLE `transaksi` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -339,4 +393,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-04-23 19:09:17
+-- Dump completed on 2015-05-20 16:41:51

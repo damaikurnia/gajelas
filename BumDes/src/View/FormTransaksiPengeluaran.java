@@ -5,6 +5,7 @@
  */
 package View;
 
+import Custom.FormatRibuan;
 import Custom.RataKanan;
 import Kelas.Barang;
 import Kelas.Profil;
@@ -14,7 +15,6 @@ import Kelas.Pengeluaran;
 import Kelas.Trans;
 import Kelas.Transaksi;
 import Koneksi.Koneksi;
-import Kontrol.BarangKontrol;
 import Kontrol.PengaturanKontrol;
 import Kontrol.PengeluaranKontrol;
 import Kontrol.TransKontrol;
@@ -325,6 +325,11 @@ public class FormTransaksiPengeluaran extends javax.swing.JFrame {
 
         text_total.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         text_total.setText("0");
+        text_total.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                text_totalKeyReleased(evt);
+            }
+        });
 
         tabel_pengeluaran.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -359,6 +364,11 @@ public class FormTransaksiPengeluaran extends javax.swing.JFrame {
         jLabel8.setText("TRANSAKSI BULAN INI");
 
         text_totalBulan.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        text_totalBulan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                text_totalBulanKeyReleased(evt);
+            }
+        });
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel16.setText("Hari, Tanggal");
@@ -719,15 +729,15 @@ public class FormTransaksiPengeluaran extends javax.swing.JFrame {
             Transaksi trans = new Transaksi();
             trans.setNoTrans(text_noTrans.getText());
             trans.setTanggalTransaksi(new SimpleDateFormat("yyyy-MM-dd").format(date_tanggal.getDate()));
-            trans.setTotal(Double.parseDouble(text_total.getText()));
+            trans.setTotal(Double.parseDouble(FormatRibuan.gabungRibuan(text_total.getText())));
 
             TransaksiKontrol.getKoneksi().keluar_updateTransaksi(trans);
-            
+
             //pembayaran beban kas (kredit), modal (kredit), beban x (debit) -- nanti beban ga usah diakumulasi lagi karena sudah dikurangi di modal
             Trans beban = new Trans(kodeAkun, (long) trans.getTotal(), 0);
             Trans kas = new Trans("1.1.1", 0, (long) trans.getTotal());
             Trans modal = new Trans("3.1.1", 0, (long) trans.getTotal());
-            
+
             TransKontrol.getKoneksi().insertTransaksi(beban);
             TransKontrol.getKoneksi().insertTransaksi(kas);
             TransKontrol.getKoneksi().insertTransaksi(modal);
@@ -836,6 +846,14 @@ public class FormTransaksiPengeluaran extends javax.swing.JFrame {
         a.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void text_totalKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_text_totalKeyReleased
+        text_total.setText(FormatRibuan.pisahRibuan(text_total.getText()));
+    }//GEN-LAST:event_text_totalKeyReleased
+
+    private void text_totalBulanKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_text_totalBulanKeyReleased
+
+    }//GEN-LAST:event_text_totalBulanKeyReleased
+
     public void update() {
         try {
             List<Transaksi> agt = TransaksiKontrol.getKoneksi().keluar_selectTransaksi();
@@ -869,8 +887,7 @@ public class FormTransaksiPengeluaran extends javax.swing.JFrame {
 //            tabel_pengeluaran.getColumnModel().getColumn(2).setCellRenderer(kanan);
                 tabel_pengeluaran.getColumnModel().getColumn(3).setCellRenderer(kanan);
 //            tabel_pengeluaran.getColumnModel().getColumn(4).setCellRenderer(kanan);
-
-                text_totalBulan.setText(TransaksiKontrol.getKoneksi().keluar_tampilTotalKeluarBulanIni());
+                text_totalBulan.setText(FormatRibuan.pisahRibuan(TransaksiKontrol.getKoneksi().keluar_tampilTotalKeluarBulanIni()));
             } else if (agt.size() != pen.size()) {
                 JOptionPane.showMessageDialog(null, "Gak size");
                 for (int i = 0; i < pen.size(); i++) {
@@ -906,8 +923,7 @@ public class FormTransaksiPengeluaran extends javax.swing.JFrame {
 //            tabel_pengeluaran.getColumnModel().getColumn(2).setCellRenderer(kanan);
                 tabel_pengeluaran.getColumnModel().getColumn(3).setCellRenderer(kanan);
 //            tabel_pengeluaran.getColumnModel().getColumn(4).setCellRenderer(kanan);
-
-                text_totalBulan.setText(TransaksiKontrol.getKoneksi().keluar_tampilTotalKeluarBulanIni());
+                text_totalBulan.setText(FormatRibuan.pisahRibuan(TransaksiKontrol.getKoneksi().keluar_tampilTotalKeluarBulanIni()));
             } else {
 
                 TransaksiKeluarTM model = new TransaksiKeluarTM(agt);
@@ -918,7 +934,7 @@ public class FormTransaksiPengeluaran extends javax.swing.JFrame {
                 tabel_pengeluaran.getColumnModel().getColumn(3).setCellRenderer(kanan);
 //            tabel_pengeluaran.getColumnModel().getColumn(4).setCellRenderer(kanan);
 
-                text_totalBulan.setText(TransaksiKontrol.getKoneksi().keluar_tampilTotalKeluarBulanIni());
+                text_totalBulan.setText(FormatRibuan.pisahRibuan(TransaksiKontrol.getKoneksi().keluar_tampilTotalKeluarBulanIni()));
 //        tabelDosen.getColumnModel().getColumn(0).setMinWidth(70);
 //        tabelDosen.getColumnModel().getColumn(0).setMaxWidth(70);
 //        tabelDosen.getColumnModel().getColumn(1).setMinWidth(220);

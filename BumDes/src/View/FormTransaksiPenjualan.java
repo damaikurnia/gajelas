@@ -5,6 +5,7 @@
  */
 package View;
 
+import Custom.FormatRibuan;
 import Custom.RataKanan;
 import Custom.RataKiri;
 import Custom.RenderWarnaWarni;
@@ -492,6 +493,11 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         text_airterakhir.setEditable(false);
         text_airterakhir.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         text_airterakhir.setText("0");
+        text_airterakhir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                text_airterakhirActionPerformed(evt);
+            }
+        });
 
         button_pelanggan.setText("...");
         button_pelanggan.addActionListener(new java.awt.event.ActionListener() {
@@ -509,6 +515,11 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         text_airlunas.setEditable(false);
         text_airlunas.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         text_airlunas.setText("0");
+        text_airlunas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                text_airlunasActionPerformed(evt);
+            }
+        });
 
         jLabel20.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -517,6 +528,11 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         text_pembayaran.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         text_pembayaran.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         text_pembayaran.setText("0");
+        text_pembayaran.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                text_pembayaranKeyReleased(evt);
+            }
+        });
 
         jLabel21.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -606,6 +622,11 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         text_airdibayar.setEditable(false);
         text_airdibayar.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         text_airdibayar.setText("0");
+        text_airdibayar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                text_airdibayarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panel_perincian1Layout = new javax.swing.GroupLayout(panel_perincian1);
         panel_perincian1.setLayout(panel_perincian1Layout);
@@ -1067,16 +1088,16 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         if (Double.parseDouble(text_total.getText()) > Double.parseDouble(text_pembayaran.getText())) {
             JOptionPane.showMessageDialog(null, "Pembayaran kurang");
         } else {
-            double pembayaran = Double.parseDouble(text_pembayaran.getText());
-            pembayaran = pembayaran - Double.parseDouble(text_total.getText());
+            double pembayaran = Double.parseDouble(FormatRibuan.gabungRibuan(text_pembayaran.getText()));
+            pembayaran = pembayaran - Double.parseDouble(FormatRibuan.gabungRibuan(text_total.getText()));
             JOptionPane.showMessageDialog(null, "Kembalian Konsumen adalah : " + Double.toString(pembayaran).split("\\.")[0]);
             try {
                 //update transaksi (pendapatan air)
                 Transaksi trans = TransaksiKontrol.getKoneksi().jual_selectTransaksi2(label_noTrans.getText());
                 trans.setIdAnggota(new Anggota(text_noPelanggan.getText()));
-                trans.setJumlah(Integer.parseInt(text_airdibayar.getText()));
-                trans.setTotal(Double.parseDouble(text_total.getText()));
-                trans.setDenda(Double.parseDouble(text_denda.getText()));
+                trans.setJumlah(Integer.parseInt(FormatRibuan.gabungRibuan(text_airdibayar.getText())));
+                trans.setTotal(Double.parseDouble(FormatRibuan.gabungRibuan(text_total.getText())));
+                trans.setDenda(Double.parseDouble(FormatRibuan.gabungRibuan(text_denda.getText())));
                 TransaksiKontrol.getKoneksi().jual_updateTransaksi(trans);
 
                 if (trans.getDenda() == 0) {//transaksi ga ada denda
@@ -1115,7 +1136,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
 
                 //rubah pemakaian air bulan tsb. set air yg barus dibayar dengan 0
                 Pemakaian pem = new Pemakaian(trans.getNoTrans(), null,
-                        Double.parseDouble(text_airterakhir.getText()), Double.parseDouble(text_airterakhir.getText()),
+                        Double.parseDouble(FormatRibuan.gabungRibuan(text_airterakhir.getText())), Double.parseDouble(FormatRibuan.gabungRibuan(text_airterakhir.getText())),
                         0, null, null);
                 PemakaianKontrol.getKoneksi().updatePemakaian(pem);//update pemakaian transaksi
 
@@ -1166,27 +1187,20 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Transaksi ini telah Lunas");
             label_noTrans.setText(tabel_histori.getValueAt(row1, 0).toString());
             combo_bulan.setSelectedItem(tabel_histori.getValueAt(row1, 4).toString());
-            text_airlunas.setText(tabel_histori.getValueAt(row1, 1).toString());
-            text_airterakhir.setText(tabel_histori.getValueAt(row1, 2).toString());
+            text_airlunas.setText(FormatRibuan.pisahRibuan(tabel_histori.getValueAt(row1, 1).toString()));
+            text_airterakhir.setText(FormatRibuan.pisahRibuan(tabel_histori.getValueAt(row1, 2).toString()));
             text_airdibayar.setText("0");
             text_pembayaran.setEditable(false);
             button_bayar.setEnabled(false);
             label_status.setText("STATUS : LUNAS");
 //            buatPerincian();
-        } //        else {
-        //            while (Integer.parseInt(tabel_histori.getValueAt(baris, 3).toString()) == 0) {
-        //                baris++;
-        //            }
-        //            if (row1 != baris) {
-        //                JOptionPane.showMessageDialog(null, "Tidak dapat membayar bulan berikut. silahkan membayar tagihan untuk bulan "
-        //                        + tabel_histori.getValueAt(baris, 4).toString() + " terlebih dahulu!");
-        //            } 
+        }
         else {
             label_noTrans.setText(tabel_histori.getValueAt(row1, 0).toString());
             combo_bulan.setSelectedItem(tabel_histori.getValueAt(row1, 4).toString());
-            text_airlunas.setText(tabel_histori.getValueAt(row1, 1).toString());
-            text_airterakhir.setText(tabel_histori.getValueAt(row1, 2).toString());
-            text_airdibayar.setText(tabel_histori.getValueAt(row1, 3).toString());
+            text_airlunas.setText(FormatRibuan.pisahRibuan(tabel_histori.getValueAt(row1, 1).toString()));
+            text_airterakhir.setText(FormatRibuan.pisahRibuan(tabel_histori.getValueAt(row1, 2).toString()));
+            text_airdibayar.setText(FormatRibuan.pisahRibuan(tabel_histori.getValueAt(row1, 3).toString()));
             buatPerincian();
 
             //membandingkan hari jatuh tempo dan hari sekarang
@@ -1198,12 +1212,12 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
                 text_denda.setText("0");
                 label_status.setText("STATUS : BLM LUNAS");
             } else {//kalo denda
-                text_denda.setText(Integer.toString(konfig.getDenda()));
+                text_denda.setText(FormatRibuan.pisahRibuan(Integer.toString(konfig.getDenda())));
 
                 double total = Double.parseDouble(text_abodemen.getText()) + Double.parseDouble(text_pertama.getText())
                         + Double.parseDouble(text_kedua.getText()) + Double.parseDouble(text_ketiga.getText()
                                 + Double.parseDouble(text_denda.getText()));
-                text_total.setText(Double.toString(total).split("\\.")[0]);
+                text_total.setText(FormatRibuan.pisahRibuan(Double.toString(total).split("\\.")[0]));
                 label_status.setText("STATUS : BLM LUNAS (DENDA)");
             }
 
@@ -1345,6 +1359,22 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         this.setVisible(false);
         a.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void text_airlunasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_text_airlunasActionPerformed
+        text_airlunas.setText(FormatRibuan.pisahRibuan(text_airlunas.getText()));
+    }//GEN-LAST:event_text_airlunasActionPerformed
+
+    private void text_airterakhirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_text_airterakhirActionPerformed
+        text_airterakhir.setText(FormatRibuan.pisahRibuan(text_airterakhir.getText()));
+    }//GEN-LAST:event_text_airterakhirActionPerformed
+
+    private void text_airdibayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_text_airdibayarActionPerformed
+        text_airdibayar.setText(FormatRibuan.pisahRibuan(text_airdibayar.getText()));
+    }//GEN-LAST:event_text_airdibayarActionPerformed
+
+    private void text_pembayaranKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_text_pembayaranKeyReleased
+        text_pembayaran.setText(FormatRibuan.pisahRibuan(text_pembayaran.getText()));
+    }//GEN-LAST:event_text_pembayaranKeyReleased
 
 //    public void update() {
 //        try {
@@ -1585,8 +1615,8 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
     }
 
     public void buatPerincian() {
-        double selisih = Double.parseDouble(text_airterakhir.getText()) - Double.parseDouble(text_airlunas.getText());
-        text_airdibayar.setText(Double.toString(selisih).split("\\.")[0]);
+        double selisih = Double.parseDouble(FormatRibuan.gabungRibuan(text_airterakhir.getText())) - Double.parseDouble(FormatRibuan.gabungRibuan(text_airlunas.getText()));
+        text_airdibayar.setText(FormatRibuan.pisahRibuan(Double.toString(selisih).split("\\.")[0]));
 
         //konfigurasi perincian dana
         int pertama = konfig.getPertama();
@@ -1599,17 +1629,17 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         if (selisih > 20) {
 //               JOptionPane.showMessageDialog(null, "Lebih dari 20");
             label_abodemen.setText("ABODEMEN : ");
-            text_abodemen.setText(Integer.toString(abodemen));
+            text_abodemen.setText(FormatRibuan.pisahRibuan(Integer.toString(abodemen)));
             label_pertama.setText(Integer.toString(bagiAir) + " Pertama (" + pertama + "/m3) " + ": ");
-            text_pertama.setText(Integer.toString(10 * pertama));
+            text_pertama.setText(FormatRibuan.pisahRibuan(Integer.toString(10 * pertama)));
             label_kedua.setText(Integer.toString(bagiAir) + " Kedua (" + kedua + "/m3) " + ": ");
-            text_kedua.setText(Integer.toString(10 * kedua));
+            text_kedua.setText(FormatRibuan.pisahRibuan(Integer.toString(10 * kedua)));
             double sisa = selisih - 20;
             label_ketiga.setText(Double.toString(sisa).split("\\.")[0] + " Air Berikut (" + selanjutnya + "/m3) " + ": ");
-            text_ketiga.setText(Double.toString(sisa * selanjutnya).split("\\.")[0]);
+            text_ketiga.setText(FormatRibuan.pisahRibuan(Double.toString(sisa * selanjutnya).split("\\.")[0]));
             double total = Double.parseDouble(text_abodemen.getText()) + Double.parseDouble(text_pertama.getText())
                     + Double.parseDouble(text_kedua.getText()) + Double.parseDouble(text_ketiga.getText());
-            text_total.setText(Double.toString(total).split("\\.")[0]);
+            text_total.setText(FormatRibuan.pisahRibuan(Double.toString(total).split("\\.")[0]));
 
             label_1.setText("10");
             label_2.setText("10");
@@ -1617,41 +1647,41 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
         } else if (selisih > 10 && selisih <= 20) {
 //                JOptionPane.showMessageDialog(null, "Lebih dari 10");
             label_abodemen.setText("ABODEMEN : ");
-            text_abodemen.setText(Integer.toString(abodemen));
+            text_abodemen.setText(FormatRibuan.pisahRibuan(Integer.toString(abodemen)));
             label_pertama.setText(Integer.toString(bagiAir) + " Pertama (" + pertama + "/m3) " + ": ");
-            text_pertama.setText(Integer.toString(10 * pertama));
+            text_pertama.setText(FormatRibuan.pisahRibuan(Integer.toString(10 * pertama)));
             double sisa = selisih - bagiAir;
             label_kedua.setText(Double.toString(sisa).split("\\.")[0] + " Kedua (" + kedua + "/m3) " + ": ");
-            text_kedua.setText(Double.toString(sisa * kedua).split("\\.")[0]);
+            text_kedua.setText(FormatRibuan.pisahRibuan(Double.toString(sisa * kedua).split("\\.")[0]));
             label_ketiga.setText("0 Air Berikut (" + selanjutnya + "/m3) " + ": ");
             text_ketiga.setText("0");
             double total = Double.parseDouble(text_abodemen.getText()) + Double.parseDouble(text_pertama.getText())
                     + Double.parseDouble(text_kedua.getText()) + Double.parseDouble(text_ketiga.getText());
-            text_total.setText(Double.toString(total).split("\\.")[0]);
+            text_total.setText(FormatRibuan.pisahRibuan(Double.toString(total).split("\\.")[0]));
 
             label_1.setText("10");
             label_2.setText(Double.toString(sisa).split("\\.")[0]);
             label_3.setText("0");
         } else if (selisih > 0 && selisih <= 10) {
             label_abodemen.setText("ABODEMEN : ");
-            text_abodemen.setText(Integer.toString(abodemen));
+            text_abodemen.setText(FormatRibuan.pisahRibuan(Integer.toString(abodemen)));
             double sisa = selisih;
             label_pertama.setText(Double.toString(sisa).split("\\.")[0] + " Pertama (" + pertama + "/m3) " + ": ");
-            text_pertama.setText(Double.toString(sisa * pertama).split("\\.")[0]);
+            text_pertama.setText(FormatRibuan.pisahRibuan(Double.toString(sisa * pertama).split("\\.")[0]));
             label_kedua.setText("0 Kedua (" + kedua + "/m3) " + ": ");
             text_kedua.setText("0");
             label_ketiga.setText("0 Air Berikut (" + selanjutnya + "/m3) " + ": ");
             text_ketiga.setText("0");
             double total = Double.parseDouble(text_abodemen.getText()) + Double.parseDouble(text_pertama.getText())
                     + Double.parseDouble(text_kedua.getText()) + Double.parseDouble(text_ketiga.getText());
-            text_total.setText(Double.toString(total).split("\\.")[0]);
+            text_total.setText(FormatRibuan.pisahRibuan(Double.toString(total).split("\\.")[0]));
 
             label_1.setText(Double.toString(sisa).split("\\.")[0]);
             label_2.setText("0");
             label_3.setText("0");
         } else {//hanya bayar abodemen
             label_abodemen.setText("ABODEMEN : ");
-            text_abodemen.setText(Integer.toString(abodemen));
+            text_abodemen.setText(FormatRibuan.pisahRibuan(Integer.toString(abodemen)));
             label_pertama.setText("0 Pertama (" + pertama + "/m3) " + ": ");
             text_pertama.setText("0");
             label_kedua.setText("0 Kedua (" + kedua + "/m3) " + ": ");
@@ -1660,7 +1690,7 @@ public class FormTransaksiPenjualan extends javax.swing.JFrame {
             text_ketiga.setText("0");
             double total = Double.parseDouble(text_abodemen.getText()) + Double.parseDouble(text_pertama.getText())
                     + Double.parseDouble(text_kedua.getText()) + Double.parseDouble(text_ketiga.getText());
-            text_total.setText(Double.toString(total).split("\\.")[0]);
+            text_total.setText(FormatRibuan.pisahRibuan(Double.toString(total).split("\\.")[0]));
 
             label_1.setText("0");
             label_2.setText("0");

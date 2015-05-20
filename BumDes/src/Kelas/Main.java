@@ -5,9 +5,7 @@
  */
 package Kelas;
 
-import Custom.Tanggal;
-import Kontrol.AkunKontrol;
-import java.util.Date;
+import Custom.FormatRibuan;
 
 /**
  *
@@ -38,22 +36,12 @@ public class Main {
 //        double pajak = labakotor * ((double)persen / (double)100);
 //        System.out.println(pajak);
         
-//        if (evt.getKeyCode() > 1) {
-//            simpanButton.setEnabled(true);
-//
-//            //membuat terbaca tanpa koma
-//            FormatRibuan fr = new FormatRibuan();
-//            String totalRibuan[] = jumlahAnggaranText.getText().split("\\.");
-//            String totalCetak = "";
-//            for (int i = 0; i < totalRibuan.length; i++) {
-//                totalCetak = totalCetak + totalRibuan[i];
-//            }
-//            jumlahAnggaranText.setText(totalCetak);
-//            System.out.println("totalCetak " + totalCetak);
-//
-//            //membuat koma
-//            jumlahAnggaranText.setText(fr.pisahRibuan(Integer.parseInt(jumlahAnggaranText.getText())));
-//            System.out.println("jumlahAnggaranText.getText() " + jumlahAnggaranText.getText());
-//        }
+//        String data = "1234567";
+//        System.out.println(FormatRibuan.pisahRibuan(data));
+//        System.out.println(FormatRibuan.angkaToTerbilang(Long.parseLong(data)));
+//        String datanew = FormatRibuan.pisahRibuan(data);
+//        System.out.println(datanew);
+//        datanew = FormatRibuan.gabungRibuan(datanew);
+//        System.out.println(datanew);
     }
 }

@@ -5,6 +5,7 @@
  */
 package View;
 
+import Custom.FormatRibuan;
 import Kelas.Trans;
 import Kontrol.TransKontrol;
 import java.sql.SQLException;
@@ -22,7 +23,7 @@ public class FormInvesAwal extends javax.swing.JFrame {
      * Creates new form FormAir
      */
     public FormInvesAwal() {
-
+        
         initComponents();
         this.setLocationRelativeTo(null);
 //        setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH);
@@ -70,6 +71,11 @@ public class FormInvesAwal extends javax.swing.JFrame {
         text_inves.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         text_inves.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         text_inves.setText("0");
+        text_inves.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                text_invesKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -132,8 +138,8 @@ public class FormInvesAwal extends javax.swing.JFrame {
 
     private void button_simpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_simpanActionPerformed
         try {
-            Trans kas = new Trans("1.1.1", Long.parseLong(text_inves.getText()), 0);
-            Trans modal = new Trans("3.1.1", Long.parseLong(text_inves.getText()), 0);
+            Trans kas = new Trans("1.1.1", Long.parseLong(FormatRibuan.gabungRibuan(text_inves.getText())), 0);
+            Trans modal = new Trans("3.1.1", Long.parseLong(FormatRibuan.gabungRibuan(text_inves.getText())), 0);
             TransKontrol.getKoneksi().insertTransaksi(kas);
             TransKontrol.getKoneksi().insertTransaksi(modal);
             JOptionPane.showMessageDialog(null, "Modal awal berhasil Ditambahkan");
@@ -141,6 +147,10 @@ public class FormInvesAwal extends javax.swing.JFrame {
             Logger.getLogger(FormInvesAwal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_button_simpanActionPerformed
+
+    private void text_invesKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_text_invesKeyReleased
+        text_inves.setText(FormatRibuan.pisahRibuan(text_inves.getText()));
+    }//GEN-LAST:event_text_invesKeyReleased
 
     /**
      * @param args the command line arguments
@@ -183,7 +193,7 @@ public class FormInvesAwal extends javax.swing.JFrame {
             }
         });
     }
-
+    
     public void cekTrans() {
         try {
             int trans = TransKontrol.getKoneksi().cekTrans();

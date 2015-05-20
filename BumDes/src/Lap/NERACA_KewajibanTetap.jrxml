@@ -63,7 +63,7 @@ group by a.kode;]]>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{keterangan}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="#,###">
 				<reportElement x="240" y="0" width="100" height="14" uuid="e1430289-981d-4d40-92fd-76f715c33fd3"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
@@ -81,7 +81,7 @@ group by a.kode;]]>
 				</textElement>
 				<text><![CDATA[SUBTOTAL Rp.]]></text>
 			</staticText>
-			<textField>
+			<textField pattern="#,###">
 				<reportElement x="240" y="0" width="100" height="14" uuid="30386429-e86e-4794-918a-35046d13ad8a"/>
 				<box>
 					<pen lineWidth="2.0" lineStyle="Double"/>

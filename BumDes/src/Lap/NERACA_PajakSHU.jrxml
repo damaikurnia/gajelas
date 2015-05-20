@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="380" pageHeight="180" columnWidth="340" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5d1a033c-b65b-4b27-b8a9-251a881f6d93">
 	<property name="ireport.zoom" value="3.0"/>
-	<property name="ireport.x" value="218"/>
+	<property name="ireport.x" value="271"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="labaBersih" class="java.lang.String"/>
 	<parameter name="pajak" class="java.lang.String"/>
@@ -36,7 +36,7 @@ where a.kode = b.kode and a.kode like '3.2.%';]]>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{pajak}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[Double.parseDouble($P{pajak})]]></textFieldExpression>
 			</textField>
 		</band>
 	</columnHeader>
@@ -79,14 +79,14 @@ where a.kode = b.kode and a.kode like '3.2.%';]]>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{total}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[Double.parseDouble($P{total})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,###">
 				<reportElement x="240" y="0" width="100" height="14" uuid="06dbdc0e-37d5-4377-8445-f950a5d2decc"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{shu}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[Double.parseDouble($P{shu})]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="0" y="0" width="218" height="14" uuid="e7724074-8e26-41f1-be68-90fc8c3e4e70"/>

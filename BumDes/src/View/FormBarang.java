@@ -5,6 +5,7 @@
  */
 package View;
 
+import Custom.FormatRibuan;
 import Custom.Tanggal;
 import Kelas.Barang;
 import Kelas.Profil;
@@ -321,6 +322,11 @@ public class FormBarang extends javax.swing.JFrame {
 
         text_jmlBeli.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         text_jmlBeli.setText("0");
+        text_jmlBeli.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                text_jmlBeliKeyReleased(evt);
+            }
+        });
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -328,6 +334,11 @@ public class FormBarang extends javax.swing.JFrame {
 
         text_total.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         text_total.setText("0");
+        text_total.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                text_totalKeyReleased(evt);
+            }
+        });
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel16.setText("Hari, Tanggal");
@@ -440,12 +451,12 @@ public class FormBarang extends javax.swing.JFrame {
                                             .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(28, 28, 28)
                                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(text_jmlBeli, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(combo_jenis, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                                 .addComponent(combo_pembayaran, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addComponent(combo_penyusutan, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(text_total, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                                .addComponent(text_total, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(text_jmlBeli, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 499, Short.MAX_VALUE)
@@ -736,11 +747,11 @@ public class FormBarang extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void button_tambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_tambahActionPerformed
-        //cek peratan atau perlengkapan?
+        //cek peratan atau perlengkapan?asd
         if (combo_jenis.getSelectedItem().toString().equals("PERLENGKAPAN USAHA")) {
             try {
-                Barang bar = new Barang(buatIDbaruBrg(), text_namaBarang.getText(), Integer.parseInt(text_jmlBeli.getText()),
-                        Double.parseDouble(text_total.getText()), carikode(combo_jenis.getSelectedItem().toString()),
+                Barang bar = new Barang(buatIDbaruBrg(), text_namaBarang.getText(), Integer.parseInt(FormatRibuan.pisahRibuan(text_jmlBeli.getText())),
+                        Double.parseDouble(FormatRibuan.pisahRibuan(text_total.getText())), carikode(combo_jenis.getSelectedItem().toString()),
                         combo_kategori.getSelectedItem().toString(), "0000-00-00", 0);
                 BarangKontrol.getKoneksi().insertBarang(bar);
 
@@ -776,8 +787,8 @@ public class FormBarang extends javax.swing.JFrame {
 
         } else {
             try {
-                Barang bar = new Barang(buatIDbaruBrg(), text_namaBarang.getText(), Integer.parseInt(text_jmlBeli.getText()),
-                        Double.parseDouble(text_total.getText()), carikode(combo_jenis.getSelectedItem().toString()),
+                Barang bar = new Barang(buatIDbaruBrg(), text_namaBarang.getText(), Integer.parseInt(FormatRibuan.pisahRibuan(text_jmlBeli.getText())),
+                        Double.parseDouble(FormatRibuan.pisahRibuan(text_total.getText())), carikode(combo_jenis.getSelectedItem().toString()),
                         combo_kategori.getSelectedItem().toString(), konversiTanggal(),
                         Integer.parseInt(combo_penyusutan.getSelectedItem().toString().split(" ")[0]));
                 BarangKontrol.getKoneksi().insertBarang(bar);
@@ -933,6 +944,14 @@ public class FormBarang extends javax.swing.JFrame {
         this.setVisible(false);
         a.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void text_jmlBeliKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_text_jmlBeliKeyReleased
+        text_jmlBeli.setText(FormatRibuan.pisahRibuan(text_jmlBeli.getText()));
+    }//GEN-LAST:event_text_jmlBeliKeyReleased
+
+    private void text_totalKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_text_totalKeyReleased
+        text_total.setText(FormatRibuan.pisahRibuan(text_total.getText()));
+    }//GEN-LAST:event_text_totalKeyReleased
 
     public void updateKategori() {
         KategoriTM model = new KategoriTM(kategor);

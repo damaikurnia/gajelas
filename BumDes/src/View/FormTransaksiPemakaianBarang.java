@@ -5,6 +5,7 @@
  */
 package View;
 
+import Custom.FormatRibuan;
 import Custom.RataKanan;
 import Kelas.Barang;
 import Kelas.Profil;
@@ -325,6 +326,16 @@ public class FormTransaksiPemakaianBarang extends javax.swing.JFrame {
         text_total.setEditable(false);
         text_total.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         text_total.setText("0");
+        text_total.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                text_totalActionPerformed(evt);
+            }
+        });
+        text_total.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                text_totalKeyReleased(evt);
+            }
+        });
 
         tabel_pemakaian.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -359,6 +370,11 @@ public class FormTransaksiPemakaianBarang extends javax.swing.JFrame {
         jLabel8.setText("TRANSAKSI HARI INI");
 
         text_ttltransbeli.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        text_ttltransbeli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                text_ttltransbeliActionPerformed(evt);
+            }
+        });
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel16.setText("Hari, Tanggal");
@@ -715,9 +731,9 @@ public class FormTransaksiPemakaianBarang extends javax.swing.JFrame {
                 trans.setNoTrans(text_noTrans.getText());
                 String idBarang = BarangKontrol.getKoneksi().cariIdBarang(combo_barang.getSelectedItem().toString());
                 trans.setIdBarang(new Barang(idBarang, combo_barang.getSelectedItem().toString(), WIDTH, WIDTH, idBarang, idBarang, idBarang, WIDTH));
-                trans.setJumlah(Integer.parseInt(text_jmlPemakaian.getText()));
+                trans.setJumlah(Integer.parseInt(FormatRibuan.gabungRibuan(text_jmlPemakaian.getText())));
                 trans.setHargaSatuan(0);
-                trans.setTotal(Double.parseDouble(text_total.getText()));
+                trans.setTotal(Double.parseDouble(FormatRibuan.gabungRibuan(text_total.getText())));
 
                 TransaksiKontrol.getKoneksi().pakai_insertTransaksi(trans);//insert ke transaksi
                 
@@ -745,16 +761,7 @@ public class FormTransaksiPemakaianBarang extends javax.swing.JFrame {
     }//GEN-LAST:event_button_tambahActionPerformed
 
     private void text_jmlPemakaianKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_text_jmlPemakaianKeyReleased
-        if (text_jmlPemakaian.getText().equals("")) {
-            text_total.setText("0");
-            text_jmlPemakaian.setText("0");
-        } else if (text_jmlPemakaian.getText().matches("[0-9]+")) {
-            double satuan = Double.parseDouble(text_ttlAset.getText()) / Double.parseDouble(label_stok.getText());
-            double total = satuan * Double.parseDouble(text_jmlPemakaian.getText());
-            text_total.setText(Double.toString(total));
-
-            button_tambah.setVisible(true);
-        }
+        text_jmlPemakaian.setText(FormatRibuan.pisahRibuan(text_jmlPemakaian.getText()));
     }//GEN-LAST:event_text_jmlPemakaianKeyReleased
 
     private void tabel_pemakaianMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabel_pemakaianMouseClicked
@@ -794,7 +801,7 @@ public class FormTransaksiPemakaianBarang extends javax.swing.JFrame {
     }//GEN-LAST:event_button_batalActionPerformed
 
     private void text_ttlAsetKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_text_ttlAsetKeyReleased
-        // TODO add your handling code here:
+        text_ttlAset.setText(FormatRibuan.pisahRibuan(text_ttlAset.getText()));
     }//GEN-LAST:event_text_ttlAsetKeyReleased
 
     private void combo_barangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_barangActionPerformed
@@ -894,6 +901,18 @@ public class FormTransaksiPemakaianBarang extends javax.swing.JFrame {
         this.setVisible(false);
         a.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void text_totalKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_text_totalKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_text_totalKeyReleased
+
+    private void text_totalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_text_totalActionPerformed
+        text_total.setText(FormatRibuan.pisahRibuan(text_total.getText()));
+    }//GEN-LAST:event_text_totalActionPerformed
+
+    private void text_ttltransbeliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_text_ttltransbeliActionPerformed
+        text_ttltransbeli.setText(FormatRibuan.pisahRibuan(text_ttltransbeli.getText()));
+    }//GEN-LAST:event_text_ttltransbeliActionPerformed
 
     public void update() {
         try {

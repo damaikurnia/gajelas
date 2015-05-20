@@ -636,13 +636,13 @@
                                               </Group>
                                               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="text_jmlBeli" alignment="0" min="-2" pref="56" max="-2" attributes="0"/>
                                                   <Component id="combo_jenis" alignment="0" min="-2" pref="214" max="-2" attributes="0"/>
                                                   <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                                                       <Component id="combo_pembayaran" alignment="0" max="32767" attributes="0"/>
                                                       <Component id="combo_penyusutan" alignment="0" max="32767" attributes="0"/>
                                                       <Component id="text_total" alignment="0" min="-2" pref="139" max="-2" attributes="0"/>
                                                   </Group>
+                                                  <Component id="text_jmlBeli" alignment="0" min="-2" pref="73" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>
@@ -811,6 +811,9 @@
                 <Property name="horizontalAlignment" type="int" value="4"/>
                 <Property name="text" type="java.lang.String" value="0"/>
               </Properties>
+              <Events>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="text_jmlBeliKeyReleased"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel15">
               <Properties>
@@ -826,6 +829,9 @@
                 <Property name="horizontalAlignment" type="int" value="4"/>
                 <Property name="text" type="java.lang.String" value="0"/>
               </Properties>
+              <Events>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="text_totalKeyReleased"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JComboBox" name="combo_kategori">
               <Properties>

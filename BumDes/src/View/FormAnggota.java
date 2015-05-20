@@ -5,6 +5,7 @@
  */
 package View;
 
+import Custom.FormatRibuan;
 import Custom.Tanggal;
 import Kelas.Anggota;
 import Kelas.Konfigurasi;
@@ -429,6 +430,8 @@ public class FormAnggota extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel9.setText("ALAMAT");
 
+        text_idAnggota.setEditable(false);
+
         text_nama.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 text_namaActionPerformed(evt);
@@ -468,6 +471,13 @@ public class FormAnggota extends javax.swing.JFrame {
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel19.setText("NO KTP");
+
+        text_biaya.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        text_biaya.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                text_biayaKeyReleased(evt);
+            }
+        });
 
         button_batal.setText("BATAL");
         button_batal.addActionListener(new java.awt.event.ActionListener() {
@@ -918,8 +928,8 @@ public class FormAnggota extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void button_tabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_tabelActionPerformed
-        dialog_anggota.setVisible(true);
         update();
+        dialog_anggota.setVisible(true);
     }//GEN-LAST:event_button_tabelActionPerformed
 
     private void button_tambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_tambahActionPerformed
@@ -1036,8 +1046,8 @@ public class FormAnggota extends javax.swing.JFrame {
         try {
             custom();
             int row1 = tabel_anggota.getSelectedRow();
+            text_idAnggota.setText(tabel_anggota.getValueAt(row1, 0).toString());
             Anggota agt = AnggotaKontrol.getKoneksi().cariIdAnggota(tabel_anggota.getValueAt(row1, 1).toString());
-            text_idAnggota.setText(agt.getIdAnggota());
             text_nama.setText(agt.getNamaAnggota());
             text_pekerjaan.setText(agt.getPekerjaan());
             text_alamat.setText(agt.getAlamat());
@@ -1120,7 +1130,7 @@ public class FormAnggota extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void button_tambahDusunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_tambahDusunActionPerformed
-        
+
         Anggota agt = new Anggota();
         agt.setDusun(text_addDusun.getText().toUpperCase());
         dusun.add(agt);
@@ -1139,7 +1149,10 @@ public class FormAnggota extends javax.swing.JFrame {
             if (kodebaru.equals("0")) {
                 text_idAnggota.setText(combo_dusun.getSelectedItem().toString().substring(0, 3) + ".1");
             } else {
-                text_idAnggota.setText(kodebaru);
+                if (button_tambah.isEnabled() == false) {
+                } else {
+                    text_idAnggota.setText(kodebaru);
+                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(FormAnggota.class.getName()).log(Level.SEVERE, null, ex);
@@ -1236,6 +1249,10 @@ public class FormAnggota extends javax.swing.JFrame {
         this.setVisible(false);
         a.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void text_biayaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_text_biayaKeyReleased
+        text_biaya.setText(FormatRibuan.pisahRibuan(text_biaya.getText()));
+    }//GEN-LAST:event_text_biayaKeyReleased
 
     public void resetdefault() {
         text_idAnggota.setText("");
@@ -1338,13 +1355,14 @@ public class FormAnggota extends javax.swing.JFrame {
         Connection kon = null;
         Koneksi con = new Koneksi();
         kon = con.getConnection();
-
+        //BUKTI PENDAFTARAN DAN INSTALASI SALURAN AIR BERSIH
         String reportSource = "./src/Lap/NotaBuktiPendaftaran.jasper";
 
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("noTrans", agt.getNoTrans());
         String alamat = text_alamat.getText() + " RT/RW " + text_rt.getText() + "/" + text_rw.getText() + " " + combo_dusun.getSelectedItem().toString() + " " + text_desa.getText();
         params.put("alamat", alamat);
+        params.put("judulnya", "BUKTI PENDAFTARAN DAN INSTALASI SALURAN AIR BERSIH");
         try {
             JasperPrint jasperPrint = JasperFillManager.fillReport(reportSource, params, kon);
             JasperViewer.viewReport(jasperPrint, false);
